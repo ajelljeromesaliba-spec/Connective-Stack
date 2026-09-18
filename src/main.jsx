@@ -539,6 +539,7 @@ function App() {
           <span>© {new Date().getFullYear()} Connective Stack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
           <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
+          <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
           <a href="mailto:aj@connectivestack.com">Email AJ</a>
         </div>
       </footer>
