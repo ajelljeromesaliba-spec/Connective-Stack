@@ -140,36 +140,6 @@ function App() {
           <span>Automation</span>
         </section>
 
-        <section className="profile-overview">
-          <div className="profile-card" data-reveal>
-            <div className="profile-scan" />
-            <div className="profile-topline"><span>CS / PROFILE 001</span><i>AVAILABLE</i></div>
-            <div className="profile-main">
-              <div className="profile-monogram"><span>AJ</span><div className="monogram-ring" /></div>
-              <div>
-                <span className="profile-label">Independent specialist</span>
-                <h2>Ajell Saliba</h2>
-                <p>Web Design • GoHighLevel • Integrations • Technical Operations</p>
-              </div>
-            </div>
-            <div className="profile-location">
-              <span><i /> Based in the Philippines</span>
-              <strong>Serving US businesses remotely</strong>
-            </div>
-          </div>
-          <div className="profile-intro" data-reveal>
-            <span className="kicker">The person behind the stack</span>
-            <h2>I turn ideas and business requirements into working digital experiences.</h2>
-            <p>My background combines customer experience, quality assurance, team leadership, GoHighLevel, website operations, domain configuration, integrations, and AI-assisted development.</p>
-            <div className="profile-stats">
-              <div><strong>3+</strong><span>Years working with GoHighLevel</span></div>
-              <div><strong>1</strong><span>Year in AI agency web operations</span></div>
-              <div><strong>17</strong><span>QA team members previously led</span></div>
-              <div><strong>5+</strong><span>Years in customer service</span></div>
-            </div>
-          </div>
-        </section>
-
         <section className="section services" id="services">
           <div className="section-heading" data-reveal>
             <span className="kicker">What I build</span>
