@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { companyProfile, defaultQuickReplies, findKnowledgeAnswer } from './hvacKnowledge'
+import { defaultQuickReplies, findKnowledgeAnswer } from './hvacKnowledge'
 import './hvac-demo.css'
+
+const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY || '58e493a2-aed3-4a98-a192-6baca6d23d64'
+const VAPI_ASSISTANT_ID = 'a1db8e60-1a21-4fab-b5ef-94f7e5671359'
+const VAPI_SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web/+esm'
 
 const Icon = ({ name }) => {
   const paths = {
@@ -13,6 +17,8 @@ const Icon = ({ name }) => {
     check: <path d="m5 12 4 4L19 6" />,
     close: <path d="m6 6 12 12M18 6 6 18" />,
     send: <><path d="m4 4 17 8-17 8 3-8-3-8Z" /><path d="M7 12h14" /></>,
+    mic: <><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6" /></>,
+    phoneOff: <><path d="m3 3 18 18" /><path d="M8.4 8.4 6.9 6.9c-.5-.5-1.3-.5-1.8-.1L3.8 8c-.6.5-.8 1.3-.5 2 2 5.1 5.9 9 11 11 .7.3 1.5.1 2-.5l1.2-1.3c.4-.5.4-1.3-.1-1.8l-1.8-1.8" /><path d="M13.2 5.2c2.8.5 5.1 2.8 5.6 5.6" /></>,
   }
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>
 }
@@ -30,6 +36,127 @@ const faqItems = [
   ['Do you provide prices through chat?', 'The demo shares diagnostic fees and explains the process. Repairs and replacements require system-specific evaluation before an exact quote is given.'],
   ['Can the assistant handle emergencies?', 'It identifies urgency and routes service requests, but life safety hazards are escalated to 911, the fire department, or the gas utility immediately.'],
 ]
+
+function VoiceDemo() {
+  const vapiRef = useRef(null)
+  const timerRef = useRef(null)
+  const [status, setStatus] = useState('idle')
+  const [speaking, setSpeaking] = useState(false)
+  const [volume, setVolume] = useState(0)
+  const [seconds, setSeconds] = useState(0)
+  const [error, setError] = useState('')
+
+  const stopTimer = () => {
+    window.clearInterval(timerRef.current)
+    timerRef.current = null
+  }
+
+  useEffect(() => () => {
+    stopTimer()
+    vapiRef.current?.stop?.()
+  }, [])
+
+  const formatTime = value => `${String(Math.floor(value / 60)).padStart(2, '0')}:${String(value % 60).padStart(2, '0')}`
+
+  const initializeVapi = async () => {
+    if (vapiRef.current) return vapiRef.current
+    const module = await import(/* @vite-ignore */ VAPI_SDK_URL)
+    const Vapi = module.default
+    const vapi = new Vapi(VAPI_PUBLIC_KEY)
+
+    vapi.on('call-start', () => {
+      setStatus('live')
+      setError('')
+      setSeconds(0)
+      stopTimer()
+      timerRef.current = window.setInterval(() => setSeconds(value => value + 1), 1000)
+    })
+    vapi.on('call-end', () => {
+      setStatus('idle')
+      setSpeaking(false)
+      setVolume(0)
+      stopTimer()
+    })
+    vapi.on('speech-start', () => setSpeaking(true))
+    vapi.on('speech-end', () => setSpeaking(false))
+    vapi.on('volume-level', level => setVolume(Math.min(1, Math.max(0, Number(level) || 0))))
+    vapi.on('error', event => {
+      const message = event?.error?.message || event?.message || 'The voice demo could not connect. Please check microphone access and try again.'
+      setError(message)
+      setStatus('idle')
+      setSpeaking(false)
+      stopTimer()
+    })
+
+    vapiRef.current = vapi
+    return vapi
+  }
+
+  const startCall = async () => {
+    if (status !== 'idle') return
+    setStatus('connecting')
+    setError('')
+    try {
+      const vapi = await initializeVapi()
+      await vapi.start(VAPI_ASSISTANT_ID)
+    } catch (event) {
+      setError(event?.message || 'Microphone access or the voice connection was not available. Please try again.')
+      setStatus('idle')
+    }
+  }
+
+  const endCall = () => {
+    if (!vapiRef.current || status === 'idle') return
+    setStatus('ending')
+    vapiRef.current.stop()
+  }
+
+  const live = status === 'live' || status === 'ending'
+  const statusLabel = status === 'connecting' ? 'Connecting securely' : status === 'ending' ? 'Ending call' : speaking ? 'Northstar is speaking' : live ? 'Listening to you' : 'Ready for a demo call'
+
+  return (
+    <section className="hvac-voice-section" id="voice-demo">
+      <div className="hvac-voice-copy">
+        <span className="hvac-kicker">Live browser call</span>
+        <h2>Talk to the AI front desk.</h2>
+        <p>Start a real voice conversation with the Northstar receptionist. Ask about an HVAC issue, test an emergency scenario, or request a sample appointment.</p>
+        <div className="voice-demo-disclosure">
+          <Icon name="mic" />
+          <div><strong>Portfolio demonstration</strong><span>Your browser will request microphone access. Use sample contact details only. No real service appointment or technician dispatch will be created.</span></div>
+        </div>
+        <div className="voice-prompt-list">
+          <span>Try saying</span>
+          <button type="button" onClick={startCall}>“My AC is blowing warm air.”</button>
+          <button type="button" onClick={startCall}>“I smell gas near my furnace.”</button>
+          <button type="button" onClick={startCall}>“Can I request an appointment?”</button>
+        </div>
+      </div>
+
+      <div className={`voice-console ${live ? 'is-live' : ''} ${speaking ? 'is-speaking' : ''}`}>
+        <div className="voice-console-top"><span>VAPI VOICE SESSION</span><i>{live ? '● LIVE' : '● STANDBY'}</i></div>
+        <div className="voice-orbit" aria-hidden="true">
+          <i className="voice-ring ring-a" /><i className="voice-ring ring-b" />
+          <div className="voice-core"><Icon name="mic" /></div>
+          <div className="voice-bars">
+            {[0, 1, 2, 3, 4, 5, 6].map((item, index) => <b key={item} style={{ height: live ? `${18 + ((index * 17 + volume * 60) % 55)}px` : `${18 + (index % 3) * 5}px` }} />)}
+          </div>
+        </div>
+        <div className="voice-status"><i className={live ? 'online' : ''} /><div><small>{statusLabel}</small><strong>{live ? formatTime(seconds) : 'Northstar Heating & Air'}</strong></div></div>
+        {error && <div className="voice-error" role="alert">{error}</div>}
+        <div className="voice-actions">
+          {!live && status !== 'connecting' ? (
+            <button type="button" className="voice-start" onClick={startCall}><Icon name="mic" /> Start voice demo</button>
+          ) : status === 'connecting' ? (
+            <button type="button" className="voice-start" disabled><span className="voice-spinner" /> Connecting...</button>
+          ) : (
+            <button type="button" className="voice-end" onClick={endCall} disabled={status === 'ending'}><Icon name="phoneOff" /> {status === 'ending' ? 'Ending...' : 'End call'}</button>
+          )}
+        </div>
+        <p className="voice-privacy">Audio is handled by Vapi for this live demonstration. Do not share sensitive or payment information.</p>
+      </div>
+    </section>
+  )
+}
 
 function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const [messages, setMessages] = useState([
@@ -219,6 +346,7 @@ export default function HvacDemo() {
         <nav>
           <a href="#services">Services</a>
           <a href="#how-it-works">AI Front Desk</a>
+          <a href="#voice-demo">Voice Demo</a>
           <a href="#faq">FAQs</a>
         </nav>
         <button type="button" className="hvac-header-cta" onClick={() => openWith('Book service')}>Request service</button>
@@ -232,7 +360,7 @@ export default function HvacDemo() {
             <p>Fast, professional heating and cooling service with a virtual front desk ready to answer questions and capture requests around the clock.</p>
             <div className="hvac-hero-actions">
               <button type="button" className="hvac-button primary" onClick={() => openWith('My AC is not cooling')}>Get HVAC help <Icon name="arrow" /></button>
-              <a className="hvac-button secondary" href={`tel:${companyProfile.phone.replace(/\D/g, '')}`}>Call {companyProfile.phone}</a>
+              <a className="hvac-button secondary" href="#voice-demo"><Icon name="mic" /> Talk to the AI</a>
             </div>
             <div className="hvac-trust-row">
               <span><Icon name="check" /> Licensed and insured demo profile</span>
@@ -323,6 +451,8 @@ export default function HvacDemo() {
             </div>
           </div>
         </section>
+
+        <VoiceDemo />
 
         <section className="hvac-faq hvac-section" id="faq">
           <div className="hvac-section-head">
