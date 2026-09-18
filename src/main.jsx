@@ -17,18 +17,30 @@ const services = [
     title: 'Website design and build',
     copy: 'A polished, mobile-first website that makes your business clear, credible, and easy to contact.',
     tags: ['Custom design', 'Responsive build', 'Fast deployment'],
+    summary: 'A complete customer-facing website built around your offer, audience, and primary call to action.',
+    includes: ['Page structure and conversion-focused layout', 'Responsive design for desktop, tablet, and mobile', 'Clear service messaging and calls to action', 'Basic on-page SEO, domain setup, and deployment'],
+    bestFor: 'Service businesses launching a new site or replacing an outdated one.',
+    result: 'A credible website that clearly explains what you do and gives visitors an easy next step.',
   },
   {
     number: '02',
     title: 'Lead-ready setup',
     copy: 'Forms, calendars, calls, and email routes connected so every inquiry reaches the right place.',
     tags: ['Lead forms', 'Booking flows', 'Notifications'],
+    summary: 'The conversion layer that turns website interest into an organized inquiry or scheduled conversation.',
+    includes: ['Lead forms with the right qualification fields', 'Calendar or appointment booking connections', 'Click-to-call and email contact paths', 'Lead notifications and routing to the right inbox or team'],
+    bestFor: 'Businesses getting traffic but losing leads through unclear or disconnected contact paths.',
+    result: 'A shorter path from visitor interest to a lead your team can actually follow up with.',
   },
   {
     number: '03',
     title: 'Integrations and automation',
     copy: 'Connect your site to the CRM and tools you already use, then automate the repetitive handoffs.',
     tags: ['CRM connections', 'Workflows', 'AI add-ons'],
+    summary: 'Connected workflows that reduce manual handoffs between your website, CRM, calendar, and follow-up tools.',
+    includes: ['CRM contact and opportunity creation', 'Workflow triggers, alerts, and follow-up sequences', 'Form, calendar, and pipeline connections', 'Optional AI chat or voice assistant integration'],
+    bestFor: 'Teams that already use several tools but still copy information or follow up manually.',
+    result: 'A cleaner operating flow with faster routing, fewer missed inquiries, and less repetitive admin work.',
   },
 ]
 
@@ -115,9 +127,40 @@ function LegalModal({ type, onClose }) {
   )
 }
 
+function ServiceModal({ service, onClose }) {
+  return (
+    <div className="legal-overlay" role="presentation" onMouseDown={event => event.target === event.currentTarget && onClose()}>
+      <section className="legal-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+        <div className="legal-header service-modal-header">
+          <div>
+            <span>CONNECTIVE STACK / SERVICE {service.number}</span>
+            <h2 id="service-modal-title">{service.title}</h2>
+          </div>
+          <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>×</button>
+        </div>
+        <div className="legal-body service-modal-body">
+          <p className="service-modal-summary">{service.summary}</p>
+          <div className="service-modal-grid">
+            <div className="service-modal-includes">
+              <span>What can be included</span>
+              <ul>{service.includes.map(item => <li key={item}><Check /> <span>{item}</span></li>)}</ul>
+            </div>
+            <div className="service-modal-aside">
+              <div><span>Best for</span><p>{service.bestFor}</p></div>
+              <div><span>Expected result</span><p>{service.result}</p></div>
+            </div>
+          </div>
+          <a href="#contact" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this service <Arrow /></a>
+        </div>
+      </section>
+    </div>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [legalModal, setLegalModal] = useState(null)
+  const [activeService, setActiveService] = useState(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -129,15 +172,19 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!legalModal) return undefined
-    const closeOnEscape = event => event.key === 'Escape' && setLegalModal(null)
+    if (!legalModal && !activeService) return undefined
+    const closeOnEscape = event => {
+      if (event.key !== 'Escape') return
+      setLegalModal(null)
+      setActiveService(null)
+    }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', closeOnEscape)
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', closeOnEscape)
     }
-  }, [legalModal])
+  }, [legalModal, activeService])
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -220,7 +267,7 @@ function App() {
                 <div className="service-tags">
                   {service.tags.map(tag => <span key={tag}>{tag}</span>)}
                 </div>
-                <span className="service-arrow"><Arrow /></span>
+                <button type="button" className="service-arrow" onClick={() => setActiveService(service)} aria-label={`View ${service.title} details`}><Arrow /></button>
               </article>
             ))}
           </div>
@@ -421,6 +468,7 @@ function App() {
         </div>
       </footer>
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
+      {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
     </>
   )
 }
