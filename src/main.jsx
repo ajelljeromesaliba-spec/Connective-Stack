@@ -316,32 +316,40 @@ function App() {
           <div className="experience-heading" data-reveal>
             <span className="kicker kicker-dark">Experience and capability</span>
             <h2>Design sense backed by hands-on technical operations.</h2>
-            <p>I do more than arrange sections on a page. I understand what happens after a visitor clicks, submits, books, or replies.</p>
+            <p>My experience combines modern web delivery with more than a decade in customer service, sales, quality assurance, technical support, and operations. I understand what needs to happen after a visitor clicks, submits, books, or replies.</p>
           </div>
           <div className="experience-layout">
             <div className="timeline" data-reveal>
               <article>
-                <span className="timeline-year">Current</span>
+                <span className="timeline-year">2025<br />Present</span>
                 <div>
-                  <small>AI agency web operations</small>
-                  <h3>Website and Systems Specialist</h3>
-                  <p>Building and maintaining websites, managing GitHub and Vercel deployments, configuring Cloudflare and DNS, connecting domains, and supporting GHL client systems.</p>
+                  <small>AIA / AI agency web operations</small>
+                  <h3>Website, GHL and Systems Specialist</h3>
+                  <p>Build and maintain client websites, manage GitHub and Vercel deployments, configure Cloudflare, DNS, domains, and technical SEO, and support GoHighLevel funnels, calendars, workflows, migrations, and third-party integrations.</p>
                 </div>
               </article>
               <article>
-                <span className="timeline-year">3+ years</span>
+                <span className="timeline-year">2022<br />2025</span>
                 <div>
-                  <small>CRM and automation</small>
-                  <h3>GoHighLevel Specialist</h3>
-                  <p>Funnels, forms, calendars, pipelines, workflows, account migrations, integrations, email setup, and day-to-day troubleshooting.</p>
+                  <small>ProClick</small>
+                  <h3>VA Team Lead and GoHighLevel Specialist</h3>
+                  <p>Led day-to-day VA delivery while managing pipelines, funnels, multistep workflows, nurture sequences, lead routing, forms, surveys, CRM organization, Shopify and Amazon support, and customer operations.</p>
                 </div>
               </article>
               <article>
-                <span className="timeline-year">Earlier</span>
+                <span className="timeline-year">2020<br />2022</span>
                 <div>
-                  <small>Customer and team operations</small>
-                  <h3>Customer Service, Sales, QA and Team Lead</h3>
-                  <p>Five years in customer service, two years across sales and quality assurance, and three years in VA team leadership with responsibility for a 17-person QA team.</p>
+                  <small>Transparent BPO</small>
+                  <h3>Sales Representative and Quality Assurance</h3>
+                  <p>Managed outbound health insurance sales, CRM documentation, lead follow-up, KPI tracking, call evaluation, compliance checks, performance reporting, and coaching feedback.</p>
+                </div>
+              </article>
+              <article>
+                <span className="timeline-year">2015<br />2020</span>
+                <div>
+                  <small>Teleperformance, Teletech, iQor and Telus</small>
+                  <h3>Customer and Technical Support</h3>
+                  <p>Resolved complex account, billing, order, healthcare, telecommunications, device, and technical issues across phone, email, and chat while maintaining clear documentation and service quality.</p>
                 </div>
               </article>
             </div>
@@ -475,7 +483,7 @@ function App() {
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
             <h2>One specialist. Direct communication. Practical execution.</h2>
-            <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. My background spans customer service, sales, quality assurance, team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
+            <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. I bring more than a decade of customer-facing and operational experience, including team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
             <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
             <div className="tool-matrix">
               <div className="tool-group">
