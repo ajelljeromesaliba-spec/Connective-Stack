@@ -88,6 +88,7 @@ function App() {
         <nav className={menuOpen ? 'nav-open' : ''}>
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
+          <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
           <a className="nav-cta" href="#contact" onClick={closeMenu}>Start a project <Arrow /></a>
@@ -98,7 +99,7 @@ function App() {
         <section className="hero">
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
-            <div className="eyebrow"><span className="status-dot" /> Independent web and systems specialist</div>
+            <div className="eyebrow"><span className="status-dot" /> AJ Saliba • Independent web and systems specialist</div>
             <h1>Websites that look sharp and <em>work harder.</em></h1>
             <p className="hero-lead">I build modern websites for service businesses, then connect the forms, calendars, CRM, and follow-up tools behind them.</p>
             <div className="hero-actions">
@@ -137,6 +138,36 @@ function App() {
           <span>Development</span><i />
           <span>Integrations</span><i />
           <span>Automation</span>
+        </section>
+
+        <section className="profile-overview">
+          <div className="profile-card" data-reveal>
+            <div className="profile-scan" />
+            <div className="profile-topline"><span>CS / PROFILE 001</span><i>AVAILABLE</i></div>
+            <div className="profile-main">
+              <div className="profile-monogram"><span>AJ</span><div className="monogram-ring" /></div>
+              <div>
+                <span className="profile-label">Independent specialist</span>
+                <h2>Ajell Saliba</h2>
+                <p>Web Design • GoHighLevel • Integrations • Technical Operations</p>
+              </div>
+            </div>
+            <div className="profile-location">
+              <span><i /> Based in the Philippines</span>
+              <strong>Serving US businesses remotely</strong>
+            </div>
+          </div>
+          <div className="profile-intro" data-reveal>
+            <span className="kicker">The person behind the stack</span>
+            <h2>I turn ideas and business requirements into working digital experiences.</h2>
+            <p>My background combines customer experience, quality assurance, team leadership, GoHighLevel, website operations, domain configuration, integrations, and AI-assisted development.</p>
+            <div className="profile-stats">
+              <div><strong>3+</strong><span>Years working with GoHighLevel</span></div>
+              <div><strong>1</strong><span>Year in AI agency web operations</span></div>
+              <div><strong>17</strong><span>QA team members previously led</span></div>
+              <div><strong>5+</strong><span>Years in customer service</span></div>
+            </div>
+          </div>
         </section>
 
         <section className="section services" id="services">
@@ -211,6 +242,68 @@ function App() {
           </div>
         </section>
 
+        <section className="experience-section" id="experience">
+          <div className="experience-heading" data-reveal>
+            <span className="kicker kicker-dark">Experience and capability</span>
+            <h2>Design sense backed by hands-on technical operations.</h2>
+            <p>I do more than arrange sections on a page. I understand what happens after a visitor clicks, submits, books, or replies.</p>
+          </div>
+          <div className="experience-layout">
+            <div className="timeline" data-reveal>
+              <article>
+                <span className="timeline-year">Current</span>
+                <div>
+                  <small>AI agency web operations</small>
+                  <h3>Website and Systems Specialist</h3>
+                  <p>Building and maintaining websites, managing GitHub and Vercel deployments, configuring Cloudflare and DNS, connecting domains, and supporting GHL client systems.</p>
+                </div>
+              </article>
+              <article>
+                <span className="timeline-year">3+ years</span>
+                <div>
+                  <small>CRM and automation</small>
+                  <h3>GoHighLevel Specialist</h3>
+                  <p>Funnels, forms, calendars, pipelines, workflows, account migrations, integrations, email setup, and day-to-day troubleshooting.</p>
+                </div>
+              </article>
+              <article>
+                <span className="timeline-year">Earlier</span>
+                <div>
+                  <small>Customer and team operations</small>
+                  <h3>Customer Service, Sales, QA and Team Lead</h3>
+                  <p>Five years in customer service, two years across sales and quality assurance, and three years in VA team leadership with responsibility for a 17-person QA team.</p>
+                </div>
+              </article>
+            </div>
+            <div className="capability-console" data-reveal>
+              <div className="console-top"><span>capabilities.json</span><i>● LIVE</i></div>
+              <div className="capability-group">
+                <span>01 / BUILD</span>
+                <div><strong>Responsive websites</strong><b>READY</b></div>
+                <div><strong>Landing pages</strong><b>READY</b></div>
+                <div><strong>Technical SEO setup</strong><b>READY</b></div>
+              </div>
+              <div className="capability-group">
+                <span>02 / CONNECT</span>
+                <div><strong>CRM and calendars</strong><b>READY</b></div>
+                <div><strong>Forms and notifications</strong><b>READY</b></div>
+                <div><strong>API and third-party tools</strong><b>READY</b></div>
+              </div>
+              <div className="capability-group">
+                <span>03 / LAUNCH</span>
+                <div><strong>GitHub and Vercel</strong><b>READY</b></div>
+                <div><strong>Cloudflare and DNS</strong><b>READY</b></div>
+                <div><strong>Email authentication</strong><b>READY</b></div>
+              </div>
+            </div>
+          </div>
+          <div className="tech-marquee" aria-label="Technology experience">
+            <div>
+              {['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'Lovable', 'WordPress', 'Shopify', 'Google Workspace', 'Zapier', 'Vapi', 'Supabase', 'Resend', 'GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare'].map((tool, index) => <span key={`${tool}-${index}`}>{tool}<i /></span>)}
+            </div>
+          </div>
+        </section>
+
         <section className="price-section">
           <div className="price-intro" data-reveal>
             <span className="kicker">Simple starting point</span>
@@ -273,7 +366,7 @@ function App() {
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
             <h2>One specialist. Direct communication. Practical execution.</h2>
-            <p>I’m Ajell, an independent web and systems specialist based in the Philippines and working with US businesses. My background spans customer service, team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
+            <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. My background spans customer service, sales, quality assurance, team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
             <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
             <div className="tool-cloud">
               {['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'Lovable', 'Google Workspace', 'WordPress', 'Zapier'].map(tool => <span key={tool}>{tool}</span>)}
