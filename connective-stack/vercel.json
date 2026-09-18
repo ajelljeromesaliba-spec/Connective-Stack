@@ -1,0 +1,25 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/demos/hvac-ai-front-desk",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/demos/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
