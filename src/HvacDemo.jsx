@@ -165,11 +165,13 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const [input, setInput] = useState('')
   const [replies, setReplies] = useState(defaultQuickReplies)
   const [flow, setFlow] = useState(null)
+  const [thinking, setThinking] = useState(false)
   const scrollRef = useRef(null)
+  const replyTimerRef = useRef(null)
 
   useEffect(() => {
     if (open) setTimeout(() => scrollRef.current?.scrollIntoView({ behavior: 'smooth' }), 30)
-  }, [messages, open])
+  }, [messages, open, thinking])
 
   useEffect(() => {
     if (seededQuestion?.text && open) handleMessage(seededQuestion.text)
@@ -177,9 +179,18 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seededQuestion])
 
+  useEffect(() => () => window.clearTimeout(replyTimerRef.current), [])
+
   const addBot = (text, nextReplies = defaultQuickReplies, urgent = false) => {
-    setMessages(current => [...current, { from: 'bot', text, urgent }])
-    setReplies(nextReplies)
+    setThinking(true)
+    setReplies([])
+    const responseDelay = 850 + Math.min(text.length * 4, 900) + Math.floor(Math.random() * 250)
+    window.clearTimeout(replyTimerRef.current)
+    replyTimerRef.current = window.setTimeout(() => {
+      setMessages(current => [...current, { from: 'bot', text, urgent }])
+      setReplies(nextReplies)
+      setThinking(false)
+    }, responseDelay)
   }
 
   const startBooking = service => {
@@ -237,7 +248,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
 
   const handleMessage = raw => {
     const value = raw.trim()
-    if (!value) return
+    if (!value || thinking) return
     setMessages(current => [...current, { from: 'user', text: value }])
     setInput('')
 
@@ -290,6 +301,11 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
                 {message.text}
               </div>
             ))}
+            {thinking && (
+              <div className="hvac-message bot hvac-thinking" role="status" aria-label="Nova is preparing a response">
+                <span /><span /><span />
+              </div>
+            )}
             <div ref={scrollRef} />
           </div>
           {replies.length > 0 && (
@@ -298,8 +314,8 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
             </div>
           )}
           <form className="hvac-chat-form" onSubmit={submit}>
-            <input value={input} onChange={event => setInput(event.target.value)} placeholder="Ask an HVAC question..." aria-label="Message Nova" />
-            <button type="submit" aria-label="Send message"><Icon name="send" /></button>
+            <input value={input} onChange={event => setInput(event.target.value)} placeholder={thinking ? 'Nova is preparing a response...' : 'Ask an HVAC question...'} aria-label="Message Nova" disabled={thinking} />
+            <button type="submit" aria-label="Send message" disabled={thinking}><Icon name="send" /></button>
           </form>
         </aside>
       )}
@@ -317,8 +333,8 @@ export default function HvacDemo() {
     const previousTitle = document.title
     const meta = document.querySelector('meta[name="description"]')
     const previousDescription = meta?.getAttribute('content')
-    document.title = 'HVAC AI Front Desk Demo | Connective Stack'
-    meta?.setAttribute('content', 'Try an interactive HVAC website and automated front desk demo by Connective Stack.')
+    document.title = 'HVAC AI Receptionist Demo | Connective Stack'
+    meta?.setAttribute('content', 'Try a live HVAC AI receptionist with browser voice, service FAQs, lead qualification, safety escalation, and appointment-request capture.')
     window.scrollTo(0, 0)
     return () => {
       document.title = previousTitle
