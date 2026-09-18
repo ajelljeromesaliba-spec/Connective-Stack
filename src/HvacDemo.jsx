@@ -384,17 +384,15 @@ export default function HvacDemo() {
               <span><Icon name="check" /> 24/7 request capture</span>
             </div>
           </div>
-          <div className="hvac-hero-visual" aria-label="HVAC system status dashboard">
-            <div className="hvac-ambient-ring ring-one" /><div className="hvac-ambient-ring ring-two" />
-            <div className="comfort-card">
+          <div className="hvac-hero-visual" aria-label="HVAC technician inspecting a home thermostat">
+            <div className="hvac-hero-photo">
+              <img src="/assets/hvac-hero-technician.webp" alt="HVAC technician inspecting a smart thermostat in a modern home" />
+              <div className="hvac-photo-shade" />
+              <div className="hvac-photo-label"><span>ON-SITE EXPERTISE</span><strong>Diagnostics built around the whole system</strong></div>
+            </div>
+            <div className="comfort-card compact">
               <div className="comfort-top"><span>HOME COMFORT</span><i>● SYSTEM ONLINE</i></div>
-              <div className="temperature"><small>INDOOR</small><strong>72<sup>°</sup></strong><span>Cooling to 70°</span></div>
-              <div className="comfort-chart"><i /><i /><i /><i /><i /><i /><i /><i /></div>
-              <div className="comfort-metrics">
-                <div><span>Humidity</span><strong>44%</strong></div>
-                <div><span>Air quality</span><strong>Good</strong></div>
-                <div><span>Next service</span><strong>Oct 12</strong></div>
-              </div>
+              <div className="comfort-compact-row"><div><small>INDOOR</small><strong>72<sup>°</sup></strong></div><div><span>Humidity</span><b>44%</b><span>Air quality</span><b>Good</b></div></div>
             </div>
             <div className="dispatch-card"><span className="dispatch-icon"><Icon name="gauge" /></span><div><small>Next arrival window</small><strong>Today, 2 PM to 5 PM</strong></div></div>
             <div className="response-card"><i /><span><small>Front desk</small><strong>Replies in seconds</strong></span></div>
@@ -412,6 +410,22 @@ export default function HvacDemo() {
           <div className="hvac-section-head">
             <div><span>Complete comfort service</span><h2>One team for the system behind your walls.</h2></div>
             <p>Built like a real service-business website, with clear paths for urgent repairs, planned projects, maintenance, and questions.</p>
+          </div>
+          <div className="hvac-service-showcase" aria-label="HVAC service photography">
+            <figure className="service-photo service-photo-large">
+              <img src="/assets/hvac-ac-service.webp" alt="HVAC technician diagnosing an outdoor air conditioning condenser" loading="lazy" />
+              <figcaption><span>Cooling systems</span><strong>Detailed diagnostics before recommendations</strong></figcaption>
+            </figure>
+            <figure className="service-photo">
+              <img src="/assets/hvac-furnace-service.webp" alt="HVAC technician maintaining a residential furnace" loading="lazy" />
+              <figcaption><span>Heating systems</span><strong>Maintenance that protects comfort and reliability</strong></figcaption>
+            </figure>
+            <div className="service-visual-note">
+              <span>WHAT A REAL BUILD CAN SHOW</span>
+              <strong>People, equipment, process, and proof.</strong>
+              <p>Custom photography and service-specific visuals help visitors understand the work before they ever call.</p>
+              <div><i /> Repair <i /> Maintenance <i /> Installation</div>
+            </div>
           </div>
           <div className="hvac-service-grid">
             {services.map(([icon, title, copy]) => (

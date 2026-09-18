@@ -49,10 +49,20 @@
 .hvac-trust-row span { display: flex; align-items: center; gap: 6px; }
 .hvac-trust-row svg { width: 15px; height: 15px; color: var(--hvac-blue); }
 
-.hvac-hero-visual { min-height: 520px; display: grid; place-items: center; }
+.hvac-hero-visual { min-height: 580px; display: grid; place-items: center; }
+.hvac-hero-photo { position: absolute; inset: 0 0 22px 28px; overflow: hidden; border-radius: 28px; background: #dceaf4; box-shadow: 0 38px 90px rgba(15,50,80,.22); }
+.hvac-hero-photo::before { content: ''; position: absolute; z-index: 2; inset: 0; border: 1px solid rgba(255,255,255,.45); border-radius: inherit; pointer-events: none; }
+.hvac-hero-photo img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 58% center; }
+.hvac-photo-shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(5,20,38,.75) 100%); }
+.hvac-photo-label { position: absolute; z-index: 3; left: 28px; right: 28px; bottom: 27px; color: white; }
+.hvac-photo-label span, .hvac-photo-label strong { display: block; }.hvac-photo-label span { margin-bottom: 7px; color: #aee7ff; font: 700 8px monospace; letter-spacing: .16em; }.hvac-photo-label strong { max-width: 330px; font: 700 17px/1.25 'Manrope', sans-serif; }
 .hvac-ambient-ring { position: absolute; border: 1px solid rgba(22,119,255,.13); border-radius: 50%; }
 .ring-one { width: 530px; height: 530px; }.ring-two { width: 410px; height: 410px; }
 .comfort-card { position: relative; z-index: 2; width: min(520px, 90%); padding: 25px; border: 1px solid #243950; border-radius: 22px; color: white; background: linear-gradient(145deg, #0c2138, #071525); box-shadow: 0 40px 80px rgba(7,23,44,.27); }
+.comfort-card.compact { position: absolute; left: -18px; top: 26px; width: 235px; padding: 17px; border-radius: 16px; backdrop-filter: blur(16px); }
+.comfort-compact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; align-items: end; margin-top: 16px; }
+.comfort-compact-row > div:first-child small, .comfort-compact-row > div:first-child strong { display: block; }.comfort-compact-row small { color: #7890a5; font: 600 8px monospace; letter-spacing: .12em; }.comfort-compact-row strong { font: 700 44px/.9 'Manrope', sans-serif; letter-spacing: -.08em; }.comfort-compact-row sup { color: var(--hvac-sky); font-size: 17px; }
+.comfort-compact-row > div:last-child { padding-left: 12px; border-left: 1px solid #294057; }.comfort-compact-row span, .comfort-compact-row b { display: block; }.comfort-compact-row span { color: #71899d; font-size: 7px; }.comfort-compact-row b { margin: 2px 0 7px; font-size: 10px; }
 .comfort-top { display: flex; justify-content: space-between; color: #7791a9; font: 600 8px monospace; letter-spacing: .12em; }
 .comfort-top i { color: #50e8bd; font-style: normal; }
 .temperature { display: grid; justify-items: center; padding: 31px 0 21px; }
@@ -83,6 +93,15 @@
 .hvac-section-head > div > span { color: var(--hvac-blue); font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .hvac-section-head h2, .hvac-ai-copy h2, .hvac-demo-cta h2, .hvac-issues h2 { margin: 14px 0 0; color: var(--hvac-navy); font: 750 clamp(38px, 4.2vw, 65px)/1.04 'Manrope', sans-serif; letter-spacing: -.055em; }
 .hvac-section-head > p { max-width: 560px; margin: 0; color: var(--hvac-muted); font-size: 16px; }
+.hvac-service-showcase { margin-bottom: 22px; display: grid; grid-template-columns: 1.15fr .85fr .7fr; gap: 16px; }
+.service-photo, .service-visual-note { min-height: 355px; position: relative; overflow: hidden; border-radius: 17px; }
+.service-photo { margin: 0; background: #dce7ee; }
+.service-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(5,20,38,.82) 100%); }
+.service-photo img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .55s ease; }.service-photo:hover img { transform: scale(1.035); }
+.service-photo figcaption { position: absolute; z-index: 2; left: 22px; right: 22px; bottom: 21px; color: white; }.service-photo figcaption span, .service-photo figcaption strong { display: block; }.service-photo figcaption span { margin-bottom: 6px; color: #aee7ff; font-size: 8px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }.service-photo figcaption strong { max-width: 370px; font: 700 16px/1.3 'Manrope', sans-serif; }
+.service-visual-note { padding: 28px; display: flex; flex-direction: column; justify-content: flex-end; color: white; background: linear-gradient(145deg, var(--hvac-blue), #0b4fa7); }
+.service-visual-note::before { content: ''; position: absolute; width: 220px; height: 220px; border: 1px solid rgba(255,255,255,.15); border-radius: 50%; right: -80px; top: -70px; box-shadow: 0 0 0 42px rgba(255,255,255,.04), 0 0 0 84px rgba(255,255,255,.025); }
+.service-visual-note > * { position: relative; z-index: 2; }.service-visual-note > span { color: #bfe8ff; font: 700 8px monospace; letter-spacing: .14em; }.service-visual-note > strong { margin-top: 12px; font: 750 26px/1.08 'Manrope', sans-serif; letter-spacing: -.04em; }.service-visual-note > p { color: #d8efff; font-size: 12px; line-height: 1.55; }.service-visual-note > div { margin-top: 12px; display: flex; gap: 9px; flex-wrap: wrap; color: white; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }.service-visual-note > div i { width: 5px; height: 5px; align-self: center; border-radius: 50%; background: #72edc5; }
 .hvac-service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .hvac-service-grid article { min-height: 330px; padding: 31px; display: flex; flex-direction: column; border: 1px solid var(--hvac-line); border-radius: 16px; background: linear-gradient(145deg, #fff, #f6fbff); transition: transform .25s ease, box-shadow .25s ease; }
 .hvac-service-grid article:hover { transform: translateY(-6px); box-shadow: 0 24px 55px rgba(34,69,98,.1); }
@@ -206,15 +225,16 @@
   .hvac-voice-copy { max-width: 760px; }
   .voice-console { justify-self: center; }
   .hvac-issues { grid-template-columns: 1fr; gap: 45px; }
+  .hvac-service-showcase { grid-template-columns: 1fr 1fr; }.service-visual-note { grid-column: 1 / 3; min-height: 250px; }
 }
 
 @media (max-width: 760px) {
   .demo-ribbon { justify-content: center; text-align: center; }.demo-ribbon > span { display: none; }
   .hvac-header { height: 70px; padding: 0 16px; }.hvac-header nav { display: none; }.hvac-brand strong { font-size: 15px; }.hvac-brand-mark { width: 37px; height: 37px; }.hvac-header-cta { padding: 0 13px; font-size: 10px; }
   .hvac-hero { min-height: auto; padding: 70px 20px 80px; gap: 45px; }.hvac-hero h1 { font-size: clamp(47px, 13.4vw, 68px); }.hvac-hero-copy > p { font-size: 16px; }.hvac-trust-row { align-items: flex-start; flex-direction: column; }
-  .hvac-hero-visual { min-height: 420px; margin: 0 -12px; width: calc(100% + 24px); }.ring-one { width: 390px; height: 390px; }.ring-two { width: 310px; height: 310px; }.comfort-card { width: 91%; padding: 18px; }.temperature strong { font-size: 65px; }.dispatch-card { left: 4px; bottom: 0; }.response-card { right: 4px; top: 18px; }
+  .hvac-hero-visual { min-height: 500px; margin: 0 -12px; width: calc(100% + 24px); }.hvac-hero-photo { inset: 0 0 20px 0; border-radius: 20px; }.hvac-hero-photo img { object-position: 62% center; }.hvac-photo-label { left: 20px; bottom: 75px; }.comfort-card.compact { left: 10px; top: 14px; width: 210px; padding: 14px; }.dispatch-card { left: 8px; bottom: 0; }.response-card { right: 8px; top: 18px; }
   .hvac-proof-strip { grid-template-columns: 1fr 1fr; padding: 20px; }.hvac-proof-strip div { padding: 16px 8px; }.hvac-proof-strip div:nth-child(2) { border-right: 0; }.hvac-proof-strip div:nth-child(-n+2) { border-bottom: 1px solid var(--hvac-line); }
-  .hvac-section, .hvac-ai-section, .hvac-voice-section { padding: 85px 20px; }.hvac-section-head { grid-template-columns: 1fr; gap: 18px; }.hvac-section-head h2, .hvac-ai-copy h2, .hvac-voice-copy h2, .hvac-demo-cta h2 { font-size: 39px; }.hvac-service-grid { grid-template-columns: 1fr; }.hvac-service-grid article { min-height: 290px; }
+  .hvac-section, .hvac-ai-section, .hvac-voice-section { padding: 85px 20px; }.hvac-section-head { grid-template-columns: 1fr; gap: 18px; }.hvac-section-head h2, .hvac-ai-copy h2, .hvac-voice-copy h2, .hvac-demo-cta h2 { font-size: 39px; }.hvac-service-showcase { grid-template-columns: 1fr; }.service-photo, .service-visual-note { min-height: 300px; }.service-visual-note { grid-column: auto; min-height: 270px; }.hvac-service-grid { grid-template-columns: 1fr; }.hvac-service-grid article { min-height: 290px; }
   .hvac-issues { padding: 80px 20px; }.hvac-issues h2 { font-size: 39px; }.issue-buttons { grid-template-columns: 1fr; }
   .workflow-nodes { grid-template-columns: 1fr; }.workflow-nodes > div { min-height: 65px; }.workflow-nodes > div:not(:last-child)::after { top: auto; right: auto; left: 24px; bottom: -9px; width: 0; height: 9px; border-top: 0; border-left: 1px dashed #40617d; }.workflow-nodes strong { margin: 8px 0 4px; }.lead-record dl { grid-template-columns: 1fr; }
   .hvac-demo-cta { padding: 85px 20px; grid-template-columns: 1fr; gap: 28px; }.hvac-footer { padding: 34px 20px; align-items: flex-start; flex-direction: column; }
