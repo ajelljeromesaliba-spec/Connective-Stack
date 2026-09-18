@@ -195,6 +195,17 @@ h1 em { display: block; color: var(--teal-dark); font-style: normal; }
 .process-grid h3 { font-size: 22px; margin-bottom: 11px; }.process-grid p { color: var(--ink-soft); font-size: 14px; }
 
 .about-visual { position: relative; }
+.about-portrait { position: relative; min-height: 620px; overflow: hidden; border: 1px solid #344143; border-radius: 20px; background: #0b0f11; box-shadow: 0 34px 85px rgba(0,0,0,.38); }
+.about-portrait::before { content: ''; position: absolute; inset: 14px; z-index: 3; border: 1px solid rgba(255,255,255,.15); border-radius: 13px; pointer-events: none; }
+.about-portrait img { width: 100%; height: 100%; min-height: 620px; object-fit: cover; object-position: center 24%; filter: saturate(.88) contrast(1.02); }
+.portrait-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,13,15,.88) 0%, rgba(8,13,15,.12) 48%, rgba(8,13,15,.04) 100%); }
+.portrait-label { position: absolute; z-index: 4; left: 34px; bottom: 32px; display: flex; flex-direction: column; }
+.portrait-label span { font: 700 20px/1.2 var(--font-display); letter-spacing: .04em; }
+.portrait-label small { margin-top: 5px; color: var(--teal); font: 600 9px/1.2 monospace; letter-spacing: .15em; }
+.portrait-code { position: absolute; z-index: 5; top: 30px; right: 30px; min-width: 154px; padding: 11px 13px; border: 1px solid rgba(255,255,255,.15); border-radius: 9px; background: rgba(8,14,16,.7); backdrop-filter: blur(12px); }
+.portrait-code > span { display: block; color: #7f908e; font: 500 8px monospace; letter-spacing: .14em; }
+.portrait-code strong { display: flex; align-items: center; gap: 7px; margin-top: 5px; color: #d8e1df; font-size: 10px; }
+.portrait-code i { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(9,205,180,.12); }
 .code-window { background: #0b0f11; border: 1px solid #293336; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.34); }
 .code-top { height: 44px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #151b1d; border-bottom: 1px solid #263034; }.code-top span { width: 7px; height: 7px; border-radius: 50%; background: #3a4547; }.code-top span:nth-child(2) { background: #7b7254; }.code-top span:nth-child(3) { background: var(--teal-dark); }.code-top small { margin-left: 8px; color: #738082; font-family: monospace; }
 .code-window pre { margin: 0; padding: 42px; min-height: 330px; font-size: clamp(13px, 1.25vw, 18px); line-height: 1.8; color: #d8dfdd; overflow: auto; }.c-muted { color: #536062; }.c-teal { color: var(--teal); }.c-gold { color: #d5c889; }
@@ -251,6 +262,9 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .tech-marquee { margin-left: -20px; margin-right: -20px; }
   .process-grid { grid-template-columns: 1fr; }.process-grid article { padding: 0; }
   .about-section { padding-bottom: 110px; }.code-window pre { padding: 28px 20px; }.experience-chip { right: 5px; bottom: -55px; }
+  .about-portrait, .about-portrait img { min-height: 530px; }
+  .portrait-label { left: 28px; bottom: 27px; }
+  .portrait-code { top: 25px; right: 25px; }
   .contact-section { grid-template-columns: 1fr; padding: 82px 20px; }.contact-panel { margin-top: 15px; }
   footer { grid-template-columns: 1fr; gap: 15px; text-align: left; }.footer-brand + p { text-align: left; }.footer-brand ~ div { flex-wrap: wrap; }
 }

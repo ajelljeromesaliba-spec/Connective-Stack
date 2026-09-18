@@ -357,11 +357,19 @@ function App() {
 
         <section className="about-section" id="about">
           <div className="about-visual" data-reveal>
-            <div className="code-window">
-              <div className="code-top"><span /><span /><span /><small>connective-stack.config</small></div>
-              <pre><code><span className="c-muted">// Built to connect</span>{'\n'}<span className="c-teal">const</span> project = {'{'}{'\n'}  strategy: <span className="c-gold">true</span>,{'\n'}  design: <span className="c-gold">'responsive'</span>,{'\n'}  systems: [<span className="c-gold">'web'</span>, <span className="c-gold">'crm'</span>],{'\n'}  handoff: <span className="c-gold">'clear'</span>{'\n'}{'}'}</code></pre>
+            <div className="about-portrait">
+              <img src="/assets/ajell-saliba.webp" alt="Ajell Saliba, founder and independent specialist at Connective Stack" />
+              <div className="portrait-shade" />
+              <div className="portrait-label">
+                <span>AJELL SALIBA</span>
+                <small>WEB + SYSTEMS SPECIALIST</small>
+              </div>
+              <div className="portrait-code">
+                <span>STATUS</span>
+                <strong><i /> Available for projects</strong>
+              </div>
             </div>
-            <div className="experience-chip"><strong>10+</strong><span>Years supporting customers, teams, and digital operations</span></div>
+            <div className="experience-chip"><strong>3+</strong><span>Years building in GoHighLevel and connected systems</span></div>
           </div>
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
