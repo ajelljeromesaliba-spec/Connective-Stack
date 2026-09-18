@@ -38,6 +38,9 @@ const projects = [
     copy: 'A focused service site with clear calls to action, trust signals, and an appointment path built for mobile visitors.',
     image: '/assets/project-hvac.svg',
     accent: 'mint',
+    goal: 'Turn high-intent local searches into calls and estimate requests.',
+    outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
+    visualTags: ['Mobile-first', 'Call + booking', 'Local trust'],
   },
   {
     label: 'Professional Services',
@@ -45,6 +48,9 @@ const projects = [
     copy: 'A credible digital presence that simplifies a complex offer and guides qualified visitors toward a consultation.',
     image: '/assets/project-advisory.svg',
     accent: 'violet',
+    goal: 'Make a complex service easier to understand and easier to buy.',
+    outcomes: ['Clearer positioning', 'Qualified consultations', 'Stronger credibility'],
+    visualTags: ['Clear offer', 'Expert positioning', 'Consultation CTA'],
   },
   {
     label: 'Connected Operations',
@@ -52,6 +58,9 @@ const projects = [
     copy: 'A visual customer journey that connects website inquiries, notifications, scheduling, and CRM follow-up.',
     image: '/assets/project-workflow.svg',
     accent: 'blue',
+    goal: 'Reduce response gaps between a new inquiry and a booked appointment.',
+    outcomes: ['Instant lead routing', 'Consistent follow-up', 'Fewer missed inquiries'],
+    visualTags: ['CRM routing', 'Calendar sync', 'Follow-up'],
   },
 ]
 
@@ -62,8 +71,70 @@ const process = [
   ['04', 'Launch and support', 'Your site goes live with a clean handoff and seven days of post-launch support.'],
 ]
 
+function LegalModal({ type, onClose }) {
+  const isPrivacy = type === 'privacy'
+
+  return (
+    <div className="legal-overlay" role="presentation" onMouseDown={event => event.target === event.currentTarget && onClose()}>
+      <section className="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+        <div className="legal-header">
+          <div>
+            <span>CONNECTIVE STACK / LEGAL</span>
+            <h2 id="legal-title">{isPrivacy ? 'Privacy Policy' : 'Terms and Conditions'}</h2>
+          </div>
+          <button type="button" className="legal-close" onClick={onClose} aria-label="Close legal information">×</button>
+        </div>
+        <div className="legal-body">
+          <p className="legal-updated">Last updated: September 18, 2026</p>
+          {isPrivacy ? (
+            <>
+              <p>Connective Stack respects your privacy. This policy explains how information may be collected and used when you visit this website or contact AJ about a project.</p>
+              <h3>Information collected</h3>
+              <p>Information may include your name, email address, company details, project requirements, and anything else you choose to provide through email or a contact form. Basic technical and analytics data may also be collected, such as device type, browser, referring page, and general location.</p>
+              <h3>How information is used</h3>
+              <ul>
+                <li>To respond to inquiries and prepare project estimates</li>
+                <li>To provide, maintain, and improve services</li>
+                <li>To secure the website and prevent misuse</li>
+                <li>To understand general website performance</li>
+              </ul>
+              <h3>Sharing and third-party services</h3>
+              <p>Personal information is not sold. Information may be processed by trusted service providers used for hosting, email, analytics, scheduling, forms, or project delivery. These providers handle information under their own privacy terms.</p>
+              <h3>Retention and your choices</h3>
+              <p>Information is retained only as reasonably needed for communication, service delivery, recordkeeping, and legal obligations. You may request access, correction, or deletion of information by emailing AJ.</p>
+              <h3>Contact</h3>
+              <p>Privacy questions may be sent to <a href="mailto:aj@connectivestack.com">aj@connectivestack.com</a>.</p>
+            </>
+          ) : (
+            <>
+              <p>By using this website, you agree to these terms. The website presents information about services offered by Connective Stack and AJ Saliba.</p>
+              <h3>Website information</h3>
+              <p>Content is provided for general information and may be updated without notice. Examples and concept projects are demonstrations of capabilities and should not be treated as guaranteed business results.</p>
+              <h3>Project engagements</h3>
+              <p>Actual services, scope, timelines, pricing, revisions, payment terms, and deliverables are governed by the written proposal or agreement accepted for each project.</p>
+              <h3>Client responsibilities</h3>
+              <ul>
+                <li>Provide accurate content, access, feedback, and approvals on time</li>
+                <li>Confirm ownership or permission for supplied text, images, data, and brand assets</li>
+                <li>Pay third-party subscriptions, usage fees, domains, or licenses unless otherwise agreed</li>
+              </ul>
+              <h3>Intellectual property</h3>
+              <p>Unless otherwise agreed in writing, final project deliverables transfer after full payment. Connective Stack retains ownership of pre-existing tools, reusable methods, and general know-how. Third-party assets remain subject to their original licenses.</p>
+              <h3>Limitations</h3>
+              <p>No specific lead, revenue, ranking, or conversion result is guaranteed. Connective Stack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
+              <h3>Contact</h3>
+              <p>Questions about these terms may be sent to <a href="mailto:aj@connectivestack.com">aj@connectivestack.com</a>.</p>
+            </>
+          )}
+        </div>
+      </section>
+    </div>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [legalModal, setLegalModal] = useState(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,6 +144,17 @@ function App() {
     document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el))
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    if (!legalModal) return undefined
+    const closeOnEscape = event => event.key === 'Escape' && setLegalModal(null)
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [legalModal])
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -197,21 +279,33 @@ function App() {
           <div className="section-heading heading-row" data-reveal>
             <div>
               <span className="kicker">Selected concepts</span>
-              <h2>Built around real business goals.</h2>
+              <h2>Designed around the result, not just the page.</h2>
             </div>
-            <p>Original sample concepts showing the design and systems work available through Connective Stack.</p>
+            <p>Each concept starts with a business problem, then connects the design, message, and customer journey around a useful outcome.</p>
           </div>
           <div className="project-grid">
             {projects.map((project, index) => (
               <article className={`project-card ${index === 0 ? 'project-wide' : ''}`} key={project.title} data-reveal>
                 <div className={`project-image ${project.accent}`}>
                   <img src={project.image} alt={`${project.title} sample concept`} />
-                  <span className="concept-badge">Sample concept</span>
+                  <span className="concept-badge">Outcome-led concept</span>
+                  <span className="project-index">0{index + 1}</span>
+                  <div className="visual-tags">
+                    {project.visualTags.map(tag => <span key={tag}><i />{tag}</span>)}
+                  </div>
                 </div>
                 <div className="project-copy">
                   <span>{project.label}</span>
                   <h3>{project.title}</h3>
                   <p>{project.copy}</p>
+                  <div className="project-goal">
+                    <small>Business goal</small>
+                    <strong>{project.goal}</strong>
+                  </div>
+                  <div className="project-outcomes">
+                    <small>Built to improve</small>
+                    <ul>{project.outcomes.map(outcome => <li key={outcome}><Check />{outcome}</li>)}</ul>
+                  </div>
                 </div>
               </article>
             ))}
@@ -397,8 +491,14 @@ function App() {
       <footer>
         <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="Connective Stack" /></a>
         <p>Websites, integrations, and automation for service businesses.</p>
-        <div><span>© {new Date().getFullYear()} Connective Stack</span><a href="mailto:aj@connectivestack.com">Email AJ</a></div>
+        <div>
+          <span>© {new Date().getFullYear()} Connective Stack</span>
+          <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
+          <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
+          <a href="mailto:aj@connectivestack.com">Email AJ</a>
+        </div>
       </footer>
+      {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
     </>
   )
 }
