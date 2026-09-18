@@ -184,6 +184,12 @@ h1 em { display: block; color: var(--teal-dark); font-style: normal; }
 .code-window pre { margin: 0; padding: 42px; min-height: 330px; font-size: clamp(13px, 1.25vw, 18px); line-height: 1.8; color: #d8dfdd; overflow: auto; }.c-muted { color: #536062; }.c-teal { color: var(--teal); }.c-gold { color: #d5c889; }
 .experience-chip { position: absolute; right: -28px; bottom: -40px; width: 240px; display: flex; gap: 13px; align-items: center; padding: 17px; background: #eef5f3; color: var(--ink); border-radius: 12px; box-shadow: 0 20px 45px rgba(0,0,0,.2); }.experience-chip strong { font-family: var(--font-display); font-size: 30px; color: var(--teal-dark); }.experience-chip span { font-size: 10px; line-height: 1.35; }
 .tool-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }.tool-cloud span { color: #a8b5b3; background: rgba(255,255,255,.03); border-color: #344143; }
+.tool-matrix { display: grid; gap: 16px; margin-top: 34px; }
+.tool-group { padding-top: 15px; border-top: 1px solid #2d3a3d; }
+.tool-group > span { display: block; margin-bottom: 11px; color: #687977; font: 600 9px/1.2 monospace; letter-spacing: .13em; text-transform: uppercase; }
+.tool-group > div { display: flex; flex-wrap: wrap; gap: 7px; }
+.tool-group b { padding: 7px 10px; border: 1px solid #344143; border-radius: 999px; background: rgba(255,255,255,.025); color: #aebbb9; font-size: 10px; font-weight: 500; transition: color .2s ease, border-color .2s ease, transform .2s ease; }
+.tool-group b:hover { color: white; border-color: rgba(9,205,180,.55); transform: translateY(-2px); }
 
 .contact-section { position: relative; overflow: hidden; background: var(--teal); color: var(--ink); padding: 105px clamp(22px, 7vw, 112px); display: grid; grid-template-columns: 1.2fr .8fr; gap: 8vw; align-items: center; }
 .contact-glow { position: absolute; width: 480px; height: 480px; border-radius: 50%; background: rgba(255,255,255,.28); filter: blur(100px); right: 12%; top: -60%; }

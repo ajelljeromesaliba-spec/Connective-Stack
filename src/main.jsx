@@ -269,7 +269,7 @@ function App() {
           </div>
           <div className="tech-marquee" aria-label="Technology experience">
             <div>
-              {['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'Lovable', 'WordPress', 'Shopify', 'Google Workspace', 'Zapier', 'Vapi', 'Supabase', 'Resend', 'GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare'].map((tool, index) => <span key={`${tool}-${index}`}>{tool}<i /></span>)}
+              {['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'Lovable', 'ChatGPT', 'Claude', 'Athena', 'Google Workspace', 'Zapier', 'VAPI', 'Supabase', 'GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare'].map((tool, index) => <span key={`${tool}-${index}`}>{tool}<i /></span>)}
             </div>
           </div>
         </section>
@@ -346,8 +346,23 @@ function App() {
             <h2>One specialist. Direct communication. Practical execution.</h2>
             <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. My background spans customer service, sales, quality assurance, team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
             <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
-            <div className="tool-cloud">
-              {['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'Lovable', 'Google Workspace', 'WordPress', 'Zapier'].map(tool => <span key={tool}>{tool}</span>)}
+            <div className="tool-matrix">
+              <div className="tool-group">
+                <span>Web, CRM and deployment</span>
+                <div>{['GoHighLevel', 'Lovable', 'Vercel', 'GitHub', 'Cloudflare', 'WordPress', 'Shopify', 'CMS Platforms'].map(tool => <b key={tool}>{tool}</b>)}</div>
+              </div>
+              <div className="tool-group">
+                <span>AI and automation</span>
+                <div>{['ChatGPT', 'Claude', 'Athena', 'Zapier', 'Make', 'VAPI', 'Chatbase', 'Supabase', 'Resend'].map(tool => <b key={tool}>{tool}</b>)}</div>
+              </div>
+              <div className="tool-group">
+                <span>CRM, sales and support</span>
+                <div>{['Salesforce', 'HubSpot', 'Zoho', 'Apollo.io', 'Aircall', 'Zendesk', 'Freshdesk'].map(tool => <b key={tool}>{tool}</b>)}</div>
+              </div>
+              <div className="tool-group">
+                <span>Creative and operations</span>
+                <div>{['Google Workspace', 'Microsoft 365', 'Slack', 'Trello', 'ClickUp', 'Notion', 'Canva', 'Figma', 'Framer', 'Zoom', 'Google Meet', 'Dropbox', 'Helium 10', 'Amazon Seller Central'].map(tool => <b key={tool}>{tool}</b>)}</div>
+              </div>
             </div>
           </div>
         </section>
