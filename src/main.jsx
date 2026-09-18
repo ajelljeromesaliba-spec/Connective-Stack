@@ -408,20 +408,51 @@ function App() {
           </div>
         </section>
 
-        <section className="section process" id="process">
-          <div className="section-heading" data-reveal>
-            <span className="kicker">The process</span>
-            <h2>Clear from kickoff to launch.</h2>
+        <section className="process-showcase" id="process">
+          <div className="process-heading" data-reveal>
+            <div>
+              <span className="kicker">How I work</span>
+              <h2>From business brief to connected digital system.</h2>
+            </div>
+            <p>I handle the customer-facing website and the technical details behind it, so the full experience is planned, built, connected, tested, and launched as one system.</p>
           </div>
-          <div className="process-grid">
-            {process.map(([number, title, copy]) => (
-              <article key={number} data-reveal>
-                <span>{number}</span>
-                <div className="process-line"><i /></div>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
+
+          <div className="process-stage">
+            <div className="process-film" data-reveal>
+              <video autoPlay muted loop playsInline preload="metadata" poster="/assets/build-process-poster.jpg">
+                <source src="/assets/build-process.mp4" type="video/mp4" />
+              </video>
+              <div className="process-film-topbar">
+                <span><i /> Build sequence</span>
+                <span>Strategy / Web / Systems / Launch</span>
+                <span>08 sec</span>
+              </div>
+              <div className="process-film-caption">
+                <small>Connected execution</small>
+                <strong>One workflow from first idea to live system</strong>
+              </div>
+            </div>
+
+            <div className="process-steps" data-reveal>
+              {process.map(([number, title, copy]) => (
+                <article key={number}>
+                  <span>{number}</span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{copy}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="process-output" data-reveal>
+            <span>What gets connected</span>
+            <div><i /> Strategy and content</div>
+            <div><i /> Responsive website</div>
+            <div><i /> GitHub and Vercel</div>
+            <div><i /> CRM and automation</div>
+            <div><i /> Domain and launch</div>
           </div>
         </section>
 
