@@ -14,7 +14,11 @@
   ],
   "rewrites": [
     {
-      "source": "/demos/(.*)",
+      "source": "/demos/hvac-ai-front-desk",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/demos/:path*",
       "destination": "/index.html"
     }
   ]
