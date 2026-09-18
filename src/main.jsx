@@ -45,26 +45,6 @@ const projects = [
     href: '/demos/hvac-ai-front-desk',
     live: true,
   },
-  {
-    label: 'Professional Services',
-    title: 'Clean advisory website',
-    copy: 'A credible digital presence that simplifies a complex offer and guides qualified visitors toward a consultation.',
-    image: '/assets/project-advisory.svg',
-    accent: 'violet',
-    goal: 'Make a complex service easier to understand and easier to buy.',
-    outcomes: ['Clearer positioning', 'Qualified consultations', 'Stronger credibility'],
-    visualTags: ['Clear offer', 'Expert positioning', 'Consultation CTA'],
-  },
-  {
-    label: 'Connected Operations',
-    title: 'Lead routing workflow',
-    copy: 'A visual customer journey that connects website inquiries, notifications, scheduling, and CRM follow-up.',
-    image: '/assets/project-workflow.svg',
-    accent: 'blue',
-    goal: 'Reduce response gaps between a new inquiry and a booked appointment.',
-    outcomes: ['Instant lead routing', 'Consistent follow-up', 'Fewer missed inquiries'],
-    visualTags: ['CRM routing', 'Calendar sync', 'Follow-up'],
-  },
 ]
 
 const process = [
@@ -174,7 +154,6 @@ function App() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
           <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>Live Demo</a>
-          <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
           <a className="nav-cta" href="#contact" onClick={closeMenu}>Start a project <Arrow /></a>
@@ -224,14 +203,6 @@ function App() {
           </div>
         </section>
 
-        <section className="signal-bar" aria-label="Capabilities">
-          <span>Strategy</span><i />
-          <span>Web design</span><i />
-          <span>Development</span><i />
-          <span>Integrations</span><i />
-          <span>Automation</span>
-        </section>
-
         <section className="section services" id="services">
           <div className="section-heading" data-reveal>
             <span className="kicker">What I build</span>
@@ -252,30 +223,6 @@ function App() {
                 <span className="service-arrow"><Arrow /></span>
               </article>
             ))}
-          </div>
-        </section>
-
-        <section className="systems-section">
-          <div className="systems-copy" data-reveal>
-            <span className="kicker kicker-dark">Connected by design</span>
-            <h2>Your tools should feel like one system.</h2>
-            <p>A website should not create another disconnected inbox. I connect the customer-facing experience to the tools that keep your business moving.</p>
-            <ul className="check-list">
-              <li><Check /> Forms routed to the right inbox or CRM</li>
-              <li><Check /> Booking links placed where intent is highest</li>
-              <li><Check /> Automated notifications and follow-up</li>
-              <li><Check /> Domains, analytics, and tracking configured</li>
-            </ul>
-            <a href="#contact" className="text-link">Talk about your setup <Arrow /></a>
-          </div>
-          <div className="systems-visual" data-reveal>
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="system-core"><img src="/assets/favicon.svg" alt="" /><span>YOUR WEBSITE</span></div>
-            <div className="system-node node-web"><span>01</span><strong>Lead form</strong><small>Capture</small></div>
-            <div className="system-node node-crm"><span>02</span><strong>CRM</strong><small>Organize</small></div>
-            <div className="system-node node-calendar"><span>03</span><strong>Calendar</strong><small>Book</small></div>
-            <div className="system-node node-follow"><span>04</span><strong>Follow-up</strong><small>Convert</small></div>
           </div>
         </section>
 
@@ -314,76 +261,6 @@ function App() {
                 </div>
               </article>
             ))}
-          </div>
-        </section>
-
-        <section className="experience-section" id="experience">
-          <div className="experience-heading" data-reveal>
-            <span className="kicker kicker-dark">Experience and capability</span>
-            <h2>Design sense backed by hands-on technical operations.</h2>
-            <p>My experience combines modern web delivery with more than a decade in customer service, sales, quality assurance, technical support, and operations. I understand what needs to happen after a visitor clicks, submits, books, or replies.</p>
-          </div>
-          <div className="experience-layout">
-            <div className="timeline" data-reveal>
-              <article>
-                <span className="timeline-year">2025<br />Present</span>
-                <div>
-                  <small>AIA / AI agency web operations</small>
-                  <h3>Website, GHL and Systems Specialist</h3>
-                  <p>Build and maintain client websites, manage GitHub and Vercel deployments, configure Cloudflare, DNS, domains, and technical SEO, and support GoHighLevel funnels, calendars, workflows, migrations, and third-party integrations.</p>
-                </div>
-              </article>
-              <article>
-                <span className="timeline-year">2022<br />2025</span>
-                <div>
-                  <small>ProClick</small>
-                  <h3>VA Team Lead and GoHighLevel Specialist</h3>
-                  <p>Led day-to-day VA delivery while managing pipelines, funnels, multistep workflows, nurture sequences, lead routing, forms, surveys, CRM organization, Shopify and Amazon support, and customer operations.</p>
-                </div>
-              </article>
-              <article>
-                <span className="timeline-year">2020<br />2022</span>
-                <div>
-                  <small>Transparent BPO</small>
-                  <h3>Sales Representative and Quality Assurance</h3>
-                  <p>Managed outbound health insurance sales, CRM documentation, lead follow-up, KPI tracking, call evaluation, compliance checks, performance reporting, and coaching feedback.</p>
-                </div>
-              </article>
-              <article>
-                <span className="timeline-year">2015<br />2020</span>
-                <div>
-                  <small>Teleperformance, Teletech, iQor and Telus</small>
-                  <h3>Customer and Technical Support</h3>
-                  <p>Resolved complex account, billing, order, healthcare, telecommunications, device, and technical issues across phone, email, and chat while maintaining clear documentation and service quality.</p>
-                </div>
-              </article>
-            </div>
-            <div className="capability-console" data-reveal>
-              <div className="console-top"><span>capabilities.json</span><i>● LIVE</i></div>
-              <div className="capability-group">
-                <span>01 / BUILD</span>
-                <div><strong>Responsive websites</strong><b>READY</b></div>
-                <div><strong>Landing pages</strong><b>READY</b></div>
-                <div><strong>Technical SEO setup</strong><b>READY</b></div>
-              </div>
-              <div className="capability-group">
-                <span>02 / CONNECT</span>
-                <div><strong>CRM and calendars</strong><b>READY</b></div>
-                <div><strong>Forms and notifications</strong><b>READY</b></div>
-                <div><strong>API and third-party tools</strong><b>READY</b></div>
-              </div>
-              <div className="capability-group">
-                <span>03 / LAUNCH</span>
-                <div><strong>GitHub and Vercel</strong><b>READY</b></div>
-                <div><strong>Cloudflare and DNS</strong><b>READY</b></div>
-                <div><strong>Email authentication</strong><b>READY</b></div>
-              </div>
-            </div>
-          </div>
-          <div className="tech-marquee" aria-label="Technology experience">
-            <div>
-              {['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'Lovable', 'ChatGPT', 'Claude', 'Athena', 'Google Workspace', 'Zapier', 'VAPI', 'Supabase', 'GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare'].map((tool, index) => <span key={`${tool}-${index}`}>{tool}<i /></span>)}
-            </div>
           </div>
         </section>
 
@@ -497,7 +374,7 @@ function App() {
               </div>
               <div className="tool-group">
                 <span>AI and automation</span>
-                <div>{['ChatGPT', 'Claude', 'Athena', 'Zapier', 'Make', 'VAPI', 'Chatbase', 'Supabase', 'Resend'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <div>{['ChatGPT', 'Claude', 'Zapier', 'Make', 'VAPI', 'Chatbase', 'Supabase', 'Resend'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
               <div className="tool-group">
                 <span>CRM, sales and support</span>
