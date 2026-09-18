@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
+import HvacDemo from './HvacDemo'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -41,6 +42,8 @@ const projects = [
     goal: 'Turn high-intent local searches into calls and estimate requests.',
     outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
     visualTags: ['Mobile-first', 'Call + booking', 'Local trust'],
+    href: '/demos/hvac-ai-front-desk',
+    live: true,
   },
   {
     label: 'Professional Services',
@@ -170,6 +173,7 @@ function App() {
         <nav className={menuOpen ? 'nav-open' : ''}>
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
+          <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>Live Demo</a>
           <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
@@ -288,7 +292,7 @@ function App() {
               <article className={`project-card ${index === 0 ? 'project-wide' : ''}`} key={project.title} data-reveal>
                 <div className={`project-image ${project.accent}`}>
                   <img src={project.image} alt={`${project.title} sample concept`} />
-                  <span className="concept-badge">Outcome-led concept</span>
+                  <span className="concept-badge">{project.live ? 'Live interactive demo' : 'Outcome-led concept'}</span>
                   <span className="project-index">0{index + 1}</span>
                   <div className="visual-tags">
                     {project.visualTags.map(tag => <span key={tag}><i />{tag}</span>)}
@@ -306,6 +310,7 @@ function App() {
                     <small>Built to improve</small>
                     <ul>{project.outcomes.map(outcome => <li key={outcome}><Check />{outcome}</li>)}</ul>
                   </div>
+                  {project.href && <a className="project-demo-link" href={project.href}>Try the live HVAC demo <Arrow /></a>}
                 </div>
               </article>
             ))}
@@ -542,4 +547,5 @@ function App() {
   )
 }
 
-createRoot(document.getElementById('root')).render(<App />)
+const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
+createRoot(document.getElementById('root')).render(currentPath === '/demos/hvac-ai-front-desk' ? <HvacDemo /> : <App />)

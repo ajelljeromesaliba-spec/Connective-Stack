@@ -11,5 +11,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/demos/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
