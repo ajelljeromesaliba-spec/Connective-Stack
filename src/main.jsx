@@ -97,6 +97,12 @@ function App() {
 
       <main id="top">
         <section className="hero">
+          <div className="hero-background-video" aria-hidden="true">
+            <video autoPlay muted loop playsInline preload="metadata">
+              <source src="/assets/hero-background.mp4" type="video/mp4" />
+            </video>
+            <div className="hero-video-wash" />
+          </div>
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
             <div className="eyebrow"><span className="status-dot" /> AJ Saliba • Independent web and systems specialist</div>
