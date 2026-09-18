@@ -185,11 +185,16 @@
 .hvac-message { max-width: 86%; margin-bottom: 10px; padding: 11px 12px; border-radius: 12px 12px 12px 3px; color: #34485c; background: white; box-shadow: 0 4px 14px rgba(30,64,94,.07); font-size: 11px; line-height: 1.5; }
 .hvac-message.user { margin-left: auto; border-radius: 12px 12px 3px 12px; color: white; background: var(--hvac-blue); }
 .hvac-message.urgent { border: 1px solid #f1b1aa; color: #7c2823; background: #fff0ee; }
+.hvac-thinking { width: 54px; min-height: 36px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.hvac-thinking span { width: 6px; height: 6px; border-radius: 50%; background: #7d93a6; animation: hvac-thinking-dot 1s ease-in-out infinite; }
+.hvac-thinking span:nth-child(2) { animation-delay: .14s; }.hvac-thinking span:nth-child(3) { animation-delay: .28s; }
+@keyframes hvac-thinking-dot { 0%, 60%, 100% { opacity: .35; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
 .hvac-quick-replies { padding: 8px 11px; display: flex; gap: 6px; overflow-x: auto; border-top: 1px solid #e4ebf0; background: white; scrollbar-width: none; }.hvac-quick-replies::-webkit-scrollbar { display: none; }
 .hvac-quick-replies button { flex: 0 0 auto; padding: 7px 9px; border: 1px solid #b8d4ee; border-radius: 999px; color: #1766b9; background: #f1f8ff; font-size: 9px; font-weight: 700; }
 .hvac-chat-form { min-height: 61px; padding: 9px; display: grid; grid-template-columns: 1fr 42px; gap: 7px; border-top: 1px solid #e2eaf0; background: white; }
 .hvac-chat-form input { width: 100%; min-width: 0; padding: 0 12px; border: 1px solid #d7e1e9; border-radius: 9px; outline: none; color: var(--hvac-text); background: #f7fafc; font-size: 11px; }.hvac-chat-form input:focus { border-color: var(--hvac-blue); }
 .hvac-chat-form button { display: grid; place-items: center; border: 0; border-radius: 9px; color: white; background: var(--hvac-blue); }.hvac-chat-form button svg { width: 18px; height: 18px; }
+.hvac-chat-form input:disabled, .hvac-chat-form button:disabled { cursor: wait; opacity: .65; }
 
 @media (max-width: 1050px) {
   .hvac-hero { grid-template-columns: 1fr; }
