@@ -37,6 +37,93 @@ const faqItems = [
   ['Can the assistant handle emergencies?', 'It identifies urgency and routes service requests, but life safety hazards are escalated to 911, the fire department, or the gas utility immediately.'],
 ]
 
+const estimateIssues = {
+  'AC diagnostic and repair': { low: 189, high: 650, icon: 'snow', note: 'Diagnostic visit plus a typical residential repair range.' },
+  'Heating or furnace repair': { low: 220, high: 850, icon: 'flame', note: 'Inspection, common parts, and standard residential labor.' },
+  'Thermostat replacement': { low: 180, high: 520, icon: 'gauge', note: 'Standard through smart thermostat installation.' },
+  'Airflow or duct issue': { low: 280, high: 1200, icon: 'air', note: 'Testing, balancing, sealing, or a limited duct repair.' },
+  'Seasonal tune-up': { low: 119, high: 189, icon: 'check', note: 'One residential heating or cooling maintenance visit.' },
+  'Full system replacement': { low: 6500, high: 14500, icon: 'air', note: 'Broad equipment and installation planning range.' },
+}
+
+const estimateAreas = {
+  'Core service area': { add: 0, label: 'Standard travel' },
+  'Extended service area': { add: 65, label: '+ $65 travel allowance' },
+  'Outer service area': { add: 125, label: '+ $125 travel allowance' },
+}
+
+const estimatePriorities = {
+  'Standard scheduling': { add: 0, label: 'Next available window' },
+  'Same-day request': { add: 95, label: '+ $95 priority allowance' },
+  'After-hours request': { add: 185, label: '+ $185 after-hours allowance' },
+}
+
+function EstimateCalculator({ onRequest }) {
+  const [issue, setIssue] = useState('AC diagnostic and repair')
+  const [area, setArea] = useState('Core service area')
+  const [priority, setPriority] = useState('Standard scheduling')
+  const [property, setProperty] = useState('Single-family home')
+
+  const issueData = estimateIssues[issue]
+  const areaData = estimateAreas[area]
+  const priorityData = estimatePriorities[priority]
+  const propertyMultiplier = property === 'Light commercial' ? 1.25 : property === 'Large home' ? 1.12 : 1
+  const roundEstimate = value => Math.round(value / 5) * 5
+  const low = roundEstimate((issueData.low + areaData.add + priorityData.add) * propertyMultiplier)
+  const high = roundEstimate((issueData.high + areaData.add + priorityData.add) * propertyMultiplier)
+  const rangePosition = Math.min(92, Math.max(24, 24 + (high / 14500) * 68))
+  const currency = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value)
+
+  return (
+    <div className="hvac-estimator">
+      <div className="estimator-controls">
+        <div className="estimator-heading">
+          <span className="estimator-icon"><Icon name={issueData.icon} /></span>
+          <div><small>INTERACTIVE BUDGET PLANNER</small><strong>Build a sample estimate</strong></div>
+        </div>
+        <label>What needs attention?
+          <select value={issue} onChange={event => setIssue(event.target.value)}>
+            {Object.keys(estimateIssues).map(option => <option key={option}>{option}</option>)}
+          </select>
+        </label>
+        <div className="estimator-control-grid">
+          <label>Service area
+            <select value={area} onChange={event => setArea(event.target.value)}>
+              {Object.keys(estimateAreas).map(option => <option key={option}>{option}</option>)}
+            </select>
+          </label>
+          <label>Property
+            <select value={property} onChange={event => setProperty(event.target.value)}>
+              <option>Single-family home</option><option>Large home</option><option>Light commercial</option>
+            </select>
+          </label>
+        </div>
+        <label>Response preference
+          <select value={priority} onChange={event => setPriority(event.target.value)}>
+            {Object.keys(estimatePriorities).map(option => <option key={option}>{option}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <div className="estimator-result">
+        <div className="estimate-orbit" style={{ '--estimate-progress': `${rangePosition}%` }}>
+          <div><small>PLANNING RANGE</small><strong>{currency(low)}</strong><span>to {currency(high)}</span></div>
+        </div>
+        <p>{issueData.note}</p>
+        <div className="estimate-breakdown">
+          <span><i />{areaData.label}</span>
+          <span><i />{priorityData.label}</span>
+          <span><i />{propertyMultiplier > 1 ? `${Math.round((propertyMultiplier - 1) * 100)}% property allowance` : 'Standard residential size'}</span>
+        </div>
+        <button type="button" onClick={() => onRequest(`I need help with ${issue.toLowerCase()} in the ${area.toLowerCase()}. My preference is ${priority.toLowerCase()}.`)}>
+          Send this scenario to the AI <Icon name="arrow" />
+        </button>
+        <small className="estimate-disclaimer">Demo estimate only. Final pricing requires service-area confirmation, equipment details, and an on-site diagnosis.</small>
+      </div>
+    </div>
+  )
+}
+
 function VoiceDemo() {
   const vapiRef = useRef(null)
   const timerRef = useRef(null)
@@ -355,6 +442,21 @@ export default function HvacDemo() {
     }
   }, [])
 
+  useEffect(() => {
+    const sections = document.querySelectorAll('.hvac-page main > section')
+    sections.forEach(section => section.classList.add('hvac-reveal'))
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.12 })
+    sections.forEach(section => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
   const openWith = question => {
     setChatOpen(true)
     setSeededQuestion({ text: question, id: Date.now() })
@@ -453,11 +555,7 @@ export default function HvacDemo() {
 
         <section className="hvac-issues">
           <div><span>Not sure where to start?</span><h2>Tell the front desk what is happening.</h2></div>
-          <div className="issue-buttons">
-            {['AC is blowing warm air', 'System is leaking water', 'Furnace is not heating', 'Airflow is weak', 'System makes a loud noise', 'I need a replacement estimate'].map(issue => (
-              <button type="button" key={issue} onClick={() => openWith(issue)}>{issue}<Icon name="arrow" /></button>
-            ))}
-          </div>
+          <EstimateCalculator onRequest={openWith} />
         </section>
 
         <section className="hvac-ai-section" id="how-it-works">
