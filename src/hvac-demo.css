@@ -20,11 +20,22 @@
 .demo-ribbon svg { width: 15px; height: 15px; }
 .hvac-header { height: 82px; padding: 0 clamp(18px, 5vw, 76px); display: flex; align-items: center; justify-content: space-between; gap: 35px; border-bottom: 1px solid var(--hvac-line); background: rgba(255,255,255,.94); backdrop-filter: blur(16px); position: relative; z-index: 20; }
 .hvac-brand { display: flex; align-items: center; gap: 11px; color: var(--hvac-navy); }
-.hvac-brand-mark { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; color: white; background: linear-gradient(145deg, var(--hvac-blue), var(--hvac-sky)); box-shadow: 0 10px 20px rgba(22,119,255,.2); }
-.hvac-brand-mark svg { width: 25px; height: 25px; }
+.hvac-brand-mark { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 14px; color: white; background: linear-gradient(145deg, var(--hvac-blue), var(--hvac-sky)); box-shadow: 0 10px 20px rgba(22,119,255,.2); }
+.hvac-brand-mark svg { width: 29px; height: 29px; }
+.northstar-mark { position: relative; overflow: visible; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.16); background: radial-gradient(circle at 28% 20%, #275e8d 0%, #0d3152 36%, #06192d 100%); box-shadow: 0 12px 28px rgba(7,39,70,.24), inset 0 1px rgba(255,255,255,.14); }
+.northstar-mark::before { content: ''; position: absolute; inset: -4px; z-index: -1; border: 1px solid rgba(22,119,255,.18); border-radius: 17px; transform: rotate(7deg); transition: transform .35s ease, border-color .35s ease; }
+.hvac-brand:hover .northstar-mark::before { border-color: rgba(255,122,26,.5); transform: rotate(-7deg); }
+.northstar-mark svg { width: 38px; height: 38px; overflow: visible; }
+.northstar-crest { fill: #70d7ff; stroke: none; filter: drop-shadow(0 0 7px rgba(83,200,255,.38)); transform-origin: center; transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+.hvac-brand:hover .northstar-crest { transform: rotate(45deg) scale(1.04); }
+.northstar-cut { fill: #f8fcff; stroke: none; }
+.northstar-flow { fill: none; stroke: #fff; stroke-width: 2.2; opacity: .9; stroke-linecap: round; }
+.flow-two { stroke: #5be0c0; stroke-width: 1.8; }
+.northstar-heat { fill: var(--hvac-orange); stroke: #fff; stroke-width: 1.5; animation: northstar-heat-pulse 2.2s ease-out infinite; }
+@keyframes northstar-heat-pulse { 70% { filter: drop-shadow(0 0 8px rgba(255,122,26,.8)); } }
 .hvac-brand > span:last-child { display: flex; flex-direction: column; line-height: 1; }
-.hvac-brand strong { font: 800 18px/1 'Manrope', sans-serif; letter-spacing: .05em; }
-.hvac-brand small { margin-top: 5px; color: #708096; font-size: 8px; letter-spacing: .2em; }
+.hvac-brand strong { font: 850 19px/1 'Manrope', sans-serif; letter-spacing: .075em; }
+.hvac-brand small { margin-top: 6px; color: #708096; font-size: 7px; font-weight: 800; letter-spacing: .23em; }
 .hvac-header nav { display: flex; gap: 30px; align-items: center; font-size: 13px; font-weight: 700; color: #526277; }
 .hvac-header nav a:hover { color: var(--hvac-blue); }
 .hvac-header-cta { min-height: 44px; padding: 0 18px; border: 0; border-radius: 7px; background: var(--hvac-orange); color: white; font-size: 12px; font-weight: 800; box-shadow: 0 10px 25px rgba(255,122,26,.22); }
@@ -215,7 +226,7 @@
 .hvac-demo-cta p { color: var(--hvac-muted); font-size: 15px; }
 .hvac-demo-cta .hvac-button { margin-top: 15px; }
 .hvac-footer { padding: 40px clamp(22px, 5vw, 76px); display: flex; justify-content: space-between; align-items: center; gap: 30px; border-top: 1px solid var(--hvac-line); background: white; }
-.hvac-footer .hvac-brand-mark { width: 36px; height: 36px; }.hvac-footer p { color: var(--hvac-muted); font-size: 11px; }.hvac-footer p a { color: var(--hvac-blue); font-weight: 800; }
+.hvac-footer .hvac-brand-mark { width: 42px; height: 42px; }.hvac-footer .northstar-mark svg { width: 34px; height: 34px; }.hvac-footer p { color: var(--hvac-muted); font-size: 11px; }.hvac-footer p a { color: var(--hvac-blue); font-weight: 800; }
 
 .hvac-chat-launcher { position: fixed; z-index: 90; right: 24px; bottom: 22px; min-height: 58px; padding: 0 19px; display: flex; align-items: center; gap: 10px; border: 0; border-radius: 999px; color: white; background: var(--hvac-blue); box-shadow: 0 18px 45px rgba(12,71,152,.3); font-size: 12px; font-weight: 800; }
 .hvac-chat-launcher.is-open { width: 48px; height: 48px; min-height: 48px; padding: 0; justify-content: center; background: var(--hvac-navy); }
