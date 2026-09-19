@@ -23,6 +23,18 @@ const Icon = ({ name }) => {
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>
 }
 
+const NorthstarLogoMark = () => (
+  <span className="hvac-brand-mark northstar-mark" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path className="northstar-crest" d="M32 5 39 23 58 30 40 37 32 58 24 38 6 31 24 24 32 5Z" />
+      <path className="northstar-cut" d="M32 16 35.7 26.8 47 30.6 36.1 34.7 32 47 27.8 35 17 31 28.1 27 32 16Z" />
+      <path className="northstar-flow flow-one" d="M11 45c9-5 18-4 25 0 6 3 11 3 17-1" />
+      <path className="northstar-flow flow-two" d="M15 51c7-3 13-2 18 1 5 3 10 3 15 0" />
+      <circle className="northstar-heat" cx="50" cy="14" r="4.5" />
+    </svg>
+  </span>
+)
+
 const services = [
   ['snow', 'AC repair and installation', 'Diagnostics, repairs, replacements, mini-splits, and seasonal cooling care.'],
   ['flame', 'Heating and heat pumps', 'Furnaces, heat pumps, dual-fuel systems, safety checks, and heating tune-ups.'],
@@ -471,8 +483,8 @@ export default function HvacDemo() {
 
       <header className="hvac-header">
         <a className="hvac-brand" href="#home" aria-label="Northstar Heating and Air home">
-          <span className="hvac-brand-mark"><Icon name="snow" /></span>
-          <span><strong>NORTHSTAR</strong><small>HEATING &amp; AIR</small></span>
+          <NorthstarLogoMark />
+          <span><strong>NORTHSTAR</strong><small>HEATING • COOLING</small></span>
         </a>
         <nav>
           <a href="#services">Services</a>
@@ -617,7 +629,7 @@ export default function HvacDemo() {
       </main>
 
       <footer className="hvac-footer">
-        <div className="hvac-brand"><span className="hvac-brand-mark"><Icon name="snow" /></span><span><strong>NORTHSTAR</strong><small>FICTIONAL HVAC DEMO</small></span></div>
+        <div className="hvac-brand"><NorthstarLogoMark /><span><strong>NORTHSTAR</strong><small>HVAC SERVICE DEMO</small></span></div>
         <p>Created by <a href="/">Connective Stack</a>. No submitted demo data is transmitted or stored.</p>
       </footer>
 
