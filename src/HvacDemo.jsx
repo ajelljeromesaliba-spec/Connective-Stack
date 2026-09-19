@@ -4,6 +4,7 @@ import './hvac-demo.css'
 
 const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY || '58e493a2-aed3-4a98-a192-6baca6d23d64'
 const VAPI_ASSISTANT_ID = 'a1db8e60-1a21-4fab-b5ef-94f7e5671359'
+const VAPI_SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.7.0/+esm'
 
 const Icon = ({ name }) => {
   const paths = {
@@ -59,7 +60,7 @@ function VoiceDemo() {
 
   const initializeVapi = async () => {
     if (vapiRef.current) return vapiRef.current
-    const vapiModule = await import('@vapi-ai/web')
+    const vapiModule = await import(/* @vite-ignore */ VAPI_SDK_URL)
     const Vapi = vapiModule.default?.default || vapiModule.default
     if (typeof Vapi !== 'function') throw new Error('The voice client could not be initialized. Please refresh the page and try again.')
     const vapi = new Vapi(VAPI_PUBLIC_KEY)
