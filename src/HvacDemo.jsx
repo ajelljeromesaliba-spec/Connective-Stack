@@ -232,7 +232,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
         return
       }
       setFlow({ step: 'name', data: { ...current.data, zip } })
-      addBot('Great, that ZIP is inside the demo coverage area. What sample name should I place on the request?', [])
+      addBot('Thanks. I’ll include that ZIP for service-area verification. What sample name should I place on the request?', [])
       return
     }
     if (current.step === 'name') {
@@ -242,7 +242,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
     }
     if (current.step === 'contact') {
       setFlow({ step: 'time', data: { ...current.data, contact: value } })
-      addBot('Which appointment window works best?', ['Today, 2 PM to 5 PM', 'Tomorrow, 8 AM to 11 AM', 'Tomorrow, 12 PM to 3 PM'])
+      addBot('Which service window do you prefer? This records a preference only and does not confirm an appointment.', ['Morning preferred', 'Afternoon preferred', 'Earliest available'])
       return
     }
     if (current.step === 'time') {
@@ -378,7 +378,7 @@ export default function HvacDemo() {
       <main>
         <section className="hvac-hero" id="home">
           <div className="hvac-hero-copy">
-            <div className="hvac-eyebrow"><i /> Same-day appointments available</div>
+            <div className="hvac-eyebrow"><i /> 24/7 request capture</div>
             <h1>Comfort restored.<br /><em>Without the runaround.</em></h1>
             <p>Fast, professional heating and cooling service with a virtual front desk ready to answer questions and capture requests around the clock.</p>
             <div className="hvac-hero-actions">
@@ -401,7 +401,7 @@ export default function HvacDemo() {
               <div className="comfort-top"><span>HOME COMFORT</span><i>● SYSTEM ONLINE</i></div>
               <div className="comfort-compact-row"><div><small>INDOOR</small><strong>72<sup>°</sup></strong></div><div><span>Humidity</span><b>44%</b><span>Air quality</span><b>Good</b></div></div>
             </div>
-            <div className="dispatch-card"><span className="dispatch-icon"><Icon name="gauge" /></span><div><small>Next arrival window</small><strong>Today, 2 PM to 5 PM</strong></div></div>
+            <div className="dispatch-card"><span className="dispatch-icon"><Icon name="gauge" /></span><div><small>Service preference</small><strong>Captured for confirmation</strong></div></div>
             <div className="response-card"><i /><span><small>Front desk</small><strong>Replies in seconds</strong></span></div>
           </div>
         </section>
