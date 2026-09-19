@@ -4,7 +4,6 @@ import './hvac-demo.css'
 
 const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY || '58e493a2-aed3-4a98-a192-6baca6d23d64'
 const VAPI_ASSISTANT_ID = 'a1db8e60-1a21-4fab-b5ef-94f7e5671359'
-const VAPI_SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web/+esm'
 
 const Icon = ({ name }) => {
   const paths = {
@@ -60,8 +59,9 @@ function VoiceDemo() {
 
   const initializeVapi = async () => {
     if (vapiRef.current) return vapiRef.current
-    const module = await import(/* @vite-ignore */ VAPI_SDK_URL)
-    const Vapi = module.default
+    const vapiModule = await import('@vapi-ai/web')
+    const Vapi = vapiModule.default?.default || vapiModule.default
+    if (typeof Vapi !== 'function') throw new Error('The voice client could not be initialized. Please refresh the page and try again.')
     const vapi = new Vapi(VAPI_PUBLIC_KEY)
 
     vapi.on('call-start', () => {
@@ -81,7 +81,10 @@ function VoiceDemo() {
     vapi.on('speech-end', () => setSpeaking(false))
     vapi.on('volume-level', level => setVolume(Math.min(1, Math.max(0, Number(level) || 0))))
     vapi.on('error', event => {
-      const message = event?.error?.message || event?.message || 'The voice demo could not connect. Please check microphone access and try again.'
+      const rawMessage = event?.error?.message || event?.message || ''
+      const message = /permission|notallowed|microphone/i.test(rawMessage)
+        ? 'Microphone access is blocked. Allow microphone access in your browser, then try again.'
+        : rawMessage || 'The voice demo could not connect. Please check microphone access and try again.'
       setError(message)
       setStatus('idle')
       setSpeaking(false)
@@ -100,7 +103,10 @@ function VoiceDemo() {
       const vapi = await initializeVapi()
       await vapi.start(VAPI_ASSISTANT_ID)
     } catch (event) {
-      setError(event?.message || 'Microphone access or the voice connection was not available. Please try again.')
+      const rawMessage = event?.message || ''
+      setError(/permission|notallowed|microphone/i.test(rawMessage)
+        ? 'Microphone access is blocked. Allow microphone access in your browser, then try again.'
+        : rawMessage || 'The voice connection was not available. Please try again.')
       setStatus('idle')
     }
   }
