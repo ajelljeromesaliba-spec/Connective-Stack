@@ -40,6 +40,7 @@ const faqItems = [
 function VoiceDemo() {
   const vapiRef = useRef(null)
   const timerRef = useRef(null)
+  const completionTimerRef = useRef(null)
   const [status, setStatus] = useState('idle')
   const [speaking, setSpeaking] = useState(false)
   const [volume, setVolume] = useState(0)
@@ -53,6 +54,7 @@ function VoiceDemo() {
 
   useEffect(() => () => {
     stopTimer()
+    window.clearTimeout(completionTimerRef.current)
     vapiRef.current?.stop?.()
   }, [])
 
@@ -66,6 +68,7 @@ function VoiceDemo() {
     const vapi = new Vapi(VAPI_PUBLIC_KEY)
 
     vapi.on('call-start', () => {
+      window.clearTimeout(completionTimerRef.current)
       setStatus('live')
       setError('')
       setSeconds(0)
@@ -73,10 +76,12 @@ function VoiceDemo() {
       timerRef.current = window.setInterval(() => setSeconds(value => value + 1), 1000)
     })
     vapi.on('call-end', () => {
-      setStatus('idle')
+      setStatus('completed')
       setSpeaking(false)
       setVolume(0)
       stopTimer()
+      window.clearTimeout(completionTimerRef.current)
+      completionTimerRef.current = window.setTimeout(() => setStatus('idle'), 4500)
     })
     vapi.on('speech-start', () => setSpeaking(true))
     vapi.on('speech-end', () => setSpeaking(false))
@@ -97,7 +102,8 @@ function VoiceDemo() {
   }
 
   const startCall = async () => {
-    if (status !== 'idle') return
+    if (status === 'connecting' || status === 'live' || status === 'ending') return
+    window.clearTimeout(completionTimerRef.current)
     setStatus('connecting')
     setError('')
     try {
@@ -119,7 +125,7 @@ function VoiceDemo() {
   }
 
   const live = status === 'live' || status === 'ending'
-  const statusLabel = status === 'connecting' ? 'Connecting securely' : status === 'ending' ? 'Ending call' : speaking ? 'Northstar is speaking' : live ? 'Listening to you' : 'Ready for a demo call'
+  const statusLabel = status === 'connecting' ? 'Connecting securely' : status === 'ending' ? 'Ending call' : status === 'completed' ? 'Call completed. Thank you for trying the demo.' : speaking ? 'Northstar is speaking' : live ? 'Listening to you' : 'Ready for a demo call'
 
   return (
     <section className="hvac-voice-section" id="voice-demo">
@@ -152,7 +158,7 @@ function VoiceDemo() {
         {error && <div className="voice-error" role="alert">{error}</div>}
         <div className="voice-actions">
           {!live && status !== 'connecting' ? (
-            <button type="button" className="voice-start" onClick={startCall}><Icon name="mic" /> Start voice demo</button>
+            <button type="button" className="voice-start" onClick={startCall}><Icon name="mic" /> {status === 'completed' ? 'Start another demo' : 'Start voice demo'}</button>
           ) : status === 'connecting' ? (
             <button type="button" className="voice-start" disabled><span className="voice-spinner" /> Connecting...</button>
           ) : (
