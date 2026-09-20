@@ -222,7 +222,7 @@ function VisitorPathway() {
         <div className="re-role-form-head"><small>PERSONALIZED {role.toUpperCase()} INTAKE</small><strong>Tell us what you need.</strong></div>
         <label>Full name<input required placeholder="Sample visitor" /></label><label>Email<input required type="email" placeholder="visitor@example.com" /></label>
         {path.fields}
-        <button type="submit">Continue as a {role} <Icon name="arrow" /></button>
+        <button type="submit">Continue as {role === 'Investor' ? 'an' : 'a'} {role} <Icon name="arrow" /></button>
       </form>}
     </div>
   </section>
