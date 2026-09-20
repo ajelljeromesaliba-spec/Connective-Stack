@@ -9,7 +9,7 @@
   --hvac-line: #d9e5ef;
 }
 
-.hvac-page { min-height: 100vh; overflow: hidden; background: #fff; color: var(--hvac-text); font-family: 'DM Sans', sans-serif; }
+.hvac-page { min-height: 100vh; overflow-x: clip; background: #fff; color: var(--hvac-text); font-family: 'DM Sans', sans-serif; }
 .hvac-page * { box-sizing: border-box; }
 .hvac-page button, .hvac-page input { font: inherit; }
 .hvac-page button { cursor: pointer; }
@@ -274,14 +274,27 @@
   .demo-ribbon { justify-content: center; text-align: center; }.demo-ribbon > span { display: none; }
   .hvac-header { height: 70px; padding: 0 16px; }.hvac-header nav { display: none; }.hvac-brand strong { font-size: 15px; }.hvac-brand-mark { width: 37px; height: 37px; }.hvac-header-cta { padding: 0 13px; font-size: 10px; }
   .hvac-hero { min-height: auto; padding: 70px 20px 80px; gap: 45px; }.hvac-hero h1 { font-size: clamp(47px, 13.4vw, 68px); }.hvac-hero-copy > p { font-size: 16px; }.hvac-trust-row { align-items: flex-start; flex-direction: column; }
-  .hvac-hero-visual { min-height: 500px; margin: 0 -12px; width: calc(100% + 24px); }.hvac-hero-photo { inset: 0 0 20px 0; border-radius: 20px; }.hvac-hero-photo img { object-position: 62% center; }.hvac-photo-label { left: 20px; bottom: 75px; }.comfort-card.compact { left: 10px; top: 14px; width: 210px; padding: 14px; }.dispatch-card { left: 8px; bottom: 0; }.response-card { right: 8px; top: 18px; }
+  .hvac-hero-visual { min-height: 500px; margin: 0; width: 100%; }.hvac-hero-photo { inset: 0 0 20px; border-radius: 20px; }.hvac-hero-photo img { object-position: 62% center; }.hvac-photo-label { left: 20px; right: 20px; bottom: 82px; }.comfort-card.compact { left: 8px; top: 14px; width: min(205px, 62vw); padding: 14px; }.dispatch-card { left: 8px; bottom: 0; max-width: calc(100% - 16px); }.response-card { right: 8px; top: 18px; max-width: 42vw; }
   .hvac-proof-strip { grid-template-columns: 1fr 1fr; padding: 20px; }.hvac-proof-strip div { padding: 16px 8px; }.hvac-proof-strip div:nth-child(2) { border-right: 0; }.hvac-proof-strip div:nth-child(-n+2) { border-bottom: 1px solid var(--hvac-line); }
   .hvac-section, .hvac-ai-section, .hvac-voice-section { padding: 85px 20px; }.hvac-section-head { grid-template-columns: 1fr; gap: 18px; }.hvac-section-head h2, .hvac-ai-copy h2, .hvac-voice-copy h2, .hvac-demo-cta h2 { font-size: 39px; }.hvac-service-showcase { grid-template-columns: 1fr; }.service-photo, .service-visual-note { min-height: 300px; }.service-visual-note { grid-column: auto; min-height: 270px; }.hvac-service-grid { grid-template-columns: 1fr; }.hvac-service-grid article { min-height: 290px; }
   .hvac-issues { padding: 80px 20px; }.hvac-issues h2 { font-size: 39px; }.issue-buttons { grid-template-columns: 1fr; }.hvac-estimator { grid-template-columns: 1fr; }.estimator-controls { border-right: 0; border-bottom: 1px solid #29445e; }.estimator-result { padding: 28px 20px; }.estimator-control-grid { grid-template-columns: 1fr; }.estimate-orbit { width: 175px; height: 175px; }
   .workflow-nodes { grid-template-columns: 1fr; }.workflow-nodes > div { min-height: 65px; }.workflow-nodes > div:not(:last-child)::after { top: auto; right: auto; left: 24px; bottom: -9px; width: 0; height: 9px; border-top: 0; border-left: 1px dashed #40617d; }.workflow-nodes strong { margin: 8px 0 4px; }.lead-record dl { grid-template-columns: 1fr; }
   .hvac-demo-cta { padding: 85px 20px; grid-template-columns: 1fr; gap: 28px; }.hvac-footer { padding: 34px 20px; align-items: flex-start; flex-direction: column; }
-  .hvac-chat-launcher { right: 14px; bottom: 14px; }.hvac-chat { right: 14px; bottom: 76px; height: min(620px, calc(100vh - 95px)); }
-  .voice-console { min-height: 530px; }.voice-orbit { height: 260px; }.voice-ring.ring-b { width: 260px; height: 260px; }.voice-ring.ring-a { width: 190px; height: 190px; }
+  .hvac-chat-launcher { right: 14px; bottom: 14px; }.hvac-chat { left: 14px; right: 14px; bottom: 76px; width: auto; height: min(620px, calc(100dvh - 95px)); }
+  .voice-console { min-height: 510px; border-radius: 18px; }.voice-orbit { height: 245px; }.voice-ring.ring-b { width: min(250px, 74vw); height: min(250px, 74vw); }.voice-ring.ring-a { width: min(185px, 55vw); height: min(185px, 55vw); }.voice-status { margin-left: 16px; margin-right: 16px; }.voice-actions { padding-left: 16px; padding-right: 16px; }.voice-privacy { margin-left: 16px; margin-right: 16px; }
+  .hvac-reveal { opacity: 1; transform: none; }
+}
+
+@media (max-width: 430px) {
+  .hvac-header { gap: 10px; }.hvac-brand { gap: 8px; }.hvac-brand small { display: none; }.hvac-header-cta { min-height: 40px; padding: 0 10px; }
+  .hvac-hero { padding-top: 55px; }.hvac-hero-actions .hvac-button { width: 100%; }
+  .hvac-hero-visual { min-height: 455px; }.hvac-photo-label { bottom: 88px; }.hvac-photo-label strong { font-size: 14px; }
+  .comfort-card.compact { width: 175px; }.comfort-compact-row strong { font-size: 36px; }.response-card { max-width: 155px; }
+  .service-photo, .service-visual-note { min-height: 270px; }
+  .workflow-nodes { padding: 14px; }.lead-record { margin: 0 14px 14px; }
+  .estimator-controls { padding: 20px 16px; }.estimator-result { padding: 26px 16px; }
+  .voice-console-top { padding: 0 13px; }.voice-console { min-height: 490px; }.voice-orbit { height: 225px; }
+  .hvac-chat-launcher span { display: none; }.hvac-chat-launcher { width: 52px; min-height: 52px; padding: 0; justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
