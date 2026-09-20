@@ -44,6 +44,34 @@ const services = [
   },
 ]
 
+const pricingTiers = [
+  {
+    name: 'Starter Website',
+    price: '500',
+    label: 'Starting project price',
+    description: 'A focused website for a business that needs a credible online presence and a clear way for customers to make contact.',
+    bestFor: 'Best for new or small service businesses',
+    includes: ['One landing page or up to 3 simple pages', 'Custom mobile-responsive design', 'Client-provided content and brand setup', 'Contact form and clear calls to action', 'Basic on-page SEO', 'Domain connection and deployment', 'One revision round', '7 days of post-launch support'],
+  },
+  {
+    name: 'Lead-Ready Website',
+    price: '850',
+    label: 'Starting project price',
+    description: 'A more complete service website designed to capture inquiries and move visitors toward a call or appointment.',
+    bestFor: 'Best for businesses actively generating leads',
+    featured: true,
+    includes: ['Up to 5 pages', 'Everything in the Starter Website', 'Copy refinement and conversion structure', 'Lead form or booking calendar setup', 'Email notification routing', 'Analytics or Meta Pixel installation', 'Two revision rounds', '14 days of post-launch support'],
+  },
+  {
+    name: 'Connected Website System',
+    price: '1,250',
+    label: 'Starting project price',
+    description: 'A website connected to the systems behind the business, with lead routing and practical automation included.',
+    bestFor: 'Best for teams that need fewer manual handoffs',
+    includes: ['Up to 5 pages', 'Everything in the Lead-Ready Website', 'CRM contact and pipeline connection', 'Workflow and notification setup', 'Calendar, form, and lead routing', 'One standard third-party integration', 'Automation testing and handoff', '14 days of post-launch support'],
+  },
+]
+
 const projects = [
   {
     label: 'Home Services',
@@ -225,7 +253,7 @@ function App() {
               <a href="#work" className="button button-secondary">See sample work</a>
             </div>
             <div className="hero-meta">
-              <div><strong>From $500</strong><span>Simple website builds</span></div>
+              <div><strong>Projects from $500</strong><span>Clear scope and deliverables</span></div>
               <div><strong>Direct support</strong><span>You work with me, AJ</span></div>
               <div><strong>US-ready</strong><span>Clear, conversion-focused copy</span></div>
             </div>
@@ -313,35 +341,29 @@ function App() {
 
         <section className="price-section">
           <div className="price-intro" data-reveal>
-            <span className="kicker">Simple starting point</span>
-            <h2>Launch the essentials. Add more when it makes sense.</h2>
-            <p>No oversized package for a business that needs a clear, professional online presence first.</p>
+            <span className="kicker">Project-based pricing</span>
+            <h2>Choose the level of build your business actually needs.</h2>
+            <p>Each project has a defined scope, deliverables, and price before work begins. The $500 tier covers the website essentials only. Connections and automation are priced separately through the higher tiers.</p>
           </div>
-          <div className="price-card" data-reveal>
-            <div className="price-top">
-              <div><span>Essential website</span><strong><sup>$</sup>500</strong><small>starting price</small></div>
-              <p>A focused website for service businesses that need to look credible and make it easy for customers to reach out.</p>
-            </div>
-            <div className="price-details">
-              <ul>
-                <li><Check /> Up to 3 pages</li>
-                <li><Check /> Custom responsive design</li>
-                <li><Check /> Contact form and calls to action</li>
-              </ul>
-              <ul>
-                <li><Check /> Basic on-page SEO</li>
-                <li><Check /> Domain and launch setup</li>
-                <li><Check /> 7 days post-launch support</li>
-              </ul>
-              <a className="button button-primary" href="#contact">Get a project estimate <Arrow /></a>
-            </div>
-            <div className="addon-strip">
-              <span>Optional add-ons</span>
-              <div><i /> Additional pages</div>
-              <div><i /> Copywriting</div>
-              <div><i /> Booking setup</div>
-              <div><i /> CRM and automation</div>
-            </div>
+          <div className="pricing-grid" data-reveal>
+            {pricingTiers.map(tier => (
+              <article className={`pricing-tier ${tier.featured ? 'featured' : ''}`} key={tier.name}>
+                {tier.featured && <span className="pricing-popular">Most practical</span>}
+                <div className="pricing-tier-head">
+                  <span>{tier.name}</span>
+                  <strong><sup>$</sup>{tier.price}<b>+</b></strong>
+                  <small>{tier.label}</small>
+                </div>
+                <p>{tier.description}</p>
+                <em>{tier.bestFor}</em>
+                <ul>{tier.includes.map(item => <li key={item}><Check />{item}</li>)}</ul>
+                <a className={`button ${tier.featured ? 'button-primary' : 'button-secondary'}`} href="#contact">Request this project <Arrow /></a>
+              </article>
+            ))}
+          </div>
+          <div className="pricing-note" data-reveal>
+            <strong>Need something outside these tiers?</strong>
+            <p>Additional pages, full copywriting, e-commerce, AI chat or voice agents, advanced API work, and custom automations are quoted based on scope. Domain, hosting, software, messaging, and other third-party subscription costs are not included.</p>
           </div>
         </section>
 
