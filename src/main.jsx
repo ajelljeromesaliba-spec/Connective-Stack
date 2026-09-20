@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import HvacDemo from './HvacDemo'
+import RealEstateDemo from './RealEstateDemo'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -84,6 +85,19 @@ const projects = [
     outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
     visualTags: ['Mobile-first', 'Call + booking', 'Local trust'],
     href: '/demos/hvac-ai-front-desk',
+    live: true,
+  },
+  {
+    label: 'Real Estate',
+    title: 'Premium multi-broker property experience',
+    copy: 'A luxury brokerage concept with curated listings, smart property matching, broker routing, affordability tools, and private tour requests.',
+    image: '/assets/realestate-malibu.svg',
+    accent: 'sand',
+    photo: true,
+    goal: 'Turn premium property interest into qualified conversations with the right broker.',
+    outcomes: ['Smarter broker routing', 'Qualified buyer intent', 'Private tour requests'],
+    visualTags: ['Multi-broker', 'AI concierge', 'Buyer tools'],
+    href: '/demos/luxury-real-estate',
     live: true,
   },
 ]
@@ -312,8 +326,8 @@ function App() {
           </div>
           <div className="project-grid">
             {projects.map((project, index) => (
-              <article className={`project-card ${index === 0 ? 'project-wide' : ''}`} key={project.title} data-reveal>
-                <div className={`project-image ${project.accent}`}>
+              <article className={`project-card ${project.live ? 'project-wide' : ''}`} key={project.title} data-reveal>
+                <div className={`project-image ${project.accent} ${project.photo ? 'photo-project' : ''}`}>
                   <picture>
                     {project.mobileImage && <source media="(max-width: 760px)" srcSet={project.mobileImage} />}
                     <img src={project.image} alt={`${project.title} sample concept`} />
@@ -336,7 +350,7 @@ function App() {
                     <small>Built to improve</small>
                     <ul>{project.outcomes.map(outcome => <li key={outcome}><Check />{outcome}</li>)}</ul>
                   </div>
-                  {project.href && <a className="project-demo-link" href={project.href}>Try the live HVAC demo <Arrow /></a>}
+                  {project.href && <a className="project-demo-link" href={project.href}>Try the live {project.label} demo <Arrow /></a>}
                 </div>
               </article>
             ))}
@@ -521,4 +535,9 @@ function App() {
 }
 
 const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
-createRoot(document.getElementById('root')).render(currentPath === '/demos/hvac-ai-front-desk' ? <HvacDemo /> : <App />)
+const route = currentPath === '/demos/hvac-ai-front-desk'
+  ? <HvacDemo />
+  : currentPath === '/demos/luxury-real-estate'
+    ? <RealEstateDemo />
+    : <App />
+createRoot(document.getElementById('root')).render(route)
