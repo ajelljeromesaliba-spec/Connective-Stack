@@ -105,7 +105,7 @@ function LegalModal({ type, onClose }) {
             <span>CONNECTIVE STACK / LEGAL</span>
             <h2 id="legal-title">{isPrivacy ? 'Privacy Policy' : 'Terms and Conditions'}</h2>
           </div>
-          <button type="button" className="legal-close" onClick={onClose} aria-label="Close legal information">×</button>
+          <button type="button" className="legal-close" onClick={onClose} aria-label="Close legal information">Ã</button>
         </div>
         <div className="legal-body">
           <p className="legal-updated">Last updated: September 18, 2026</p>
@@ -126,7 +126,7 @@ function LegalModal({ type, onClose }) {
               <h3>Retention and your choices</h3>
               <p>Information is retained only as reasonably needed for communication, service delivery, recordkeeping, and legal obligations. You may request access, correction, or deletion of information by emailing AJ.</p>
               <h3>Contact</h3>
-              <p>Privacy questions may be sent to <a href="mailto:aj@connectivestack.com">aj@connectivestack.com</a>.</p>
+              <p>Privacy questions may be sent to <a href="mailto:ajell.saliba@connectivestack.com">ajell.saliba@connectivestack.com</a>.</p>
             </>
           ) : (
             <>
@@ -146,7 +146,7 @@ function LegalModal({ type, onClose }) {
               <h3>Limitations</h3>
               <p>No specific lead, revenue, ranking, or conversion result is guaranteed. Connective Stack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
               <h3>Contact</h3>
-              <p>Questions about these terms may be sent to <a href="mailto:aj@connectivestack.com">aj@connectivestack.com</a>.</p>
+              <p>Questions about these terms may be sent to <a href="mailto:ajell.saliba@connectivestack.com">ajell.saliba@connectivestack.com</a>.</p>
             </>
           )}
         </div>
@@ -164,7 +164,7 @@ function ServiceModal({ service, onClose }) {
             <span>CONNECTIVE STACK / SERVICE {service.number}</span>
             <h2 id="service-modal-title">{service.title}</h2>
           </div>
-          <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>×</button>
+          <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>Ã</button>
         </div>
         <div className="legal-body service-modal-body">
           <p className="service-modal-summary">{service.summary}</p>
@@ -245,7 +245,7 @@ function App() {
           </div>
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
-            <div className="eyebrow"><span className="status-dot" /> AJ Saliba • Independent web and systems specialist</div>
+            <div className="eyebrow"><span className="status-dot" /> AJ Saliba â¢ Independent web and systems specialist</div>
             <h1>Websites that look sharp and <em>work harder.</em></h1>
             <p className="hero-lead">I build modern websites for service businesses, then connect the forms, calendars, CRM, and follow-up tools behind them.</p>
             <div className="hero-actions">
@@ -267,7 +267,7 @@ function App() {
               <div className="video-topbar"><span /><span>Connected digital systems</span><span>08 sec</span></div>
             </div>
             <div className="floating-card floating-card-one">
-              <span className="mini-icon">↗</span>
+              <span className="mini-icon">â</span>
               <div><small>Lead captured</small><strong>Website form</strong></div>
               <span className="live-dot" />
             </div>
@@ -455,7 +455,7 @@ function App() {
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
             <h2>One specialist. Direct communication. Practical execution.</h2>
-            <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. I bring more than a decade of customer-facing and operational experience, including team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
+            <p>Iâm Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. I bring more than a decade of customer-facing and operational experience, including team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
             <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
             <div className="tool-matrix">
               <div className="tool-group">
@@ -482,9 +482,9 @@ function App() {
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
             <span className="kicker kicker-dark">Have a project in mind?</span>
-            <h2>Let’s build the right starting point.</h2>
+            <h2>Letâs build the right starting point.</h2>
             <p>Tell me what your business does, what is not working today, and what you want the website to help you achieve.</p>
-            <a href="mailto:aj@connectivestack.com?subject=Website%20project%20inquiry" className="button button-light">aj@connectivestack.com <Arrow /></a>
+            <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="button button-light">ajell.saliba@connectivestack.com <Arrow /></a>
           </div>
           <div className="contact-panel" data-reveal>
             <span>Good fit for</span>
@@ -503,11 +503,11 @@ function App() {
         <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="Connective Stack" /></a>
         <p>Websites, integrations, and automation for service businesses.</p>
         <div>
-          <span>© {new Date().getFullYear()} Connective Stack</span>
+          <span>Â© {new Date().getFullYear()} Connective Stack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
           <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
           <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
-          <a href="mailto:aj@connectivestack.com">Email AJ</a>
+          <a href="mailto:ajell.saliba@connectivestack.com">Email AJ</a>
         </div>
       </footer>
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
