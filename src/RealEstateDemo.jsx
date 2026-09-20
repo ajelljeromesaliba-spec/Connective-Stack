@@ -41,10 +41,10 @@ const listings = [
 ]
 
 const brokers = [
-  { initials: 'EM', name: 'Elena Marlow', role: 'Luxury Residential', market: 'Beverly Hills · Los Angeles', stats: '96% list-to-close', formNote: 'Luxury buyer or seller representation', formType: 'luxury' },
-  { initials: 'MC', name: 'Marcus Cole', role: 'Coastal Specialist', market: 'Malibu · Pacific Palisades', stats: '$48M sold this year', formNote: 'Coastal and waterfront property search', formType: 'coastal' },
-  { initials: 'SR', name: 'Sofia Reyes', role: 'Relocation Advisor', market: 'Scottsdale · Phoenix · Mesa', stats: '4.9 client rating', formNote: 'Arizona relocation and first-home planning', formType: 'relocation' },
-  { initials: 'JL', name: 'Jordan Lee', role: 'Investment Properties', market: 'Austin · Greater Los Angeles', stats: '12 years advising', formNote: 'Investment strategy and acquisition', formType: 'investment' },
+  { initials: 'EM', name: 'Elena Marlow', role: 'Luxury Residential', market: 'Beverly Hills · Los Angeles', stats: '96% list-to-close', formNote: 'Luxury buyer or seller representation', formType: 'luxury', portrait: 'portrait-elena' },
+  { initials: 'MC', name: 'Marcus Cole', role: 'Coastal Specialist', market: 'Malibu · Pacific Palisades', stats: '$48M sold this year', formNote: 'Coastal and waterfront property search', formType: 'coastal', portrait: 'portrait-marcus' },
+  { initials: 'SR', name: 'Sofia Reyes', role: 'Relocation Advisor', market: 'Scottsdale · Phoenix · Mesa', stats: '4.9 client rating', formNote: 'Arizona relocation and first-home planning', formType: 'relocation', portrait: 'portrait-sofia' },
+  { initials: 'JL', name: 'Jordan Lee', role: 'Investment Properties', market: 'Austin · Greater Los Angeles', stats: '12 years advising', formNote: 'Investment strategy and acquisition', formType: 'investment', portrait: 'portrait-jordan' },
 ]
 
 const categoryGuide = [
@@ -181,6 +181,53 @@ function BrokerModal({ broker, onClose }) {
   </div>
 }
 
+const visitorPaths = {
+  Buyer: {
+    eyebrow: 'FIND THE RIGHT HOME',
+    title: 'Start a private property search.',
+    copy: 'Share your market, budget, and timeline. The system will match you with the best available advisor.',
+    fields: <><label>Preferred market<input placeholder="City, neighborhood, or state" /></label><label>Budget range<select><option>Under $500K</option><option>$500K–$1M</option><option>$1M–$3M</option><option>$3M+</option></select></label><label>Buying timeline<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Researching</option></select></label><label>Financing stage<select><option>Pre-approved</option><option>Speaking with a lender</option><option>Cash purchase</option><option>Not started</option></select></label></>,
+  },
+  Seller: {
+    eyebrow: 'PREPARE TO SELL',
+    title: 'Request a private home review.',
+    copy: 'Tell us about the property and your preferred timing. A listing advisor can prepare the next steps.',
+    fields: <><label>Property location<input placeholder="City and state" /></label><label>Property type<select><option>Single-family home</option><option>Condo or townhome</option><option>Luxury estate</option><option>Investment property</option></select></label><label>Selling timeframe<select><option>As soon as possible</option><option>1–3 months</option><option>3–6 months</option><option>Exploring value</option></select></label><label>Current occupancy<select><option>Owner occupied</option><option>Tenant occupied</option><option>Vacant</option></select></label></>,
+  },
+  Broker: {
+    eyebrow: 'BROKER COLLABORATION',
+    title: 'Connect with the brokerage team.',
+    copy: 'Built for referral partners, cooperating brokers, and agents interested in the platform or network.',
+    fields: <><label>Brokerage name<input placeholder="Your brokerage" /></label><label>Licensed state<input placeholder="CA, AZ, TX, or other" /></label><label>Collaboration goal<select><option>Buyer referral</option><option>Seller referral</option><option>Co-broker opportunity</option><option>Join the network</option></select></label><label>Primary market<input placeholder="Market or territory" /></label></>,
+  },
+  Investor: {
+    eyebrow: 'INVESTMENT SEARCH',
+    title: 'Build an acquisition brief.',
+    copy: 'Define the return strategy, target market, and capital range for a more useful first conversation.',
+    fields: <><label>Investment goal<select><option>Long-term rental</option><option>Short-term rental</option><option>Appreciation</option><option>Portfolio diversification</option></select></label><label>Target market<input placeholder="Austin, Los Angeles, or open" /></label><label>Acquisition budget<select><option>Under $1M</option><option>$1M–$3M</option><option>$3M+</option></select></label><label>Purchase timeline<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Researching</option></select></label></>,
+  },
+}
+
+function VisitorPathway() {
+  const [role, setRole] = useState('Buyer')
+  const [sent, setSent] = useState(false)
+  const path = visitorPaths[role]
+  const chooseRole = nextRole => { setRole(nextRole); setSent(false) }
+  return <section className="re-visitor-path re-section re-reveal" id="start">
+    <div className="re-heading"><div><span>CHOOSE YOUR PATH</span><h2>One website. A relevant next step for every visitor.</h2></div><p>Instead of sending everyone to the same contact form, each path collects the information needed for that person’s goal.</p></div>
+    <div className="re-role-tabs" role="tablist" aria-label="Visitor type">{Object.keys(visitorPaths).map(item => <button type="button" role="tab" aria-selected={role === item} className={role === item ? 'active' : ''} onClick={() => chooseRole(item)} key={item}><small>I am a</small><strong>{item}</strong></button>)}</div>
+    <div className="re-role-panel">
+      <div className="re-role-copy"><span>{path.eyebrow}</span><h3>{path.title}</h3><p>{path.copy}</p><div><b>01</b><span>Qualified intake</span></div><div><b>02</b><span>Correct advisor route</span></div><div><b>03</b><span>CRM-ready follow-up</span></div></div>
+      {sent ? <div className="re-role-confirm"><span><Icon name="check" /></span><small>{role.toUpperCase()} PATH COMPLETE</small><h3>The inquiry is ready to route.</h3><p>This demo does not submit data externally. In a live build, the visitor would now enter the correct pipeline and follow-up sequence.</p><button type="button" onClick={() => setSent(false)}>Start another inquiry</button></div> : <form onSubmit={e => { e.preventDefault(); setSent(true) }}>
+        <div className="re-role-form-head"><small>PERSONALIZED {role.toUpperCase()} INTAKE</small><strong>Tell us what you need.</strong></div>
+        <label>Full name<input required placeholder="Sample visitor" /></label><label>Email<input required type="email" placeholder="visitor@example.com" /></label>
+        {path.fields}
+        <button type="submit">Continue as a {role} <Icon name="arrow" /></button>
+      </form>}
+    </div>
+  </section>
+}
+
 function Concierge() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([{ from: 'bot', text: 'Welcome to Aster & Row. Are you buying, selling, or exploring an investment?' }])
@@ -221,7 +268,7 @@ export default function RealEstateDemo() {
       <div className="re-demo-bar"><a href="/">← Connective Stack portfolio</a><span>Interactive concept · Fictional brokerage</span><b>{saved.length} saved</b></div>
       <header className="re-header">
         <a href="#home" className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>PRIVATE REAL ESTATE</small></span></a>
-        <nav><a href="#properties">Properties</a><a href="#match">Private search</a><a href="#advisors">Advisors</a><a href="#affordability">Affordability</a></nav>
+        <nav><a href="#start">Get started</a><a href="#properties">Properties</a><a href="#match">Private search</a><a href="#advisors">Advisors</a><a href="#affordability">Affordability</a></nav>
         <button onClick={() => setAdvisor(brokers[0])}>Schedule a consultation</button>
       </header>
       <main>
@@ -234,6 +281,8 @@ export default function RealEstateDemo() {
         </section>
 
         <section className="re-proof"><div><strong>$186M</strong><span>Career sales</span></div><div><strong>4</strong><span>Specialist advisors</span></div><div><strong>96%</strong><span>List-to-close ratio</span></div><div><strong>18 min</strong><span>Average lead response</span></div></section>
+
+        <VisitorPathway />
 
         <section className="re-properties re-section re-reveal" id="properties">
           <div className="re-heading"><div><span>PRIVATE COLLECTION</span><h2>Residences selected with intention.</h2></div><p>Filter the portfolio, save a property, and request a private viewing. Every inquiry is matched to the right advisor.</p></div>
@@ -252,7 +301,7 @@ export default function RealEstateDemo() {
 
         <section className="re-advisors re-section re-reveal" id="advisors">
           <div className="re-heading"><div><span>ADVISORY TEAM</span><h2>Multiple brokers. One seamless standard.</h2></div><p>Each lead is routed by geography, property type, price range, and availability, while the brokerage keeps one consistent client experience.</p></div>
-          <div className="re-broker-grid">{brokers.map((broker, index) => <article key={broker.name}><div className={`re-avatar tone-${index + 1}`}>{broker.initials}</div><small>{broker.role}</small><h3>{broker.name}</h3><p>{broker.market}</p><div className="re-agent-form-note">Form: {broker.formNote}</div><span>{broker.stats}</span><button onClick={() => setAdvisor(broker)}>Meet this advisor <Icon name="arrow" /></button></article>)}</div>
+          <div className="re-broker-grid">{brokers.map(broker => <article key={broker.name}><div className={`re-avatar ${broker.portrait}`} role="img" aria-label={`${broker.name}, ${broker.role}`}><span>{broker.initials}</span></div><small>{broker.role}</small><h3>{broker.name}</h3><p>{broker.market}</p><div className="re-agent-form-note">Form: {broker.formNote}</div><span>{broker.stats}</span><button onClick={() => setAdvisor(broker)}>Meet this advisor <Icon name="arrow" /></button></article>)}</div>
           <div className="re-routing"><span>NEW INQUIRY</span><i /><div><small>01</small><strong>Intent scored</strong><p>Buy · $5M+ · 90 days</p></div><i /><div><small>02</small><strong>Market matched</strong><p>Malibu · Coastal</p></div><i /><div className="active"><small>03</small><strong>Broker assigned</strong><p>Marcus Cole · Available</p></div></div>
         </section>
 
