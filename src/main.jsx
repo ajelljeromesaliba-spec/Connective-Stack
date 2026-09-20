@@ -426,10 +426,10 @@ function App() {
               </div>
               <div className="portrait-code">
                 <span>STATUS</span>
-                <strong><i /> Available for projects</strong>
+                <strong><i /> Project-based and hourly support</strong>
               </div>
             </div>
-            <div className="experience-chip"><strong>3+</strong><span>Years building in GoHighLevel and connected systems</span></div>
+            <div className="experience-chip"><strong>11</strong><span>Years of overall professional experience</span></div>
           </div>
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
