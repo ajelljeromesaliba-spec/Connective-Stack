@@ -32,16 +32,26 @@ const AsterRowMark = ({ compact = false }) => (
 )
 
 const listings = [
-  { id: 1, city: 'Beverly Hills', state: 'CA', neighborhood: 'Trousdale Estates', price: 4895000, beds: 4, baths: 5, sqft: '4,820', type: 'City', image: '/assets/realestate-hero.svg', broker: 'Elena Marlow', initials: 'EM', specialty: 'Luxury residences' },
-  { id: 2, city: 'Malibu', state: 'CA', neighborhood: 'Carbon Beach', price: 7250000, beds: 5, baths: 6, sqft: '5,640', type: 'Coastal', image: '/assets/realestate-malibu.svg', broker: 'Marcus Cole', initials: 'MC', specialty: 'Coastal properties' },
-  { id: 3, city: 'Scottsdale', state: 'AZ', neighborhood: 'Paradise Valley', price: 3180000, beds: 4, baths: 4.5, sqft: '4,310', type: 'Desert', image: '/assets/realestate-scottsdale.svg', broker: 'Sofia Reyes', initials: 'SR', specialty: 'Desert modern homes' },
+  { id: 1, city: 'Beverly Hills', state: 'CA', neighborhood: 'Trousdale Estates', price: 4895000, beds: 4, baths: 5, sqft: '4,820', category: 'Luxury', type: 'City', image: '/assets/realestate-hero.svg', broker: 'Elena Marlow', initials: 'EM', specialty: 'Luxury residences' },
+  { id: 2, city: 'Malibu', state: 'CA', neighborhood: 'Carbon Beach', price: 7250000, beds: 5, baths: 6, sqft: '5,640', category: 'Luxury', type: 'Coastal', image: '/assets/realestate-malibu.svg', broker: 'Marcus Cole', initials: 'MC', specialty: 'Coastal properties' },
+  { id: 3, city: 'Scottsdale', state: 'AZ', neighborhood: 'Paradise Valley', price: 3180000, beds: 4, baths: 4.5, sqft: '4,310', category: 'Premium', type: 'Desert', image: '/assets/realestate-scottsdale.svg', broker: 'Sofia Reyes', initials: 'SR', specialty: 'Relocation and Arizona homes' },
+  { id: 4, city: 'Austin', state: 'TX', neighborhood: 'The Grove Residences', price: 1285000, beds: 2, baths: 2.5, sqft: '1,780', category: 'Premium', type: 'Urban', image: '/assets/realestate-austin-premium.webp', broker: 'Jordan Lee', initials: 'JL', specialty: 'Investment properties' },
+  { id: 5, city: 'Phoenix', state: 'AZ', neighborhood: 'Arcadia Townhomes', price: 535000, beds: 3, baths: 2.5, sqft: '1,690', category: 'Starter', type: 'Townhome', image: '/assets/realestate-phoenix-starter.webp', broker: 'Sofia Reyes', initials: 'SR', specialty: 'First-time buyers and relocation' },
+  { id: 6, city: 'Mesa', state: 'AZ', neighborhood: 'Desert Willow', price: 415000, beds: 3, baths: 2, sqft: '1,560', category: 'Affordable', type: 'Single-family', image: '/assets/realestate-mesa-affordable.webp', broker: 'Sofia Reyes', initials: 'SR', specialty: 'Affordable Arizona homes' },
 ]
 
 const brokers = [
-  { initials: 'EM', name: 'Elena Marlow', role: 'Luxury Residential', market: 'Beverly Hills Â· Los Angeles', stats: '96% list-to-close' },
-  { initials: 'MC', name: 'Marcus Cole', role: 'Coastal Specialist', market: 'Malibu Â· Pacific Palisades', stats: '$48M sold this year' },
-  { initials: 'SR', name: 'Sofia Reyes', role: 'Relocation Advisor', market: 'Scottsdale Â· Paradise Valley', stats: '4.9 client rating' },
-  { initials: 'JL', name: 'Jordan Lee', role: 'Investment Properties', market: 'Greater Los Angeles', stats: '12 years advising' },
+  { initials: 'EM', name: 'Elena Marlow', role: 'Luxury Residential', market: 'Beverly Hills · Los Angeles', stats: '96% list-to-close', formNote: 'Luxury buyer or seller representation', formType: 'luxury' },
+  { initials: 'MC', name: 'Marcus Cole', role: 'Coastal Specialist', market: 'Malibu · Pacific Palisades', stats: '$48M sold this year', formNote: 'Coastal and waterfront property search', formType: 'coastal' },
+  { initials: 'SR', name: 'Sofia Reyes', role: 'Relocation Advisor', market: 'Scottsdale · Phoenix · Mesa', stats: '4.9 client rating', formNote: 'Arizona relocation and first-home planning', formType: 'relocation' },
+  { initials: 'JL', name: 'Jordan Lee', role: 'Investment Properties', market: 'Austin · Greater Los Angeles', stats: '12 years advising', formNote: 'Investment strategy and acquisition', formType: 'investment' },
+]
+
+const categoryGuide = [
+  { name: 'Luxury', range: '$3M+', note: 'Private estates and signature residences' },
+  { name: 'Premium', range: '$1M–$3M', note: 'High-design homes in leading markets' },
+  { name: 'Starter', range: '$500K–$1M', note: 'First-home and move-up opportunities' },
+  { name: 'Affordable', range: 'Under $500K', note: 'Value-focused homes with clear costs' },
 ]
 
 const money = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value)
@@ -67,7 +77,7 @@ function MortgageCalculator() {
         <span>ESTIMATED MONTHLY PRINCIPAL + INTEREST</span>
         <strong>{money(monthly)}<small>/mo</small></strong>
         <div><i style={{ width: `${down}%` }} /></div>
-        <p>{money(price * down / 100)} down Â· 30-year fixed example</p>
+        <p>{money(price * down / 100)} down · 30-year fixed example</p>
         <small>Illustration only. Taxes, insurance, HOA fees, and lender requirements are not included.</small>
       </div>
     </div>
@@ -76,16 +86,23 @@ function MortgageCalculator() {
 
 function Matchmaker({ onTour }) {
   const [location, setLocation] = useState('Malibu')
-  const [budget, setBudget] = useState('5M+')
+  const [budget, setBudget] = useState('$3M+')
   const [goal, setGoal] = useState('Primary residence')
-  const match = location === 'Scottsdale' ? listings[2] : location === 'Malibu' ? listings[1] : listings[0]
+  const match = useMemo(() => {
+    if (budget === 'Under $500K') return listings[5]
+    if (budget === '$500K–$1M') return listings[4]
+    if (budget === '$1M–$3M') return location === 'Austin' ? listings[3] : listings[2]
+    if (location === 'Malibu') return listings[1]
+    if (location === 'Scottsdale' || location === 'Phoenix') return listings[2]
+    return listings[0]
+  }, [location, budget])
   return (
     <div className="re-match-card">
       <div className="re-match-controls">
         <span>SMART PROPERTY MATCH</span>
         <h3>Tell us what moving well looks like.</h3>
-        <label>Preferred market<select value={location} onChange={e => setLocation(e.target.value)}><option>Malibu</option><option>Beverly Hills</option><option>Scottsdale</option></select></label>
-        <div className="re-choice-group"><small>Budget</small>{['Under $3M', '$3Mâ$5M', '5M+'].map(item => <button className={budget === item ? 'active' : ''} onClick={() => setBudget(item)} key={item}>{item}</button>)}</div>
+        <label>Preferred market<select value={location} onChange={e => setLocation(e.target.value)}><option>Malibu</option><option>Beverly Hills</option><option>Scottsdale</option><option>Austin</option><option>Phoenix</option></select></label>
+        <div className="re-choice-group"><small>Budget</small>{['Under $500K', '$500K–$1M', '$1M–$3M', '$3M+'].map(item => <button type="button" className={budget === item ? 'active' : ''} onClick={() => setBudget(item)} key={item}>{item}</button>)}</div>
         <div className="re-choice-group"><small>Goal</small>{['Primary residence', 'Second home', 'Investment'].map(item => <button className={goal === item ? 'active' : ''} onClick={() => setGoal(item)} key={item}>{item}</button>)}</div>
       </div>
       <div className="re-match-result">
@@ -94,13 +111,20 @@ function Matchmaker({ onTour }) {
         <div>
           <small>{match.neighborhood}</small>
           <strong>{money(match.price)}</strong>
-          <p>{match.beds} beds Â· {match.baths} baths Â· {match.sqft} sq ft</p>
+          <p>{match.beds} beds · {match.baths} baths · {match.sqft} sq ft</p>
         </div>
         <div className="re-routed"><b>{match.initials}</b><p>Routed to <strong>{match.broker}</strong><span>{match.specialty}</span></p><i>AVAILABLE</i></div>
         <button onClick={() => onTour(match)}>Request a private tour <Icon name="arrow" /></button>
       </div>
     </div>
   )
+}
+
+const CategoryField = ({ category }) => {
+  if (category === 'Luxury') return <label>Representation need<select><option>Buying</option><option>Selling</option><option>Buying and selling</option></select></label>
+  if (category === 'Premium') return <label>Financing stage<select><option>Pre-approved</option><option>Speaking with a lender</option><option>Cash purchase</option><option>Not started</option></select></label>
+  if (category === 'Starter') return <label>First-time buyer?<select><option>Yes</option><option>No</option><option>Not sure yet</option></select></label>
+  return <label>Monthly payment target<select><option>Under $2,500</option><option>$2,500–$3,500</option><option>$3,500–$4,500</option><option>Still estimating</option></select></label>
 }
 
 function TourModal({ property, onClose }) {
@@ -114,11 +138,13 @@ function TourModal({ property, onClose }) {
           <span className="re-modal-kicker">PRIVATE SHOWING</span>
           <h2>Tour {property.neighborhood}</h2>
           <p>Choose a preferred time. This portfolio demo uses sample details only and does not submit information externally.</p>
+          <div className="re-form-route"><b>{property.initials}</b><div><small>ASSIGNED ADVISOR</small><strong>{property.broker}</strong><span>{property.category} · {property.specialty}</span></div></div>
           <form onSubmit={e => { e.preventDefault(); setSent(true) }}>
             <label>Full name<input required placeholder="Sample buyer" /></label>
             <label>Email<input required type="email" placeholder="buyer@example.com" /></label>
             <label>Preferred date<input required type="date" /></label>
-            <label>Buying timeline<select><option>Within 30 days</option><option>1â3 months</option><option>3â6 months</option><option>Researching</option></select></label>
+            <label>Buying timeline<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Researching</option></select></label>
+            <CategoryField category={property.category} />
             <button type="submit">Request private tour <Icon name="arrow" /></button>
           </form>
         </>}
@@ -127,13 +153,41 @@ function TourModal({ property, onClose }) {
   )
 }
 
+function BrokerModal({ broker, onClose }) {
+  const [sent, setSent] = useState(false)
+  if (!broker) return null
+  const customFields = {
+    luxury: <><label>Representation need<select><option>Buying</option><option>Selling</option><option>Buying and selling</option></select></label><label>Target price range<select><option>$3M–$5M</option><option>$5M–$10M</option><option>$10M+</option></select></label><label>Preferred market<input placeholder="Beverly Hills, Bel Air, Los Angeles" /></label><label>Timeline<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Exploring privately</option></select></label></>,
+    coastal: <><label>Property use<select><option>Primary residence</option><option>Second home</option><option>Investment</option></select></label><label>Preferred coastal area<input placeholder="Malibu, Pacific Palisades" /></label><label>Waterfront requirement<select><option>Direct waterfront</option><option>Ocean view</option><option>Near the coast</option><option>Flexible</option></select></label><label>Tour timing<select><option>This week</option><option>Within 30 days</option><option>1–3 months</option><option>Researching</option></select></label></>,
+    relocation: <><label>Moving from<input placeholder="Current city and state" /></label><label>Move-by timeframe<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Flexible</option></select></label><label>Preferred Arizona area<select><option>Scottsdale</option><option>Phoenix</option><option>Mesa</option><option>Help me choose</option></select></label><label>Home category<select><option>Premium</option><option>Starter</option><option>Affordable</option></select></label></>,
+    investment: <><label>Investment goal<select><option>Long-term rental</option><option>Short-term rental</option><option>Appreciation</option><option>Portfolio diversification</option></select></label><label>Target market<select><option>Austin</option><option>Los Angeles</option><option>Open to recommendations</option></select></label><label>Acquisition budget<select><option>Under $1M</option><option>$1M–$3M</option><option>$3M+</option></select></label><label>Target hold period<select><option>1–3 years</option><option>3–7 years</option><option>7+ years</option></select></label></>,
+  }
+  return <div className="re-modal-overlay" onMouseDown={e => e.target === e.currentTarget && onClose()}>
+    <div className="re-modal">
+      <button className="re-modal-close" onClick={onClose} aria-label="Close"><Icon name="close" /></button>
+      {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>CONSULTATION ROUTED</small><h2>Your request is ready for {broker.name}.</h2><p>The form captured the details relevant to {broker.role.toLowerCase()}. In a live setup, the correct pipeline, calendar, and follow-up sequence would now start automatically.</p><button onClick={onClose}>Return to advisors</button></div> : <>
+        <span className="re-modal-kicker">PERSONALIZED ADVISOR INTAKE</span>
+        <h2>Meet {broker.name}</h2>
+        <p>{broker.formNote}. The questions below are tailored to this advisor, so the first conversation starts with the right context.</p>
+        <div className="re-form-route"><b>{broker.initials}</b><div><small>{broker.role}</small><strong>{broker.name}</strong><span>{broker.market}</span></div></div>
+        <form onSubmit={e => { e.preventDefault(); setSent(true) }}>
+          <label>Full name<input required placeholder="Sample client" /></label>
+          <label>Email<input required type="email" placeholder="client@example.com" /></label>
+          {customFields[broker.formType]}
+          <button type="submit">Send to {broker.name.split(' ')[0]} <Icon name="arrow" /></button>
+        </form>
+      </>}
+    </div>
+  </div>
+}
+
 function Concierge() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([{ from: 'bot', text: 'Welcome to Aster & Row. Are you buying, selling, or exploring an investment?' }])
   const reply = question => {
     const responses = {
       'Find a property': 'I can match you by market, budget, property style, and timeline. Malibu currently has a strong coastal listing at $7.25M.',
-      'Meet a broker': 'Iâll route you by market and specialty. Elena covers Beverly Hills, Marcus handles Malibu, Sofia leads Scottsdale, and Jordan advises investors.',
+      'Meet a broker': 'I’ll route you by market and specialty. Elena covers Beverly Hills, Marcus handles Malibu, Sofia leads Scottsdale, and Jordan advises investors.',
       'Value my home': 'A broker can prepare a private market review using recent comparable sales, condition, and current demand. No public estimate is treated as a final valuation.',
     }
     setMessages(items => [...items, { from: 'user', text: question }, { from: 'bot', text: responses[question] }])
@@ -141,7 +195,7 @@ function Concierge() {
   return <>
     <button className="re-chat-launcher" onClick={() => setOpen(!open)}><Icon name={open ? 'close' : 'chat'} /><span>{open ? 'Close' : 'Ask the concierge'}</span></button>
     {open && <aside className="re-chat">
-      <div className="re-chat-head"><AsterRowMark compact /><div><strong>Aster Concierge</strong><span><i /> Online Â· Demo experience</span></div><button onClick={() => setOpen(false)}><Icon name="close" /></button></div>
+      <div className="re-chat-head"><AsterRowMark compact /><div><strong>Aster Concierge</strong><span><i /> Online · Demo experience</span></div><button onClick={() => setOpen(false)}><Icon name="close" /></button></div>
       <div className="re-chat-messages">{messages.map((item, i) => <p className={item.from} key={i}>{item.text}</p>)}</div>
       <div className="re-chat-options">{['Find a property', 'Meet a broker', 'Value my home'].map(item => <button onClick={() => reply(item)} key={item}>{item}</button>)}</div>
     </aside>}
@@ -149,10 +203,11 @@ function Concierge() {
 }
 
 export default function RealEstateDemo() {
-  const [filter, setFilter] = useState('All')
+  const [filter, setFilter] = useState('All Homes')
   const [saved, setSaved] = useState([])
   const [tour, setTour] = useState(null)
-  const shown = filter === 'All' ? listings : listings.filter(item => item.type === filter)
+  const [advisor, setAdvisor] = useState(null)
+  const shown = filter === 'All Homes' ? listings : listings.filter(item => item.category === filter)
 
   useEffect(() => {
     document.title = 'Luxury Real Estate Brokerage Demo | Connective Stack'
@@ -163,28 +218,29 @@ export default function RealEstateDemo() {
 
   return (
     <div className="re-page">
-      <div className="re-demo-bar"><a href="/">â Connective Stack portfolio</a><span>Interactive concept Â· Fictional brokerage</span><b>{saved.length} saved</b></div>
+      <div className="re-demo-bar"><a href="/">← Connective Stack portfolio</a><span>Interactive concept · Fictional brokerage</span><b>{saved.length} saved</b></div>
       <header className="re-header">
         <a href="#home" className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>PRIVATE REAL ESTATE</small></span></a>
         <nav><a href="#properties">Properties</a><a href="#match">Private search</a><a href="#advisors">Advisors</a><a href="#affordability">Affordability</a></nav>
-        <button onClick={() => setTour(listings[0])}>Schedule a consultation</button>
+        <button onClick={() => setAdvisor(brokers[0])}>Schedule a consultation</button>
       </header>
       <main>
         <section className="re-hero re-reveal" id="home">
           <img className="re-hero-image" src="/assets/realestate-hero.svg" alt="Modern luxury home at golden hour" />
           <div className="re-hero-shade" />
-          <div className="re-hero-copy"><span>CURATED HOMES Â· TRUSTED ADVISORS</span><h1>Exceptional property.<br /><em>Personal representation.</em></h1><p>One private search, intelligently routed to the broker who knows your market, property type, and priorities.</p><div><a href="#properties">Explore residences <Icon name="arrow" /></a><button onClick={() => setTour(listings[0])}>Request a private search</button></div></div>
+          <div className="re-hero-copy"><span>CURATED HOMES · TRUSTED ADVISORS</span><h1>Exceptional property.<br /><em>Personal representation.</em></h1><p>One private search, intelligently routed to the broker who knows your market, property type, and priorities.</p><div><a href="#properties">Explore residences <Icon name="arrow" /></a><button onClick={() => setTour(listings[0])}>Request a private search</button></div></div>
           <div className="re-market-card"><small>LIVE MARKET PULSE</small><strong>14</strong><span>qualified opportunities</span><div><i /> Los Angeles <b>7</b></div><div><i /> Malibu <b>4</b></div><div><i /> Scottsdale <b>3</b></div></div>
-          <div className="re-hero-caption"><span>FEATURED RESIDENCE</span><strong>Trousdale Estates Â· Beverly Hills</strong><small>$4,895,000</small></div>
+          <div className="re-hero-caption"><span>FEATURED RESIDENCE</span><strong>Trousdale Estates · Beverly Hills</strong><small>$4,895,000</small></div>
         </section>
 
         <section className="re-proof"><div><strong>$186M</strong><span>Career sales</span></div><div><strong>4</strong><span>Specialist advisors</span></div><div><strong>96%</strong><span>List-to-close ratio</span></div><div><strong>18 min</strong><span>Average lead response</span></div></section>
 
         <section className="re-properties re-section re-reveal" id="properties">
           <div className="re-heading"><div><span>PRIVATE COLLECTION</span><h2>Residences selected with intention.</h2></div><p>Filter the portfolio, save a property, and request a private viewing. Every inquiry is matched to the right advisor.</p></div>
-          <div className="re-filters">{['All', 'City', 'Coastal', 'Desert'].map(item => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div>
+          <div className="re-category-guide">{categoryGuide.map(item => <button type="button" className={filter === item.name ? 'active' : ''} onClick={() => setFilter(item.name)} key={item.name}><span>{item.name}</span><strong>{item.range}</strong><small>{item.note}</small></button>)}</div>
+          <div className="re-filters">{['All Homes', 'Luxury', 'Premium', 'Starter', 'Affordable'].map(item => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div>
           <div className="re-listings">{shown.map(item => <article key={item.id}>
-            <div className="re-listing-image"><img src={item.image} alt={`${item.neighborhood} luxury residence`} /><span>{item.type}</span><button className={saved.includes(item.id) ? 'saved' : ''} onClick={() => setSaved(ids => ids.includes(item.id) ? ids.filter(id => id !== item.id) : [...ids, item.id])} aria-label="Save property"><Icon name="heart" /></button></div>
+            <div className="re-listing-image"><img src={item.image} alt={`${item.neighborhood} ${item.category.toLowerCase()} residence`} /><div className="re-listing-badges"><span>{item.category}</span><small>{item.type}</small></div><button className={saved.includes(item.id) ? 'saved' : ''} onClick={() => setSaved(ids => ids.includes(item.id) ? ids.filter(id => id !== item.id) : [...ids, item.id])} aria-label="Save property"><Icon name="heart" /></button></div>
             <div className="re-listing-copy"><small><Icon name="pin" /> {item.city}, {item.state}</small><h3>{item.neighborhood}</h3><strong>{money(item.price)}</strong><div><span><Icon name="bed" /> {item.beds} beds</span><span><Icon name="bath" /> {item.baths} baths</span><span><Icon name="area" /> {item.sqft} sq ft</span></div><button onClick={() => setTour(item)}>View private details <Icon name="arrow" /></button></div>
           </article>)}</div>
         </section>
@@ -196,8 +252,8 @@ export default function RealEstateDemo() {
 
         <section className="re-advisors re-section re-reveal" id="advisors">
           <div className="re-heading"><div><span>ADVISORY TEAM</span><h2>Multiple brokers. One seamless standard.</h2></div><p>Each lead is routed by geography, property type, price range, and availability, while the brokerage keeps one consistent client experience.</p></div>
-          <div className="re-broker-grid">{brokers.map((broker, index) => <article key={broker.name}><div className={`re-avatar tone-${index + 1}`}>{broker.initials}</div><small>{broker.role}</small><h3>{broker.name}</h3><p>{broker.market}</p><span>{broker.stats}</span><button onClick={() => setTour(listings[index > 2 ? 0 : index])}>Meet this advisor <Icon name="arrow" /></button></article>)}</div>
-          <div className="re-routing"><span>NEW INQUIRY</span><i /><div><small>01</small><strong>Intent scored</strong><p>Buy Â· $5M+ Â· 90 days</p></div><i /><div><small>02</small><strong>Market matched</strong><p>Malibu Â· Coastal</p></div><i /><div className="active"><small>03</small><strong>Broker assigned</strong><p>Marcus Cole Â· Available</p></div></div>
+          <div className="re-broker-grid">{brokers.map((broker, index) => <article key={broker.name}><div className={`re-avatar tone-${index + 1}`}>{broker.initials}</div><small>{broker.role}</small><h3>{broker.name}</h3><p>{broker.market}</p><div className="re-agent-form-note">Form: {broker.formNote}</div><span>{broker.stats}</span><button onClick={() => setAdvisor(broker)}>Meet this advisor <Icon name="arrow" /></button></article>)}</div>
+          <div className="re-routing"><span>NEW INQUIRY</span><i /><div><small>01</small><strong>Intent scored</strong><p>Buy · $5M+ · 90 days</p></div><i /><div><small>02</small><strong>Market matched</strong><p>Malibu · Coastal</p></div><i /><div className="active"><small>03</small><strong>Broker assigned</strong><p>Marcus Cole · Available</p></div></div>
         </section>
 
         <section className="re-affordability re-section re-reveal" id="affordability">
@@ -210,6 +266,7 @@ export default function RealEstateDemo() {
       <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL PORTFOLIO DEMO</small></span></div><p>Designed and built by <a href="/">Connective Stack</a></p></footer>
       <Concierge />
       <TourModal property={tour} onClose={() => setTour(null)} />
+      <BrokerModal broker={advisor} onClose={() => setAdvisor(null)} />
     </div>
   )
 }
