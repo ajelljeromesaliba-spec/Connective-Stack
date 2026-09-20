@@ -78,6 +78,7 @@ const projects = [
     title: 'Conversion-first HVAC website',
     copy: 'A focused service site with clear calls to action, trust signals, and an appointment path built for mobile visitors.',
     image: '/assets/project-hvac.svg',
+    mobileImage: '/assets/project-hvac-mobile.svg',
     accent: 'mint',
     goal: 'Turn high-intent local searches into calls and estimate requests.',
     outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
@@ -313,7 +314,10 @@ function App() {
             {projects.map((project, index) => (
               <article className={`project-card ${index === 0 ? 'project-wide' : ''}`} key={project.title} data-reveal>
                 <div className={`project-image ${project.accent}`}>
-                  <img src={project.image} alt={`${project.title} sample concept`} />
+                  <picture>
+                    {project.mobileImage && <source media="(max-width: 760px)" srcSet={project.mobileImage} />}
+                    <img src={project.image} alt={`${project.title} sample concept`} />
+                  </picture>
                   <span className="concept-badge">{project.live ? 'Live interactive demo' : 'Outcome-led concept'}</span>
                   <span className="project-index">0{index + 1}</span>
                   <div className="visual-tags">
