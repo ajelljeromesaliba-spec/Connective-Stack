@@ -243,7 +243,21 @@ function App() {
         <nav className={menuOpen ? 'nav-open' : ''}>
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
-          <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>Live Demo</a>
+          <div className="nav-demo-menu">
+            <a href="#work" className="nav-demo-trigger" onClick={closeMenu}>Live Demos <span aria-hidden="true">â</span></a>
+            <div className="nav-demo-dropdown">
+              <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>
+                <small>Home Services</small>
+                <strong>HVAC AI Front Desk</strong>
+                <span>Chat, voice, estimates, and service intake</span>
+              </a>
+              <a href="/demos/luxury-real-estate" onClick={closeMenu}>
+                <small>Real Estate</small>
+                <strong>Premium Brokerage</strong>
+                <span>Listings, broker routing, and buyer tools</span>
+              </a>
+            </div>
+          </div>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
           <a className="nav-cta" href="#contact" onClick={closeMenu}>Start a project <Arrow /></a>
