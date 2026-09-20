@@ -361,6 +361,27 @@ function App() {
               </article>
             ))}
           </div>
+          <div className="hourly-support" data-reveal>
+            <div className="hourly-support-rate">
+              <span>Flexible support</span>
+              <strong><sup>$</sup>25<small>/hour</small></strong>
+              <p>For smaller updates, fixes, and ongoing technical help.</p>
+            </div>
+            <div className="hourly-support-details">
+              <strong>What hourly support can cover</strong>
+              <ul>
+                <li><Check /> Website content and layout updates</li>
+                <li><Check /> Technical troubleshooting and bug fixes</li>
+                <li><Check /> Domain, DNS, form, and calendar support</li>
+                <li><Check /> CRM, workflow, and integration updates</li>
+              </ul>
+            </div>
+            <div className="hourly-support-terms">
+              <span>Clear expectations</span>
+              <p><strong>1-hour minimum</strong> for each support request, then billed in 30-minute increments. I confirm the expected time before starting. Larger builds and new features are quoted as fixed-price projects.</p>
+              <a href="#contact">Request hourly support <Arrow /></a>
+            </div>
+          </div>
           <div className="pricing-note" data-reveal>
             <strong>Need something outside these tiers?</strong>
             <p>Additional pages, full copywriting, e-commerce, AI chat or voice agents, advanced API work, and custom automations are quoted based on scope. Domain, hosting, software, messaging, and other third-party subscription costs are not included.</p>
