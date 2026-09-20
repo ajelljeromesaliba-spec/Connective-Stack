@@ -263,6 +263,16 @@ export default function RealEstateDemo() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const videos = document.querySelectorAll('.re-listing-image video')
+    const playbackObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.play().catch(() => {})
+      else entry.target.pause()
+    }), { threshold: .2 })
+    videos.forEach(video => playbackObserver.observe(video))
+    return () => playbackObserver.disconnect()
+  }, [filter])
+
   return (
     <div className="re-page">
       <div className="re-demo-bar"><a href="/">← Connective Stack portfolio</a><span>Interactive concept · Fictional brokerage</span><b>{saved.length} saved</b></div>
