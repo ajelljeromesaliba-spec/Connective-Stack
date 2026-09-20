@@ -19,6 +19,18 @@ const Icon = ({ name }) => {
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>
 }
 
+const AsterRowMark = ({ compact = false }) => (
+  <span className={`re-brand-mark ${compact ? 'compact' : ''}`} aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path className="re-mark-frame" d="M12 53V27C12 14 20.8 6 32 6s20 8 20 21v26" />
+      <path className="re-mark-a" d="m19 47 12-29 12 29M24 36h15" />
+      <path className="re-mark-r" d="M32 18v29M32 20h5.5c7 0 9.5 3.2 9.5 7.5S44 35 37.5 35H32m6 0 10 12" />
+      <path className="re-mark-star" d="m51 8 1.4 4.1 4.1 1.4-4.1 1.4L51 19l-1.4-4.1-4.1-1.4 4.1-1.4L51 8Z" />
+      <path className="re-mark-base" d="M8 53h48" />
+    </svg>
+  </span>
+)
+
 const listings = [
   { id: 1, city: 'Beverly Hills', state: 'CA', neighborhood: 'Trousdale Estates', price: 4895000, beds: 4, baths: 5, sqft: '4,820', type: 'City', image: '/assets/realestate-hero.svg', broker: 'Elena Marlow', initials: 'EM', specialty: 'Luxury residences' },
   { id: 2, city: 'Malibu', state: 'CA', neighborhood: 'Carbon Beach', price: 7250000, beds: 5, baths: 6, sqft: '5,640', type: 'Coastal', image: '/assets/realestate-malibu.svg', broker: 'Marcus Cole', initials: 'MC', specialty: 'Coastal properties' },
@@ -129,7 +141,7 @@ function Concierge() {
   return <>
     <button className="re-chat-launcher" onClick={() => setOpen(!open)}><Icon name={open ? 'close' : 'chat'} /><span>{open ? 'Close' : 'Ask the concierge'}</span></button>
     {open && <aside className="re-chat">
-      <div className="re-chat-head"><b>AR</b><div><strong>Aster Concierge</strong><span><i /> Online Â· Demo experience</span></div><button onClick={() => setOpen(false)}><Icon name="close" /></button></div>
+      <div className="re-chat-head"><AsterRowMark compact /><div><strong>Aster Concierge</strong><span><i /> Online Â· Demo experience</span></div><button onClick={() => setOpen(false)}><Icon name="close" /></button></div>
       <div className="re-chat-messages">{messages.map((item, i) => <p className={item.from} key={i}>{item.text}</p>)}</div>
       <div className="re-chat-options">{['Find a property', 'Meet a broker', 'Value my home'].map(item => <button onClick={() => reply(item)} key={item}>{item}</button>)}</div>
     </aside>}
@@ -153,7 +165,7 @@ export default function RealEstateDemo() {
     <div className="re-page">
       <div className="re-demo-bar"><a href="/">â Connective Stack portfolio</a><span>Interactive concept Â· Fictional brokerage</span><b>{saved.length} saved</b></div>
       <header className="re-header">
-        <a href="#home" className="re-brand"><b>AR</b><span><strong>ASTER &amp; ROW</strong><small>PRIVATE REAL ESTATE</small></span></a>
+        <a href="#home" className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>PRIVATE REAL ESTATE</small></span></a>
         <nav><a href="#properties">Properties</a><a href="#match">Private search</a><a href="#advisors">Advisors</a><a href="#affordability">Affordability</a></nav>
         <button onClick={() => setTour(listings[0])}>Schedule a consultation</button>
       </header>
@@ -195,7 +207,7 @@ export default function RealEstateDemo() {
 
         <section className="re-cta re-reveal"><div><span>CONNECTIVE STACK DEMO</span><h2>Built for the full brokerage, not just one agent.</h2></div><div><p>This fictional concept demonstrates premium listings, broker routing, lead qualification, calculators, CRM-ready intake, and automated follow-up.</p><a href="mailto:ajell.saliba@connectivestack.com?subject=Real%20estate%20website%20demo">Build a real estate experience <Icon name="arrow" /></a></div></section>
       </main>
-      <footer className="re-footer"><div className="re-brand"><b>AR</b><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL PORTFOLIO DEMO</small></span></div><p>Designed and built by <a href="/">Connective Stack</a></p></footer>
+      <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL PORTFOLIO DEMO</small></span></div><p>Designed and built by <a href="/">Connective Stack</a></p></footer>
       <Concierge />
       <TourModal property={tour} onClose={() => setTour(null)} />
     </div>
