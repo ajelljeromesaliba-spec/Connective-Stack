@@ -244,7 +244,7 @@ function App() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
           <div className="nav-demo-menu">
-            <a href="#work" className="nav-demo-trigger" onClick={closeMenu}>Live Demos <span aria-hidden="true">â</span></a>
+            <a href="#work" className="nav-demo-trigger" onClick={closeMenu}>Live Demos <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
             <div className="nav-demo-dropdown">
               <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>
                 <small>Home Services</small>
