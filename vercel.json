@@ -22,6 +22,10 @@
       "destination": "/demos/luxury-real-estate/index.html"
     },
     {
+      "source": "/demos/healthcare-patient-experience",
+      "destination": "/demos/healthcare-patient-experience/index.html"
+    },
+    {
       "source": "/demos/:path*",
       "destination": "/index.html"
     }
