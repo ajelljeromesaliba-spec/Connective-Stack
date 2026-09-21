@@ -120,7 +120,7 @@ function LegalModal({ type, onClose }) {
             <span>CONNECTIVE STACK / LEGAL</span>
             <h2 id="legal-title">{isPrivacy ? 'Privacy Policy' : 'Terms and Conditions'}</h2>
           </div>
-          <button type="button" className="legal-close" onClick={onClose} aria-label="Close legal information">Ã</button>
+          <button type="button" className="legal-close" onClick={onClose} aria-label="Close legal information">×</button>
         </div>
         <div className="legal-body">
           <p className="legal-updated">Last updated: September 18, 2026</p>
@@ -179,7 +179,7 @@ function ServiceModal({ service, onClose }) {
             <span>CONNECTIVE STACK / SERVICE {service.number}</span>
             <h2 id="service-modal-title">{service.title}</h2>
           </div>
-          <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>Ã</button>
+          <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>×</button>
         </div>
         <div className="legal-body service-modal-body">
           <p className="service-modal-summary">{service.summary}</p>
@@ -197,6 +197,61 @@ function ServiceModal({ service, onClose }) {
         </div>
       </section>
     </div>
+  )
+}
+
+const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+
+function ProjectInquiryForm() {
+  const [status, setStatus] = useState('idle')
+  const [feedback, setFeedback] = useState('')
+
+  const submitInquiry = async event => {
+    event.preventDefault()
+    setStatus('sending')
+    setFeedback('')
+    const form = event.currentTarget
+    const payload = Object.fromEntries(new FormData(form).entries())
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok) throw new Error(result.error || 'The inquiry could not be sent.')
+      form.reset()
+      setStatus('success')
+      setFeedback('Thanks. Your project details were sent to AJ. Expect a reply within one business day.')
+    } catch (error) {
+      setStatus('error')
+      setFeedback(error.message || 'Something went wrong. Please email AJ directly or book a call.')
+    }
+  }
+
+  return (
+    <form className="inquiry-form" onSubmit={submitInquiry}>
+      <div className="inquiry-form-heading">
+        <span>PROJECT INQUIRY</span>
+        <h3>Share the essentials.</h3>
+        <p>A few useful details help me recommend the right scope, timeline, and starting price.</p>
+      </div>
+      <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
+      <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
+      <label>Phone number <small>Optional</small><input name="phone" type="tel" autoComplete="tel" placeholder="US or international number" /></label>
+      <label>Company or business<input name="company" autoComplete="organization" placeholder="Company name" /></label>
+      <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
+      <label>How can I help?<select name="service" required defaultValue=""><option value="" disabled>Select a service</option><option>New website</option><option>Website redesign</option><option>Landing page</option><option>Website plus lead capture</option><option>CRM or GoHighLevel setup</option><option>Automation or integration</option><option>AI chat or voice agent</option><option>Hourly technical support</option><option>Not sure yet</option></select></label>
+      <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
+      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>Under $500</option><option>$500 to $850</option><option>$850 to $1,250</option><option>$1,250 to $2,500</option><option>$2,500+</option><option>Need a recommendation</option></select></label>
+      <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
+      <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the current problem, the pages or systems you need, and the outcome you want." /></label>
+      <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
+      <label className="inquiry-consent inquiry-wide"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about this project and understand that submitting this form does not create a service agreement.</span></label>
+      <button className="button button-primary inquiry-submit inquiry-wide" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending inquiry…' : 'Send project inquiry'} <Arrow /></button>
+      {feedback && <p className={`inquiry-feedback ${status}`} role="status">{feedback}</p>}
+    </form>
   )
 }
 
@@ -274,7 +329,7 @@ function App() {
           </div>
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
-            <div className="eyebrow"><span className="status-dot" /> AJ Saliba â¢ Independent web and systems specialist</div>
+            <div className="eyebrow"><span className="status-dot" /> AJ Saliba • Independent web and systems specialist</div>
             <h1>Websites that look sharp and <em>work harder.</em></h1>
             <p className="hero-lead">I build modern websites for service businesses, then connect the forms, calendars, CRM, and follow-up tools behind them.</p>
             <div className="hero-actions">
@@ -296,7 +351,7 @@ function App() {
               <div className="video-topbar"><span /><span>Connected digital systems</span><span>08 sec</span></div>
             </div>
             <div className="floating-card floating-card-one">
-              <span className="mini-icon">â</span>
+              <span className="mini-icon">↗</span>
               <div><small>Lead captured</small><strong>Website form</strong></div>
               <span className="live-dot" />
             </div>
@@ -487,7 +542,7 @@ function App() {
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
             <h2>One specialist. Direct communication. Practical execution.</h2>
-            <p>Iâm Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. I bring more than a decade of customer-facing and operational experience, including team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
+            <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. I bring more than a decade of customer-facing and operational experience, including team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
             <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
             <div className="tool-matrix">
               <div className="tool-group">
@@ -514,20 +569,19 @@ function App() {
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
             <span className="kicker kicker-dark">Have a project in mind?</span>
-            <h2>Letâs build the right starting point.</h2>
-            <p>Tell me what your business does, what is not working today, and what you want the website to help you achieve.</p>
-            <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="button button-light">ajell.saliba@connectivestack.com <Arrow /></a>
+            <h2>Tell me what you need, or book a conversation.</h2>
+            <p>Send the project details for a written recommendation, or choose a time on my calendar if a conversation is easier.</p>
+            <div className="contact-actions">
+              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
+              <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
+            </div>
+            <div className="contact-expectations">
+              <div><strong>Project-based</strong><span>Defined scope, price, and delivery plan</span></div>
+              <div><strong>$25/hour</strong><span>Technical support with a one-hour minimum</span></div>
+              <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
+            </div>
           </div>
-          <div className="contact-panel" data-reveal>
-            <span>Good fit for</span>
-            <ul>
-              <li><Check /> New service business websites</li>
-              <li><Check /> Website redesigns</li>
-              <li><Check /> Landing pages</li>
-              <li><Check /> CRM and calendar connections</li>
-              <li><Check /> Workflow and follow-up setup</li>
-            </ul>
-          </div>
+          <div className="contact-panel" data-reveal><ProjectInquiryForm /></div>
         </section>
       </main>
 
@@ -535,7 +589,7 @@ function App() {
         <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="Connective Stack" /></a>
         <p>Websites, integrations, and automation for service businesses.</p>
         <div>
-          <span>Â© {new Date().getFullYear()} Connective Stack</span>
+          <span>© {new Date().getFullYear()} Connective Stack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
           <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
           <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
