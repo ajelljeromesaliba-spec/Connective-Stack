@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './styles.css'
 import HvacDemo from './HvacDemo'
 import RealEstateDemo from './RealEstateDemo'
+import HealthcareDemo from './HealthcareDemo'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -98,6 +99,19 @@ const projects = [
     outcomes: ['Smarter broker routing', 'Qualified buyer intent', 'Private tour requests'],
     visualTags: ['Multi-broker', 'AI concierge', 'Buyer tools'],
     href: '/demos/luxury-real-estate',
+    live: true,
+  },
+  {
+    label: 'Healthcare',
+    title: 'Connected multi-provider patient experience',
+    copy: 'A fictional clinic platform with conditional intake, provider routing, scheduling, simulated benefits, estimates, and privacy-conscious workflows.',
+    image: '/assets/healthcare-hero-v1.webp',
+    accent: 'mint',
+    photo: true,
+    goal: 'Turn a complex patient journey into clear, coordinated administrative steps.',
+    outcomes: ['Conditional intake', 'Provider routing', 'Benefits workflow'],
+    visualTags: ['Multi-provider', 'Smart intake', 'Cost estimator'],
+    href: '/demos/healthcare-patient-experience',
     live: true,
   },
 ]
@@ -310,6 +324,11 @@ function App() {
                 <small>Real Estate</small>
                 <strong>Premium Brokerage</strong>
                 <span>Listings, broker routing, and buyer tools</span>
+              </a>
+              <a href="/demos/healthcare-patient-experience" onClick={closeMenu}>
+                <small>Healthcare</small>
+                <strong>Connected Patient Experience</strong>
+                <span>Intake, benefits, scheduling, and provider routing</span>
               </a>
             </div>
           </div>
@@ -607,5 +626,7 @@ const route = currentPath === '/demos/hvac-ai-front-desk'
   ? <HvacDemo />
   : currentPath === '/demos/luxury-real-estate'
     ? <RealEstateDemo />
+    : currentPath === '/demos/healthcare-patient-experience'
+      ? <HealthcareDemo />
     : <App />
 createRoot(document.getElementById('root')).render(route)
