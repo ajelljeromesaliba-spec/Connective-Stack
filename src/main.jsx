@@ -4,6 +4,7 @@ import './styles.css'
 import HvacDemo from './HvacDemo'
 import RealEstateDemo from './RealEstateDemo'
 import HealthcareDemo from './HealthcareDemo'
+import CaseStudy from './CaseStudy'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -86,6 +87,7 @@ const projects = [
     outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
     visualTags: ['Mobile-first', 'Call + booking', 'Local trust'],
     href: '/demos/hvac-ai-front-desk',
+    caseStudyHref: '/case-studies/hvac-lead-system',
     live: true,
   },
   {
@@ -99,6 +101,7 @@ const projects = [
     outcomes: ['Smarter broker routing', 'Qualified buyer intent', 'Private tour requests'],
     visualTags: ['Multi-broker', 'AI concierge', 'Buyer tools'],
     href: '/demos/luxury-real-estate',
+    caseStudyHref: '/case-studies/luxury-real-estate',
     live: true,
   },
   {
@@ -112,6 +115,7 @@ const projects = [
     outcomes: ['Conditional intake', 'Provider routing', 'Benefits workflow'],
     visualTags: ['Multi-provider', 'Smart intake', 'Cost estimator'],
     href: '/demos/healthcare-patient-experience',
+    caseStudyHref: '/case-studies/healthcare-patient-experience',
     live: true,
   },
 ]
@@ -456,7 +460,10 @@ function App() {
                     <small>Built to improve</small>
                     <ul>{project.outcomes.map(outcome => <li key={outcome}><Check />{outcome}</li>)}</ul>
                   </div>
-                  {project.href && <a className="project-demo-link" href={project.href}>Try the live {project.label} demo <Arrow /></a>}
+                  <div className="project-action-links">
+                    {project.caseStudyHref && <a className="project-case-link" href={project.caseStudyHref}>Read the case study <Arrow /></a>}
+                    {project.href && <a className="project-demo-link" href={project.href}>Try the live demo <Arrow /></a>}
+                  </div>
                 </div>
               </article>
             ))}
@@ -657,11 +664,18 @@ function App() {
 }
 
 const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
+const caseStudySlug = currentPath.startsWith('/case-studies/')
+  ? currentPath.replace('/case-studies/', '')
+  : null
+const caseStudySlugs = new Set(['hvac-lead-system', 'luxury-real-estate', 'healthcare-patient-experience'])
+
 const route = currentPath === '/demos/hvac-ai-front-desk'
   ? <HvacDemo />
   : currentPath === '/demos/luxury-real-estate'
     ? <RealEstateDemo />
     : currentPath === '/demos/healthcare-patient-experience'
       ? <HealthcareDemo />
-    : <App />
+      : caseStudySlugs.has(caseStudySlug)
+        ? <CaseStudy slug={caseStudySlug} />
+        : <App />
 createRoot(document.getElementById('root')).render(route)
