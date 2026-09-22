@@ -156,6 +156,8 @@ function LegalModal({ type, onClose }) {
               </ul>
               <h3>Sharing and third-party services</h3>
               <p>Personal information is not sold. Information may be processed by trusted service providers used for hosting, email, analytics, scheduling, forms, or project delivery. These providers handle information under their own privacy terms.</p>
+              <h3>AI voice demonstration</h3>
+              <p>The portfolio includes an optional Atlas voice demonstration. If you start a voice session, Atlas may process microphone audio, call events, summaries, transcripts, and related technical data. Do not share medical, payment, account, or other sensitive information in the demonstration.</p>
               <h3>Retention and your choices</h3>
               <p>Information is retained only as reasonably needed for communication, service delivery, recordkeeping, and legal obligations. You may request access, correction, or deletion of information by emailing AJ.</p>
               <h3>Contact</h3>
@@ -219,6 +221,64 @@ function ServiceModal({ service, onClose }) {
 }
 
 const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+const ATLAS_VOICE_SCRIPT = 'https://cdn.youratlas.com/scripts/aqx-voice-bubble.prod.min.js'
+const ATLAS_CAMPAIGN_ID = 'ac5e4e93-3b0a-4c22-b851-cc202ac3fea8'
+
+function AtlasVoiceWidget() {
+  const [status, setStatus] = useState('loading')
+
+  useEffect(() => {
+    let cancelled = false
+    let script = document.getElementById('connectivestack-atlas-voice-script')
+
+    const mountBubble = async () => {
+      try {
+        await window.customElements.whenDefined('aqx-voice-bubble')
+        if (cancelled || document.querySelector('aqx-voice-bubble[data-connectivestack-widget]')) return
+        const bubble = document.createElement('aqx-voice-bubble')
+        bubble.setAttribute('campaign-id', ATLAS_CAMPAIGN_ID)
+        bubble.setAttribute('size', 'sm')
+        bubble.setAttribute('data-connectivestack-widget', 'true')
+        document.body.appendChild(bubble)
+        setStatus('ready')
+      } catch {
+        if (!cancelled) setStatus('error')
+      }
+    }
+
+    const handleError = () => !cancelled && setStatus('error')
+
+    if (script) {
+      if (window.customElements.get('aqx-voice-bubble')) mountBubble()
+      else {
+        script.addEventListener('load', mountBubble, { once: true })
+        script.addEventListener('error', handleError, { once: true })
+      }
+    } else {
+      script = document.createElement('script')
+      script.id = 'connectivestack-atlas-voice-script'
+      script.src = ATLAS_VOICE_SCRIPT
+      script.async = true
+      script.addEventListener('load', mountBubble, { once: true })
+      script.addEventListener('error', handleError, { once: true })
+      document.head.appendChild(script)
+    }
+
+    return () => {
+      cancelled = true
+      script?.removeEventListener('load', mountBubble)
+      script?.removeEventListener('error', handleError)
+      document.querySelector('aqx-voice-bubble[data-connectivestack-widget]')?.remove()
+    }
+  }, [])
+
+  return (
+    <aside className={`atlas-voice-disclosure ${status}`} aria-live="polite">
+      <strong>{status === 'error' ? 'Voice demo unavailable' : status === 'ready' ? 'AI appointment demo' : 'Loading voice demo'}</strong>
+      <span>{status === 'error' ? 'Please use the project form or calendar instead.' : 'Powered by Atlas. Do not share sensitive, medical, or payment information.'}</span>
+    </aside>
+  )
+}
 
 function ProjectInquiryForm() {
   const [status, setStatus] = useState('idle')
@@ -695,6 +755,7 @@ function App() {
           <a href="mailto:ajell.saliba@connectivestack.com">Email AJ</a>
         </div>
       </footer>
+      <AtlasVoiceWidget />
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
       {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
     </>
