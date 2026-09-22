@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import HvacDemo from './HvacDemo'
+import RealEstateDemo from './RealEstateDemo'
+import HealthcareDemo from './HealthcareDemo'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -17,18 +19,58 @@ const services = [
     title: 'Website design and build',
     copy: 'A polished, mobile-first website that makes your business clear, credible, and easy to contact.',
     tags: ['Custom design', 'Responsive build', 'Fast deployment'],
+    summary: 'A complete customer-facing website built around your offer, audience, and primary call to action.',
+    includes: ['Page structure and conversion-focused layout', 'Responsive design for desktop, tablet, and mobile', 'Clear service messaging and calls to action', 'Basic on-page SEO, domain setup, and deployment'],
+    bestFor: 'Service businesses launching a new site or replacing an outdated one.',
+    result: 'A credible website that clearly explains what you do and gives visitors an easy next step.',
   },
   {
     number: '02',
     title: 'Lead-ready setup',
     copy: 'Forms, calendars, calls, and email routes connected so every inquiry reaches the right place.',
     tags: ['Lead forms', 'Booking flows', 'Notifications'],
+    summary: 'The conversion layer that turns website interest into an organized inquiry or scheduled conversation.',
+    includes: ['Lead forms with the right qualification fields', 'Calendar or appointment booking connections', 'Click-to-call and email contact paths', 'Lead notifications and routing to the right inbox or team'],
+    bestFor: 'Businesses getting traffic but losing leads through unclear or disconnected contact paths.',
+    result: 'A shorter path from visitor interest to a lead your team can actually follow up with.',
   },
   {
     number: '03',
     title: 'Integrations and automation',
     copy: 'Connect your site to the CRM and tools you already use, then automate the repetitive handoffs.',
     tags: ['CRM connections', 'Workflows', 'AI add-ons'],
+    summary: 'Connected workflows that reduce manual handoffs between your website, CRM, calendar, and follow-up tools.',
+    includes: ['CRM contact and opportunity creation', 'Workflow triggers, alerts, and follow-up sequences', 'Form, calendar, and pipeline connections', 'Optional AI chat or voice assistant integration'],
+    bestFor: 'Teams that already use several tools but still copy information or follow up manually.',
+    result: 'A cleaner operating flow with faster routing, fewer missed inquiries, and less repetitive admin work.',
+  },
+]
+
+const pricingTiers = [
+  {
+    name: 'Starter Website',
+    price: '500',
+    label: 'Starting project price',
+    description: 'A focused website for a business that needs a credible online presence and a clear way for customers to make contact.',
+    bestFor: 'Best for new or small service businesses',
+    includes: ['One landing page or up to 3 simple pages', 'Custom mobile-responsive design', 'Client-provided content and brand setup', 'Contact form and clear calls to action', 'Basic on-page SEO', 'Domain connection and deployment', 'One revision round', '7 days of post-launch support'],
+  },
+  {
+    name: 'Lead-Ready Website',
+    price: '850',
+    label: 'Starting project price',
+    description: 'A more complete service website designed to capture inquiries and move visitors toward a call or appointment.',
+    bestFor: 'Best for businesses actively generating leads',
+    featured: true,
+    includes: ['Up to 5 pages', 'Everything in the Starter Website', 'Copy refinement and conversion structure', 'Lead form or booking calendar setup', 'Email notification routing', 'Analytics or Meta Pixel installation', 'Two revision rounds', '14 days of post-launch support'],
+  },
+  {
+    name: 'Connected Website System',
+    price: '1,250',
+    label: 'Starting project price',
+    description: 'A website connected to the systems behind the business, with lead routing and practical automation included.',
+    bestFor: 'Best for teams that need fewer manual handoffs',
+    includes: ['Up to 5 pages', 'Everything in the Lead-Ready Website', 'CRM contact and pipeline connection', 'Workflow and notification setup', 'Calendar, form, and lead routing', 'One standard third-party integration', 'Automation testing and handoff', '14 days of post-launch support'],
   },
 ]
 
@@ -38,6 +80,7 @@ const projects = [
     title: 'Conversion-first HVAC website',
     copy: 'A focused service site with clear calls to action, trust signals, and an appointment path built for mobile visitors.',
     image: '/assets/project-hvac.svg',
+    mobileImage: '/assets/project-hvac-mobile.svg',
     accent: 'mint',
     goal: 'Turn high-intent local searches into calls and estimate requests.',
     outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
@@ -46,24 +89,30 @@ const projects = [
     live: true,
   },
   {
-    label: 'Professional Services',
-    title: 'Clean advisory website',
-    copy: 'A credible digital presence that simplifies a complex offer and guides qualified visitors toward a consultation.',
-    image: '/assets/project-advisory.svg',
-    accent: 'violet',
-    goal: 'Make a complex service easier to understand and easier to buy.',
-    outcomes: ['Clearer positioning', 'Qualified consultations', 'Stronger credibility'],
-    visualTags: ['Clear offer', 'Expert positioning', 'Consultation CTA'],
+    label: 'Real Estate',
+    title: 'Premium multi-broker property experience',
+    copy: 'A luxury brokerage concept with curated listings, smart property matching, broker routing, affordability tools, and private tour requests.',
+    image: '/assets/realestate-malibu.webp',
+    accent: 'sand',
+    photo: true,
+    goal: 'Turn premium property interest into qualified conversations with the right broker.',
+    outcomes: ['Smarter broker routing', 'Qualified buyer intent', 'Private tour requests'],
+    visualTags: ['Multi-broker', 'AI concierge', 'Buyer tools'],
+    href: '/demos/luxury-real-estate',
+    live: true,
   },
   {
-    label: 'Connected Operations',
-    title: 'Lead routing workflow',
-    copy: 'A visual customer journey that connects website inquiries, notifications, scheduling, and CRM follow-up.',
-    image: '/assets/project-workflow.svg',
-    accent: 'blue',
-    goal: 'Reduce response gaps between a new inquiry and a booked appointment.',
-    outcomes: ['Instant lead routing', 'Consistent follow-up', 'Fewer missed inquiries'],
-    visualTags: ['CRM routing', 'Calendar sync', 'Follow-up'],
+    label: 'Healthcare',
+    title: 'Connected multi-provider patient experience',
+    copy: 'A fictional clinic platform with conditional intake, provider routing, scheduling, simulated benefits, estimates, and privacy-conscious workflows.',
+    image: '/assets/healthcare-hero-v1.webp',
+    accent: 'mint',
+    photo: true,
+    goal: 'Turn a complex patient journey into clear, coordinated administrative steps.',
+    outcomes: ['Conditional intake', 'Provider routing', 'Benefits workflow'],
+    visualTags: ['Multi-provider', 'Smart intake', 'Cost estimator'],
+    href: '/demos/healthcare-patient-experience',
+    live: true,
   },
 ]
 
@@ -91,7 +140,7 @@ function LegalModal({ type, onClose }) {
           <p className="legal-updated">Last updated: September 18, 2026</p>
           {isPrivacy ? (
             <>
-              <p>Connective Stack respects your privacy. This policy explains how information may be collected and used when you visit this website or contact AJ about a project.</p>
+              <p>ConnectiveStack respects your privacy. This policy explains how information may be collected and used when you visit this website or contact AJ about a project.</p>
               <h3>Information collected</h3>
               <p>Information may include your name, email address, company details, project requirements, and anything else you choose to provide through email or a contact form. Basic technical and analytics data may also be collected, such as device type, browser, referring page, and general location.</p>
               <h3>How information is used</h3>
@@ -106,11 +155,11 @@ function LegalModal({ type, onClose }) {
               <h3>Retention and your choices</h3>
               <p>Information is retained only as reasonably needed for communication, service delivery, recordkeeping, and legal obligations. You may request access, correction, or deletion of information by emailing AJ.</p>
               <h3>Contact</h3>
-              <p>Privacy questions may be sent to <a href="mailto:aj@connectivestack.com">aj@connectivestack.com</a>.</p>
+              <p>Privacy questions may be sent to <a href="mailto:ajell.saliba@connectivestack.com">ajell.saliba@connectivestack.com</a>.</p>
             </>
           ) : (
             <>
-              <p>By using this website, you agree to these terms. The website presents information about services offered by Connective Stack and AJ Saliba.</p>
+              <p>By using this website, you agree to these terms. The website presents information about services offered by ConnectiveStack and Ajell Saliba.</p>
               <h3>Website information</h3>
               <p>Content is provided for general information and may be updated without notice. Examples and concept projects are demonstrations of capabilities and should not be treated as guaranteed business results.</p>
               <h3>Project engagements</h3>
@@ -122,11 +171,11 @@ function LegalModal({ type, onClose }) {
                 <li>Pay third-party subscriptions, usage fees, domains, or licenses unless otherwise agreed</li>
               </ul>
               <h3>Intellectual property</h3>
-              <p>Unless otherwise agreed in writing, final project deliverables transfer after full payment. Connective Stack retains ownership of pre-existing tools, reusable methods, and general know-how. Third-party assets remain subject to their original licenses.</p>
+              <p>Unless otherwise agreed in writing, final project deliverables transfer after full payment. ConnectiveStack retains ownership of pre-existing tools, reusable methods, and general know-how. Third-party assets remain subject to their original licenses.</p>
               <h3>Limitations</h3>
-              <p>No specific lead, revenue, ranking, or conversion result is guaranteed. Connective Stack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
+              <p>No specific lead, revenue, ranking, or conversion result is guaranteed. ConnectiveStack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
               <h3>Contact</h3>
-              <p>Questions about these terms may be sent to <a href="mailto:aj@connectivestack.com">aj@connectivestack.com</a>.</p>
+              <p>Questions about these terms may be sent to <a href="mailto:ajell.saliba@connectivestack.com">ajell.saliba@connectivestack.com</a>.</p>
             </>
           )}
         </div>
@@ -135,9 +184,95 @@ function LegalModal({ type, onClose }) {
   )
 }
 
+function ServiceModal({ service, onClose }) {
+  return (
+    <div className="legal-overlay" role="presentation" onMouseDown={event => event.target === event.currentTarget && onClose()}>
+      <section className="legal-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+        <div className="legal-header service-modal-header">
+          <div>
+            <span>CONNECTIVE STACK / SERVICE {service.number}</span>
+            <h2 id="service-modal-title">{service.title}</h2>
+          </div>
+          <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>×</button>
+        </div>
+        <div className="legal-body service-modal-body">
+          <p className="service-modal-summary">{service.summary}</p>
+          <div className="service-modal-grid">
+            <div className="service-modal-includes">
+              <span>What can be included</span>
+              <ul>{service.includes.map(item => <li key={item}><Check /> <span>{item}</span></li>)}</ul>
+            </div>
+            <div className="service-modal-aside">
+              <div><span>Best for</span><p>{service.bestFor}</p></div>
+              <div><span>Expected result</span><p>{service.result}</p></div>
+            </div>
+          </div>
+          <a href="#contact" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this service <Arrow /></a>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+
+function ProjectInquiryForm() {
+  const [status, setStatus] = useState('idle')
+  const [feedback, setFeedback] = useState('')
+
+  const submitInquiry = async event => {
+    event.preventDefault()
+    setStatus('sending')
+    setFeedback('')
+    const form = event.currentTarget
+    const payload = Object.fromEntries(new FormData(form).entries())
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const result = await response.json().catch(() => ({}))
+      if (!response.ok) throw new Error(result.error || 'The inquiry could not be sent.')
+      form.reset()
+      setStatus('success')
+      setFeedback('Thanks. Your project details were sent to AJ. Expect a reply within one business day.')
+    } catch (error) {
+      setStatus('error')
+      setFeedback(error.message || 'Something went wrong. Please email AJ directly or book a call.')
+    }
+  }
+
+  return (
+    <form className="inquiry-form" onSubmit={submitInquiry}>
+      <div className="inquiry-form-heading">
+        <span>PROJECT INQUIRY</span>
+        <h3>Share the essentials.</h3>
+        <p>A few useful details help me recommend the right scope, timeline, and starting price.</p>
+      </div>
+      <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
+      <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
+      <label>Phone number <small>Optional</small><input name="phone" type="tel" autoComplete="tel" placeholder="US or international number" /></label>
+      <label>Company or business<input name="company" autoComplete="organization" placeholder="Company name" /></label>
+      <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
+      <label>How can I help?<select name="service" required defaultValue=""><option value="" disabled>Select a service</option><option>New website</option><option>Website redesign</option><option>Landing page</option><option>Website plus lead capture</option><option>CRM or GoHighLevel setup</option><option>Automation or integration</option><option>AI chat or voice agent</option><option>Hourly technical support</option><option>Not sure yet</option></select></label>
+      <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
+      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>Under $500</option><option>$500 to $850</option><option>$850 to $1,250</option><option>$1,250 to $2,500</option><option>$2,500+</option><option>Need a recommendation</option></select></label>
+      <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
+      <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the current problem, the pages or systems you need, and the outcome you want." /></label>
+      <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
+      <label className="inquiry-consent inquiry-wide"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about this project and understand that submitting this form does not create a service agreement.</span></label>
+      <button className="button button-primary inquiry-submit inquiry-wide" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending inquiry…' : 'Send project inquiry'} <Arrow /></button>
+      {feedback && <p className={`inquiry-feedback ${status}`} role="status">{feedback}</p>}
+    </form>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [legalModal, setLegalModal] = useState(null)
+  const [activeService, setActiveService] = useState(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -149,23 +284,27 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!legalModal) return undefined
-    const closeOnEscape = event => event.key === 'Escape' && setLegalModal(null)
+    if (!legalModal && !activeService) return undefined
+    const closeOnEscape = event => {
+      if (event.key !== 'Escape') return
+      setLegalModal(null)
+      setActiveService(null)
+    }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', closeOnEscape)
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', closeOnEscape)
     }
-  }, [legalModal])
+  }, [legalModal, activeService])
 
   const closeMenu = () => setMenuOpen(false)
 
   return (
     <>
       <header className="site-header">
-        <a href="#top" className="brand" aria-label="Connective Stack home">
-          <img src="/assets/connective-stack-logo.png" alt="Connective Stack" />
+        <a href="#top" className="brand" aria-label="ConnectiveStack home">
+          <img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" />
         </a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
           <span /><span />
@@ -173,8 +312,26 @@ function App() {
         <nav className={menuOpen ? 'nav-open' : ''}>
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
-          <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>Live Demo</a>
-          <a href="#experience" onClick={closeMenu}>Experience</a>
+          <div className="nav-demo-menu">
+            <a href="#work" className="nav-demo-trigger" onClick={closeMenu}>Live Demos <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
+            <div className="nav-demo-dropdown">
+              <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>
+                <small>Home Services</small>
+                <strong>HVAC AI Front Desk</strong>
+                <span>Chat, voice, estimates, and service intake</span>
+              </a>
+              <a href="/demos/luxury-real-estate" onClick={closeMenu}>
+                <small>Real Estate</small>
+                <strong>Premium Brokerage</strong>
+                <span>Listings, broker routing, and buyer tools</span>
+              </a>
+              <a href="/demos/healthcare-patient-experience" onClick={closeMenu}>
+                <small>Healthcare</small>
+                <strong>Connected Patient Experience</strong>
+                <span>Intake, benefits, scheduling, and provider routing</span>
+              </a>
+            </div>
+          </div>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
           <a className="nav-cta" href="#contact" onClick={closeMenu}>Start a project <Arrow /></a>
@@ -199,7 +356,7 @@ function App() {
               <a href="#work" className="button button-secondary">See sample work</a>
             </div>
             <div className="hero-meta">
-              <div><strong>From $500</strong><span>Simple website builds</span></div>
+              <div><strong>Projects from $500</strong><span>Clear scope and deliverables</span></div>
               <div><strong>Direct support</strong><span>You work with me, AJ</span></div>
               <div><strong>US-ready</strong><span>Clear, conversion-focused copy</span></div>
             </div>
@@ -224,14 +381,6 @@ function App() {
           </div>
         </section>
 
-        <section className="signal-bar" aria-label="Capabilities">
-          <span>Strategy</span><i />
-          <span>Web design</span><i />
-          <span>Development</span><i />
-          <span>Integrations</span><i />
-          <span>Automation</span>
-        </section>
-
         <section className="section services" id="services">
           <div className="section-heading" data-reveal>
             <span className="kicker">What I build</span>
@@ -249,33 +398,9 @@ function App() {
                 <div className="service-tags">
                   {service.tags.map(tag => <span key={tag}>{tag}</span>)}
                 </div>
-                <span className="service-arrow"><Arrow /></span>
+                <button type="button" className="service-arrow" onClick={() => setActiveService(service)} aria-label={`View ${service.title} details`}><Arrow /></button>
               </article>
             ))}
-          </div>
-        </section>
-
-        <section className="systems-section">
-          <div className="systems-copy" data-reveal>
-            <span className="kicker kicker-dark">Connected by design</span>
-            <h2>Your tools should feel like one system.</h2>
-            <p>A website should not create another disconnected inbox. I connect the customer-facing experience to the tools that keep your business moving.</p>
-            <ul className="check-list">
-              <li><Check /> Forms routed to the right inbox or CRM</li>
-              <li><Check /> Booking links placed where intent is highest</li>
-              <li><Check /> Automated notifications and follow-up</li>
-              <li><Check /> Domains, analytics, and tracking configured</li>
-            </ul>
-            <a href="#contact" className="text-link">Talk about your setup <Arrow /></a>
-          </div>
-          <div className="systems-visual" data-reveal>
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="system-core"><img src="/assets/favicon.svg" alt="" /><span>YOUR WEBSITE</span></div>
-            <div className="system-node node-web"><span>01</span><strong>Lead form</strong><small>Capture</small></div>
-            <div className="system-node node-crm"><span>02</span><strong>CRM</strong><small>Organize</small></div>
-            <div className="system-node node-calendar"><span>03</span><strong>Calendar</strong><small>Book</small></div>
-            <div className="system-node node-follow"><span>04</span><strong>Follow-up</strong><small>Convert</small></div>
           </div>
         </section>
 
@@ -289,9 +414,12 @@ function App() {
           </div>
           <div className="project-grid">
             {projects.map((project, index) => (
-              <article className={`project-card ${index === 0 ? 'project-wide' : ''}`} key={project.title} data-reveal>
-                <div className={`project-image ${project.accent}`}>
-                  <img src={project.image} alt={`${project.title} sample concept`} />
+              <article className={`project-card ${project.live ? 'project-wide' : ''}`} key={project.title} data-reveal>
+                <div className={`project-image ${project.accent} ${project.photo ? 'photo-project' : ''}`}>
+                  <picture>
+                    {project.mobileImage && <source media="(max-width: 760px)" srcSet={project.mobileImage} />}
+                    <img src={project.image} alt={`${project.title} sample concept`} loading="lazy" />
+                  </picture>
                   <span className="concept-badge">{project.live ? 'Live interactive demo' : 'Outcome-led concept'}</span>
                   <span className="project-index">0{index + 1}</span>
                   <div className="visual-tags">
@@ -310,114 +438,59 @@ function App() {
                     <small>Built to improve</small>
                     <ul>{project.outcomes.map(outcome => <li key={outcome}><Check />{outcome}</li>)}</ul>
                   </div>
-                  {project.href && <a className="project-demo-link" href={project.href}>Try the live HVAC demo <Arrow /></a>}
+                  {project.href && <a className="project-demo-link" href={project.href}>Try the live {project.label} demo <Arrow /></a>}
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="experience-section" id="experience">
-          <div className="experience-heading" data-reveal>
-            <span className="kicker kicker-dark">Experience and capability</span>
-            <h2>Design sense backed by hands-on technical operations.</h2>
-            <p>My experience combines modern web delivery with more than a decade in customer service, sales, quality assurance, technical support, and operations. I understand what needs to happen after a visitor clicks, submits, books, or replies.</p>
-          </div>
-          <div className="experience-layout">
-            <div className="timeline" data-reveal>
-              <article>
-                <span className="timeline-year">2025<br />Present</span>
-                <div>
-                  <small>AIA / AI agency web operations</small>
-                  <h3>Website, GHL and Systems Specialist</h3>
-                  <p>Build and maintain client websites, manage GitHub and Vercel deployments, configure Cloudflare, DNS, domains, and technical SEO, and support GoHighLevel funnels, calendars, workflows, migrations, and third-party integrations.</p>
-                </div>
-              </article>
-              <article>
-                <span className="timeline-year">2022<br />2025</span>
-                <div>
-                  <small>ProClick</small>
-                  <h3>VA Team Lead and GoHighLevel Specialist</h3>
-                  <p>Led day-to-day VA delivery while managing pipelines, funnels, multistep workflows, nurture sequences, lead routing, forms, surveys, CRM organization, Shopify and Amazon support, and customer operations.</p>
-                </div>
-              </article>
-              <article>
-                <span className="timeline-year">2020<br />2022</span>
-                <div>
-                  <small>Transparent BPO</small>
-                  <h3>Sales Representative and Quality Assurance</h3>
-                  <p>Managed outbound health insurance sales, CRM documentation, lead follow-up, KPI tracking, call evaluation, compliance checks, performance reporting, and coaching feedback.</p>
-                </div>
-              </article>
-              <article>
-                <span className="timeline-year">2015<br />2020</span>
-                <div>
-                  <small>Teleperformance, Teletech, iQor and Telus</small>
-                  <h3>Customer and Technical Support</h3>
-                  <p>Resolved complex account, billing, order, healthcare, telecommunications, device, and technical issues across phone, email, and chat while maintaining clear documentation and service quality.</p>
-                </div>
-              </article>
-            </div>
-            <div className="capability-console" data-reveal>
-              <div className="console-top"><span>capabilities.json</span><i>● LIVE</i></div>
-              <div className="capability-group">
-                <span>01 / BUILD</span>
-                <div><strong>Responsive websites</strong><b>READY</b></div>
-                <div><strong>Landing pages</strong><b>READY</b></div>
-                <div><strong>Technical SEO setup</strong><b>READY</b></div>
-              </div>
-              <div className="capability-group">
-                <span>02 / CONNECT</span>
-                <div><strong>CRM and calendars</strong><b>READY</b></div>
-                <div><strong>Forms and notifications</strong><b>READY</b></div>
-                <div><strong>API and third-party tools</strong><b>READY</b></div>
-              </div>
-              <div className="capability-group">
-                <span>03 / LAUNCH</span>
-                <div><strong>GitHub and Vercel</strong><b>READY</b></div>
-                <div><strong>Cloudflare and DNS</strong><b>READY</b></div>
-                <div><strong>Email authentication</strong><b>READY</b></div>
-              </div>
-            </div>
-          </div>
-          <div className="tech-marquee" aria-label="Technology experience">
-            <div>
-              {['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'Lovable', 'ChatGPT', 'Claude', 'Athena', 'Google Workspace', 'Zapier', 'VAPI', 'Supabase', 'GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare'].map((tool, index) => <span key={`${tool}-${index}`}>{tool}<i /></span>)}
-            </div>
-          </div>
-        </section>
-
         <section className="price-section">
           <div className="price-intro" data-reveal>
-            <span className="kicker">Simple starting point</span>
-            <h2>Launch the essentials. Add more when it makes sense.</h2>
-            <p>No oversized package for a business that needs a clear, professional online presence first.</p>
+            <span className="kicker">Project-based pricing</span>
+            <h2>Choose the level of build your business actually needs.</h2>
+            <p>Each project has a defined scope, deliverables, and price before work begins. The $500 tier covers the website essentials only. Connections and automation are priced separately through the higher tiers.</p>
           </div>
-          <div className="price-card" data-reveal>
-            <div className="price-top">
-              <div><span>Essential website</span><strong><sup>$</sup>500</strong><small>starting price</small></div>
-              <p>A focused website for service businesses that need to look credible and make it easy for customers to reach out.</p>
+          <div className="pricing-grid" data-reveal>
+            {pricingTiers.map(tier => (
+              <article className={`pricing-tier ${tier.featured ? 'featured' : ''}`} key={tier.name}>
+                {tier.featured && <span className="pricing-popular">Most practical</span>}
+                <div className="pricing-tier-head">
+                  <span>{tier.name}</span>
+                  <strong><sup>$</sup>{tier.price}<b>+</b></strong>
+                  <small>{tier.label}</small>
+                </div>
+                <p>{tier.description}</p>
+                <em>{tier.bestFor}</em>
+                <ul>{tier.includes.map(item => <li key={item}><Check />{item}</li>)}</ul>
+                <a className={`button ${tier.featured ? 'button-primary' : 'button-secondary'}`} href="#contact">Request this project <Arrow /></a>
+              </article>
+            ))}
+          </div>
+          <div className="hourly-support" data-reveal>
+            <div className="hourly-support-rate">
+              <span>Flexible support</span>
+              <strong><sup>$</sup>25<small>/hour</small></strong>
+              <p>For smaller updates, fixes, and ongoing technical help.</p>
             </div>
-            <div className="price-details">
+            <div className="hourly-support-details">
+              <strong>What hourly support can cover</strong>
               <ul>
-                <li><Check /> Up to 3 pages</li>
-                <li><Check /> Custom responsive design</li>
-                <li><Check /> Contact form and calls to action</li>
+                <li><Check /> Website content and layout updates</li>
+                <li><Check /> Technical troubleshooting and bug fixes</li>
+                <li><Check /> Domain, DNS, form, and calendar support</li>
+                <li><Check /> CRM, workflow, and integration updates</li>
               </ul>
-              <ul>
-                <li><Check /> Basic on-page SEO</li>
-                <li><Check /> Domain and launch setup</li>
-                <li><Check /> 7 days post-launch support</li>
-              </ul>
-              <a className="button button-primary" href="#contact">Get a project estimate <Arrow /></a>
             </div>
-            <div className="addon-strip">
-              <span>Optional add-ons</span>
-              <div><i /> Additional pages</div>
-              <div><i /> Copywriting</div>
-              <div><i /> Booking setup</div>
-              <div><i /> CRM and automation</div>
+            <div className="hourly-support-terms">
+              <span>Clear expectations</span>
+              <p><strong>1-hour minimum</strong> for each support request, then billed in 30-minute increments. I confirm the expected time before starting. Larger builds and new features are quoted as fixed-price projects.</p>
+              <a href="#contact">Request hourly support <Arrow /></a>
             </div>
+          </div>
+          <div className="pricing-note" data-reveal>
+            <strong>Need something outside these tiers?</strong>
+            <p>Additional pages, full copywriting, e-commerce, AI chat or voice agents, advanced API work, and custom automations are quoted based on scope. Domain, hosting, software, messaging, and other third-party subscription costs are not included.</p>
           </div>
         </section>
 
@@ -472,7 +545,7 @@ function App() {
         <section className="about-section" id="about">
           <div className="about-visual" data-reveal>
             <div className="about-portrait">
-              <img src="/assets/ajell-saliba.webp" alt="Ajell Saliba, founder and independent specialist at Connective Stack" />
+              <img src="/assets/ajell-saliba.webp" alt="Ajell Saliba, founder and independent specialist at ConnectiveStack" loading="lazy" />
               <div className="portrait-shade" />
               <div className="portrait-label">
                 <span>AJELL SALIBA</span>
@@ -480,10 +553,10 @@ function App() {
               </div>
               <div className="portrait-code">
                 <span>STATUS</span>
-                <strong><i /> Available for projects</strong>
+                <strong><i /> Project-based and hourly support</strong>
               </div>
             </div>
-            <div className="experience-chip"><strong>3+</strong><span>Years building in GoHighLevel and connected systems</span></div>
+            <div className="experience-chip"><strong>11</strong><span>Years of overall professional experience</span></div>
           </div>
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
@@ -497,7 +570,7 @@ function App() {
               </div>
               <div className="tool-group">
                 <span>AI and automation</span>
-                <div>{['ChatGPT', 'Claude', 'Athena', 'Zapier', 'Make', 'VAPI', 'Chatbase', 'Supabase', 'Resend'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <div>{['ChatGPT', 'Claude', 'Zapier', 'Make', 'VAPI', 'Chatbase', 'Supabase', 'Resend'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
               <div className="tool-group">
                 <span>CRM, sales and support</span>
@@ -515,37 +588,45 @@ function App() {
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
             <span className="kicker kicker-dark">Have a project in mind?</span>
-            <h2>Let’s build the right starting point.</h2>
-            <p>Tell me what your business does, what is not working today, and what you want the website to help you achieve.</p>
-            <a href="mailto:aj@connectivestack.com?subject=Website%20project%20inquiry" className="button button-light">aj@connectivestack.com <Arrow /></a>
+            <h2>Tell me what you need, or book a conversation.</h2>
+            <p>Send the project details for a written recommendation, or choose a time on my calendar if a conversation is easier.</p>
+            <div className="contact-actions">
+              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
+              <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
+            </div>
+            <div className="contact-expectations">
+              <div><strong>Project-based</strong><span>Defined scope, price, and delivery plan</span></div>
+              <div><strong>$25/hour</strong><span>Technical support with a one-hour minimum</span></div>
+              <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
+            </div>
           </div>
-          <div className="contact-panel" data-reveal>
-            <span>Good fit for</span>
-            <ul>
-              <li><Check /> New service business websites</li>
-              <li><Check /> Website redesigns</li>
-              <li><Check /> Landing pages</li>
-              <li><Check /> CRM and calendar connections</li>
-              <li><Check /> Workflow and follow-up setup</li>
-            </ul>
-          </div>
+          <div className="contact-panel" data-reveal><ProjectInquiryForm /></div>
         </section>
       </main>
 
       <footer>
-        <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="Connective Stack" /></a>
+        <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" /></a>
         <p>Websites, integrations, and automation for service businesses.</p>
         <div>
-          <span>© {new Date().getFullYear()} Connective Stack</span>
+          <span>© {new Date().getFullYear()} ConnectiveStack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
           <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
-          <a href="mailto:aj@connectivestack.com">Email AJ</a>
+          <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
+          <a href="mailto:ajell.saliba@connectivestack.com">Email AJ</a>
         </div>
       </footer>
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
+      {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
     </>
   )
 }
 
 const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
-createRoot(document.getElementById('root')).render(currentPath === '/demos/hvac-ai-front-desk' ? <HvacDemo /> : <App />)
+const route = currentPath === '/demos/hvac-ai-front-desk'
+  ? <HvacDemo />
+  : currentPath === '/demos/luxury-real-estate'
+    ? <RealEstateDemo />
+    : currentPath === '/demos/healthcare-patient-experience'
+      ? <HealthcareDemo />
+    : <App />
+createRoot(document.getElementById('root')).render(route)

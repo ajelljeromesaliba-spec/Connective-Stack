@@ -8,6 +8,9 @@ export default defineConfig({
       input: {
         main: 'index.html',
         hvacDemo: 'demos/hvac-ai-front-desk/index.html',
+        realEstateDemo: 'demos/luxury-real-estate/index.html',
+        healthcareDemo: 'demos/healthcare-patient-experience/index.html',
+        notFound: '404.html',
       },
     },
   },

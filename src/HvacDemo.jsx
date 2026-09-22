@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { companyProfile, defaultQuickReplies, findKnowledgeAnswer } from './hvacKnowledge'
+import { defaultQuickReplies, findKnowledgeAnswer } from './hvacKnowledge'
 import './hvac-demo.css'
+
+const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY || '58e493a2-aed3-4a98-a192-6baca6d23d64'
+const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+const VAPI_ASSISTANT_ID = 'a1db8e60-1a21-4fab-b5ef-94f7e5671359'
+const VAPI_SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.7.0/+esm'
 
 const Icon = ({ name }) => {
   const paths = {
@@ -13,9 +18,23 @@ const Icon = ({ name }) => {
     check: <path d="m5 12 4 4L19 6" />,
     close: <path d="m6 6 12 12M18 6 6 18" />,
     send: <><path d="m4 4 17 8-17 8 3-8-3-8Z" /><path d="M7 12h14" /></>,
+    mic: <><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6" /></>,
+    phoneOff: <><path d="m3 3 18 18" /><path d="M8.4 8.4 6.9 6.9c-.5-.5-1.3-.5-1.8-.1L3.8 8c-.6.5-.8 1.3-.5 2 2 5.1 5.9 9 11 11 .7.3 1.5.1 2-.5l1.2-1.3c.4-.5.4-1.3-.1-1.8l-1.8-1.8" /><path d="M13.2 5.2c2.8.5 5.1 2.8 5.6 5.6" /></>,
   }
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>
 }
+
+const NorthstarLogoMark = () => (
+  <span className="hvac-brand-mark northstar-mark" aria-hidden="true">
+    <svg viewBox="0 0 64 64">
+      <path className="northstar-crest" d="M32 5 39 23 58 30 40 37 32 58 24 38 6 31 24 24 32 5Z" />
+      <path className="northstar-cut" d="M32 16 35.7 26.8 47 30.6 36.1 34.7 32 47 27.8 35 17 31 28.1 27 32 16Z" />
+      <path className="northstar-flow flow-one" d="M11 45c9-5 18-4 25 0 6 3 11 3 17-1" />
+      <path className="northstar-flow flow-two" d="M15 51c7-3 13-2 18 1 5 3 10 3 15 0" />
+      <circle className="northstar-heat" cx="50" cy="14" r="4.5" />
+    </svg>
+  </span>
+)
 
 const services = [
   ['snow', 'AC repair and installation', 'Diagnostics, repairs, replacements, mini-splits, and seasonal cooling care.'],
@@ -31,6 +50,221 @@ const faqItems = [
   ['Can the assistant handle emergencies?', 'It identifies urgency and routes service requests, but life safety hazards are escalated to 911, the fire department, or the gas utility immediately.'],
 ]
 
+const estimateIssues = {
+  'AC diagnostic and repair': { low: 189, high: 650, icon: 'snow', note: 'Diagnostic visit plus a typical residential repair range.' },
+  'Heating or furnace repair': { low: 220, high: 850, icon: 'flame', note: 'Inspection, common parts, and standard residential labor.' },
+  'Thermostat replacement': { low: 180, high: 520, icon: 'gauge', note: 'Standard through smart thermostat installation.' },
+  'Airflow or duct issue': { low: 280, high: 1200, icon: 'air', note: 'Testing, balancing, sealing, or a limited duct repair.' },
+  'Seasonal tune-up': { low: 119, high: 189, icon: 'check', note: 'One residential heating or cooling maintenance visit.' },
+  'Full system replacement': { low: 6500, high: 14500, icon: 'air', note: 'Broad equipment and installation planning range.' },
+}
+
+const estimateAreas = {
+  'Core service area': { add: 0, label: 'Standard travel' },
+  'Extended service area': { add: 65, label: '+ $65 travel allowance' },
+  'Outer service area': { add: 125, label: '+ $125 travel allowance' },
+}
+
+const estimatePriorities = {
+  'Standard scheduling': { add: 0, label: 'Next available window' },
+  'Same-day request': { add: 95, label: '+ $95 priority allowance' },
+  'After-hours request': { add: 185, label: '+ $185 after-hours allowance' },
+}
+
+function EstimateCalculator({ onRequest }) {
+  const [issue, setIssue] = useState('AC diagnostic and repair')
+  const [area, setArea] = useState('Core service area')
+  const [priority, setPriority] = useState('Standard scheduling')
+  const [property, setProperty] = useState('Single-family home')
+
+  const issueData = estimateIssues[issue]
+  const areaData = estimateAreas[area]
+  const priorityData = estimatePriorities[priority]
+  const propertyMultiplier = property === 'Light commercial' ? 1.25 : property === 'Large home' ? 1.12 : 1
+  const roundEstimate = value => Math.round(value / 5) * 5
+  const low = roundEstimate((issueData.low + areaData.add + priorityData.add) * propertyMultiplier)
+  const high = roundEstimate((issueData.high + areaData.add + priorityData.add) * propertyMultiplier)
+  const rangePosition = Math.min(92, Math.max(24, 24 + (high / 14500) * 68))
+  const currency = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value)
+
+  return (
+    <div className="hvac-estimator">
+      <div className="estimator-controls">
+        <div className="estimator-heading">
+          <span className="estimator-icon"><Icon name={issueData.icon} /></span>
+          <div><small>INTERACTIVE BUDGET PLANNER</small><strong>Build a sample estimate</strong></div>
+        </div>
+        <label>What needs attention?
+          <select value={issue} onChange={event => setIssue(event.target.value)}>
+            {Object.keys(estimateIssues).map(option => <option key={option}>{option}</option>)}
+          </select>
+        </label>
+        <div className="estimator-control-grid">
+          <label>Service area
+            <select value={area} onChange={event => setArea(event.target.value)}>
+              {Object.keys(estimateAreas).map(option => <option key={option}>{option}</option>)}
+            </select>
+          </label>
+          <label>Property
+            <select value={property} onChange={event => setProperty(event.target.value)}>
+              <option>Single-family home</option><option>Large home</option><option>Light commercial</option>
+            </select>
+          </label>
+        </div>
+        <label>Response preference
+          <select value={priority} onChange={event => setPriority(event.target.value)}>
+            {Object.keys(estimatePriorities).map(option => <option key={option}>{option}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <div className="estimator-result">
+        <div className="estimate-orbit" style={{ '--estimate-progress': `${rangePosition}%` }}>
+          <div><small>PLANNING RANGE</small><strong>{currency(low)}</strong><span>to {currency(high)}</span></div>
+        </div>
+        <p>{issueData.note}</p>
+        <div className="estimate-breakdown">
+          <span><i />{areaData.label}</span>
+          <span><i />{priorityData.label}</span>
+          <span><i />{propertyMultiplier > 1 ? `${Math.round((propertyMultiplier - 1) * 100)}% property allowance` : 'Standard residential size'}</span>
+        </div>
+        <button type="button" onClick={() => onRequest(`I need help with ${issue.toLowerCase()} in the ${area.toLowerCase()}. My preference is ${priority.toLowerCase()}.`)}>
+          Send this scenario to the AI <Icon name="arrow" />
+        </button>
+        <small className="estimate-disclaimer">Demo estimate only. Final pricing requires service-area confirmation, equipment details, and an on-site diagnosis.</small>
+      </div>
+    </div>
+  )
+}
+
+function VoiceDemo() {
+  const vapiRef = useRef(null)
+  const timerRef = useRef(null)
+  const [status, setStatus] = useState('idle')
+  const [speaking, setSpeaking] = useState(false)
+  const [volume, setVolume] = useState(0)
+  const [seconds, setSeconds] = useState(0)
+  const [error, setError] = useState('')
+
+  const stopTimer = () => {
+    window.clearInterval(timerRef.current)
+    timerRef.current = null
+  }
+
+  useEffect(() => () => {
+    stopTimer()
+    vapiRef.current?.stop?.()
+  }, [])
+
+  const formatTime = value => `${String(Math.floor(value / 60)).padStart(2, '0')}:${String(value % 60).padStart(2, '0')}`
+
+  const initializeVapi = async () => {
+    if (vapiRef.current) return vapiRef.current
+    const vapiModule = await import(/* @vite-ignore */ VAPI_SDK_URL)
+    const Vapi = vapiModule.default?.default || vapiModule.default
+    if (typeof Vapi !== 'function') throw new Error('The voice client could not be initialized. Please refresh the page and try again.')
+    const vapi = new Vapi(VAPI_PUBLIC_KEY)
+
+    vapi.on('call-start', () => {
+      setStatus('live')
+      setError('')
+      setSeconds(0)
+      stopTimer()
+      timerRef.current = window.setInterval(() => setSeconds(value => value + 1), 1000)
+    })
+    vapi.on('call-end', () => {
+      setStatus('idle')
+      setSpeaking(false)
+      setVolume(0)
+      stopTimer()
+    })
+    vapi.on('speech-start', () => setSpeaking(true))
+    vapi.on('speech-end', () => setSpeaking(false))
+    vapi.on('volume-level', level => setVolume(Math.min(1, Math.max(0, Number(level) || 0))))
+    vapi.on('error', event => {
+      const rawMessage = event?.error?.message || event?.message || ''
+      const message = /permission|notallowed|microphone/i.test(rawMessage)
+        ? 'Microphone access is blocked. Allow microphone access in your browser, then try again.'
+        : rawMessage || 'The voice demo could not connect. Please check microphone access and try again.'
+      setError(message)
+      setStatus('idle')
+      setSpeaking(false)
+      stopTimer()
+    })
+
+    vapiRef.current = vapi
+    return vapi
+  }
+
+  const startCall = async () => {
+    if (status !== 'idle') return
+    setStatus('connecting')
+    setError('')
+    try {
+      const vapi = await initializeVapi()
+      await vapi.start(VAPI_ASSISTANT_ID)
+    } catch (event) {
+      const rawMessage = event?.message || ''
+      setError(/permission|notallowed|microphone/i.test(rawMessage)
+        ? 'Microphone access is blocked. Allow microphone access in your browser, then try again.'
+        : rawMessage || 'The voice connection was not available. Please try again.')
+      setStatus('idle')
+    }
+  }
+
+  const endCall = () => {
+    if (!vapiRef.current || status === 'idle') return
+    setStatus('ending')
+    vapiRef.current.stop()
+  }
+
+  const live = status === 'live' || status === 'ending'
+  const statusLabel = status === 'connecting' ? 'Connecting securely' : status === 'ending' ? 'Ending call' : speaking ? 'Northstar is speaking' : live ? 'Listening to you' : 'Ready for a demo call'
+
+  return (
+    <section className="hvac-voice-section" id="voice-demo">
+      <div className="hvac-voice-copy">
+        <span className="hvac-kicker">Live browser call</span>
+        <h2>Talk to the AI front desk.</h2>
+        <p>Start a real voice conversation with the Northstar receptionist. Ask about an HVAC issue, test an emergency scenario, or request a sample appointment.</p>
+        <div className="voice-demo-disclosure">
+          <Icon name="mic" />
+          <div><strong>Portfolio demonstration</strong><span>Your browser will request microphone access. Use sample contact details only. No real service appointment or technician dispatch will be created.</span></div>
+        </div>
+        <div className="voice-prompt-list">
+          <span>Try saying</span>
+          <button type="button" onClick={startCall}>“My AC is blowing warm air.”</button>
+          <button type="button" onClick={startCall}>“I smell gas near my furnace.”</button>
+          <button type="button" onClick={startCall}>“Can I request an appointment?”</button>
+        </div>
+      </div>
+
+      <div className={`voice-console ${live ? 'is-live' : ''} ${speaking ? 'is-speaking' : ''}`}>
+        <div className="voice-console-top"><span>VAPI VOICE SESSION</span><i>{live ? '● LIVE' : '● STANDBY'}</i></div>
+        <div className="voice-orbit" aria-hidden="true">
+          <i className="voice-ring ring-a" /><i className="voice-ring ring-b" />
+          <div className="voice-core"><Icon name="mic" /></div>
+          <div className="voice-bars">
+            {[0, 1, 2, 3, 4, 5, 6].map((item, index) => <b key={item} style={{ height: live ? `${18 + ((index * 17 + volume * 60) % 55)}px` : `${18 + (index % 3) * 5}px` }} />)}
+          </div>
+        </div>
+        <div className="voice-status"><i className={live ? 'online' : ''} /><div><small>{statusLabel}</small><strong>{live ? formatTime(seconds) : 'Northstar Heating & Air'}</strong></div></div>
+        {error && <div className="voice-error" role="alert">{error}</div>}
+        <div className="voice-actions">
+          {!live && status !== 'connecting' ? (
+            <button type="button" className="voice-start" onClick={startCall}><Icon name="mic" /> Start voice demo</button>
+          ) : status === 'connecting' ? (
+            <button type="button" className="voice-start" disabled><span className="voice-spinner" /> Connecting...</button>
+          ) : (
+            <button type="button" className="voice-end" onClick={endCall} disabled={status === 'ending'}><Icon name="phoneOff" /> {status === 'ending' ? 'Ending...' : 'End call'}</button>
+          )}
+        </div>
+        <p className="voice-privacy">Audio is handled by Vapi for this live demonstration. Do not share sensitive or payment information.</p>
+      </div>
+    </section>
+  )
+}
+
 function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const [messages, setMessages] = useState([
     { from: 'bot', text: 'Hi, I’m Nova, the Northstar virtual front desk. I can answer HVAC questions, check service coverage, and help request an appointment. This is an interactive portfolio demo, so please use sample contact details.' },
@@ -38,11 +272,13 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const [input, setInput] = useState('')
   const [replies, setReplies] = useState(defaultQuickReplies)
   const [flow, setFlow] = useState(null)
+  const [thinking, setThinking] = useState(false)
   const scrollRef = useRef(null)
+  const replyTimerRef = useRef(null)
 
   useEffect(() => {
     if (open) setTimeout(() => scrollRef.current?.scrollIntoView({ behavior: 'smooth' }), 30)
-  }, [messages, open])
+  }, [messages, open, thinking])
 
   useEffect(() => {
     if (seededQuestion?.text && open) handleMessage(seededQuestion.text)
@@ -50,9 +286,18 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seededQuestion])
 
+  useEffect(() => () => window.clearTimeout(replyTimerRef.current), [])
+
   const addBot = (text, nextReplies = defaultQuickReplies, urgent = false) => {
-    setMessages(current => [...current, { from: 'bot', text, urgent }])
-    setReplies(nextReplies)
+    setThinking(true)
+    setReplies([])
+    const responseDelay = 850 + Math.min(text.length * 4, 900) + Math.floor(Math.random() * 250)
+    window.clearTimeout(replyTimerRef.current)
+    replyTimerRef.current = window.setTimeout(() => {
+      setMessages(current => [...current, { from: 'bot', text, urgent }])
+      setReplies(nextReplies)
+      setThinking(false)
+    }, responseDelay)
   }
 
   const startBooking = service => {
@@ -87,7 +332,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
         return
       }
       setFlow({ step: 'name', data: { ...current.data, zip } })
-      addBot('Great, that ZIP is inside the demo coverage area. What sample name should I place on the request?', [])
+      addBot('Thanks. I’ll include that ZIP for service-area verification. What sample name should I place on the request?', [])
       return
     }
     if (current.step === 'name') {
@@ -97,20 +342,20 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
     }
     if (current.step === 'contact') {
       setFlow({ step: 'time', data: { ...current.data, contact: value } })
-      addBot('Which appointment window works best?', ['Today, 2 PM to 5 PM', 'Tomorrow, 8 AM to 11 AM', 'Tomorrow, 12 PM to 3 PM'])
+      addBot('Which service window do you prefer? This records a preference only and does not confirm an appointment.', ['Morning preferred', 'Afternoon preferred', 'Earliest available'])
       return
     }
     if (current.step === 'time') {
       const lead = { ...current.data, time: value, status: 'New service request' }
       onLeadCreated(lead)
       setFlow(null)
-      addBot(`Demo request created for ${lead.name}. A real setup can create the contact, add an opportunity, notify dispatch, and trigger confirmation automatically. No information from this demo was sent or saved.`, ['View CRM handoff', 'Ask another question', 'Contact Connective Stack'])
+      addBot(`Demo request created for ${lead.name}. A real setup can create the contact, add an opportunity, notify dispatch, and trigger confirmation automatically. No information from this demo was sent or saved.`, ['View CRM handoff', 'Ask another question', 'Contact ConnectiveStack'])
     }
   }
 
   const handleMessage = raw => {
     const value = raw.trim()
-    if (!value) return
+    if (!value || thinking) return
     setMessages(current => [...current, { from: 'user', text: value }])
     setInput('')
 
@@ -121,7 +366,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
 
     const lowered = value.toLowerCase()
     if (lowered.includes('contact connective')) {
-      addBot('You can contact AJ at aj@connectivestack.com to discuss a website, front desk assistant, CRM connection, or automation build.', ['Ask another question'])
+      addBot('You can contact AJ at ajell.saliba@connectivestack.com to discuss a website, front desk assistant, CRM connection, or automation build.', ['Ask another question'])
       return
     }
     if (lowered.includes('view crm')) {
@@ -163,6 +408,11 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
                 {message.text}
               </div>
             ))}
+            {thinking && (
+              <div className="hvac-message bot hvac-thinking" role="status" aria-label="Nova is preparing a response">
+                <span /><span /><span />
+              </div>
+            )}
             <div ref={scrollRef} />
           </div>
           {replies.length > 0 && (
@@ -171,8 +421,8 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
             </div>
           )}
           <form className="hvac-chat-form" onSubmit={submit}>
-            <input value={input} onChange={event => setInput(event.target.value)} placeholder="Ask an HVAC question..." aria-label="Message Nova" />
-            <button type="submit" aria-label="Send message"><Icon name="send" /></button>
+            <input value={input} onChange={event => setInput(event.target.value)} placeholder={thinking ? 'Nova is preparing a response...' : 'Ask an HVAC question...'} aria-label="Message Nova" disabled={thinking} />
+            <button type="submit" aria-label="Send message" disabled={thinking}><Icon name="send" /></button>
           </form>
         </aside>
       )}
@@ -190,13 +440,28 @@ export default function HvacDemo() {
     const previousTitle = document.title
     const meta = document.querySelector('meta[name="description"]')
     const previousDescription = meta?.getAttribute('content')
-    document.title = 'HVAC AI Front Desk Demo | Connective Stack'
-    meta?.setAttribute('content', 'Try an interactive HVAC website and automated front desk demo by Connective Stack.')
+    document.title = 'HVAC Website & Automation Demo | ConnectiveStack'
+    meta?.setAttribute('content', 'Explore a fictional ConnectiveStack HVAC website and automation demo with AI reception, service intake, estimates, scheduling, and lead routing.')
     window.scrollTo(0, 0)
     return () => {
       document.title = previousTitle
       if (previousDescription) meta?.setAttribute('content', previousDescription)
     }
+  }, [])
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('.hvac-page main > section')
+    sections.forEach(section => section.classList.add('hvac-reveal'))
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.12 })
+    sections.forEach(section => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
   const openWith = question => {
@@ -207,32 +472,33 @@ export default function HvacDemo() {
   return (
     <div className="hvac-page">
       <div className="demo-ribbon">
-        <span>Interactive portfolio demo by Connective Stack</span>
+        <span>ConnectiveStack Live Demo · Fictional HVAC company</span>
         <a href="/">Return to AJ’s portfolio <Icon name="arrow" /></a>
       </div>
 
       <header className="hvac-header">
         <a className="hvac-brand" href="#home" aria-label="Northstar Heating and Air home">
-          <span className="hvac-brand-mark"><Icon name="snow" /></span>
-          <span><strong>NORTHSTAR</strong><small>HEATING &amp; AIR</small></span>
+          <NorthstarLogoMark />
+          <span><strong>NORTHSTAR</strong><small>HEATING • COOLING</small></span>
         </a>
         <nav>
           <a href="#services">Services</a>
           <a href="#how-it-works">AI Front Desk</a>
+          <a href="#voice-demo">Voice Demo</a>
           <a href="#faq">FAQs</a>
         </nav>
-        <button type="button" className="hvac-header-cta" onClick={() => openWith('Book service')}>Request service</button>
+        <a className="hvac-header-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a discovery call</a>
       </header>
 
       <main>
         <section className="hvac-hero" id="home">
           <div className="hvac-hero-copy">
-            <div className="hvac-eyebrow"><i /> Same-day appointments available</div>
+            <div className="hvac-eyebrow"><i /> 24/7 request capture</div>
             <h1>Comfort restored.<br /><em>Without the runaround.</em></h1>
             <p>Fast, professional heating and cooling service with a virtual front desk ready to answer questions and capture requests around the clock.</p>
             <div className="hvac-hero-actions">
               <button type="button" className="hvac-button primary" onClick={() => openWith('My AC is not cooling')}>Get HVAC help <Icon name="arrow" /></button>
-              <a className="hvac-button secondary" href={`tel:${companyProfile.phone.replace(/\D/g, '')}`}>Call {companyProfile.phone}</a>
+              <a className="hvac-button secondary" href="#voice-demo"><Icon name="mic" /> Talk to the AI</a>
             </div>
             <div className="hvac-trust-row">
               <span><Icon name="check" /> Licensed and insured demo profile</span>
@@ -240,19 +506,17 @@ export default function HvacDemo() {
               <span><Icon name="check" /> 24/7 request capture</span>
             </div>
           </div>
-          <div className="hvac-hero-visual" aria-label="HVAC system status dashboard">
-            <div className="hvac-ambient-ring ring-one" /><div className="hvac-ambient-ring ring-two" />
-            <div className="comfort-card">
-              <div className="comfort-top"><span>HOME COMFORT</span><i>● SYSTEM ONLINE</i></div>
-              <div className="temperature"><small>INDOOR</small><strong>72<sup>°</sup></strong><span>Cooling to 70°</span></div>
-              <div className="comfort-chart"><i /><i /><i /><i /><i /><i /><i /><i /></div>
-              <div className="comfort-metrics">
-                <div><span>Humidity</span><strong>44%</strong></div>
-                <div><span>Air quality</span><strong>Good</strong></div>
-                <div><span>Next service</span><strong>Oct 12</strong></div>
-              </div>
+          <div className="hvac-hero-visual" aria-label="HVAC technician inspecting a home thermostat">
+            <div className="hvac-hero-photo">
+              <img src="/assets/hvac-hero-technician.webp" alt="HVAC technician inspecting a smart thermostat in a modern home" />
+              <div className="hvac-photo-shade" />
+              <div className="hvac-photo-label"><span>ON-SITE EXPERTISE</span><strong>Diagnostics built around the whole system</strong></div>
             </div>
-            <div className="dispatch-card"><span className="dispatch-icon"><Icon name="gauge" /></span><div><small>Next arrival window</small><strong>Today, 2 PM to 5 PM</strong></div></div>
+            <div className="comfort-card compact">
+              <div className="comfort-top"><span>HOME COMFORT</span><i>● SYSTEM ONLINE</i></div>
+              <div className="comfort-compact-row"><div><small>INDOOR</small><strong>72<sup>°</sup></strong></div><div><span>Humidity</span><b>44%</b><span>Air quality</span><b>Good</b></div></div>
+            </div>
+            <div className="dispatch-card"><span className="dispatch-icon"><Icon name="gauge" /></span><div><small>Service preference</small><strong>Captured for confirmation</strong></div></div>
             <div className="response-card"><i /><span><small>Front desk</small><strong>Replies in seconds</strong></span></div>
           </div>
         </section>
@@ -269,6 +533,22 @@ export default function HvacDemo() {
             <div><span>Complete comfort service</span><h2>One team for the system behind your walls.</h2></div>
             <p>Built like a real service-business website, with clear paths for urgent repairs, planned projects, maintenance, and questions.</p>
           </div>
+          <div className="hvac-service-showcase" aria-label="HVAC service photography">
+            <figure className="service-photo service-photo-large">
+              <img src="/assets/hvac-ac-service.webp" alt="HVAC technician diagnosing an outdoor air conditioning condenser" loading="lazy" />
+              <figcaption><span>Cooling systems</span><strong>Detailed diagnostics before recommendations</strong></figcaption>
+            </figure>
+            <figure className="service-photo">
+              <img src="/assets/hvac-furnace-service.webp" alt="HVAC technician maintaining a residential furnace" loading="lazy" />
+              <figcaption><span>Heating systems</span><strong>Maintenance that protects comfort and reliability</strong></figcaption>
+            </figure>
+            <div className="service-visual-note">
+              <span>WHAT A REAL BUILD CAN SHOW</span>
+              <strong>People, equipment, process, and proof.</strong>
+              <p>Custom photography and service-specific visuals help visitors understand the work before they ever call.</p>
+              <div><i /> Repair <i /> Maintenance <i /> Installation</div>
+            </div>
+          </div>
           <div className="hvac-service-grid">
             {services.map(([icon, title, copy]) => (
               <article key={title}>
@@ -282,11 +562,7 @@ export default function HvacDemo() {
 
         <section className="hvac-issues">
           <div><span>Not sure where to start?</span><h2>Tell the front desk what is happening.</h2></div>
-          <div className="issue-buttons">
-            {['AC is blowing warm air', 'System is leaking water', 'Furnace is not heating', 'Airflow is weak', 'System makes a loud noise', 'I need a replacement estimate'].map(issue => (
-              <button type="button" key={issue} onClick={() => openWith(issue)}>{issue}<Icon name="arrow" /></button>
-            ))}
-          </div>
+          <EstimateCalculator onRequest={openWith} />
         </section>
 
         <section className="hvac-ai-section" id="how-it-works">
@@ -324,6 +600,8 @@ export default function HvacDemo() {
           </div>
         </section>
 
+        <VoiceDemo />
+
         <section className="hvac-faq hvac-section" id="faq">
           <div className="hvac-section-head">
             <div><span>Common questions</span><h2>Useful answers before the visit.</h2></div>
@@ -341,13 +619,13 @@ export default function HvacDemo() {
 
         <section className="hvac-demo-cta">
           <div><span>Need a system like this?</span><h2>Turn your website into a working front desk.</h2></div>
-          <div><p>This page is a fictional demonstration built by AJ Saliba at Connective Stack. The same structure can be customized around a real company’s services, policies, service area, CRM, and scheduling process.</p><a href="mailto:aj@connectivestack.com?subject=HVAC%20front%20desk%20project" className="hvac-button dark">Build one for my business <Icon name="arrow" /></a></div>
+          <div><p>This fictional concept was created by Ajell Saliba at ConnectiveStack to demonstrate website design, AI reception, intake, estimating, scheduling, CRM routing, and automation. No company, pricing, service area, or customer information shown here is real.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="hvac-button dark">Discuss an HVAC project <Icon name="arrow" /></a></div>
         </section>
       </main>
 
       <footer className="hvac-footer">
-        <div className="hvac-brand"><span className="hvac-brand-mark"><Icon name="snow" /></span><span><strong>NORTHSTAR</strong><small>FICTIONAL HVAC DEMO</small></span></div>
-        <p>Created by <a href="/">Connective Stack</a>. No submitted demo data is transmitted or stored.</p>
+        <div className="hvac-brand"><NorthstarLogoMark /><span><strong>NORTHSTAR</strong><small>HVAC SERVICE DEMO</small></span></div>
+        <p>Created by <a href="/">ConnectiveStack</a>. No submitted demo data is transmitted or stored.</p>
       </footer>
 
       <ChatAssistant open={chatOpen} onOpenChange={setChatOpen} onLeadCreated={setLead} seededQuestion={seededQuestion} />

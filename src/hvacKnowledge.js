@@ -1,9 +1,7 @@
 export const companyProfile = {
   name: 'Northstar Heating & Air',
-  phone: '(512) 555-0147',
-  serviceArea: 'Austin, Round Rock, Cedar Park, Pflugerville, Leander, and nearby communities',
-  hours: 'Monday through Saturday, 7:00 AM to 8:00 PM, with 24/7 emergency response',
-  diagnosticFee: '$89 during standard hours and $149 after hours',
+  serviceArea: 'Dallas, Fort Worth, Arlington, Plano, Frisco, McKinney, Irving, Garland, Richardson, Carrollton, Grapevine, Keller, Southlake, Grand Prairie, and Lewisville',
+  hours: 'Monday through Friday, 8:00 AM to 6:00 PM Central Time, and Saturday, 8:00 AM to 2:00 PM. Routine service is closed on Sunday',
 }
 
 export const defaultQuickReplies = [
@@ -60,31 +58,31 @@ const knowledgeBase = [
   {
     id: 'pricing',
     keywords: ['price', 'pricing', 'cost', 'charge', 'diagnostic fee', 'service fee', 'estimate', 'how much'],
-    answer: `Demo pricing uses a ${companyProfile.diagnosticFee} diagnostic fee. The technician inspects the system and presents repair options before work begins. Replacement estimates are complimentary after an in-home assessment. Actual pricing depends on the system, parts, access, and required permits.`,
+    answer: 'This portfolio demo does not provide binding prices or invent a diagnostic fee. Actual pricing depends on the equipment, the cause of the problem, access, parts, permits, and the work required. In a live implementation, the assistant would share only the contractor’s approved pricing or collect details for an estimate.',
     replies: ['Book service', 'Financing options', 'Repair or replace?'],
   },
   {
     id: 'emergency',
     keywords: ['emergency', 'after hours', '24/7', 'tonight', 'weekend', 'urgent', 'same day'],
-    answer: `Emergency response is available 24/7 for loss of cooling or heating during unsafe temperatures, active leaks near equipment, electrical concerns, and system failures affecting vulnerable occupants. Life safety hazards must go to 911 first. Standard office hours are ${companyProfile.hours}.`,
+    answer: 'The demo can identify urgent situations and collect an after-hours request for priority review, but it cannot dispatch emergency service or promise a response time. Life-safety hazards must go to 911, the fire department, or the gas utility first.',
     replies: ['Request emergency service', 'What is the after-hours fee?', 'Book regular service'],
   },
   {
     id: 'service-area',
-    keywords: ['service area', 'location', 'where', 'zip', 'area', 'travel', 'come to'],
-    answer: `The fictional service area includes ${companyProfile.serviceArea}. Enter your five-digit ZIP during booking and the assistant will demonstrate an automatic coverage check.`,
-    replies: ['Book service', '78701', 'Business hours'],
+    keywords: ['service area', 'location', 'where', 'zip', 'area', 'travel', 'come to', 'city', 'cities', 'dallas', 'fort worth'],
+    answer: `The fictional service area includes ${companyProfile.serviceArea}. Locations outside those cities are collected for service-area verification rather than automatically rejected.`,
+    replies: ['Book service', 'Business hours', 'What information do you need?'],
   },
   {
     id: 'hours',
     keywords: ['hours', 'open', 'closing', 'business hours', 'available'],
-    answer: `Regular appointments are available ${companyProfile.hours}. Appointment windows and emergency response times depend on technician availability.`,
+    answer: `Sample office hours are ${companyProfile.hours}. Same-day, after-hours, and appointment-window availability always requires confirmation.`,
     replies: ['Book service', 'Emergency service', 'Service area'],
   },
   {
     id: 'maintenance',
     keywords: ['maintenance', 'tune up', 'tune-up', 'membership', 'plan', 'seasonal', 'preventive'],
-    answer: 'The Comfort Care Plan includes one cooling visit and one heating visit each year, priority scheduling, a 15% repair discount, no overtime charge, filter reminders, and a documented system report. Annual pre-season checks help catch problems before peak summer or winter demand.',
+    answer: 'The demo can collect a one-time tune-up, preventive maintenance, filter-guidance, or maintenance-plan inquiry. Exact plan benefits, discounts, and priority-service terms must come from the contractor’s approved policy and are not invented in this demonstration.',
     replies: ['Join maintenance plan', 'What is checked?', 'Book a tune-up'],
   },
   {
@@ -114,7 +112,7 @@ const knowledgeBase = [
   {
     id: 'warranty',
     keywords: ['warranty', 'guarantee', 'covered', 'coverage', 'labor warranty', 'parts warranty'],
-    answer: 'The demo offer includes a one-year workmanship warranty on completed repairs. Equipment and parts warranties vary by manufacturer, product registration, and installation details. The office verifies coverage using the model, serial number, installation date, and proof of maintenance when required.',
+    answer: 'Equipment, parts, and labor warranty coverage varies by manufacturer, contractor, registration status, installation date, and service history. The demo can collect the model and installation details for review but cannot confirm coverage or promise a free repair.',
     replies: ['Check warranty information', 'Book service', 'Maintenance plans'],
   },
   {
@@ -162,7 +160,7 @@ const knowledgeBase = [
   {
     id: 'payment',
     keywords: ['payment', 'credit card', 'cash', 'check', 'pay'],
-    answer: 'The demo company accepts major credit cards, ACH, and checks. Payment is due when service is completed unless an approved commercial account or financing agreement applies. A real implementation would use the client’s actual payment policy.',
+    answer: 'Payment methods and payment timing are not defined for this fictional demonstration. A real implementation would answer only from the contractor’s approved payment policy and could route customers to a secure payment process.',
     replies: ['Book service', 'Financing options', 'What do you charge?'],
   },
   {
@@ -180,8 +178,8 @@ const knowledgeBase = [
   {
     id: 'demo',
     keywords: ['demo', 'about this', 'is this real', 'real company', 'how does this work'],
-    answer: 'This is a portfolio demonstration created by Connective Stack. Northstar Heating & Air, its phone number, prices, appointments, and lead records are fictional. The assistant demonstrates how a real HVAC knowledge base, qualification flow, booking handoff, and CRM routing can work.',
-    replies: ['Book a demo appointment', 'What can the assistant answer?', 'Contact Connective Stack'],
+    answer: 'This is a portfolio demonstration created by ConnectiveStack. Northstar Heating & Air, its phone number, prices, appointments, and lead records are fictional. The assistant demonstrates how a real HVAC knowledge base, qualification flow, booking handoff, and CRM routing can work.',
+    replies: ['Try the demo booking flow', 'What can the assistant answer?', 'Contact ConnectiveStack'],
   },
 ]
 
@@ -210,20 +208,23 @@ export function findKnowledgeAnswer(input) {
     }
   }
 
-  let best = null
-  let bestScore = 0
-  knowledgeBase.forEach(item => {
+  const matches = knowledgeBase.map(item => {
     const score = item.keywords.reduce((total, keyword) => {
       if (query.includes(keyword)) return total + keyword.split(' ').length + 2
       return total
     }, 0)
-    if (score > bestScore) {
-      best = item
-      bestScore = score
-    }
-  })
+    return { item, score }
+  }).filter(match => match.score > 0).sort((a, b) => b.score - a.score)
 
-  if (best) return best
+  if (matches.length) {
+    const selected = matches.slice(0, 2).map(match => match.item)
+    return {
+      id: selected.map(item => item.id).join('+'),
+      answer: selected.map(item => item.answer).join('\n\n'),
+      replies: [...new Set(selected.flatMap(item => item.replies))].slice(0, 4),
+      urgent: selected.some(item => item.urgent),
+    }
+  }
 
   return {
     id: 'fallback',

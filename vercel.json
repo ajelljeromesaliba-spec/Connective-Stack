@@ -12,14 +12,26 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "connectivestack.com" }],
+      "destination": "https://www.connectivestack.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/demos/hvac-ai-front-desk",
-      "destination": "/index.html"
+      "destination": "/demos/hvac-ai-front-desk/index.html"
     },
     {
-      "source": "/demos/:path*",
-      "destination": "/index.html"
+      "source": "/demos/luxury-real-estate",
+      "destination": "/demos/luxury-real-estate/index.html"
+    },
+    {
+      "source": "/demos/healthcare-patient-experience",
+      "destination": "/demos/healthcare-patient-experience/index.html"
     }
   ]
 }

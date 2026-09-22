@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://connectivestack.com/sitemap.xml
+Host: www.connectivestack.com
+Sitemap: https://www.connectivestack.com/sitemap.xml

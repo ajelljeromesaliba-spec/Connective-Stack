@@ -1,0 +1,23 @@
+{
+  "name": "ConnectiveStack",
+  "short_name": "ConnectiveStack",
+  "description": "Modern websites, AI automation, and integrations for service businesses.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f7f6",
+  "theme_color": "#101416",
+  "icons": [
+    {
+      "src": "/assets/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
