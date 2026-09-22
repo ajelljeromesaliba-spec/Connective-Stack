@@ -13,6 +13,8 @@
 .hvac-page * { box-sizing: border-box; }
 .hvac-page button, .hvac-page input { font: inherit; }
 .hvac-page button { cursor: pointer; }
+.hvac-page :where(a, button, input, select, textarea):focus-visible { outline: 3px solid var(--hvac-orange); outline-offset: 3px; }
+.hvac-page section[id] { scroll-margin-top: 24px; }
 .hvac-page svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .demo-ribbon { min-height: 38px; padding: 8px clamp(18px, 5vw, 76px); display: flex; justify-content: space-between; align-items: center; gap: 20px; background: var(--hvac-navy); color: #b9cadb; font-size: 11px; }
 .demo-ribbon > span { text-transform: uppercase; letter-spacing: .13em; }
