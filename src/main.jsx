@@ -295,11 +295,27 @@ function App() {
   const [activeService, setActiveService] = useState(null)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('is-visible')),
-      { threshold: 0.12 }
-    )
-    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el))
+    const revealItems = [...document.querySelectorAll('[data-reveal]')]
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    revealItems.forEach((item, index) => {
+      item.style.setProperty('--reveal-delay', `${(index % 3) * 90}ms`)
+    })
+
+    if (reduceMotion) {
+      revealItems.forEach(item => item.classList.add('is-visible'))
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return
+        entry.target.classList.add('is-visible')
+        observer.unobserve(entry.target)
+      })
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' })
+
+    revealItems.forEach(item => observer.observe(item))
     return () => observer.disconnect()
   }, [])
 
