@@ -319,7 +319,7 @@ function App() {
 
   return (
     <>
-      <header className="site-header">
+      <header className="site-header portfolio-header">
         <a href="#top" className="brand" aria-label="ConnectiveStack home">
           <img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" />
         </a>
@@ -355,19 +355,17 @@ function App() {
         </nav>
       </header>
 
-      <main id="top">
+      <main id="top" className="portfolio-main">
         <section className="hero">
-          <div className="hero-background-video" aria-hidden="true">
-            <video autoPlay muted loop playsInline preload="metadata">
-              <source src="/assets/hero-background.mp4" type="video/mp4" />
-            </video>
-            <div className="hero-video-wash" />
+          <div className="hero-surreal-field" aria-hidden="true">
+            <span className="hero-field-orb hero-field-orb-one" />
+            <span className="hero-field-orb hero-field-orb-two" />
           </div>
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
             <div className="eyebrow"><span className="status-dot" /> AJ Saliba • Independent web and systems specialist</div>
-            <h1>Websites that look sharp and <em>work harder.</em></h1>
-            <p className="hero-lead">I build modern websites for service businesses, then connect the forms, calendars, CRM, and follow-up tools behind them.</p>
+            <h1>Clear websites with an <em>unexpected point of view.</em></h1>
+            <p className="hero-lead">I create distinctive websites for service businesses, then connect the forms, calendars, CRM, and follow-up tools behind them.</p>
             <div className="hero-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Build my website <Arrow /></a>
               <a href="#work" className="button button-secondary">See sample work</a>
@@ -379,21 +377,24 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-media" data-reveal>
-            <div className="video-shell">
-              <video autoPlay muted loop playsInline poster="/assets/video-poster.svg">
-                <source src="/assets/connective-stack-commercial.mp4" type="video/mp4" />
-              </video>
-              <div className="video-topbar"><span /><span>Connected digital systems</span><span>08 sec</span></div>
-            </div>
+          <div className="hero-media surreal-hero" data-reveal>
+            <figure className="surreal-canvas">
+              <img src="/assets/portfolio-surreal-hero.webp" alt="Surreal architectural world of connected digital systems" fetchPriority="high" />
+              <figcaption>
+                <span>PORTFOLIO / DIGITAL ARCHITECTURE</span>
+                <strong>Ideas become useful systems.</strong>
+              </figcaption>
+            </figure>
+            <div className="surreal-orbit surreal-orbit-one" aria-hidden="true" />
+            <div className="surreal-orbit surreal-orbit-two" aria-hidden="true" />
             <div className="floating-card floating-card-one">
               <span className="mini-icon">↗</span>
-              <div><small>Lead captured</small><strong>Website form</strong></div>
+              <div><small>Designed to convert</small><strong>Clear next actions</strong></div>
               <span className="live-dot" />
             </div>
             <div className="floating-card floating-card-two">
               <div className="flow-nodes"><i /><i /><i /></div>
-              <div><small>System status</small><strong>Connected</strong></div>
+              <div><small>Built as a system</small><strong>Connected</strong></div>
             </div>
           </div>
         </section>
@@ -459,6 +460,23 @@ function App() {
                 </div>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="surreal-manifesto" aria-label="ConnectiveStack design philosophy">
+          <div className="surreal-manifesto-art" data-reveal>
+            <img src="/assets/portfolio-surreal-journey.webp" alt="Surreal path connecting floating ideas into one system" loading="lazy" />
+            <div className="surreal-manifesto-index">CS / 04</div>
+          </div>
+          <div className="surreal-manifesto-copy" data-reveal>
+            <span className="kicker">Clarity meets imagination</span>
+            <h2>Distinctive enough to be remembered. Clear enough to be trusted.</h2>
+            <p>Every visual decision supports the message. Every interaction points toward a useful next step. The result is a website with character—and a system that works behind it.</p>
+            <div className="manifesto-principles">
+              <span>01 / Art direction</span>
+              <span>02 / Clear journeys</span>
+              <span>03 / Connected systems</span>
+            </div>
           </div>
         </section>
 
@@ -621,7 +639,7 @@ function App() {
         </section>
       </main>
 
-      <footer>
+      <footer className="portfolio-footer">
         <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" /></a>
         <p>Websites, integrations, and automation for service businesses.</p>
         <div>
