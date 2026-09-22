@@ -92,7 +92,7 @@ const projects = [
     label: 'Real Estate',
     title: 'Premium multi-broker property experience',
     copy: 'A luxury brokerage concept with curated listings, smart property matching, broker routing, affordability tools, and private tour requests.',
-    image: '/assets/realestate-malibu.webp',
+    image: '/assets/realestate-austin-premium.webp',
     accent: 'sand',
     photo: true,
     goal: 'Turn premium property interest into qualified conversations with the right broker.',
