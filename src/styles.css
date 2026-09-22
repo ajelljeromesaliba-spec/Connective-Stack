@@ -405,7 +405,7 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
 }
 
 
-/* CLEAN SURREAL PORTFOLIO — scoped to the main portfolio only */
+/* CLEAN SURREAL PORTFOLIO: scoped to the main portfolio only */
 .portfolio-header {
   background: rgba(247, 250, 249, 0.82);
   border-bottom: 1px solid rgba(15, 24, 24, 0.08);
@@ -488,7 +488,7 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
 }
 
 .portfolio-main .hero-copy::before {
-  content: "CS—01";
+  content: "CS / 01";
   display: block;
   margin-bottom: 2rem;
   color: rgba(11, 17, 18, 0.42);
@@ -1064,4 +1064,42 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
     margin-inline: .35rem;
     border-radius: 2rem;
   }
+}
+
+
+/* FEATURED PRICING CARD CONTRAST */
+.portfolio-main .pricing-tier.featured,
+.portfolio-main .pricing-tier.featured .pricing-tier-head > span,
+.portfolio-main .pricing-tier.featured .pricing-tier-head small,
+.portfolio-main .pricing-tier.featured p,
+.portfolio-main .pricing-tier.featured em,
+.portfolio-main .pricing-tier.featured li {
+  color: rgba(247, 255, 253, 0.78);
+}
+
+.portfolio-main .pricing-tier.featured .pricing-tier-head strong {
+  color: #ffffff;
+}
+
+.portfolio-main .pricing-tier.featured .pricing-tier-head sup,
+.portfolio-main .pricing-tier.featured .pricing-tier-head b,
+.portfolio-main .pricing-tier.featured em,
+.portfolio-main .pricing-tier.featured li svg {
+  color: #21d2bd;
+}
+
+.portfolio-main .pricing-tier.featured .pricing-tier-head {
+  border-bottom-color: rgba(255, 255, 255, 0.42);
+}
+
+.portfolio-main .pricing-tier.featured .button-primary {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #0b1112;
+}
+
+.portfolio-main .pricing-tier.featured .button-primary:hover {
+  border-color: #21d2bd;
+  background: #21d2bd;
+  color: #07100f;
 }
