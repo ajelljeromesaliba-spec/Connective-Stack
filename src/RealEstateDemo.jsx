@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import './real-estate-demo.css'
 
+const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+
 const Icon = ({ name }) => {
   const paths = {
     arrow: <><path d="M5 12h14" /><path d="m15 8 4 4-4 4" /></>,
@@ -103,7 +105,7 @@ function Matchmaker({ onTour }) {
         <h3>Tell us what moving well looks like.</h3>
         <label>Preferred market<select value={location} onChange={e => setLocation(e.target.value)}><option>Malibu</option><option>Beverly Hills</option><option>Scottsdale</option><option>Austin</option><option>Phoenix</option></select></label>
         <div className="re-choice-group"><small>Budget</small>{['Under $500K', '$500K–$1M', '$1M–$3M', '$3M+'].map(item => <button type="button" className={budget === item ? 'active' : ''} onClick={() => setBudget(item)} key={item}>{item}</button>)}</div>
-        <div className="re-choice-group"><small>Goal</small>{['Primary residence', 'Second home', 'Investment'].map(item => <button className={goal === item ? 'active' : ''} onClick={() => setGoal(item)} key={item}>{item}</button>)}</div>
+        <div className="re-choice-group"><small>Goal</small>{['Primary residence', 'Second home', 'Investment'].map(item => <button type="button" className={goal === item ? 'active' : ''} onClick={() => setGoal(item)} key={item}>{item}</button>)}</div>
       </div>
       <div className="re-match-result">
         <span><Icon name="spark" /> BEST CURRENT MATCH</span>
@@ -114,7 +116,7 @@ function Matchmaker({ onTour }) {
           <p>{match.beds} beds · {match.baths} baths · {match.sqft} sq ft</p>
         </div>
         <div className="re-routed"><b>{match.initials}</b><p>Routed to <strong>{match.broker}</strong><span>{match.specialty}</span></p><i>AVAILABLE</i></div>
-        <button onClick={() => onTour(match)}>Request a private tour <Icon name="arrow" /></button>
+        <button type="button" onClick={() => onTour(match)}>Request a private tour <Icon name="arrow" /></button>
       </div>
     </div>
   )
@@ -132,11 +134,11 @@ function TourModal({ property, onClose }) {
   if (!property) return null
   return (
     <div className="re-modal-overlay" onMouseDown={e => e.target === e.currentTarget && onClose()}>
-      <div className="re-modal">
-        <button className="re-modal-close" onClick={onClose} aria-label="Close"><Icon name="close" /></button>
-        {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>REQUEST RECEIVED</small><h2>Your private tour is being coordinated.</h2><p>{property.broker} is the best-fit broker for {property.neighborhood}. In a real setup, the lead would now enter the CRM and trigger email and SMS confirmation.</p><button onClick={onClose}>Return to listings</button></div> : <>
+      <div className="re-modal" role="dialog" aria-modal="true" aria-labelledby="tour-dialog-title">
+        <button type="button" className="re-modal-close" onClick={onClose} aria-label="Close private tour dialog"><Icon name="close" /></button>
+        {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>REQUEST RECEIVED</small><h2 id="tour-dialog-title">Your private tour is being coordinated.</h2><p>{property.broker} is the best-fit broker for {property.neighborhood}. In a real setup, the lead would now enter the CRM and trigger email and SMS confirmation.</p><button type="button" onClick={onClose}>Return to listings</button></div> : <>
           <span className="re-modal-kicker">PRIVATE SHOWING</span>
-          <h2>Tour {property.neighborhood}</h2>
+          <h2 id="tour-dialog-title">Tour {property.neighborhood}</h2>
           <p>Choose a preferred time. This portfolio demo uses sample details only and does not submit information externally.</p>
           <div className="re-form-route"><b>{property.initials}</b><div><small>ASSIGNED ADVISOR</small><strong>{property.broker}</strong><span>{property.category} · {property.specialty}</span></div></div>
           <form onSubmit={e => { e.preventDefault(); setSent(true) }}>
@@ -163,11 +165,11 @@ function BrokerModal({ broker, onClose }) {
     investment: <><label>Investment goal<select><option>Long-term rental</option><option>Short-term rental</option><option>Appreciation</option><option>Portfolio diversification</option></select></label><label>Target market<select><option>Austin</option><option>Los Angeles</option><option>Open to recommendations</option></select></label><label>Acquisition budget<select><option>Under $1M</option><option>$1M–$3M</option><option>$3M+</option></select></label><label>Target hold period<select><option>1–3 years</option><option>3–7 years</option><option>7+ years</option></select></label></>,
   }
   return <div className="re-modal-overlay" onMouseDown={e => e.target === e.currentTarget && onClose()}>
-    <div className="re-modal">
-      <button className="re-modal-close" onClick={onClose} aria-label="Close"><Icon name="close" /></button>
-      {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>CONSULTATION ROUTED</small><h2>Your request is ready for {broker.name}.</h2><p>The form captured the details relevant to {broker.role.toLowerCase()}. In a live setup, the correct pipeline, calendar, and follow-up sequence would now start automatically.</p><button onClick={onClose}>Return to advisors</button></div> : <>
+    <div className="re-modal" role="dialog" aria-modal="true" aria-labelledby="broker-dialog-title">
+      <button type="button" className="re-modal-close" onClick={onClose} aria-label="Close advisor dialog"><Icon name="close" /></button>
+      {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>CONSULTATION ROUTED</small><h2 id="broker-dialog-title">Your request is ready for {broker.name}.</h2><p>The form captured the details relevant to {broker.role.toLowerCase()}. In a live setup, the correct pipeline, calendar, and follow-up sequence would now start automatically.</p><button type="button" onClick={onClose}>Return to advisors</button></div> : <>
         <span className="re-modal-kicker">PERSONALIZED ADVISOR INTAKE</span>
-        <h2>Meet {broker.name}</h2>
+        <h2 id="broker-dialog-title">Meet {broker.name}</h2>
         <p>{broker.formNote}. The questions below are tailored to this advisor, so the first conversation starts with the right context.</p>
         <div className="re-form-route"><b>{broker.initials}</b><div><small>{broker.role}</small><strong>{broker.name}</strong><span>{broker.market}</span></div></div>
         <form onSubmit={e => { e.preventDefault(); setSent(true) }}>
@@ -240,9 +242,9 @@ function Concierge() {
     setMessages(items => [...items, { from: 'user', text: question }, { from: 'bot', text: responses[question] }])
   }
   return <>
-    <button className="re-chat-launcher" onClick={() => setOpen(!open)}><Icon name={open ? 'close' : 'chat'} /><span>{open ? 'Close' : 'Ask the concierge'}</span></button>
-    {open && <aside className="re-chat">
-      <div className="re-chat-head"><AsterRowMark compact /><div><strong>Aster Concierge</strong><span><i /> Online · Demo experience</span></div><button onClick={() => setOpen(false)}><Icon name="close" /></button></div>
+    <button type="button" className="re-chat-launcher" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="real-estate-concierge"><Icon name={open ? 'close' : 'chat'} /><span>{open ? 'Close' : 'Ask the concierge'}</span></button>
+    {open && <aside className="re-chat" id="real-estate-concierge" aria-label="Aster Concierge">
+      <div className="re-chat-head"><AsterRowMark compact /><div><strong>Aster Concierge</strong><span><i /> Online · Demo experience</span></div><button type="button" onClick={() => setOpen(false)} aria-label="Close concierge"><Icon name="close" /></button></div>
       <div className="re-chat-messages">{messages.map((item, i) => <p className={item.from} key={i}>{item.text}</p>)}</div>
       <div className="re-chat-options">{['Find a property', 'Meet a broker', 'Value my home'].map(item => <button onClick={() => reply(item)} key={item}>{item}</button>)}</div>
     </aside>}
@@ -273,13 +275,28 @@ export default function RealEstateDemo() {
     return () => playbackObserver.disconnect()
   }, [filter])
 
+  useEffect(() => {
+    if (!tour && !advisor) return undefined
+    const closeOnEscape = event => {
+      if (event.key !== 'Escape') return
+      setTour(null)
+      setAdvisor(null)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [tour, advisor])
+
   return (
     <div className="re-page">
       <div className="re-demo-bar"><a href="/">← Connective Stack portfolio</a><span>Interactive concept · Fictional brokerage</span><b>{saved.length} saved</b></div>
       <header className="re-header">
         <a href="#home" className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>PRIVATE REAL ESTATE</small></span></a>
         <nav><a href="#start">Get started</a><a href="#properties">Properties</a><a href="#match">Private search</a><a href="#advisors">Advisors</a><a href="#affordability">Affordability</a></nav>
-        <button onClick={() => setAdvisor(brokers[0])}>Schedule a consultation</button>
+        <button type="button" onClick={() => setAdvisor(brokers[0])}>Schedule a consultation</button>
       </header>
       <main>
         <section className="re-hero re-reveal" id="home">
@@ -320,7 +337,7 @@ export default function RealEstateDemo() {
           <MortgageCalculator />
         </section>
 
-        <section className="re-cta re-reveal"><div><span>CONNECTIVE STACK DEMO</span><h2>Built for the full brokerage, not just one agent.</h2></div><div><p>This fictional concept demonstrates premium listings, broker routing, lead qualification, calculators, CRM-ready intake, and automated follow-up.</p><a href="mailto:ajell.saliba@connectivestack.com?subject=Real%20estate%20website%20demo">Build a real estate experience <Icon name="arrow" /></a></div></section>
+        <section className="re-cta re-reveal"><div><span>CONNECTIVE STACK DEMO</span><h2>Built for the full brokerage, not just one agent.</h2></div><div><p>This fictional concept demonstrates premium listings, broker routing, lead qualification, calculators, CRM-ready intake, and automated follow-up.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a real estate project <Icon name="arrow" /></a></div></section>
       </main>
       <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL PORTFOLIO DEMO</small></span></div><p>Designed and built by <a href="/">Connective Stack</a></p></footer>
       <Concierge />
