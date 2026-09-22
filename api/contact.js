@@ -10,6 +10,8 @@ const escapeHtml = value => clean(value)
   .replaceAll("'", '&#039;')
 
 export default async function handler(request, response) {
+  response.setHeader('Cache-Control', 'no-store')
+
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST')
     return response.status(405).json({ error: 'Method not allowed.' })
