@@ -121,10 +121,10 @@ const projects = [
 ]
 
 const process = [
-  ['01', 'Discover', 'We align on the goal, audience, pages, content, and the tools your business already uses.'],
-  ['02', 'Design and build', 'I shape the message, create the visual direction, and build the responsive experience.'],
-  ['03', 'Connect and test', 'Forms, buttons, analytics, domains, and integrations are tested across devices.'],
-  ['04', 'Launch and support', 'Your site goes live with a clean handoff and seven days of post-launch support.'],
+  ['01', 'Audit the current journey', 'We document the offer, audience, lead path, required pages, existing tools, and the handoffs that currently fail.'],
+  ['02', 'Structure and build', 'I turn the approved scope into page hierarchy, conversion copy, visual direction, and responsive components.'],
+  ['03', 'Connect and verify', 'Forms, calendars, CRM fields, notifications, analytics, domains, and fallback paths are tested before launch.'],
+  ['04', 'Launch and document', 'The approved build goes live with named deliverables, access handoff, and the support period defined in the proposal.'],
 ]
 
 function LegalModal({ type, onClose }) {
@@ -208,7 +208,7 @@ function ServiceModal({ service, onClose }) {
             </div>
             <div className="service-modal-aside">
               <div><span>Best for</span><p>{service.bestFor}</p></div>
-              <div><span>Expected result</span><p>{service.result}</p></div>
+              <div><span>Delivery objective</span><p>{service.result}</p></div>
             </div>
           </div>
           <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this service <Arrow /></a>
@@ -268,8 +268,8 @@ function ProjectInquiryForm() {
     <form className="inquiry-form" onSubmit={submitInquiry}>
       <div className="inquiry-form-heading">
         <span>PROJECT INQUIRY</span>
-        <h3>Share the essentials.</h3>
-        <p>A few useful details help me recommend the right scope, timeline, and starting price.</p>
+        <h3>Describe the current setup.</h3>
+        <p>Share the business goal, current website or tools, broken handoffs, required deadline, and available budget. I use these details to recommend a realistic scope.</p>
       </div>
       <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
       <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
@@ -384,16 +384,16 @@ function App() {
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
             <div className="eyebrow"><span className="status-dot" /> AJ Saliba • Independent web and systems specialist</div>
-            <h1>Clear websites with an <em>unexpected point of view.</em></h1>
-            <p className="hero-lead">I create distinctive websites for service businesses, then connect the forms, calendars, CRM, and follow-up tools behind them.</p>
+            <h1>Distinctive websites built around the <em>customer journey behind them.</em></h1>
+            <p className="hero-lead">I design and deploy websites for service businesses, then connect the lead forms, booking, CRM routing, notifications, and follow-up included in the agreed scope.</p>
             <div className="hero-actions">
-              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Build my website <Arrow /></a>
+              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Discuss a project <Arrow /></a>
               <a href="#work" className="button button-secondary">See sample work</a>
             </div>
             <div className="hero-meta">
-              <div><strong>Projects from $1,250</strong><span>Clear scope and deliverables</span></div>
-              <div><strong>Direct support</strong><span>You work with me, AJ</span></div>
-              <div><strong>US-ready</strong><span>Clear, conversion-focused copy</span></div>
+              <div><strong>Projects from $1,250</strong><span>Pages, revisions, and support defined in writing</span></div>
+              <div><strong>Independent specialist</strong><span>Direct planning, build, testing, and handoff</span></div>
+              <div><strong>Concept work labeled</strong><span>No invented client metrics or testimonials</span></div>
             </div>
           </div>
 
@@ -419,11 +419,18 @@ function App() {
           </div>
         </section>
 
+        <section className="credibility-strip" aria-label="What prospects can verify">
+          <div data-reveal><strong>3</strong><span>Interactive industry demos</span></div>
+          <div data-reveal><strong>3</strong><span>Documented concept case studies</span></div>
+          <div data-reveal><strong>11 years</strong><span>Across service, sales, QA, leadership, and digital operations</span></div>
+          <div data-reveal><strong>1 specialist</strong><span>Responsible from scope through launch</span></div>
+        </section>
+
         <section className="section services" id="services">
           <div className="section-heading" data-reveal>
             <span className="kicker">What I build</span>
-            <h2>A better website is only the beginning.</h2>
-            <p>The goal is a clean customer journey, from the first click to the next action.</p>
+            <h2>Design, lead capture, and system handoff in one scope.</h2>
+            <p>The work is separated into clear deliverables so you know what is being designed, what is being connected, and what remains a third-party responsibility.</p>
           </div>
           <div className="service-list">
             {services.map(service => (
@@ -473,7 +480,7 @@ function App() {
                     <strong>{project.goal}</strong>
                   </div>
                   <div className="project-outcomes">
-                    <small>Built to improve</small>
+                    <small>Designed to improve</small>
                     <ul>{project.outcomes.map(outcome => <li key={outcome}><Check />{outcome}</li>)}</ul>
                   </div>
                   <div className="project-action-links">
@@ -483,6 +490,21 @@ function App() {
                 </div>
               </article>
             ))}
+          </div>
+          <p className="concept-disclosure">These are self-initiated concept projects built to demonstrate strategy, interface design, and system planning. Fictional data is labeled, and no performance metric is presented as a client result.</p>
+        </section>
+
+        <section className="evidence-section" id="proof">
+          <div className="evidence-heading" data-reveal>
+            <span className="kicker">Evidence before promises</span>
+            <h2>What a prospect can inspect before contacting me.</h2>
+            <p>Credibility should come from visible work, clear boundaries, and a scope that can be checked.</p>
+          </div>
+          <div className="evidence-grid">
+            <article data-reveal><span>01</span><h3>Interactive demos</h3><p>Open and test the actual customer journeys, forms, calculators, routing logic, and responsive interfaces instead of judging isolated screenshots.</p></article>
+            <article data-reveal><span>02</span><h3>Documented reasoning</h3><p>Each case study explains the business problem, assumptions, design decisions, workflow, safeguards, and production requirements.</p></article>
+            <article data-reveal><span>03</span><h3>Honest proof boundaries</h3><p>Concept data stays fictional, intended outcomes are not reported as measured results, and automated tools are not presented as replacements for human judgment.</p></article>
+            <article data-reveal><span>04</span><h3>Defined commercial terms</h3><p>Starting prices identify page limits, revision rounds, support periods, integrations, and costs that remain outside the project fee.</p></article>
           </div>
         </section>
 
@@ -619,12 +641,12 @@ function App() {
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
             <h2>One specialist. Direct communication. Practical execution.</h2>
-            <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. I bring more than a decade of customer-facing and operational experience, including team leadership, GoHighLevel, website operations, domains, integrations, and AI-assisted development.</p>
+            <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. My 11 years of professional experience span customer service, sales, quality assurance, leadership of a 17-person QA team, GoHighLevel operations, website delivery, DNS, deployments, and integrations.</p>
             <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
             <div className="tool-matrix">
               <div className="tool-group">
                 <span>Web, CRM and deployment</span>
-                <div>{['GoHighLevel', 'Lovable', 'Vercel', 'GitHub', 'Cloudflare', 'WordPress', 'Shopify', 'CMS Platforms'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <div>{['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'WordPress', 'Shopify'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
               <div className="tool-group">
                 <span>AI and automation</span>
@@ -632,11 +654,11 @@ function App() {
               </div>
               <div className="tool-group">
                 <span>CRM, sales and support</span>
-                <div>{['Salesforce', 'HubSpot', 'Zoho', 'Apollo.io', 'Aircall', 'Zendesk', 'Freshdesk'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <div>{['GoHighLevel', 'HubSpot', 'Salesforce', 'Zoho', 'Aircall', 'Zendesk', 'Freshdesk'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
               <div className="tool-group">
                 <span>Creative and operations</span>
-                <div>{['Google Workspace', 'Microsoft 365', 'Slack', 'Trello', 'ClickUp', 'Notion', 'Canva', 'Figma', 'Framer', 'Zoom', 'Google Meet', 'Dropbox', 'Helium 10', 'Amazon Seller Central'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <div>{['Google Workspace', 'Microsoft 365', 'Slack', 'Trello', 'ClickUp', 'Canva', 'Figma', 'Framer'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
             </div>
           </div>
@@ -645,9 +667,9 @@ function App() {
         <section className="contact-section" id="contact">
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
-            <span className="kicker kicker-dark">Have a project in mind?</span>
-            <h2>Tell me what you need, or book a conversation.</h2>
-            <p>Send the project details for a written recommendation, or choose a time on my calendar if a conversation is easier.</p>
+            <span className="kicker kicker-dark">Start with the current problem</span>
+            <h2>Show me where the customer journey or handoff breaks.</h2>
+            <p>Send the current website, tools, desired outcome, deadline, and budget range. I will recommend a realistic scope or tell you when the project is not a fit.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
               <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
