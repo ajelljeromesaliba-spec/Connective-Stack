@@ -286,6 +286,23 @@ export default function CaseStudy({ slug }) {
 
   useEffect(() => {
     document.title = `${study.title} | ConnectiveStack Case Study`
+    const pageUrl = `https://www.connectivestack.com/case-studies/${slug}`
+    const pageDescription = study.summary
+    const socialImage = `https://www.connectivestack.com${study.image}`
+    const setMeta = (selector, attribute, value) => {
+      const element = document.head.querySelector(selector)
+      if (element) element.setAttribute(attribute, value)
+    }
+
+    setMeta('link[rel="canonical"]', 'href', pageUrl)
+    setMeta('meta[name="description"]', 'content', pageDescription)
+    setMeta('meta[property="og:title"]', 'content', `${study.title} | ConnectiveStack Case Study`)
+    setMeta('meta[property="og:description"]', 'content', pageDescription)
+    setMeta('meta[property="og:url"]', 'content', pageUrl)
+    setMeta('meta[property="og:image"]', 'content', socialImage)
+    setMeta('meta[name="twitter:title"]', 'content', `${study.title} | ConnectiveStack Case Study`)
+    setMeta('meta[name="twitter:description"]', 'content', pageDescription)
+    setMeta('meta[name="twitter:image"]', 'content', socialImage)
     window.scrollTo(0, 0)
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
