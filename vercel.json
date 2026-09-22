@@ -49,6 +49,10 @@
     {
       "source": "/demos/:path*",
       "destination": "/index.html"
+    },
+    {
+      "source": "/case-studies/:path*",
+      "destination": "/index.html"
     }
   ]
 }
