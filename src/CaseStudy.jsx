@@ -284,6 +284,53 @@ export default function CaseStudy({ slug }) {
   useEffect(() => {
     document.title = `${study.title} | ConnectiveStack Case Study`
     window.scrollTo(0, 0)
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const selector = [
+      '.case-header > *',
+      '.case-hero-copy > *',
+      '.case-hero-visual',
+      '.case-meta > div',
+      '.case-section-label',
+      '.case-section-copy > *',
+      '.case-challenge > *',
+      '.case-strategy-heading > *',
+      '.case-strategy-grid article',
+      '.case-build-heading > *',
+      '.case-build-grid article',
+      '.case-journey article',
+      '.case-flow > div',
+      '.case-decisions-heading > *',
+      '.case-decision-list article',
+      '.case-testing-grid article',
+      '.case-outcomes-heading > *',
+      '.case-outcome-grid article',
+      '.case-implementation > *',
+      '.case-final-cta > *',
+      '.case-footer > *',
+    ].join(',')
+
+    const motionItems = [...document.querySelectorAll(selector)]
+    motionItems.forEach((item, index) => {
+      item.setAttribute('data-case-reveal', '')
+      item.style.setProperty('--case-delay', `${(index % 4) * 85}ms`)
+    })
+
+    if (reduceMotion) {
+      motionItems.forEach(item => item.classList.add('case-is-visible'))
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return
+        entry.target.classList.add('case-is-visible')
+        observer.unobserve(entry.target)
+      })
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' })
+
+    motionItems.forEach(item => observer.observe(item))
+    return () => observer.disconnect()
   }, [study])
 
   return (
