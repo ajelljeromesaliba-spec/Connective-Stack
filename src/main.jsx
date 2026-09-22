@@ -49,7 +49,7 @@ const services = [
 const pricingTiers = [
   {
     name: 'Professional Website',
-    price: '1,500',
+    price: '1,250',
     label: 'Starting project investment',
     description: 'A professionally built website that gives your business a credible online presence and a clear path for customers to take action.',
     bestFor: 'Best for established service businesses ready for a stronger online presence',
@@ -57,7 +57,7 @@ const pricingTiers = [
   },
   {
     name: 'Lead-Ready Website',
-    price: '2,750',
+    price: '2,250',
     label: 'Starting project investment',
     description: 'A more complete service website designed to capture inquiries and move visitors toward a call or appointment.',
     bestFor: 'Best for businesses actively generating leads',
@@ -66,7 +66,7 @@ const pricingTiers = [
   },
   {
     name: 'Connected Website System',
-    price: '4,500',
+    price: '3,750',
     label: 'Starting project investment',
     description: 'A website connected to the systems behind the business, with lead routing and practical automation included.',
     bestFor: 'Best for teams that need fewer manual handoffs',
@@ -274,7 +274,7 @@ function ProjectInquiryForm() {
       <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
       <label>How can I help?<select name="service" required defaultValue=""><option value="" disabled>Select a service</option><option>New website</option><option>Website redesign</option><option>Landing page</option><option>Website plus lead capture</option><option>CRM or GoHighLevel setup</option><option>Automation or integration</option><option>AI chat or voice agent</option><option>Hourly technical support</option><option>Not sure yet</option></select></label>
       <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
-      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,500 to $2,750</option><option>$2,750 to $4,500</option><option>$4,500 to $7,500</option><option>$7,500+</option><option>Need a recommendation</option></select></label>
+      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,250 to $2,250</option><option>$2,250 to $3,750</option><option>$3,750 to $6,000</option><option>$6,000+</option><option>Need a recommendation</option></select></label>
       <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
       <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the current problem, the pages or systems you need, and the outcome you want." /></label>
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
@@ -371,7 +371,7 @@ function App() {
               <a href="#work" className="button button-secondary">See sample work</a>
             </div>
             <div className="hero-meta">
-              <div><strong>Projects from $1,500</strong><span>Clear scope and deliverables</span></div>
+              <div><strong>Projects from $1,250</strong><span>Clear scope and deliverables</span></div>
               <div><strong>Direct support</strong><span>You work with me, AJ</span></div>
               <div><strong>US-ready</strong><span>Clear, conversion-focused copy</span></div>
             </div>
@@ -484,7 +484,7 @@ function App() {
           <div className="price-intro" data-reveal>
             <span className="kicker">Project-based pricing</span>
             <h2>Choose the level of build your business actually needs.</h2>
-            <p>Website projects start at $1,500. Final investment depends on page count, integrations, automation complexity, and content readiness. Every engagement has a defined scope, deliverables, and price before work begins.</p>
+            <p>Website projects start at $1,250. Final investment depends on page count, integrations, automation complexity, and content readiness. Every engagement has a defined scope, deliverables, and price before work begins.</p>
           </div>
           <div className="pricing-grid" data-reveal>
             {pricingTiers.map(tier => (
@@ -505,7 +505,7 @@ function App() {
           <div className="hourly-support" data-reveal>
             <div className="hourly-support-rate">
               <span>Flexible support</span>
-              <strong><sup>$</sup>60<small>/hour</small></strong>
+              <strong><sup>$</sup>50<small>/hour</small></strong>
               <p>For smaller updates, fixes, and ongoing technical help.</p>
             </div>
             <div className="hourly-support-details">
@@ -631,7 +631,7 @@ function App() {
             </div>
             <div className="contact-expectations">
               <div><strong>Project-based</strong><span>Defined scope, price, and delivery plan</span></div>
-              <div><strong>$60/hour</strong><span>Technical support with a one-hour minimum</span></div>
+              <div><strong>$50/hour</strong><span>Technical support with a one-hour minimum</span></div>
               <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
             </div>
           </div>
