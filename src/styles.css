@@ -403,3 +403,665 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .process-film video { display: none; }
   .process-film { min-height: 300px; background: #0b1113 url('/assets/build-process-poster.jpg') center / cover no-repeat; }
 }
+
+
+/* CLEAN SURREAL PORTFOLIO — scoped to the main portfolio only */
+.portfolio-header {
+  background: rgba(247, 250, 249, 0.82);
+  border-bottom: 1px solid rgba(15, 24, 24, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.portfolio-main {
+  --surreal-ink: #0b1112;
+  --surreal-paper: #f4f8f7;
+  --surreal-mint: #18cdb7;
+  --surreal-line: rgba(11, 17, 18, 0.12);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 88% 6%, rgba(24, 205, 183, 0.12), transparent 26rem),
+    linear-gradient(180deg, #f8fbfa 0%, #f2f7f5 34%, #ffffff 64%);
+}
+
+.portfolio-main .hero {
+  position: relative;
+  min-height: min(920px, calc(100svh - 76px));
+  padding: clamp(5rem, 8vw, 8.5rem) clamp(1.25rem, 5vw, 5.5rem) clamp(4rem, 7vw, 7rem);
+  grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
+  gap: clamp(2.5rem, 6vw, 7rem);
+  align-items: center;
+  background: transparent;
+  isolation: isolate;
+}
+
+.portfolio-main .hero::before {
+  content: "";
+  position: absolute;
+  inset: 1.5rem;
+  border: 1px solid rgba(11, 17, 18, 0.08);
+  border-radius: 2.4rem;
+  pointer-events: none;
+}
+
+.portfolio-main .hero-surreal-field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.portfolio-main .hero-field-orb {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0.75;
+}
+
+.portfolio-main .hero-field-orb-one {
+  width: min(38vw, 38rem);
+  aspect-ratio: 1;
+  top: -18%;
+  right: -10%;
+  background: radial-gradient(circle at 34% 34%, rgba(255,255,255,.96), rgba(24,205,183,.16) 42%, rgba(24,205,183,0) 70%);
+}
+
+.portfolio-main .hero-field-orb-two {
+  width: 18rem;
+  aspect-ratio: 1;
+  left: 36%;
+  bottom: -12%;
+  border: 1px solid rgba(12, 25, 25, 0.08);
+  box-shadow: inset 0 0 60px rgba(24,205,183,.08);
+}
+
+.portfolio-main .hero-grid {
+  opacity: 0.28;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.portfolio-main .hero-copy {
+  position: relative;
+  z-index: 3;
+  max-width: 44rem;
+}
+
+.portfolio-main .hero-copy::before {
+  content: "CS—01";
+  display: block;
+  margin-bottom: 2rem;
+  color: rgba(11, 17, 18, 0.42);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+.portfolio-main .eyebrow {
+  width: fit-content;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(11, 17, 18, 0.1);
+  border-radius: 999px;
+  background: rgba(255,255,255,.62);
+  box-shadow: 0 14px 40px rgba(14, 35, 33, 0.05);
+}
+
+.portfolio-main .hero h1 {
+  max-width: 10.4ch;
+  margin-top: 1.4rem;
+  font-size: clamp(3.5rem, 6.15vw, 7.15rem);
+  line-height: 0.92;
+  letter-spacing: -0.072em;
+  text-wrap: balance;
+}
+
+.portfolio-main .hero h1 em {
+  color: var(--surreal-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
+
+.portfolio-main .hero h1 em::after {
+  content: "";
+  display: inline-block;
+  width: 0.34em;
+  height: 0.34em;
+  margin-left: 0.06em;
+  border-radius: 50%;
+  background: var(--surreal-mint);
+  vertical-align: 0.14em;
+  box-shadow: 0 0 0 0.1em rgba(24, 205, 183, 0.13);
+}
+
+.portfolio-main .hero-lead {
+  max-width: 38rem;
+  font-size: clamp(1rem, 1.2vw, 1.18rem);
+  line-height: 1.75;
+  color: rgba(11, 17, 18, 0.7);
+}
+
+.portfolio-main .hero-actions .button {
+  min-height: 3.4rem;
+  border-radius: 999px;
+}
+
+.portfolio-main .hero-meta {
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--surreal-line);
+}
+
+.portfolio-main .surreal-hero {
+  position: relative;
+  min-height: clamp(32rem, 58vw, 48rem);
+  display: grid;
+  place-items: center;
+}
+
+.portfolio-main .surreal-canvas {
+  position: relative;
+  width: min(100%, 54rem);
+  height: clamp(31rem, 52vw, 47rem);
+  margin: 0;
+  overflow: hidden;
+  border-radius: 48% 48% 2.4rem 2.4rem / 18% 18% 2.4rem 2.4rem;
+  background: #e8eeee;
+  box-shadow:
+    0 3rem 8rem rgba(16, 38, 35, 0.18),
+    inset 0 0 0 1px rgba(255,255,255,.7);
+  transform: rotate(1.35deg);
+}
+
+.portfolio-main .surreal-canvas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 64%, rgba(6, 15, 16, .72)),
+    linear-gradient(90deg, rgba(255,255,255,.14), transparent 30%);
+  pointer-events: none;
+}
+
+.portfolio-main .surreal-canvas img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% center;
+  transform: scale(1.035) rotate(-1.35deg);
+  transition: transform 900ms cubic-bezier(.2,.8,.2,1);
+}
+
+.portfolio-main .surreal-canvas:hover img {
+  transform: scale(1.075) rotate(-1.35deg);
+}
+
+.portfolio-main .surreal-canvas figcaption {
+  position: absolute;
+  z-index: 2;
+  left: 2rem;
+  right: 2rem;
+  bottom: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
+  color: white;
+}
+
+.portfolio-main .surreal-canvas figcaption span {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.portfolio-main .surreal-canvas figcaption strong {
+  max-width: 12rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-align: right;
+}
+
+.portfolio-main .surreal-orbit {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(11, 17, 18, 0.16);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.portfolio-main .surreal-orbit-one {
+  width: 17rem;
+  height: 6rem;
+  top: 10%;
+  right: -9%;
+  transform: rotate(-14deg);
+}
+
+.portfolio-main .surreal-orbit-two {
+  width: 9rem;
+  height: 9rem;
+  left: -5%;
+  bottom: 4%;
+  box-shadow: inset 0 0 2rem rgba(24, 205, 183, 0.12);
+}
+
+.portfolio-main .surreal-hero .floating-card {
+  border: 1px solid rgba(255,255,255,.72);
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 1.5rem 4rem rgba(11, 30, 28, .16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.portfolio-main .surreal-hero .floating-card-one {
+  left: -3.2rem;
+  bottom: 16%;
+}
+
+.portfolio-main .surreal-hero .floating-card-two {
+  right: -2.5rem;
+  top: 18%;
+}
+
+.portfolio-main .section {
+  position: relative;
+}
+
+.portfolio-main .section-heading .kicker,
+.portfolio-main .price-intro .kicker,
+.portfolio-main .process-heading .kicker {
+  color: #0a8f80;
+  letter-spacing: 0.16em;
+}
+
+.portfolio-main .services {
+  padding-top: clamp(6rem, 10vw, 10rem);
+  padding-bottom: clamp(6rem, 10vw, 10rem);
+  background: rgba(255,255,255,.68);
+}
+
+.portfolio-main .services::before {
+  content: "SERVICES / SYSTEMS / SUPPORT";
+  position: absolute;
+  top: 3rem;
+  right: clamp(1.5rem, 6vw, 6rem);
+  color: rgba(11,17,18,.34);
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+}
+
+.portfolio-main .service-list {
+  border-top: 1px solid var(--surreal-line);
+}
+
+.portfolio-main .service-card {
+  border: 0;
+  border-bottom: 1px solid var(--surreal-line);
+  border-radius: 0;
+  background: transparent;
+  transition: padding 350ms ease, background 350ms ease;
+}
+
+.portfolio-main .service-card:hover {
+  padding-inline: 1.2rem;
+  background: rgba(24,205,183,.06);
+}
+
+.portfolio-main .service-number {
+  color: #0a8f80;
+}
+
+.portfolio-main .service-arrow {
+  border-radius: 50%;
+  background: var(--surreal-ink);
+  color: white;
+}
+
+.portfolio-main .work {
+  margin: 0 clamp(.75rem, 2vw, 2rem);
+  padding: clamp(6rem, 9vw, 9rem) clamp(1.1rem, 4vw, 5rem);
+  border-radius: clamp(2rem, 5vw, 5rem);
+  color: white;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(24,205,183,.18), transparent 25rem),
+    #0a1011;
+}
+
+.portfolio-main .work .section-heading h2,
+.portfolio-main .work .section-heading p {
+  color: white;
+}
+
+.portfolio-main .work .section-heading p {
+  opacity: .7;
+}
+
+.portfolio-main .work .project-grid {
+  gap: 1.4rem;
+}
+
+.portfolio-main .work .project-card {
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 2.2rem;
+  background: #f8fbfa;
+  color: var(--surreal-ink);
+  box-shadow: 0 2rem 6rem rgba(0,0,0,.24);
+}
+
+.portfolio-main .work .project-image {
+  min-height: clamp(23rem, 42vw, 38rem);
+}
+
+.portfolio-main .work .project-image img {
+  transition: transform 800ms cubic-bezier(.2,.8,.2,1), filter 800ms ease;
+}
+
+.portfolio-main .work .project-card:hover .project-image img {
+  transform: scale(1.035);
+  filter: saturate(.92) contrast(1.03);
+}
+
+.portfolio-main .concept-badge {
+  border-radius: 999px;
+  border-color: rgba(255,255,255,.56);
+  background: rgba(255,255,255,.84);
+  backdrop-filter: blur(16px);
+}
+
+.portfolio-main .project-copy {
+  padding: clamp(1.8rem, 4vw, 3.4rem);
+}
+
+.portfolio-main .project-demo-link {
+  border-radius: 999px;
+}
+
+.portfolio-main .surreal-manifesto {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, .55fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: center;
+  padding: clamp(7rem, 12vw, 12rem) clamp(1.25rem, 5vw, 5.5rem);
+}
+
+.portfolio-main .surreal-manifesto-art {
+  position: relative;
+  min-height: clamp(26rem, 50vw, 45rem);
+  overflow: hidden;
+  border-radius: 2.5rem 50% 2.5rem 2.5rem / 2.5rem 32% 2.5rem 2.5rem;
+  box-shadow: 0 2rem 7rem rgba(17, 41, 38, .16);
+}
+
+.portfolio-main .surreal-manifesto-art img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
+}
+
+.portfolio-main .surreal-manifesto-index {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  padding: .7rem .9rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.78);
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  backdrop-filter: blur(14px);
+}
+
+.portfolio-main .surreal-manifesto-copy {
+  position: relative;
+}
+
+.portfolio-main .surreal-manifesto-copy::before {
+  content: "";
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  top: -5rem;
+  right: -3rem;
+  border: 1px solid rgba(11,17,18,.12);
+  border-radius: 50%;
+}
+
+.portfolio-main .surreal-manifesto-copy h2 {
+  margin: 1.2rem 0 1.4rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.5rem, 4.5vw, 5.2rem);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.05em;
+}
+
+.portfolio-main .surreal-manifesto-copy > p {
+  color: rgba(11,17,18,.68);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.portfolio-main .manifesto-principles {
+  display: grid;
+  gap: 0;
+  margin-top: 2.4rem;
+  border-top: 1px solid var(--surreal-line);
+}
+
+.portfolio-main .manifesto-principles span {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--surreal-line);
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.portfolio-main .price-section {
+  margin: 0 clamp(.75rem, 2vw, 2rem);
+  border-radius: clamp(2rem, 5vw, 5rem);
+  background: #eaf2f0;
+}
+
+.portfolio-main .pricing-tier {
+  border-color: rgba(11,17,18,.1);
+  border-radius: 1.8rem;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(10px);
+}
+
+.portfolio-main .pricing-tier.featured {
+  background: #0b1112;
+  box-shadow: 0 2.5rem 5rem rgba(11,17,18,.18);
+}
+
+.portfolio-main .process-showcase {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(24,205,183,.12), transparent 24rem),
+    #f8fbfa;
+}
+
+.portfolio-main .process-film {
+  border-radius: 3rem 3rem 1.2rem 3rem;
+}
+
+.portfolio-main .about-section {
+  position: relative;
+  background: #0a1011;
+}
+
+.portfolio-main .about-section::after {
+  content: "";
+  position: absolute;
+  width: clamp(14rem, 26vw, 28rem);
+  aspect-ratio: 1;
+  right: -10%;
+  bottom: -25%;
+  border: 1px solid rgba(24,205,183,.28);
+  border-radius: 50%;
+  box-shadow: inset 0 0 6rem rgba(24,205,183,.08);
+  pointer-events: none;
+}
+
+.portfolio-main .about-portrait {
+  border-radius: 50% 50% 2rem 2rem / 20% 20% 2rem 2rem;
+}
+
+.portfolio-main .contact-section {
+  background:
+    radial-gradient(circle at 15% 18%, rgba(255,255,255,.18), transparent 20rem),
+    linear-gradient(135deg, #0b9e8d, #18cdb7);
+}
+
+.portfolio-main .inquiry-form {
+  border: 1px solid rgba(255,255,255,.62);
+  border-radius: 2rem;
+  background: rgba(238, 251, 248, .86);
+  box-shadow: 0 2rem 6rem rgba(4,57,51,.18);
+  backdrop-filter: blur(20px);
+}
+
+.portfolio-footer {
+  background: #f8fbfa;
+  border-top: 1px solid rgba(11,17,18,.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .portfolio-main .surreal-orbit-one {
+    animation: surreal-drift 11s ease-in-out infinite alternate;
+  }
+
+  .portfolio-main .surreal-orbit-two {
+    animation: surreal-drift 14s ease-in-out infinite alternate-reverse;
+  }
+
+  .portfolio-main .hero-field-orb-one {
+    animation: surreal-breathe 12s ease-in-out infinite;
+  }
+}
+
+@keyframes surreal-drift {
+  to { transform: translate3d(-1.5rem, 1.2rem, 0) rotate(8deg); }
+}
+
+@keyframes surreal-breathe {
+  50% { transform: scale(1.08); opacity: .55; }
+}
+
+@media (max-width: 1050px) {
+  .portfolio-main .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .portfolio-main .hero-copy {
+    max-width: 54rem;
+  }
+
+  .portfolio-main .hero h1 {
+    max-width: 11ch;
+  }
+
+  .portfolio-main .surreal-hero {
+    min-height: 40rem;
+  }
+
+  .portfolio-main .surreal-manifesto {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-main .surreal-manifesto-copy {
+    max-width: 44rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .portfolio-main .hero {
+    padding-top: 3.4rem;
+    padding-inline: 1rem;
+    gap: 2.5rem;
+  }
+
+  .portfolio-main .hero::before {
+    inset: .5rem;
+    border-radius: 1.6rem;
+  }
+
+  .portfolio-main .hero-copy::before {
+    margin-bottom: 1rem;
+  }
+
+  .portfolio-main .hero h1 {
+    font-size: clamp(3.15rem, 15vw, 5rem);
+  }
+
+  .portfolio-main .hero-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-main .surreal-hero {
+    min-height: 31rem;
+  }
+
+  .portfolio-main .surreal-canvas {
+    height: 31rem;
+    border-radius: 48% 48% 1.6rem 1.6rem / 13% 13% 1.6rem 1.6rem;
+  }
+
+  .portfolio-main .surreal-canvas figcaption {
+    left: 1.1rem;
+    right: 1.1rem;
+    bottom: 1.1rem;
+  }
+
+  .portfolio-main .surreal-canvas figcaption span {
+    max-width: 9rem;
+  }
+
+  .portfolio-main .surreal-canvas figcaption strong {
+    font-size: .96rem;
+  }
+
+  .portfolio-main .surreal-hero .floating-card-one {
+    left: .25rem;
+    bottom: -1rem;
+  }
+
+  .portfolio-main .surreal-hero .floating-card-two {
+    right: .25rem;
+    top: 1.2rem;
+  }
+
+  .portfolio-main .work {
+    margin-inline: .35rem;
+    padding-inline: .8rem;
+    border-radius: 2rem;
+  }
+
+  .portfolio-main .work .project-card {
+    border-radius: 1.5rem;
+  }
+
+  .portfolio-main .surreal-manifesto {
+    padding-inline: 1rem;
+  }
+
+  .portfolio-main .surreal-manifesto-art {
+    min-height: 30rem;
+    border-radius: 1.5rem 45% 1.5rem 1.5rem / 1.5rem 18% 1.5rem 1.5rem;
+  }
+
+  .portfolio-main .surreal-manifesto-art img {
+    object-position: 38% center;
+  }
+
+  .portfolio-main .price-section {
+    margin-inline: .35rem;
+    border-radius: 2rem;
+  }
+}
