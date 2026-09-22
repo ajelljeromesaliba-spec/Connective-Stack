@@ -437,3 +437,307 @@ body { margin: 0; }
   html { scroll-behavior: auto; }
   .case-button { transition: none; }
 }
+
+
+/* CASE STUDY MOTION SYSTEM */
+[data-case-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 34px, 0);
+  filter: blur(7px);
+  transition:
+    opacity 760ms cubic-bezier(.22, 1, .36, 1),
+    transform 900ms cubic-bezier(.22, 1, .36, 1),
+    filter 760ms ease;
+  transition-delay: var(--case-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+[data-case-reveal].case-is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+}
+
+.case-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.case-hero::after {
+  content: "";
+  width: clamp(240px, 32vw, 520px);
+  aspect-ratio: 1;
+  position: absolute;
+  left: 40%;
+  top: 4%;
+  z-index: -1;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--case-accent) 12%, transparent);
+  filter: blur(70px);
+  animation: case-orbit 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.case-hero-visual {
+  overflow: visible;
+  transition: transform 700ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.case-hero-visual img {
+  transition: transform 1.2s cubic-bezier(.22, 1, .36, 1), filter 700ms ease;
+  animation: case-photo-breathe 10s ease-in-out infinite alternate;
+}
+
+.case-hero-visual:hover {
+  transform: translateY(-8px) rotate(.25deg);
+}
+
+.case-hero-visual:hover img {
+  transform: scale(1.035);
+  filter: saturate(1) contrast(1.04);
+}
+
+.case-hero-visual figcaption {
+  animation: case-caption-float 4.8s ease-in-out infinite;
+}
+
+.case-kicker::after {
+  content: "";
+  width: 42px;
+  height: 1px;
+  margin-left: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  background: currentColor;
+  transform-origin: left;
+  animation: case-line-pulse 2.8s ease-in-out infinite;
+}
+
+.case-button svg,
+.case-header-cta svg,
+.case-footer a:last-child svg {
+  transition: transform 220ms ease;
+}
+
+.case-button:hover svg,
+.case-header-cta:hover svg,
+.case-footer a:last-child:hover svg {
+  transform: translateX(5px);
+}
+
+.case-meta > div,
+.case-goal-grid article,
+.case-strategy-grid article,
+.case-build-grid article,
+.case-testing-grid article,
+.case-outcome-grid article {
+  transition:
+    transform 380ms cubic-bezier(.22, 1, .36, 1),
+    border-color 280ms ease,
+    background-color 280ms ease,
+    box-shadow 380ms ease;
+}
+
+.case-meta > div:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,.055);
+}
+
+.case-goal-grid article:hover,
+.case-testing-grid article:hover {
+  z-index: 1;
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--case-accent) 48%, transparent);
+  box-shadow: 0 24px 60px rgba(15, 30, 30, .09);
+}
+
+.case-strategy-grid article:hover {
+  transform: translateY(-8px);
+  background: color-mix(in srgb, var(--case-soft) 80%, #fff);
+  box-shadow: 0 24px 55px color-mix(in srgb, var(--case-accent) 13%, transparent);
+}
+
+.case-build-grid article:hover,
+.case-outcome-grid article:hover {
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--case-accent) 72%, transparent);
+  background: rgba(255,255,255,.065);
+}
+
+.case-journey article,
+.case-decision-list article,
+.case-implementation li {
+  transition: transform 320ms ease, padding-left 320ms ease, background-color 320ms ease;
+}
+
+.case-journey article:hover,
+.case-decision-list article:hover,
+.case-implementation li:hover {
+  padding-left: 14px;
+  transform: translateX(5px);
+  background: color-mix(in srgb, var(--case-soft) 54%, transparent);
+}
+
+.case-flow > div {
+  position: relative;
+  overflow: hidden;
+  transition: transform 320ms ease, border-color 320ms ease, background-color 320ms ease;
+}
+
+.case-flow > div::after {
+  content: "";
+  position: absolute;
+  inset: auto 100% 0 0;
+  height: 3px;
+  background: var(--case-accent);
+  transition: inset 520ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.case-flow > div:hover {
+  transform: translateY(-6px);
+  border-color: var(--case-accent);
+  background: color-mix(in srgb, var(--case-soft) 52%, transparent);
+}
+
+.case-flow > div:hover::after {
+  inset: auto 0 0 0;
+}
+
+.case-flow > i {
+  animation: case-arrow-travel 1.8s ease-in-out infinite;
+}
+
+.case-challenge li svg,
+.case-build-grid li svg,
+.case-outcome-grid svg {
+  transition: transform 280ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.case-challenge li:hover svg,
+.case-build-grid li:hover svg,
+.case-outcome-grid article:hover svg {
+  transform: scale(1.22) rotate(-7deg);
+}
+
+.case-final-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.case-final-cta::before,
+.case-final-cta::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.case-final-cta::before {
+  width: 420px;
+  height: 420px;
+  left: -190px;
+  top: -250px;
+  border: 1px solid color-mix(in srgb, var(--case-accent) 48%, transparent);
+  animation: case-ring-spin 18s linear infinite;
+}
+
+.case-final-cta::after {
+  width: 360px;
+  height: 360px;
+  right: -150px;
+  bottom: -230px;
+  background: color-mix(in srgb, var(--case-accent) 17%, transparent);
+  filter: blur(35px);
+  animation: case-orbit 9s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes case-orbit {
+  from { transform: translate3d(-4%, -2%, 0) scale(.92); }
+  to { transform: translate3d(12%, 9%, 0) scale(1.08); }
+}
+
+@keyframes case-photo-breathe {
+  from { transform: scale(1); }
+  to { transform: scale(1.025); }
+}
+
+@keyframes case-caption-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -7px, 0); }
+}
+
+@keyframes case-line-pulse {
+  0%, 100% { transform: scaleX(.45); opacity: .45; }
+  50% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes case-arrow-travel {
+  0%, 100% { transform: translateX(-2px); opacity: .45; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+@keyframes case-ring-spin {
+  from { transform: rotate(0deg) scale(.92); }
+  to { transform: rotate(360deg) scale(1.08); }
+}
+
+@media (max-width: 720px) {
+  [data-case-reveal] {
+    transform: translate3d(0, 22px, 0);
+    filter: blur(4px);
+  }
+
+  .case-hero-visual:hover,
+  .case-goal-grid article:hover,
+  .case-testing-grid article:hover,
+  .case-strategy-grid article:hover,
+  .case-build-grid article:hover,
+  .case-outcome-grid article:hover {
+    transform: none;
+  }
+
+  .case-flow > i {
+    animation-name: case-arrow-travel-mobile;
+  }
+}
+
+@keyframes case-arrow-travel-mobile {
+  0%, 100% { transform: rotate(90deg) translateX(-2px); opacity: .45; }
+  50% { transform: rotate(90deg) translateX(4px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-case-reveal],
+  [data-case-reveal].case-is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .case-hero::after,
+  .case-hero-visual img,
+  .case-hero-visual figcaption,
+  .case-kicker::after,
+  .case-flow > i,
+  .case-final-cta::before,
+  .case-final-cta::after {
+    animation: none;
+  }
+
+  .case-hero-visual,
+  .case-hero-visual img,
+  .case-meta > div,
+  .case-goal-grid article,
+  .case-strategy-grid article,
+  .case-build-grid article,
+  .case-testing-grid article,
+  .case-outcome-grid article,
+  .case-journey article,
+  .case-decision-list article,
+  .case-implementation li {
+    transition: none;
+  }
+}
