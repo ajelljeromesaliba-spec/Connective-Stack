@@ -284,11 +284,12 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!legalModal && !activeService) return undefined
+    if (!legalModal && !activeService && !menuOpen) return undefined
     const closeOnEscape = event => {
       if (event.key !== 'Escape') return
       setLegalModal(null)
       setActiveService(null)
+      setMenuOpen(false)
     }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', closeOnEscape)
@@ -296,7 +297,7 @@ function App() {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', closeOnEscape)
     }
-  }, [legalModal, activeService])
+  }, [legalModal, activeService, menuOpen])
 
   const closeMenu = () => setMenuOpen(false)
 
@@ -306,10 +307,10 @@ function App() {
         <a href="#top" className="brand" aria-label="ConnectiveStack home">
           <img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" />
         </a>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
+        <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="site-navigation">
           <span /><span />
         </button>
-        <nav className={menuOpen ? 'nav-open' : ''}>
+        <nav id="site-navigation" className={menuOpen ? 'nav-open' : ''}>
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
           <div className="nav-demo-menu">
