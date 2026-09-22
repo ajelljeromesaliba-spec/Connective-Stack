@@ -232,14 +232,14 @@ function VoiceDemo() {
         </div>
         <div className="voice-prompt-list">
           <span>Try saying</span>
-          <button type="button" onClick={startCall}>âMy AC is blowing warm air.â</button>
-          <button type="button" onClick={startCall}>âI smell gas near my furnace.â</button>
-          <button type="button" onClick={startCall}>âCan I request an appointment?â</button>
+          <button type="button" onClick={startCall}>“My AC is blowing warm air.”</button>
+          <button type="button" onClick={startCall}>“I smell gas near my furnace.”</button>
+          <button type="button" onClick={startCall}>“Can I request an appointment?”</button>
         </div>
       </div>
 
       <div className={`voice-console ${live ? 'is-live' : ''} ${speaking ? 'is-speaking' : ''}`}>
-        <div className="voice-console-top"><span>VAPI VOICE SESSION</span><i>{live ? 'â LIVE' : 'â STANDBY'}</i></div>
+        <div className="voice-console-top"><span>VAPI VOICE SESSION</span><i>{live ? '● LIVE' : '● STANDBY'}</i></div>
         <div className="voice-orbit" aria-hidden="true">
           <i className="voice-ring ring-a" /><i className="voice-ring ring-b" />
           <div className="voice-core"><Icon name="mic" /></div>
@@ -266,7 +266,7 @@ function VoiceDemo() {
 
 function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Hi, Iâm Nova, the Northstar virtual front desk. I can answer HVAC questions, check service coverage, and help request an appointment. This is an interactive portfolio demo, so please use sample contact details.' },
+    { from: 'bot', text: 'Hi, I’m Nova, the Northstar virtual front desk. I can answer HVAC questions, check service coverage, and help request an appointment. This is an interactive portfolio demo, so please use sample contact details.' },
   ])
   const [input, setInput] = useState('')
   const [replies, setReplies] = useState(defaultQuickReplies)
@@ -302,7 +302,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const startBooking = service => {
     setFlow({ step: 'service', data: service ? { service } : {} })
     if (service) {
-      addBot(`Got it. Iâll start a ${service} request. How urgent is the issue?`, ['Emergency or unsafe', 'No heating or cooling', 'System still runs', 'Planning or estimate'])
+      addBot(`Got it. I’ll start a ${service} request. How urgent is the issue?`, ['Emergency or unsafe', 'No heating or cooling', 'System still runs', 'Planning or estimate'])
     } else {
       addBot('What type of help do you need?', ['AC repair', 'Heating repair', 'Maintenance', 'Replacement estimate', 'Indoor air quality'])
     }
@@ -331,7 +331,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
         return
       }
       setFlow({ step: 'name', data: { ...current.data, zip } })
-      addBot('Thanks. Iâll include that ZIP for service-area verification. What sample name should I place on the request?', [])
+      addBot('Thanks. I’ll include that ZIP for service-area verification. What sample name should I place on the request?', [])
       return
     }
     if (current.step === 'name') {
@@ -472,13 +472,13 @@ export default function HvacDemo() {
     <div className="hvac-page">
       <div className="demo-ribbon">
         <span>Interactive portfolio demo by Connective Stack</span>
-        <a href="/">Return to AJâs portfolio <Icon name="arrow" /></a>
+        <a href="/">Return to AJ’s portfolio <Icon name="arrow" /></a>
       </div>
 
       <header className="hvac-header">
         <a className="hvac-brand" href="#home" aria-label="Northstar Heating and Air home">
           <NorthstarLogoMark />
-          <span><strong>NORTHSTAR</strong><small>HEATING â¢ COOLING</small></span>
+          <span><strong>NORTHSTAR</strong><small>HEATING • COOLING</small></span>
         </a>
         <nav>
           <a href="#services">Services</a>
@@ -512,8 +512,8 @@ export default function HvacDemo() {
               <div className="hvac-photo-label"><span>ON-SITE EXPERTISE</span><strong>Diagnostics built around the whole system</strong></div>
             </div>
             <div className="comfort-card compact">
-              <div className="comfort-top"><span>HOME COMFORT</span><i>â SYSTEM ONLINE</i></div>
-              <div className="comfort-compact-row"><div><small>INDOOR</small><strong>72<sup>Â°</sup></strong></div><div><span>Humidity</span><b>44%</b><span>Air quality</span><b>Good</b></div></div>
+              <div className="comfort-top"><span>HOME COMFORT</span><i>● SYSTEM ONLINE</i></div>
+              <div className="comfort-compact-row"><div><small>INDOOR</small><strong>72<sup>°</sup></strong></div><div><span>Humidity</span><b>44%</b><span>Air quality</span><b>Good</b></div></div>
             </div>
             <div className="dispatch-card"><span className="dispatch-icon"><Icon name="gauge" /></span><div><small>Service preference</small><strong>Captured for confirmation</strong></div></div>
             <div className="response-card"><i /><span><small>Front desk</small><strong>Replies in seconds</strong></span></div>
@@ -578,7 +578,7 @@ export default function HvacDemo() {
             <button type="button" className="hvac-button light" onClick={() => openWith('What can the assistant answer?')}>Test the assistant <Icon name="arrow" /></button>
           </div>
           <div className="workflow-console">
-            <div className="workflow-top"><span>LIVE WORKFLOW</span><i>{lead ? 'â LEAD ROUTED' : 'â WAITING FOR DEMO LEAD'}</i></div>
+            <div className="workflow-top"><span>LIVE WORKFLOW</span><i>{lead ? '● LEAD ROUTED' : '● WAITING FOR DEMO LEAD'}</i></div>
             <div className="workflow-nodes">
               {['Website chat', 'Safety check', 'Lead qualification', 'CRM record', 'Dispatch follow-up'].map((item, index) => (
                 <div className={lead || index === 0 ? 'active' : ''} key={item}><span>0{index + 1}</span><strong>{item}</strong><small>{lead ? 'Complete' : index === 0 ? 'Online' : 'Ready'}</small></div>
@@ -609,7 +609,7 @@ export default function HvacDemo() {
           <div className="hvac-faq-list">
             {faqItems.map(([question, answer], index) => (
               <article className={openFaq === index ? 'open' : ''} key={question}>
-                <button type="button" onClick={() => setOpenFaq(openFaq === index ? -1 : index)}><span>{question}</span><i>{openFaq === index ? 'â' : '+'}</i></button>
+                <button type="button" onClick={() => setOpenFaq(openFaq === index ? -1 : index)}><span>{question}</span><i>{openFaq === index ? '−' : '+'}</i></button>
                 {openFaq === index && <p>{answer}</p>}
               </article>
             ))}
@@ -618,7 +618,7 @@ export default function HvacDemo() {
 
         <section className="hvac-demo-cta">
           <div><span>Need a system like this?</span><h2>Turn your website into a working front desk.</h2></div>
-          <div><p>This page is a fictional demonstration built by AJ Saliba at Connective Stack. The same structure can be customized around a real companyâs services, policies, service area, CRM, and scheduling process.</p><a href="mailto:ajell.saliba@connectivestack.com?subject=HVAC%20front%20desk%20project" className="hvac-button dark">Build one for my business <Icon name="arrow" /></a></div>
+          <div><p>This page is a fictional demonstration built by AJ Saliba at Connective Stack. The same structure can be customized around a real company’s services, policies, service area, CRM, and scheduling process.</p><a href="mailto:ajell.saliba@connectivestack.com?subject=HVAC%20front%20desk%20project" className="hvac-button dark">Build one for my business <Icon name="arrow" /></a></div>
         </section>
       </main>
 
