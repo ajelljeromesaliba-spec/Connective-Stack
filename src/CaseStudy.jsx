@@ -16,7 +16,8 @@ const caseStudies = {
     industry: 'Home services',
     title: 'From urgent HVAC problem to an organized service request.',
     summary: 'A conversion-focused HVAC concept designed to capture high-intent inquiries, answer common questions, and give the service team better information before the first follow-up.',
-    image: '/assets/hvac-hero-technician.webp',
+    image: '/assets/case-study-hvac-problem-v1.webp',
+    imageAlt: 'Homeowner uncomfortable in a hot home while checking the thermostat',
     demoHref: '/demos/hvac-ai-front-desk',
     demoLabel: 'Try the HVAC demo',
     theme: 'blue',
@@ -104,7 +105,8 @@ const caseStudies = {
     industry: 'Real estate',
     title: 'A premium property journey built around intent, not endless browsing.',
     summary: 'A luxury brokerage concept that combines curated listings, private search, advisor routing, affordability tools, and concierge-style lead capture.',
-    image: '/assets/realestate-austin-premium.webp',
+    image: '/assets/case-study-realestate-problem-v1.webp',
+    imageAlt: 'Property buyer overwhelmed by listings, notes, and affordability decisions',
     demoHref: '/demos/luxury-real-estate',
     demoLabel: 'Try the real estate demo',
     theme: 'forest',
@@ -192,7 +194,8 @@ const caseStudies = {
     industry: 'Healthcare',
     title: 'A clearer administrative journey from care need to scheduled visit.',
     summary: 'A fictional multi-provider clinic experience that demonstrates conditional intake, provider routing, simulated benefits, cost education, scheduling, and privacy-conscious workflow design.',
-    image: '/assets/healthcare-hero-v1.webp',
+    image: '/assets/case-study-healthcare-problem-v1.webp',
+    imageAlt: 'Patient frustrated by appointment and insurance paperwork',
     demoHref: '/demos/healthcare-patient-experience',
     demoLabel: 'Try the healthcare demo',
     theme: 'teal',
@@ -357,7 +360,7 @@ export default function CaseStudy({ slug }) {
             </div>
           </div>
           <figure className="case-hero-visual">
-            <img src={study.image} alt={`${study.industry} concept interface`} />
+            <img src={study.image} alt={study.imageAlt} />
             <figcaption><span>DESIGNED EXPERIENCE</span><strong>{study.meta[1][1]}</strong></figcaption>
           </figure>
         </section>
