@@ -1461,3 +1461,187 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
     transition: none;
   }
 }
+
+
+/* CREDIBILITY AND EVIDENCE */
+.portfolio-main .credibility-strip {
+  padding: 0 clamp(24px, 7vw, 96px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  color: #effffb;
+  background: #0a2523;
+  border-top: 1px solid rgba(255,255,255,.12);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.portfolio-main .credibility-strip > div {
+  min-height: 144px;
+  padding: 30px clamp(18px, 2.5vw, 34px);
+  display: grid;
+  align-content: center;
+  gap: 9px;
+  border-right: 1px solid rgba(255,255,255,.14);
+}
+
+.portfolio-main .credibility-strip > div:first-child {
+  padding-left: 0;
+}
+
+.portfolio-main .credibility-strip > div:last-child {
+  border-right: 0;
+}
+
+.portfolio-main .credibility-strip strong {
+  color: #53d7c4;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+  letter-spacing: -.035em;
+}
+
+.portfolio-main .credibility-strip span {
+  max-width: 245px;
+  color: rgba(239,255,251,.69);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+
+.portfolio-main .concept-disclosure {
+  max-width: 980px;
+  margin: 34px auto 0;
+  padding: 18px 20px;
+  color: #42514f;
+  background: rgba(255,255,255,.64);
+  border: 1px solid rgba(13,89,82,.16);
+  border-left: 3px solid #0d8f80;
+  font-size: .84rem;
+  line-height: 1.65;
+}
+
+.portfolio-main .evidence-section {
+  padding: clamp(82px, 10vw, 148px) clamp(24px, 7vw, 96px);
+  color: #eafffa;
+  background:
+    radial-gradient(circle at 88% 10%, rgba(32,203,181,.14), transparent 30%),
+    #0a1717;
+}
+
+.portfolio-main .evidence-heading {
+  max-width: 900px;
+  margin-bottom: clamp(42px, 6vw, 74px);
+}
+
+.portfolio-main .evidence-heading h2 {
+  max-width: 850px;
+  margin: 0 0 22px;
+  color: #fff;
+  font-size: clamp(2.5rem, 5.5vw, 5.3rem);
+  line-height: .99;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+
+.portfolio-main .evidence-heading p {
+  max-width: 680px;
+  margin: 0;
+  color: rgba(234,255,250,.66);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.portfolio-main .evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.15);
+}
+
+.portfolio-main .evidence-grid article {
+  min-height: 330px;
+  padding: clamp(26px, 3vw, 40px);
+  background: #0a1717;
+  transition: transform 360ms cubic-bezier(.22,1,.36,1), background-color 300ms ease;
+}
+
+.portfolio-main .evidence-grid article:hover {
+  z-index: 1;
+  transform: translateY(-7px);
+  background: #102322;
+}
+
+.portfolio-main .evidence-grid article > span {
+  color: #42cdb8;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.portfolio-main .evidence-grid h3 {
+  margin: 74px 0 15px;
+  color: #fff;
+  font-size: 1.25rem;
+  letter-spacing: -.025em;
+}
+
+.portfolio-main .evidence-grid p {
+  margin: 0;
+  color: rgba(234,255,250,.64);
+  font-size: .9rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 1000px) {
+  .portfolio-main .credibility-strip,
+  .portfolio-main .evidence-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .portfolio-main .credibility-strip > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .portfolio-main .credibility-strip > div:nth-child(-n+2) {
+    border-bottom: 1px solid rgba(255,255,255,.14);
+  }
+
+  .portfolio-main .credibility-strip > div:first-child {
+    padding-left: clamp(18px, 2.5vw, 34px);
+  }
+}
+
+@media (max-width: 620px) {
+  .portfolio-main .credibility-strip,
+  .portfolio-main .evidence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-main .credibility-strip > div {
+    min-height: 116px;
+    padding: 24px 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.14);
+  }
+
+  .portfolio-main .credibility-strip > div:first-child {
+    padding-left: 0;
+  }
+
+  .portfolio-main .credibility-strip > div:last-child {
+    border-bottom: 0;
+  }
+
+  .portfolio-main .evidence-grid article {
+    min-height: 260px;
+  }
+
+  .portfolio-main .evidence-grid h3 {
+    margin-top: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-main .evidence-grid article {
+    transition: none;
+  }
+}
