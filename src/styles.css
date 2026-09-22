@@ -1103,3 +1103,61 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   background: #21d2bd;
   color: #07100f;
 }
+
+
+/* INQUIRY FORM SPACING FIX */
+.portfolio-main .contact-panel {
+  padding: 10px;
+  border-radius: 2.4rem;
+}
+
+.portfolio-main .inquiry-form {
+  padding: clamp(26px, 3vw, 40px);
+  column-gap: 18px;
+  row-gap: 20px;
+}
+
+.portfolio-main .inquiry-form-heading {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.portfolio-main .inquiry-form-heading > span,
+.portfolio-main .inquiry-form-heading h3,
+.portfolio-main .inquiry-form-heading p {
+  margin: 0;
+}
+
+.portfolio-main .inquiry-form-heading h3 {
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.portfolio-main .inquiry-form label {
+  align-content: start;
+  line-height: 1.35;
+}
+
+@media (max-width: 760px) {
+  .portfolio-main .contact-panel {
+    padding: 6px;
+    border-radius: 1.8rem;
+  }
+
+  .portfolio-main .inquiry-form {
+    grid-template-columns: 1fr;
+    padding: 24px 18px;
+    border-radius: 1.45rem;
+    gap: 18px;
+  }
+
+  .portfolio-main .inquiry-form-heading,
+  .portfolio-main .inquiry-wide {
+    grid-column: auto;
+  }
+
+  .portfolio-main .inquiry-form-heading h3 {
+    font-size: clamp(2rem, 10vw, 2.7rem);
+  }
+}
