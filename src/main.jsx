@@ -92,7 +92,7 @@ const projects = [
     label: 'Real Estate',
     title: 'Premium multi-broker property experience',
     copy: 'A luxury brokerage concept with curated listings, smart property matching, broker routing, affordability tools, and private tour requests.',
-    image: '/assets/realestate-malibu.svg',
+    image: '/assets/realestate-malibu.webp',
     accent: 'sand',
     photo: true,
     goal: 'Turn premium property interest into qualified conversations with the right broker.',
@@ -140,7 +140,7 @@ function LegalModal({ type, onClose }) {
           <p className="legal-updated">Last updated: September 18, 2026</p>
           {isPrivacy ? (
             <>
-              <p>Connective Stack respects your privacy. This policy explains how information may be collected and used when you visit this website or contact AJ about a project.</p>
+              <p>ConnectiveStack respects your privacy. This policy explains how information may be collected and used when you visit this website or contact AJ about a project.</p>
               <h3>Information collected</h3>
               <p>Information may include your name, email address, company details, project requirements, and anything else you choose to provide through email or a contact form. Basic technical and analytics data may also be collected, such as device type, browser, referring page, and general location.</p>
               <h3>How information is used</h3>
@@ -159,7 +159,7 @@ function LegalModal({ type, onClose }) {
             </>
           ) : (
             <>
-              <p>By using this website, you agree to these terms. The website presents information about services offered by Connective Stack and AJ Saliba.</p>
+              <p>By using this website, you agree to these terms. The website presents information about services offered by ConnectiveStack and Ajell Saliba.</p>
               <h3>Website information</h3>
               <p>Content is provided for general information and may be updated without notice. Examples and concept projects are demonstrations of capabilities and should not be treated as guaranteed business results.</p>
               <h3>Project engagements</h3>
@@ -171,9 +171,9 @@ function LegalModal({ type, onClose }) {
                 <li>Pay third-party subscriptions, usage fees, domains, or licenses unless otherwise agreed</li>
               </ul>
               <h3>Intellectual property</h3>
-              <p>Unless otherwise agreed in writing, final project deliverables transfer after full payment. Connective Stack retains ownership of pre-existing tools, reusable methods, and general know-how. Third-party assets remain subject to their original licenses.</p>
+              <p>Unless otherwise agreed in writing, final project deliverables transfer after full payment. ConnectiveStack retains ownership of pre-existing tools, reusable methods, and general know-how. Third-party assets remain subject to their original licenses.</p>
               <h3>Limitations</h3>
-              <p>No specific lead, revenue, ranking, or conversion result is guaranteed. Connective Stack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
+              <p>No specific lead, revenue, ranking, or conversion result is guaranteed. ConnectiveStack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
               <h3>Contact</h3>
               <p>Questions about these terms may be sent to <a href="mailto:ajell.saliba@connectivestack.com">ajell.saliba@connectivestack.com</a>.</p>
             </>
@@ -207,7 +207,7 @@ function ServiceModal({ service, onClose }) {
               <div><span>Expected result</span><p>{service.result}</p></div>
             </div>
           </div>
-          <a href="#contact" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this service <Arrow /></a>
+          <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this service <Arrow /></a>
         </div>
       </section>
     </div>
@@ -303,8 +303,8 @@ function App() {
   return (
     <>
       <header className="site-header">
-        <a href="#top" className="brand" aria-label="Connective Stack home">
-          <img src="/assets/connective-stack-logo.png" alt="Connective Stack" />
+        <a href="#top" className="brand" aria-label="ConnectiveStack home">
+          <img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" />
         </a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
           <span /><span />
@@ -334,7 +334,7 @@ function App() {
           </div>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
-          <a className="nav-cta" href="#contact" onClick={closeMenu}>Start a project <Arrow /></a>
+          <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Start a project <Arrow /></a>
         </nav>
       </header>
 
@@ -352,7 +352,7 @@ function App() {
             <h1>Websites that look sharp and <em>work harder.</em></h1>
             <p className="hero-lead">I build modern websites for service businesses, then connect the forms, calendars, CRM, and follow-up tools behind them.</p>
             <div className="hero-actions">
-              <a href="#contact" className="button button-primary">Build my website <Arrow /></a>
+              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Build my website <Arrow /></a>
               <a href="#work" className="button button-secondary">See sample work</a>
             </div>
             <div className="hero-meta">
@@ -418,7 +418,7 @@ function App() {
                 <div className={`project-image ${project.accent} ${project.photo ? 'photo-project' : ''}`}>
                   <picture>
                     {project.mobileImage && <source media="(max-width: 760px)" srcSet={project.mobileImage} />}
-                    <img src={project.image} alt={`${project.title} sample concept`} />
+                    <img src={project.image} alt={`${project.title} sample concept`} loading="lazy" />
                   </picture>
                   <span className="concept-badge">{project.live ? 'Live interactive demo' : 'Outcome-led concept'}</span>
                   <span className="project-index">0{index + 1}</span>
@@ -463,7 +463,7 @@ function App() {
                 <p>{tier.description}</p>
                 <em>{tier.bestFor}</em>
                 <ul>{tier.includes.map(item => <li key={item}><Check />{item}</li>)}</ul>
-                <a className={`button ${tier.featured ? 'button-primary' : 'button-secondary'}`} href="#contact">Request this project <Arrow /></a>
+                <a className={`button ${tier.featured ? 'button-primary' : 'button-secondary'}`} href={CALENDAR_URL} target="_blank" rel="noreferrer">Request this project <Arrow /></a>
               </article>
             ))}
           </div>
@@ -485,7 +485,7 @@ function App() {
             <div className="hourly-support-terms">
               <span>Clear expectations</span>
               <p><strong>1-hour minimum</strong> for each support request, then billed in 30-minute increments. I confirm the expected time before starting. Larger builds and new features are quoted as fixed-price projects.</p>
-              <a href="#contact">Request hourly support <Arrow /></a>
+              <a href={CALENDAR_URL} target="_blank" rel="noreferrer">Request hourly support <Arrow /></a>
             </div>
           </div>
           <div className="pricing-note" data-reveal>
@@ -545,7 +545,7 @@ function App() {
         <section className="about-section" id="about">
           <div className="about-visual" data-reveal>
             <div className="about-portrait">
-              <img src="/assets/ajell-saliba.webp" alt="Ajell Saliba, founder and independent specialist at Connective Stack" />
+              <img src="/assets/ajell-saliba.webp" alt="Ajell Saliba, founder and independent specialist at ConnectiveStack" loading="lazy" />
               <div className="portrait-shade" />
               <div className="portrait-label">
                 <span>AJELL SALIBA</span>
@@ -605,10 +605,10 @@ function App() {
       </main>
 
       <footer>
-        <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="Connective Stack" /></a>
+        <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" /></a>
         <p>Websites, integrations, and automation for service businesses.</p>
         <div>
-          <span>© {new Date().getFullYear()} Connective Stack</span>
+          <span>© {new Date().getFullYear()} ConnectiveStack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
           <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
           <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
