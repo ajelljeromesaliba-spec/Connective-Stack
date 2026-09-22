@@ -219,11 +219,13 @@ const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
 function ProjectInquiryForm() {
   const [status, setStatus] = useState('idle')
   const [feedback, setFeedback] = useState('')
+  const [fallbackEmail, setFallbackEmail] = useState('')
 
   const submitInquiry = async event => {
     event.preventDefault()
     setStatus('sending')
     setFeedback('')
+    setFallbackEmail('')
     const form = event.currentTarget
     const payload = Object.fromEntries(new FormData(form).entries())
 
@@ -239,8 +241,22 @@ function ProjectInquiryForm() {
       setStatus('success')
       setFeedback('Thanks. Your project details were sent to AJ. Expect a reply within one business day.')
     } catch (error) {
+      const emailBody = [
+        `Name: ${payload.name || ''}`,
+        `Email: ${payload.email || ''}`,
+        `Phone: ${payload.phone || 'Not provided'}`,
+        `Company: ${payload.company || 'Not provided'}`,
+        `Service: ${payload.service || ''}`,
+        `Engagement: ${payload.engagement || ''}`,
+        `Budget: ${payload.budget || ''}`,
+        `Timeline: ${payload.timeline || ''}`,
+        '',
+        'Project details:',
+        payload.message || '',
+      ].join('\n')
+      setFallbackEmail(`mailto:ajell.saliba@connectivestack.com?subject=${encodeURIComponent(`Project inquiry from ${payload.name || 'website lead'}`)}&body=${encodeURIComponent(emailBody)}`)
       setStatus('error')
-      setFeedback(error.message || 'Something went wrong. Please email AJ directly or book a call.')
+      setFeedback('The form could not send automatically. Your details are still here—use either option below to continue without starting over.')
     }
   }
 
@@ -264,7 +280,7 @@ function ProjectInquiryForm() {
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
       <label className="inquiry-consent inquiry-wide"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about this project and understand that submitting this form does not create a service agreement.</span></label>
       <button className="button button-primary inquiry-submit inquiry-wide" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending inquiry…' : 'Send project inquiry'} <Arrow /></button>
-      {feedback && <p className={`inquiry-feedback ${status}`} role="status">{feedback}</p>}
+      {feedback && <div className={`inquiry-feedback ${status}`} role="status"><p>{feedback}</p>{status === 'error' && <div className="inquiry-fallback-actions"><a href={fallbackEmail}>Email these details to AJ</a><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a discovery call</a></div>}</div>}
     </form>
   )
 }
