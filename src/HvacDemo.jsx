@@ -3,7 +3,6 @@ import { defaultQuickReplies, findKnowledgeAnswer } from './hvacKnowledge'
 import './hvac-demo.css'
 
 const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY || '58e493a2-aed3-4a98-a192-6baca6d23d64'
-const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
 const VAPI_ASSISTANT_ID = 'a1db8e60-1a21-4fab-b5ef-94f7e5671359'
 const VAPI_SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.7.0/+esm'
 
@@ -233,14 +232,14 @@ function VoiceDemo() {
         </div>
         <div className="voice-prompt-list">
           <span>Try saying</span>
-          <button type="button" onClick={startCall}>“My AC is blowing warm air.”</button>
-          <button type="button" onClick={startCall}>“I smell gas near my furnace.”</button>
-          <button type="button" onClick={startCall}>“Can I request an appointment?”</button>
+          <button type="button" onClick={startCall}>âMy AC is blowing warm air.â</button>
+          <button type="button" onClick={startCall}>âI smell gas near my furnace.â</button>
+          <button type="button" onClick={startCall}>âCan I request an appointment?â</button>
         </div>
       </div>
 
       <div className={`voice-console ${live ? 'is-live' : ''} ${speaking ? 'is-speaking' : ''}`}>
-        <div className="voice-console-top"><span>VAPI VOICE SESSION</span><i>{live ? '● LIVE' : '● STANDBY'}</i></div>
+        <div className="voice-console-top"><span>VAPI VOICE SESSION</span><i>{live ? 'â LIVE' : 'â STANDBY'}</i></div>
         <div className="voice-orbit" aria-hidden="true">
           <i className="voice-ring ring-a" /><i className="voice-ring ring-b" />
           <div className="voice-core"><Icon name="mic" /></div>
@@ -267,7 +266,7 @@ function VoiceDemo() {
 
 function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Hi, I’m Nova, the Northstar virtual front desk. I can answer HVAC questions, check service coverage, and help request an appointment. This is an interactive portfolio demo, so please use sample contact details.' },
+    { from: 'bot', text: 'Hi, Iâm Nova, the Northstar virtual front desk. I can answer HVAC questions, check service coverage, and help request an appointment. This is an interactive portfolio demo, so please use sample contact details.' },
   ])
   const [input, setInput] = useState('')
   const [replies, setReplies] = useState(defaultQuickReplies)
@@ -303,7 +302,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const startBooking = service => {
     setFlow({ step: 'service', data: service ? { service } : {} })
     if (service) {
-      addBot(`Got it. I’ll start a ${service} request. How urgent is the issue?`, ['Emergency or unsafe', 'No heating or cooling', 'System still runs', 'Planning or estimate'])
+      addBot(`Got it. Iâll start a ${service} request. How urgent is the issue?`, ['Emergency or unsafe', 'No heating or cooling', 'System still runs', 'Planning or estimate'])
     } else {
       addBot('What type of help do you need?', ['AC repair', 'Heating repair', 'Maintenance', 'Replacement estimate', 'Indoor air quality'])
     }
@@ -332,7 +331,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
         return
       }
       setFlow({ step: 'name', data: { ...current.data, zip } })
-      addBot('Thanks. I’ll include that ZIP for service-area verification. What sample name should I place on the request?', [])
+      addBot('Thanks. Iâll include that ZIP for service-area verification. What sample name should I place on the request?', [])
       return
     }
     if (current.step === 'name') {
@@ -349,7 +348,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
       const lead = { ...current.data, time: value, status: 'New service request' }
       onLeadCreated(lead)
       setFlow(null)
-      addBot(`Demo request created for ${lead.name}. A real setup can create the contact, add an opportunity, notify dispatch, and trigger confirmation automatically. No information from this demo was sent or saved.`, ['View CRM handoff', 'Ask another question', 'Contact ConnectiveStack'])
+      addBot(`Demo request created for ${lead.name}. A real setup can create the contact, add an opportunity, notify dispatch, and trigger confirmation automatically. No information from this demo was sent or saved.`, ['View CRM handoff', 'Ask another question', 'Contact Connective Stack'])
     }
   }
 
@@ -440,8 +439,8 @@ export default function HvacDemo() {
     const previousTitle = document.title
     const meta = document.querySelector('meta[name="description"]')
     const previousDescription = meta?.getAttribute('content')
-    document.title = 'HVAC Website & Automation Demo | ConnectiveStack'
-    meta?.setAttribute('content', 'Explore a fictional ConnectiveStack HVAC website and automation demo with AI reception, service intake, estimates, scheduling, and lead routing.')
+    document.title = 'HVAC AI Receptionist Demo | Connective Stack'
+    meta?.setAttribute('content', 'Try a live HVAC AI receptionist with browser voice, service FAQs, lead qualification, safety escalation, and appointment-request capture.')
     window.scrollTo(0, 0)
     return () => {
       document.title = previousTitle
@@ -472,14 +471,14 @@ export default function HvacDemo() {
   return (
     <div className="hvac-page">
       <div className="demo-ribbon">
-        <span>ConnectiveStack Live Demo · Fictional HVAC company</span>
-        <a href="/">Return to AJ’s portfolio <Icon name="arrow" /></a>
+        <span>Interactive portfolio demo by Connective Stack</span>
+        <a href="/">Return to AJâs portfolio <Icon name="arrow" /></a>
       </div>
 
       <header className="hvac-header">
         <a className="hvac-brand" href="#home" aria-label="Northstar Heating and Air home">
           <NorthstarLogoMark />
-          <span><strong>NORTHSTAR</strong><small>HEATING • COOLING</small></span>
+          <span><strong>NORTHSTAR</strong><small>HEATING â¢ COOLING</small></span>
         </a>
         <nav>
           <a href="#services">Services</a>
@@ -487,7 +486,7 @@ export default function HvacDemo() {
           <a href="#voice-demo">Voice Demo</a>
           <a href="#faq">FAQs</a>
         </nav>
-        <a className="hvac-header-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a discovery call</a>
+        <button type="button" className="hvac-header-cta" onClick={() => openWith('Book service')}>Request service</button>
       </header>
 
       <main>
@@ -513,8 +512,8 @@ export default function HvacDemo() {
               <div className="hvac-photo-label"><span>ON-SITE EXPERTISE</span><strong>Diagnostics built around the whole system</strong></div>
             </div>
             <div className="comfort-card compact">
-              <div className="comfort-top"><span>HOME COMFORT</span><i>● SYSTEM ONLINE</i></div>
-              <div className="comfort-compact-row"><div><small>INDOOR</small><strong>72<sup>°</sup></strong></div><div><span>Humidity</span><b>44%</b><span>Air quality</span><b>Good</b></div></div>
+              <div className="comfort-top"><span>HOME COMFORT</span><i>â SYSTEM ONLINE</i></div>
+              <div className="comfort-compact-row"><div><small>INDOOR</small><strong>72<sup>Â°</sup></strong></div><div><span>Humidity</span><b>44%</b><span>Air quality</span><b>Good</b></div></div>
             </div>
             <div className="dispatch-card"><span className="dispatch-icon"><Icon name="gauge" /></span><div><small>Service preference</small><strong>Captured for confirmation</strong></div></div>
             <div className="response-card"><i /><span><small>Front desk</small><strong>Replies in seconds</strong></span></div>
@@ -579,7 +578,7 @@ export default function HvacDemo() {
             <button type="button" className="hvac-button light" onClick={() => openWith('What can the assistant answer?')}>Test the assistant <Icon name="arrow" /></button>
           </div>
           <div className="workflow-console">
-            <div className="workflow-top"><span>LIVE WORKFLOW</span><i>{lead ? '● LEAD ROUTED' : '● WAITING FOR DEMO LEAD'}</i></div>
+            <div className="workflow-top"><span>LIVE WORKFLOW</span><i>{lead ? 'â LEAD ROUTED' : 'â WAITING FOR DEMO LEAD'}</i></div>
             <div className="workflow-nodes">
               {['Website chat', 'Safety check', 'Lead qualification', 'CRM record', 'Dispatch follow-up'].map((item, index) => (
                 <div className={lead || index === 0 ? 'active' : ''} key={item}><span>0{index + 1}</span><strong>{item}</strong><small>{lead ? 'Complete' : index === 0 ? 'Online' : 'Ready'}</small></div>
@@ -610,7 +609,7 @@ export default function HvacDemo() {
           <div className="hvac-faq-list">
             {faqItems.map(([question, answer], index) => (
               <article className={openFaq === index ? 'open' : ''} key={question}>
-                <button type="button" onClick={() => setOpenFaq(openFaq === index ? -1 : index)}><span>{question}</span><i>{openFaq === index ? '−' : '+'}</i></button>
+                <button type="button" onClick={() => setOpenFaq(openFaq === index ? -1 : index)}><span>{question}</span><i>{openFaq === index ? 'â' : '+'}</i></button>
                 {openFaq === index && <p>{answer}</p>}
               </article>
             ))}
@@ -619,13 +618,13 @@ export default function HvacDemo() {
 
         <section className="hvac-demo-cta">
           <div><span>Need a system like this?</span><h2>Turn your website into a working front desk.</h2></div>
-          <div><p>This fictional concept was created by Ajell Saliba at ConnectiveStack to demonstrate website design, AI reception, intake, estimating, scheduling, CRM routing, and automation. No company, pricing, service area, or customer information shown here is real.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="hvac-button dark">Discuss an HVAC project <Icon name="arrow" /></a></div>
+          <div><p>This page is a fictional demonstration built by AJ Saliba at Connective Stack. The same structure can be customized around a real companyâs services, policies, service area, CRM, and scheduling process.</p><a href="mailto:ajell.saliba@connectivestack.com?subject=HVAC%20front%20desk%20project" className="hvac-button dark">Build one for my business <Icon name="arrow" /></a></div>
         </section>
       </main>
 
       <footer className="hvac-footer">
         <div className="hvac-brand"><NorthstarLogoMark /><span><strong>NORTHSTAR</strong><small>HVAC SERVICE DEMO</small></span></div>
-        <p>Created by <a href="/">ConnectiveStack</a>. No submitted demo data is transmitted or stored.</p>
+        <p>Created by <a href="/">Connective Stack</a>. No submitted demo data is transmitted or stored.</p>
       </footer>
 
       <ChatAssistant open={chatOpen} onOpenChange={setChatOpen} onLeadCreated={setLead} seededQuestion={seededQuestion} />

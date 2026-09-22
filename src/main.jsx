@@ -92,7 +92,7 @@ const projects = [
     label: 'Real Estate',
     title: 'Premium multi-broker property experience',
     copy: 'A luxury brokerage concept with curated listings, smart property matching, broker routing, affordability tools, and private tour requests.',
-    image: '/assets/realestate-malibu.webp',
+    image: '/assets/realestate-malibu.svg',
     accent: 'sand',
     photo: true,
     goal: 'Turn premium property interest into qualified conversations with the right broker.',
@@ -140,7 +140,7 @@ function LegalModal({ type, onClose }) {
           <p className="legal-updated">Last updated: September 18, 2026</p>
           {isPrivacy ? (
             <>
-              <p>ConnectiveStack respects your privacy. This policy explains how information may be collected and used when you visit this website or contact AJ about a project.</p>
+              <p>Connective Stack respects your privacy. This policy explains how information may be collected and used when you visit this website or contact AJ about a project.</p>
               <h3>Information collected</h3>
               <p>Information may include your name, email address, company details, project requirements, and anything else you choose to provide through email or a contact form. Basic technical and analytics data may also be collected, such as device type, browser, referring page, and general location.</p>
               <h3>How information is used</h3>
@@ -159,7 +159,7 @@ function LegalModal({ type, onClose }) {
             </>
           ) : (
             <>
-              <p>By using this website, you agree to these terms. The website presents information about services offered by ConnectiveStack and Ajell Saliba.</p>
+              <p>By using this website, you agree to these terms. The website presents information about services offered by Connective Stack and AJ Saliba.</p>
               <h3>Website information</h3>
               <p>Content is provided for general information and may be updated without notice. Examples and concept projects are demonstrations of capabilities and should not be treated as guaranteed business results.</p>
               <h3>Project engagements</h3>
@@ -171,9 +171,9 @@ function LegalModal({ type, onClose }) {
                 <li>Pay third-party subscriptions, usage fees, domains, or licenses unless otherwise agreed</li>
               </ul>
               <h3>Intellectual property</h3>
-              <p>Unless otherwise agreed in writing, final project deliverables transfer after full payment. ConnectiveStack retains ownership of pre-existing tools, reusable methods, and general know-how. Third-party assets remain subject to their original licenses.</p>
+              <p>Unless otherwise agreed in writing, final project deliverables transfer after full payment. Connective Stack retains ownership of pre-existing tools, reusable methods, and general know-how. Third-party assets remain subject to their original licenses.</p>
               <h3>Limitations</h3>
-              <p>No specific lead, revenue, ranking, or conversion result is guaranteed. ConnectiveStack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
+              <p>No specific lead, revenue, ranking, or conversion result is guaranteed. Connective Stack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
               <h3>Contact</h3>
               <p>Questions about these terms may be sent to <a href="mailto:ajell.saliba@connectivestack.com">ajell.saliba@connectivestack.com</a>.</p>
             </>
@@ -303,8 +303,8 @@ function App() {
   return (
     <>
       <header className="site-header">
-        <a href="#top" className="brand" aria-label="ConnectiveStack home">
-          <img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" />
+        <a href="#top" className="brand" aria-label="Connective Stack home">
+          <img src="/assets/connective-stack-logo.png" alt="Connective Stack" />
         </a>
         <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>
           <span /><span />
@@ -418,7 +418,7 @@ function App() {
                 <div className={`project-image ${project.accent} ${project.photo ? 'photo-project' : ''}`}>
                   <picture>
                     {project.mobileImage && <source media="(max-width: 760px)" srcSet={project.mobileImage} />}
-                    <img src={project.image} alt={`${project.title} sample concept`} loading="lazy" />
+                    <img src={project.image} alt={`${project.title} sample concept`} />
                   </picture>
                   <span className="concept-badge">{project.live ? 'Live interactive demo' : 'Outcome-led concept'}</span>
                   <span className="project-index">0{index + 1}</span>
@@ -545,7 +545,7 @@ function App() {
         <section className="about-section" id="about">
           <div className="about-visual" data-reveal>
             <div className="about-portrait">
-              <img src="/assets/ajell-saliba.webp" alt="Ajell Saliba, founder and independent specialist at ConnectiveStack" loading="lazy" />
+              <img src="/assets/ajell-saliba.webp" alt="Ajell Saliba, founder and independent specialist at Connective Stack" />
               <div className="portrait-shade" />
               <div className="portrait-label">
                 <span>AJELL SALIBA</span>
@@ -605,10 +605,10 @@ function App() {
       </main>
 
       <footer>
-        <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" /></a>
+        <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="Connective Stack" /></a>
         <p>Websites, integrations, and automation for service businesses.</p>
         <div>
-          <span>© {new Date().getFullYear()} ConnectiveStack</span>
+          <span>© {new Date().getFullYear()} Connective Stack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
           <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
           <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>

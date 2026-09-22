@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import './real-estate-demo.css'
 
-const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
-
 const Icon = ({ name }) => {
   const paths = {
     arrow: <><path d="M5 12h14" /><path d="m15 8 4 4-4 4" /></>,
@@ -34,9 +32,9 @@ const AsterRowMark = ({ compact = false }) => (
 )
 
 const listings = [
-  { id: 1, city: 'Beverly Hills', state: 'CA', neighborhood: 'Trousdale Estates', price: 4895000, beds: 4, baths: 5, sqft: '4,820', category: 'Luxury', type: 'City', image: '/assets/realestate-hero.webp', video: '/assets/realestate-hero-flow-v1.mp4', broker: 'Elena Marlow', initials: 'EM', specialty: 'Luxury residences' },
-  { id: 2, city: 'Malibu', state: 'CA', neighborhood: 'Carbon Beach', price: 7250000, beds: 5, baths: 6, sqft: '5,640', category: 'Luxury', type: 'Coastal', image: '/assets/realestate-malibu.webp', video: '/assets/realestate-malibu-flow-v1.mp4', broker: 'Marcus Cole', initials: 'MC', specialty: 'Coastal properties' },
-  { id: 3, city: 'Scottsdale', state: 'AZ', neighborhood: 'Paradise Valley', price: 3180000, beds: 4, baths: 4.5, sqft: '4,310', category: 'Premium', type: 'Desert', image: '/assets/realestate-scottsdale.webp', video: '/assets/realestate-scottsdale-flow-v1.mp4', broker: 'Sofia Reyes', initials: 'SR', specialty: 'Relocation and Arizona homes' },
+  { id: 1, city: 'Beverly Hills', state: 'CA', neighborhood: 'Trousdale Estates', price: 4895000, beds: 4, baths: 5, sqft: '4,820', category: 'Luxury', type: 'City', image: '/assets/realestate-hero.svg', video: '/assets/realestate-hero-flow-v1.mp4', broker: 'Elena Marlow', initials: 'EM', specialty: 'Luxury residences' },
+  { id: 2, city: 'Malibu', state: 'CA', neighborhood: 'Carbon Beach', price: 7250000, beds: 5, baths: 6, sqft: '5,640', category: 'Luxury', type: 'Coastal', image: '/assets/realestate-malibu.svg', video: '/assets/realestate-malibu-flow-v1.mp4', broker: 'Marcus Cole', initials: 'MC', specialty: 'Coastal properties' },
+  { id: 3, city: 'Scottsdale', state: 'AZ', neighborhood: 'Paradise Valley', price: 3180000, beds: 4, baths: 4.5, sqft: '4,310', category: 'Premium', type: 'Desert', image: '/assets/realestate-scottsdale.svg', video: '/assets/realestate-scottsdale-flow-v1.mp4', broker: 'Sofia Reyes', initials: 'SR', specialty: 'Relocation and Arizona homes' },
   { id: 4, city: 'Austin', state: 'TX', neighborhood: 'The Grove Residences', price: 1285000, beds: 2, baths: 2.5, sqft: '1,780', category: 'Premium', type: 'Urban', image: '/assets/realestate-austin-premium.webp', video: '/assets/realestate-austin-flow-v1.mp4', broker: 'Jordan Lee', initials: 'JL', specialty: 'Investment properties' },
   { id: 5, city: 'Phoenix', state: 'AZ', neighborhood: 'Arcadia Townhomes', price: 535000, beds: 3, baths: 2.5, sqft: '1,690', category: 'Starter', type: 'Townhome', image: '/assets/realestate-phoenix-starter.webp', video: '/assets/realestate-phoenix-flow-v1.mp4', broker: 'Sofia Reyes', initials: 'SR', specialty: 'First-time buyers and relocation' },
   { id: 6, city: 'Mesa', state: 'AZ', neighborhood: 'Desert Willow', price: 415000, beds: 3, baths: 2, sqft: '1,560', category: 'Affordable', type: 'Single-family', image: '/assets/realestate-mesa-affordable.webp', video: '/assets/realestate-mesa-flow-v1.mp4', broker: 'Sofia Reyes', initials: 'SR', specialty: 'Affordable Arizona homes' },
@@ -136,7 +134,7 @@ function TourModal({ property, onClose }) {
     <div className="re-modal-overlay" onMouseDown={e => e.target === e.currentTarget && onClose()}>
       <div className="re-modal">
         <button className="re-modal-close" onClick={onClose} aria-label="Close"><Icon name="close" /></button>
-        {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>DEMO REQUEST COMPLETE</small><h2>Your simulated tour request is ready.</h2><p>{property.broker} is the fictional best-fit broker for {property.neighborhood}. No request was submitted. A production setup could send the lead to the CRM and trigger email and SMS confirmation.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a real discovery call</a><button onClick={onClose}>Return to listings</button></div> : <>
+        {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>REQUEST RECEIVED</small><h2>Your private tour is being coordinated.</h2><p>{property.broker} is the best-fit broker for {property.neighborhood}. In a real setup, the lead would now enter the CRM and trigger email and SMS confirmation.</p><button onClick={onClose}>Return to listings</button></div> : <>
           <span className="re-modal-kicker">PRIVATE SHOWING</span>
           <h2>Tour {property.neighborhood}</h2>
           <p>Choose a preferred time. This portfolio demo uses sample details only and does not submit information externally.</p>
@@ -167,7 +165,7 @@ function BrokerModal({ broker, onClose }) {
   return <div className="re-modal-overlay" onMouseDown={e => e.target === e.currentTarget && onClose()}>
     <div className="re-modal">
       <button className="re-modal-close" onClick={onClose} aria-label="Close"><Icon name="close" /></button>
-      {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>DEMO CONSULTATION ROUTED</small><h2>Your simulated request is ready for {broker.name}.</h2><p>The form captured the details relevant to {broker.role.toLowerCase()}. No request was submitted. In a live setup, the correct pipeline, calendar, and follow-up sequence would start automatically.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a real discovery call</a><button onClick={onClose}>Return to advisors</button></div> : <>
+      {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>CONSULTATION ROUTED</small><h2>Your request is ready for {broker.name}.</h2><p>The form captured the details relevant to {broker.role.toLowerCase()}. In a live setup, the correct pipeline, calendar, and follow-up sequence would now start automatically.</p><button onClick={onClose}>Return to advisors</button></div> : <>
         <span className="re-modal-kicker">PERSONALIZED ADVISOR INTAKE</span>
         <h2>Meet {broker.name}</h2>
         <p>{broker.formNote}. The questions below are tailored to this advisor, so the first conversation starts with the right context.</p>
@@ -259,7 +257,7 @@ export default function RealEstateDemo() {
   const shown = filter === 'All Homes' ? listings : listings.filter(item => item.category === filter)
 
   useEffect(() => {
-    document.title = 'Premium Real Estate Website Demo | ConnectiveStack'
+    document.title = 'Luxury Real Estate Brokerage Demo | Connective Stack'
     const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible')), { threshold: .08 })
     document.querySelectorAll('.re-reveal').forEach(el => observer.observe(el))
     return () => observer.disconnect()
@@ -277,15 +275,15 @@ export default function RealEstateDemo() {
 
   return (
     <div className="re-page">
-      <div className="re-demo-bar"><a href="/">← ConnectiveStack portfolio</a><span>ConnectiveStack Live Demo · Fictional brokerage</span><b>{saved.length} saved</b></div>
+      <div className="re-demo-bar"><a href="/">← Connective Stack portfolio</a><span>Interactive concept · Fictional brokerage</span><b>{saved.length} saved</b></div>
       <header className="re-header">
         <a href="#home" className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>PRIVATE REAL ESTATE</small></span></a>
         <nav><a href="#start">Get started</a><a href="#properties">Properties</a><a href="#match">Private search</a><a href="#advisors">Advisors</a><a href="#affordability">Affordability</a></nav>
-        <a className="re-header-calendar" href={CALENDAR_URL} target="_blank" rel="noreferrer">Schedule a consultation</a>
+        <button onClick={() => setAdvisor(brokers[0])}>Schedule a consultation</button>
       </header>
       <main>
         <section className="re-hero re-reveal" id="home">
-          <video className="re-hero-image" autoPlay muted loop playsInline poster="/assets/realestate-hero.webp" aria-label="Cinematic preview of the featured Beverly Hills residence"><source src="/assets/realestate-hero-flow-v1.mp4" type="video/mp4" /></video>
+          <video className="re-hero-image" autoPlay muted loop playsInline poster="/assets/realestate-hero.svg" aria-label="Cinematic preview of the featured Beverly Hills residence"><source src="/assets/realestate-hero-flow-v1.mp4" type="video/mp4" /></video>
           <div className="re-hero-shade" />
           <div className="re-hero-copy"><span>CURATED HOMES · TRUSTED ADVISORS</span><h1>Exceptional property.<br /><em>Personal representation.</em></h1><p>One private search, intelligently routed to the broker who knows your market, property type, and priorities.</p><div><a href="#properties">Explore residences <Icon name="arrow" /></a><button onClick={() => setTour(listings[0])}>Request a private search</button></div></div>
           <div className="re-market-card"><small>LIVE MARKET PULSE</small><strong>14</strong><span>qualified opportunities</span><div><i /> Los Angeles <b>7</b></div><div><i /> Malibu <b>4</b></div><div><i /> Scottsdale <b>3</b></div></div>
@@ -322,9 +320,9 @@ export default function RealEstateDemo() {
           <MortgageCalculator />
         </section>
 
-        <section className="re-cta re-reveal"><div><span>CONNECTIVESTACK LIVE DEMO</span><h2>Built for the full brokerage, not just one agent.</h2></div><div><p>This fictional concept demonstrates premium listings, broker routing, lead qualification, calculators, CRM-ready intake, and automated follow-up.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a real estate project <Icon name="arrow" /></a></div></section>
+        <section className="re-cta re-reveal"><div><span>CONNECTIVE STACK DEMO</span><h2>Built for the full brokerage, not just one agent.</h2></div><div><p>This fictional concept demonstrates premium listings, broker routing, lead qualification, calculators, CRM-ready intake, and automated follow-up.</p><a href="mailto:ajell.saliba@connectivestack.com?subject=Real%20estate%20website%20demo">Build a real estate experience <Icon name="arrow" /></a></div></section>
       </main>
-      <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL PORTFOLIO DEMO</small></span></div><p>Designed and built by <a href="/">ConnectiveStack</a>. All properties, brokers, pricing, and claims are simulated.</p></footer>
+      <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL PORTFOLIO DEMO</small></span></div><p>Designed and built by <a href="/">Connective Stack</a></p></footer>
       <Concierge />
       <TourModal property={tour} onClose={() => setTour(null)} />
       <BrokerModal broker={advisor} onClose={() => setAdvisor(null)} />

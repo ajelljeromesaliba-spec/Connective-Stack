@@ -12,14 +12,6 @@
       ]
     }
   ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "connectivestack.com" }],
-      "destination": "https://www.connectivestack.com/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/demos/hvac-ai-front-desk",
@@ -32,6 +24,10 @@
     {
       "source": "/demos/healthcare-patient-experience",
       "destination": "/demos/healthcare-patient-experience/index.html"
+    },
+    {
+      "source": "/demos/:path*",
+      "destination": "/index.html"
     }
   ]
 }

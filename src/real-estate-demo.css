@@ -55,8 +55,4 @@
   .re-chat-launcher{right:13px;bottom:13px}.re-chat{left:13px;right:13px;bottom:75px;width:auto}.re-modal{padding:32px 20px}.re-modal form{grid-template-columns:1fr}.re-reveal{opacity:1;transform:none}
 }
 @media(max-width:430px){.re-header .re-brand small{display:none}.re-header>button{max-width:118px}.re-hero-copy{padding-top:190px}.re-hero-caption{display:none}.re-role-tabs strong{font-size:19px}.re-listing-image{height:270px}.re-avatar{height:330px}.re-routed>i{display:none}.re-chat-launcher span{display:none}.re-chat-launcher{width:52px;padding:0;justify-content:center}.re-calc-result>strong{font-size:44px}}
-
-.re-header-calendar{min-height:42px;padding:0 17px;border:1px solid var(--re-green);border-radius:3px;color:white;background:var(--re-green);font-size:10px;font-weight:700;letter-spacing:.04em;display:inline-flex;align-items:center;text-decoration:none}.re-confirmation>a{min-height:48px;width:100%;margin:8px 0;display:flex;justify-content:center;align-items:center;color:white;background:var(--re-green);font-size:10px;font-weight:800;text-decoration:none}.re-confirmation>button{color:var(--re-green);background:white;border:1px solid #cfd8d3}
-@media(max-width:760px){.re-header-calendar{padding:0 10px;font-size:8px}}
-@media(max-width:430px){.re-header-calendar{max-width:118px;text-align:center}}
 @media(prefers-reduced-motion:reduce){.re-page *{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}.re-reveal{opacity:1;transform:none}}
