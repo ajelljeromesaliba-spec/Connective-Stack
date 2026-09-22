@@ -256,7 +256,7 @@ function ProjectInquiryForm() {
       ].join('\n')
       setFallbackEmail(`mailto:ajell.saliba@connectivestack.com?subject=${encodeURIComponent(`Project inquiry from ${payload.name || 'website lead'}`)}&body=${encodeURIComponent(emailBody)}`)
       setStatus('error')
-      setFeedback('The form could not send automatically. Your details are still here—use either option below to continue without starting over.')
+      setFeedback('The form could not send automatically. Your details are still here. Use either option below to continue without starting over.')
     }
   }
 
@@ -471,7 +471,7 @@ function App() {
           <div className="surreal-manifesto-copy" data-reveal>
             <span className="kicker">Clarity meets imagination</span>
             <h2>Distinctive enough to be remembered. Clear enough to be trusted.</h2>
-            <p>Every visual decision supports the message. Every interaction points toward a useful next step. The result is a website with character—and a system that works behind it.</p>
+            <p>Every visual decision supports the message. Every interaction points toward a useful next step. The result is a website with character, plus a system that works behind it.</p>
             <div className="manifesto-principles">
               <span>01 / Art direction</span>
               <span>02 / Clear journeys</span>
