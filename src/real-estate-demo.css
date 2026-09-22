@@ -1,6 +1,8 @@
 :root { --re-ink:#18211f; --re-green:#243c35; --re-sage:#75877c; --re-cream:#f4f0e8; --re-gold:#b4925f; --re-line:#d9d7cf; }
 .re-page { min-height:100vh; overflow-x:clip; color:var(--re-ink); background:#fbfaf7; font-family:'DM Sans',sans-serif; }
 .re-page * { box-sizing:border-box; }.re-page button,.re-page input,.re-page select { font:inherit; }.re-page button { cursor:pointer; }.re-page svg { width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round; }
+.re-page :where(a,button,input,select,textarea):focus-visible { outline:3px solid var(--re-gold);outline-offset:3px; }
+.re-page section[id] { scroll-margin-top:24px; }
 .re-demo-bar { min-height:36px;padding:7px clamp(18px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:20px;color:#cbd4cf;background:#13251f;font-size:9px;letter-spacing:.08em;text-transform:uppercase; }.re-demo-bar a:hover { color:white; }.re-demo-bar b { color:#d7bd91; }
 .re-header { height:82px;padding:0 clamp(18px,5vw,72px);display:flex;align-items:center;justify-content:space-between;gap:36px;position:relative;z-index:20;border-bottom:1px solid rgba(255,255,255,.16);background:#fbfaf7; }
 .re-brand { display:flex;align-items:center;gap:13px; }
