@@ -29,7 +29,7 @@ section[id] { scroll-margin-top: 96px; }
 }
 .brand img { width: 225px; height: auto; }
 nav { display: flex; align-items: center; gap: 30px; font-size: 14px; font-weight: 600; }
-.nav-primary { display: flex; align-items: center; gap: 30px; }
+.nav-primary { display: flex; align-items: center; gap: 24px; }
 .nav-primary > a { color: #495255; transition: color .2s ease; }
 .nav-primary > a:hover { color: var(--ink); }
 .nav-demo-menu { position: relative; }
@@ -38,7 +38,7 @@ nav { display: flex; align-items: center; gap: 30px; font-size: 14px; font-weigh
   .site-header nav { position: absolute; inset: 0; display: block; pointer-events: none; }
   .site-header .nav-primary {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    display: flex; align-items: center; gap: clamp(18px, 2vw, 30px); white-space: nowrap; pointer-events: auto;
+    display: flex; align-items: center; gap: clamp(16px, 1.7vw, 24px); white-space: nowrap; pointer-events: auto;
   }
   .site-header .nav-cta {
     position: absolute; top: 50%; right: clamp(22px, 5vw, 80px); transform: translateY(-50%);
@@ -57,7 +57,7 @@ nav { display: flex; align-items: center; gap: 30px; font-size: 14px; font-weigh
 .nav-demo-dropdown strong { margin: 5px 0 3px; color: var(--ink); font: 700 13px/1.25 var(--font-display); }
 .nav-demo-dropdown a > span { color: #75807d; font-size: 10px; font-weight: 500; line-height: 1.4; }
 .nav-cta, .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
-.nav-cta { background: var(--ink); color: #fff; padding: 11px 16px; border-radius: 999px; }
+.nav-cta { background: var(--ink); color: #fff; padding: 10px 15px; border-radius: 999px; white-space: nowrap; }
 .nav-cta svg, .button svg, .text-link svg { width: 18px; height: 18px; }
 .menu-toggle { display: none; border: 0; background: none; padding: 8px; }
 .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px; }
