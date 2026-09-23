@@ -52,11 +52,11 @@
     },
     {
       "source": "/ghl-systems",
-      "destination": "/"
+      "destination": "/index.html"
     },
     {
       "source": "/ghl-systems/:path*",
-      "destination": "/"
+      "destination": "/index.html"
     },
     {
       "source": "/case-studies/:path*",
