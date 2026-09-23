@@ -175,7 +175,7 @@ function App() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
           <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>Live Demo</a>
-          <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
+          <a href="/ghl-systems.html" onClick={closeMenu}>GHL Systems</a>
           <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
