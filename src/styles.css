@@ -195,6 +195,12 @@ h1 em { display: block; color: var(--teal-dark); font-style: normal; }
 .pricing-tier ul { list-style: none; padding: 22px 0 0; margin: 0 0 28px; display: grid; gap: 10px; font-size: 11px; }
 .pricing-tier li { display: flex; gap: 8px; align-items: flex-start; color: #4f5c59; }.pricing-tier li svg { width: 15px; height: 15px; flex: 0 0 auto; color: var(--teal-dark); }
 .pricing-tier .button { width: 100%; margin-top: auto; }
+.pricing-trust-points { margin-top: 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.pricing-trust-points article { min-width: 0; padding: 22px 24px; display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; border: 1px solid #cfdcd8; border-radius: 14px; background: rgba(255,255,255,.68); }
+.pricing-trust-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: #d9f2ec; color: var(--teal-dark); }
+.pricing-trust-icon svg { width: 16px; height: 16px; }
+.pricing-trust-points strong { display: block; margin-bottom: 7px; font: 700 14px var(--font-display); }
+.pricing-trust-points p { margin: 0; color: var(--ink-soft); font-size: 11px; line-height: 1.65; }
 .hourly-support { margin-top: 18px; padding: 28px; display: grid; grid-template-columns: .8fr 1.1fr 1.1fr; gap: 30px; align-items: center; overflow: hidden; border: 1px solid #273638; border-radius: 18px; color: white; background: linear-gradient(120deg, #111719, #1d2d2d); box-shadow: 0 22px 48px rgba(25,45,40,.13); }
 .hourly-support-rate > span, .hourly-support-terms > span { display: block; margin-bottom: 10px; color: var(--teal); font: 700 8px/1.2 monospace; letter-spacing: .14em; text-transform: uppercase; }
 .hourly-support-rate strong { display: block; font: 750 52px/1 var(--font-display); letter-spacing: -.05em; }.hourly-support-rate sup { margin-right: 2px; color: var(--teal); font-size: 19px; }.hourly-support-rate small { margin-left: 6px; color: #aab8b6; font-size: 13px; letter-spacing: 0; }
@@ -361,7 +367,8 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .service-card { grid-template-columns: 35px 1fr 40px; gap: 16px; }.service-tags { grid-column: 2 / 4; }
   .systems-visual { transform: scale(.78); margin: -45px -60px; }.orbit-two { width: 440px; height: 440px; }.orbit-one { width: 280px; height: 280px; }
   .heading-row { grid-template-columns: 1fr; gap: 10px; }.project-grid { grid-template-columns: 1fr; }.project-wide { grid-column: auto; display: block; }.project-wide .project-image, .project-image { min-height: 510px; padding: 58px 12px 70px; }.project-image picture { width: min(330px, 94%); }.project-wide .project-copy, .project-copy { padding: 26px; }.visual-tags { justify-content: center; }.concept-badge { max-width: calc(100% - 80px); white-space: normal; }
-  .pricing-grid { grid-template-columns: 1fr; }.pricing-tier { padding: 27px; }.pricing-tier > p { min-height: 0; }.hourly-support { grid-template-columns: 1fr; gap: 22px; }.hourly-support-details { padding: 22px 0; border-right: 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }.pricing-note { grid-template-columns: 1fr; gap: 8px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-trust-points { grid-template-columns: 1fr; }.pricing-tier { padding: 27px; }.pricing-tier > p { min-height: 0; }.hourly-support { grid-template-columns: 1fr; gap: 22px; }.hourly-support-details { padding: 22px 0; border-right: 0; border-left: 0; border-top: 1px solid rgba(255,255,255,.1); border-bottom: 1px solid rgba(255,255,255,.1); }.pricing-note { grid-template-columns: 1fr; gap: 8px; }
   .experience-section { padding: 85px 20px 0; }
   .experience-layout { margin-top: 55px; }
   .timeline::before { left: 72px; }
