@@ -754,20 +754,20 @@ function App() {
             <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
             <div className="tool-matrix">
               <div className="tool-group">
-                <span>Web, CRM and deployment</span>
-                <div>{['GoHighLevel', 'Vercel', 'GitHub', 'Cloudflare', 'WordPress', 'Shopify'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <span>Web, hosting and deployment</span>
+                <div>{['GoHighLevel', 'Lovable', 'Vercel', 'GitHub', 'Cloudflare', 'Porkbun', 'WordPress', 'Shopify', 'Framer'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
               <div className="tool-group">
-                <span>AI and automation</span>
-                <div>{['ChatGPT', 'Claude', 'Zapier', 'Make', 'VAPI', 'Chatbase', 'Supabase', 'Resend'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <span>AI, automation and integrations</span>
+                <div>{['ChatGPT', 'Claude', 'Zapier', 'Make', 'VAPI', 'Chatbase', 'Supabase', 'Resend', 'Mailgun'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
               <div className="tool-group">
-                <span>CRM, sales and support</span>
-                <div>{['GoHighLevel', 'HubSpot', 'Salesforce', 'Zoho', 'Aircall', 'Zendesk', 'Freshdesk'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <span>CRM, sales and scheduling</span>
+                <div>{['GoHighLevel', 'HubSpot', 'Salesforce', 'Zoho', 'Calendly', 'Google Calendar', 'Aircall', 'Stripe', 'PayPal'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
               <div className="tool-group">
-                <span>Creative and operations</span>
-                <div>{['Google Workspace', 'Microsoft 365', 'Slack', 'Trello', 'ClickUp', 'Canva', 'Figma', 'Framer'].map(tool => <b key={tool}>{tool}</b>)}</div>
+                <span>Operations, support and creative</span>
+                <div>{['Google Workspace', 'Microsoft 365', 'Slack', 'Trello', 'ClickUp', 'Freshdesk', 'Zendesk', 'Canva', 'Figma', 'CapCut'].map(tool => <b key={tool}>{tool}</b>)}</div>
               </div>
             </div>
           </div>
