@@ -197,7 +197,7 @@ export default function GhlSystems({ slug }) {
       <main className="ghl-page">
         <header className="ghl-detail-nav">
           <a href="/" className="ghl-brand"><img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" /></a>
-          <div><a href="/?view=ghl-systems">All GHL systems</a><a className="ghl-nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a build <Arrow /></a></div>
+          <div><a href="/ghl-systems">All GHL systems</a><a className="ghl-nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a build <Arrow /></a></div>
         </header>
 
         <article className="ghl-detail">
@@ -253,7 +253,7 @@ export default function GhlSystems({ slug }) {
 
       <section className="ghl-system-grid">
         {ghlSystems.map(system => (
-          <a className="ghl-system-card" href={'/?view=ghl-systems&system=' + system.slug} key={system.slug}>
+          <a className="ghl-system-card" href={'/ghl-systems/' + system.slug} key={system.slug}>
             <div className="ghl-card-top"><span>{system.number}</span><small>OPEN SYSTEM ↗</small></div>
             <h2>{system.title}</h2>
             <Flow steps={system.flow} />
