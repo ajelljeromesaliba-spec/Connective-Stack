@@ -407,30 +407,52 @@ function App() {
           <span /><span />
         </button>
         <nav id="site-navigation" className={menuOpen ? 'nav-open' : ''}>
-          <a href="#services" onClick={closeMenu}>Services</a>
-          <a href="#work" onClick={closeMenu}>Work</a>
-          <div className="nav-demo-menu">
-            <a href="#work" className="nav-demo-trigger" onClick={closeMenu}>Live Demos <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
-            <div className="nav-demo-dropdown">
-              <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>
-                <small>Home Services</small>
-                <strong>HVAC AI Front Desk</strong>
-                <span>Chat, voice, estimates, and service intake</span>
-              </a>
-              <a href="/demos/luxury-real-estate" onClick={closeMenu}>
-                <small>Real Estate</small>
-                <strong>Premium Brokerage</strong>
-                <span>Listings, broker routing, and buyer tools</span>
-              </a>
-              <a href="/demos/healthcare-patient-experience" onClick={closeMenu}>
-                <small>Healthcare</small>
-                <strong>Connected Patient Experience</strong>
-                <span>Intake, benefits, scheduling, and provider routing</span>
-              </a>
+          <div className="nav-primary">
+            <a href="#services" onClick={closeMenu}>Services</a>
+            <a href="#work" onClick={closeMenu}>Work</a>
+            <div className="nav-demo-menu">
+              <a href="/case-studies/hvac-lead-system" className="nav-demo-trigger" onClick={closeMenu}>Case Studies <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
+              <div className="nav-demo-dropdown">
+                <a href="/case-studies/hvac-lead-system" onClick={closeMenu}>
+                  <small>Home Services</small>
+                  <strong>HVAC Lead System</strong>
+                  <span>Website, intake, booking, and follow-up flow</span>
+                </a>
+                <a href="/case-studies/luxury-real-estate" onClick={closeMenu}>
+                  <small>Real Estate</small>
+                  <strong>Luxury Real Estate</strong>
+                  <span>Buyer journey, broker routing, and conversion logic</span>
+                </a>
+                <a href="/case-studies/healthcare-patient-experience" onClick={closeMenu}>
+                  <small>Healthcare</small>
+                  <strong>Patient Experience</strong>
+                  <span>Intake, provider routing, scheduling, and safeguards</span>
+                </a>
+              </div>
             </div>
+            <div className="nav-demo-menu">
+              <a href="#work" className="nav-demo-trigger" onClick={closeMenu}>Live Demos <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
+              <div className="nav-demo-dropdown">
+                <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>
+                  <small>Home Services</small>
+                  <strong>HVAC AI Front Desk</strong>
+                  <span>Chat, voice, estimates, and service intake</span>
+                </a>
+                <a href="/demos/luxury-real-estate" onClick={closeMenu}>
+                  <small>Real Estate</small>
+                  <strong>Premium Brokerage</strong>
+                  <span>Listings, broker routing, and buyer tools</span>
+                </a>
+                <a href="/demos/healthcare-patient-experience" onClick={closeMenu}>
+                  <small>Healthcare</small>
+                  <strong>Connected Patient Experience</strong>
+                  <span>Intake, benefits, scheduling, and provider routing</span>
+                </a>
+              </div>
+            </div>
+            <a href="#process" onClick={closeMenu}>Process</a>
+            <a href="#about" onClick={closeMenu}>About</a>
           </div>
-          <a href="#process" onClick={closeMenu}>Process</a>
-          <a href="#about" onClick={closeMenu}>About</a>
           <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Start a project <Arrow /></a>
         </nav>
       </header>
