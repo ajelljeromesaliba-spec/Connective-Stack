@@ -5,6 +5,7 @@ import HvacDemo from './HvacDemo'
 import RealEstateDemo from './RealEstateDemo'
 import HealthcareDemo from './HealthcareDemo'
 import CaseStudy from './CaseStudy'
+import GhlSystems from './GhlSystems'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -450,6 +451,7 @@ function App() {
               </div>
             </div>
             <a href="#process" onClick={closeMenu}>Process</a>
+            <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
             <a href="#about" onClick={closeMenu}>About</a>
           </div>
           <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Start a project <Arrow /></a>
@@ -789,13 +791,21 @@ const caseStudySlug = currentPath.startsWith('/case-studies/')
   : null
 const caseStudySlugs = new Set(['hvac-lead-system', 'luxury-real-estate', 'healthcare-patient-experience'])
 
+const ghlSystemSlug = currentPath.startsWith('/ghl-systems/')
+  ? currentPath.replace('/ghl-systems/', '')
+  : null
+
 const route = currentPath === '/demos/hvac-ai-front-desk'
   ? <HvacDemo />
   : currentPath === '/demos/luxury-real-estate'
     ? <RealEstateDemo />
     : currentPath === '/demos/healthcare-patient-experience'
       ? <HealthcareDemo />
-      : caseStudySlugs.has(caseStudySlug)
-        ? <CaseStudy slug={caseStudySlug} />
-        : <App />
+      : currentPath === '/ghl-systems'
+        ? <GhlSystems />
+        : ghlSystemSlug
+          ? <GhlSystems slug={ghlSystemSlug} />
+          : caseStudySlugs.has(caseStudySlug)
+            ? <CaseStudy slug={caseStudySlug} />
+            : <App />
 createRoot(document.getElementById('root')).render(route)
