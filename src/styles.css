@@ -1765,3 +1765,16 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
     right: 12px;
   }
 }
+
+/* Reserve room for the GHL overlay close button so it never covers the header CTA. */
+.ghl-page-overlay .ghl-detail-nav {
+  padding-right: 86px;
+}
+@media (max-width: 650px) {
+  .ghl-page-overlay .ghl-detail-nav {
+    padding-right: 76px;
+  }
+  .ghl-page-overlay .ghl-nav-cta {
+    margin-right: 0;
+  }
+}
