@@ -51,6 +51,14 @@
       "destination": "/index.html"
     },
     {
+      "source": "/ghl-systems",
+      "destination": "/"
+    },
+    {
+      "source": "/ghl-systems/:path*",
+      "destination": "/"
+    },
+    {
       "source": "/case-studies/:path*",
       "destination": "/"
     }
