@@ -114,6 +114,69 @@ export const ghlSystems = [
   }
 ]
 
+const systemArchitectures = [
+  {
+    number: 'A1',
+    title: 'Lead-to-Appointment Architecture',
+    problem: 'Turn a new inquiry into a qualified, booked opportunity without relying on manual follow-up.',
+    flow: ['Landing Page', 'Form', 'Qualification', 'GHL CRM', 'Automation', 'Calendar', 'Pipeline'],
+    tools: ['GoHighLevel', 'LC Phone / Twilio', 'Mailgun', 'Google Calendar'],
+    automation: 'Creates or updates the contact, applies source and qualification data, triggers follow-up, books the meeting, and advances the opportunity.',
+    edgeCases: ['Duplicate contacts', 'Incomplete form data', 'Failed notifications', 'No response after follow-up'],
+    fallback: 'Create a manual task or team alert when the automated path cannot complete.'
+  },
+  {
+    number: 'A2',
+    title: 'AI Front Desk & Missed Call Recovery',
+    problem: 'Keep calls and after-hours inquiries from disappearing when nobody answers immediately.',
+    flow: ['Incoming Call', 'AI / Phone System', 'CRM Contact', 'SMS Follow-Up', 'Booking', 'Human Handoff'],
+    tools: ['VAPI', 'GoHighLevel', 'LC Phone / Twilio', 'GHL Calendar'],
+    automation: 'Captures caller details, starts an SMS conversation, offers a booking path, and records the lead for follow-up.',
+    edgeCases: ['No answer', 'After-hours call', 'Unclear intent', 'Caller requests a person'],
+    fallback: 'Route to a human, create a callback task, or send the team a notification.'
+  },
+  {
+    number: 'A3',
+    title: 'Website-to-CRM Infrastructure',
+    problem: 'Connect the public website to the systems behind it so form submissions do not stop at an inbox.',
+    flow: ['Website', 'Form / API', 'Webhook', 'CRM', 'Workflow', 'Notification', 'Database'],
+    tools: ['Vercel', 'GitHub', 'Cloudflare', 'GoHighLevel', 'Supabase', 'Resend'],
+    automation: 'Validates the submission, sends it to the right system, triggers downstream actions, and records delivery or workflow status.',
+    edgeCases: ['Webhook failure', 'Invalid payload', 'Email delivery issue', 'Duplicate submission'],
+    fallback: 'Log the failure, preserve the submission, and notify the team instead of silently losing the lead.'
+  },
+  {
+    number: 'A4',
+    title: 'Qualified Lead Routing System',
+    problem: 'Send the right lead to the right pipeline, owner, or next step based on real qualification data.',
+    flow: ['New Lead', 'Custom Fields', 'Logic', 'Tag / Score', 'Owner', 'Pipeline', 'Team Alert'],
+    tools: ['GoHighLevel', 'Custom Fields', 'Workflows', 'Slack', 'Webhooks'],
+    automation: 'Reads form answers and CRM data, applies routing rules, assigns ownership, and starts the correct follow-up path.',
+    edgeCases: ['Missing answers', 'Conflicting criteria', 'Unassigned owner', 'Existing opportunity'],
+    fallback: 'Place uncertain leads into a review stage and alert the team for manual assignment.'
+  },
+  {
+    number: 'A5',
+    title: 'Appointment Recovery Architecture',
+    problem: 'Recover missed appointments instead of letting a no-show become a dead lead.',
+    flow: ['No-Show', 'Status Trigger', 'SMS / Email', 'Rebooking Link', 'Pipeline Update', 'Task'],
+    tools: ['GHL Calendar', 'GoHighLevel Workflows', 'SMS', 'Email', 'Pipelines'],
+    automation: 'Detects appointment status, sends recovery messages, offers a new booking path, and keeps the opportunity active.',
+    edgeCases: ['Repeated no-show', 'Reply received', 'Already rebooked', 'Opt-out'],
+    fallback: 'Stop automation when needed and create a manual follow-up task for the owner.'
+  },
+  {
+    number: 'A6',
+    title: 'Client Onboarding & Internal Handoff',
+    problem: 'Move a closed deal into delivery without relying on scattered messages and memory.',
+    flow: ['Won Opportunity', 'Welcome Email', 'Intake Form', 'Tasks', 'Internal Alert', 'Delivery Stage'],
+    tools: ['GoHighLevel', 'Forms', 'Email', 'Slack', 'Zapier / Make'],
+    automation: 'Starts onboarding, collects required information, assigns internal tasks, and updates the client stage.',
+    edgeCases: ['Missing intake', 'Incomplete payment', 'Delayed client response', 'Task not completed'],
+    fallback: 'Send reminders, escalate internally, or hold the workflow until the required step is complete.'
+  }
+]
+
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
 )
@@ -134,7 +197,7 @@ export default function GhlSystems({ slug }) {
       <main className="ghl-page">
         <header className="ghl-detail-nav">
           <a href="/" className="ghl-brand"><img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" /></a>
-          <div><a href="/?view=ghl-systems">All GHL systems</a><a className="ghl-nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a build <Arrow /></a></div>
+          <div><a href="/ghl-systems">All GHL systems</a><a className="ghl-nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a build <Arrow /></a></div>
         </header>
 
         <article className="ghl-detail">
@@ -190,7 +253,7 @@ export default function GhlSystems({ slug }) {
 
       <section className="ghl-system-grid">
         {ghlSystems.map(system => (
-          <a className="ghl-system-card" href={'/?view=ghl-systems&system=' + system.slug} key={system.slug}>
+          <a className="ghl-system-card" href={'/ghl-systems/' + system.slug} key={system.slug}>
             <div className="ghl-card-top"><span>{system.number}</span><small>OPEN SYSTEM ↗</small></div>
             <h2>{system.title}</h2>
             <Flow steps={system.flow} />
@@ -198,6 +261,46 @@ export default function GhlSystems({ slug }) {
             <div className="ghl-card-tags">{system.integrations.slice(0, 3).map(item => <span key={item}>{item}</span>)}</div>
           </a>
         ))}
+      </section>
+
+      <section className="ghl-architecture">
+        <div className="ghl-architecture-head">
+          <span className="ghl-label">SYSTEM ARCHITECTURE</span>
+          <h2>How the pieces work together.</h2>
+          <p>The workflow itself is only one part of the job. These examples show the trigger, connected tools, automated path, edge cases, and fallback behavior I plan for when building a production-ready system.</p>
+        </div>
+
+        <div className="ghl-architecture-grid">
+          {systemArchitectures.map(item => (
+            <article className="ghl-architecture-card" key={item.number}>
+              <div className="ghl-architecture-top">
+                <span>{item.number}</span>
+                <small>ARCHITECTURE MAP</small>
+              </div>
+              <h3>{item.title}</h3>
+              <p className="ghl-architecture-problem">{item.problem}</p>
+              <Flow steps={item.flow} />
+              <div className="ghl-architecture-detail">
+                <div>
+                  <span className="ghl-mini-label">Connected tools</span>
+                  <div className="ghl-card-tags">{item.tools.map(tool => <span key={tool}>{tool}</span>)}</div>
+                </div>
+                <div>
+                  <span className="ghl-mini-label">What happens automatically</span>
+                  <p>{item.automation}</p>
+                </div>
+                <div>
+                  <span className="ghl-mini-label">Edge cases checked</span>
+                  <ul>{item.edgeCases.map(edge => <li key={edge}>{edge}</li>)}</ul>
+                </div>
+                <div className="ghl-fallback">
+                  <span className="ghl-mini-label">Fallback path</span>
+                  <p>{item.fallback}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="ghl-integrations">
