@@ -814,15 +814,13 @@ const caseStudySlug = currentPath.startsWith('/case-studies/')
   ? currentPath.replace('/case-studies/', '')
   : null
 const caseStudySlugs = new Set(['hvac-lead-system', 'luxury-real-estate', 'healthcare-patient-experience'])
-const ghlSystemSlug = currentPath.startsWith('/ghl-systems/')
-  ? currentPath.replace('/ghl-systems/', '')
+const ghlSystemSlug = currentPath === '/ghl-systems'
+  ? new URLSearchParams(window.location.search).get('system')
   : null
 
 const route = currentPath === '/ghl-systems'
-  ? <GhlSystems />
-  : ghlSystemSlug
-    ? <GhlSystems slug={ghlSystemSlug} />
-    : currentPath === '/demos/hvac-ai-front-desk'
+  ? <GhlSystems slug={ghlSystemSlug || undefined} />
+  : currentPath === '/demos/hvac-ai-front-desk'
     ? <HvacDemo />
     : currentPath === '/demos/luxury-real-estate'
       ? <RealEstateDemo />
