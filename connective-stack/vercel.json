@@ -14,6 +14,14 @@
   ],
   "rewrites": [
     {
+      "source": "/ghl-systems",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ghl-systems/:path*",
+      "destination": "/index.html"
+    },
+    {
       "source": "/demos/hvac-ai-front-desk",
       "destination": "/index.html"
     },
