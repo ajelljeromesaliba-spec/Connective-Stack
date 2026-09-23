@@ -253,7 +253,7 @@ export default function GhlSystems({ slug }) {
 
       <section className="ghl-system-grid">
         {ghlSystems.map(system => (
-          <a className="ghl-system-card" href={'/ghl-systems/' + system.slug} key={system.slug}>
+          <a className="ghl-system-card" href={'/ghl-systems?system=' + system.slug} key={system.slug}>
             <div className="ghl-card-top"><span>{system.number}</span><small>OPEN SYSTEM ↗</small></div>
             <h2>{system.title}</h2>
             <Flow steps={system.flow} />
