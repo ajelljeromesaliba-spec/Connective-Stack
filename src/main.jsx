@@ -409,7 +409,6 @@ function App() {
         <nav id="site-navigation" className={menuOpen ? 'nav-open' : ''}>
           <div className="nav-primary">
             <a href="#services" onClick={closeMenu}>Services</a>
-            <a href="#work" onClick={closeMenu}>Work</a>
             <div className="nav-demo-menu">
               <a href="/case-studies/hvac-lead-system" className="nav-demo-trigger" onClick={closeMenu}>Case Studies <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
               <div className="nav-demo-dropdown">
