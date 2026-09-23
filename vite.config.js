@@ -7,6 +7,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
+        ghlSystems: 'ghl-systems/index.html',
         hvacDemo: 'demos/hvac-ai-front-desk/index.html',
         realEstateDemo: 'demos/luxury-real-estate/index.html',
         healthcareDemo: 'demos/healthcare-patient-experience/index.html',
