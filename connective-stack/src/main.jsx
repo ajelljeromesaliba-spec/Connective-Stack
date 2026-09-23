@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import HvacDemo from './HvacDemo'
+import GhlSystems from './GhlSystems'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -174,6 +175,7 @@ function App() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
           <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>Live Demo</a>
+          <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
           <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
@@ -548,4 +550,16 @@ function App() {
 }
 
 const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
-createRoot(document.getElementById('root')).render(currentPath === '/demos/hvac-ai-front-desk' ? <HvacDemo /> : <App />)
+const ghlSystemSlug = currentPath.startsWith('/ghl-systems/')
+  ? currentPath.replace('/ghl-systems/', '')
+  : null
+
+const route = currentPath === '/demos/hvac-ai-front-desk'
+  ? <HvacDemo />
+  : currentPath === '/ghl-systems'
+    ? <GhlSystems />
+    : ghlSystemSlug
+      ? <GhlSystems slug={ghlSystemSlug} />
+      : <App />
+
+createRoot(document.getElementById('root')).render(route)
