@@ -352,6 +352,7 @@ function ProjectInquiryForm() {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [ghlOpen, setGhlOpen] = useState(false)
   const [openNavDropdown, setOpenNavDropdown] = useState(null)
   const [legalModal, setLegalModal] = useState(null)
   const [activeService, setActiveService] = useState(null)
@@ -382,12 +383,13 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!legalModal && !activeService && !menuOpen) return undefined
+    if (!legalModal && !activeService && !menuOpen && !ghlOpen) return undefined
     const closeOnEscape = event => {
       if (event.key !== 'Escape') return
       setLegalModal(null)
       setActiveService(null)
       setMenuOpen(false)
+      setGhlOpen(false)
     }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', closeOnEscape)
@@ -395,7 +397,7 @@ function App() {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', closeOnEscape)
     }
-  }, [legalModal, activeService, menuOpen])
+  }, [legalModal, activeService, menuOpen, ghlOpen])
 
   const closeMenu = () => {
     setMenuOpen(false)
@@ -459,7 +461,7 @@ function App() {
               </div>
             </div>
             <a href="#process" onClick={closeMenu}>Process</a>
-            <a href="/?view=ghl-systems" onClick={closeMenu}>GHL Systems</a>
+            <button type="button" className="nav-plain-button" onClick={() => { setGhlOpen(true); closeMenu() }}>GHL Systems</button>
             <a href="#about" onClick={closeMenu}>About</a>
           </div>
           <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Start a project <Arrow /></a>
@@ -787,6 +789,12 @@ function App() {
         </div>
       </footer>
       <AtlasVoiceWidget />
+      {ghlOpen && (
+        <div className="ghl-page-overlay" role="dialog" aria-modal="true" aria-label="GoHighLevel systems">
+          <button type="button" className="ghl-overlay-close" onClick={() => setGhlOpen(false)} aria-label="Close GoHighLevel systems">×</button>
+          <GhlSystems />
+        </div>
+      )}
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
       {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
     </>
@@ -794,18 +802,12 @@ function App() {
 }
 
 const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
-const query = new URLSearchParams(window.location.search)
-const ghlView = query.get('view') === 'ghl-systems'
-const ghlSystemSlug = query.get('system')
-
 const caseStudySlug = currentPath.startsWith('/case-studies/')
   ? currentPath.replace('/case-studies/', '')
   : null
 const caseStudySlugs = new Set(['hvac-lead-system', 'luxury-real-estate', 'healthcare-patient-experience'])
 
-const route = ghlView
-  ? <GhlSystems slug={ghlSystemSlug || undefined} />
-  : currentPath === '/demos/hvac-ai-front-desk'
+const route = currentPath === '/demos/hvac-ai-front-desk'
     ? <HvacDemo />
     : currentPath === '/demos/luxury-real-estate'
       ? <RealEstateDemo />
