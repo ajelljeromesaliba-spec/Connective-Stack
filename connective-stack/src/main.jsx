@@ -175,7 +175,7 @@ function App() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#work" onClick={closeMenu}>Work</a>
           <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>Live Demo</a>
-          <a href="/ghl-systems.html" onClick={closeMenu}>GHL Systems</a>
+          <a href="/?view=ghl-systems" onClick={closeMenu}>GHL Systems</a>
           <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#process" onClick={closeMenu}>Process</a>
           <a href="#about" onClick={closeMenu}>About</a>
@@ -550,16 +550,14 @@ function App() {
 }
 
 const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
-const ghlSystemSlug = currentPath.startsWith('/ghl-systems/')
-  ? currentPath.replace('/ghl-systems/', '')
-  : null
+const query = new URLSearchParams(window.location.search)
+const ghlView = query.get('view') === 'ghl-systems'
+const ghlSystemSlug = query.get('system')
 
-const route = currentPath === '/demos/hvac-ai-front-desk'
-  ? <HvacDemo />
-  : currentPath === '/ghl-systems'
-    ? <GhlSystems />
-    : ghlSystemSlug
-      ? <GhlSystems slug={ghlSystemSlug} />
-      : <App />
+const route = ghlView
+  ? <GhlSystems slug={ghlSystemSlug || undefined} />
+  : currentPath === '/demos/hvac-ai-front-desk'
+    ? <HvacDemo />
+    : <App />
 
 createRoot(document.getElementById('root')).render(route)
