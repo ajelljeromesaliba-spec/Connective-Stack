@@ -64,7 +64,7 @@ const pricingTiers = [
     description: 'A more complete service website designed to capture inquiries and move visitors toward a call or appointment.',
     bestFor: 'Best for businesses actively generating leads',
     featured: true,
-    includes: ['Up to 5 pages', 'Everything in the Professional Website', 'Copy refinement and conversion structure', 'Lead form or booking calendar setup', 'Email notification routing', 'Analytics or Meta Pixel installation', 'Two revision rounds', '14 days of post-launch support'],
+    includes: ['Up to 5 pages', 'Everything in the Professional Website', 'Copy refinement and conversion structure', 'Lead form or booking calendar setup', 'Email notification routing', 'Analytics or Meta Pixel installation', 'Two revision rounds', '30 days of post-launch technical support'],
   },
   {
     name: 'Connected Website System',
@@ -72,7 +72,7 @@ const pricingTiers = [
     label: 'Starting project investment',
     description: 'A website connected to the systems behind the business, with lead routing and practical automation included.',
     bestFor: 'Best for teams that need fewer manual handoffs',
-    includes: ['Up to 5 pages', 'Everything in the Lead-Ready Website', 'CRM contact and pipeline connection', 'Workflow and notification setup', 'Calendar, form, and lead routing', 'One standard third-party integration', 'Automation testing and handoff', '14 days of post-launch support'],
+    includes: ['Up to 5 pages', 'Everything in the Lead-Ready Website', 'CRM contact and pipeline connection', 'Workflow and notification setup', 'Calendar, form, and lead routing', 'One standard third-party integration', 'Automation testing and handoff', '30 days of post-launch technical support'],
   },
 ]
 
