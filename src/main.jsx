@@ -640,6 +640,22 @@ function App() {
               </article>
             ))}
           </div>
+          <div className="pricing-trust-points" data-reveal>
+            <article>
+              <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
+              <div>
+                <strong>You Own What We Build</strong>
+                <p>Your production accounts, domain, and project assets remain under your ownership. ConnectiveStack simply gets the access needed to build and manage your system.</p>
+              </div>
+            </article>
+            <article>
+              <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
+              <div>
+                <strong>30-Day Post-Launch Support</strong>
+                <p>Technical support for the original build is included for 30 days after launch.</p>
+              </div>
+            </article>
+          </div>
           <div className="hourly-support" data-reveal>
             <div className="hourly-support-rate">
               <span>Flexible support</span>
