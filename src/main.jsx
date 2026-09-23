@@ -352,6 +352,7 @@ function ProjectInquiryForm() {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [openNavDropdown, setOpenNavDropdown] = useState(null)
   const [legalModal, setLegalModal] = useState(null)
   const [activeService, setActiveService] = useState(null)
 
@@ -396,7 +397,14 @@ function App() {
     }
   }, [legalModal, activeService, menuOpen])
 
-  const closeMenu = () => setMenuOpen(false)
+  const closeMenu = () => {
+    setMenuOpen(false)
+    setOpenNavDropdown(null)
+  }
+
+  const toggleNavDropdown = name => {
+    setOpenNavDropdown(current => current === name ? null : name)
+  }
 
   return (
     <>
@@ -410,8 +418,8 @@ function App() {
         <nav id="site-navigation" className={menuOpen ? 'nav-open' : ''}>
           <div className="nav-primary">
             <a href="#services" onClick={closeMenu}>Services</a>
-            <div className="nav-demo-menu">
-              <a href="/case-studies/hvac-lead-system" className="nav-demo-trigger" onClick={closeMenu}>Case Studies <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
+            <div className={`nav-demo-menu ${openNavDropdown === 'case-studies' ? 'mobile-open' : ''}`}>
+              <button type="button" className="nav-demo-trigger" onClick={() => toggleNavDropdown('case-studies')} aria-expanded={openNavDropdown === 'case-studies'}>Case Studies <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
               <div className="nav-demo-dropdown">
                 <a href="/case-studies/hvac-lead-system" onClick={closeMenu}>
                   <small>Home Services</small>
@@ -430,8 +438,8 @@ function App() {
                 </a>
               </div>
             </div>
-            <div className="nav-demo-menu">
-              <a href="#work" className="nav-demo-trigger" onClick={closeMenu}>Live Demos <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
+            <div className={`nav-demo-menu ${openNavDropdown === 'live-demos' ? 'mobile-open' : ''}`}>
+              <button type="button" className="nav-demo-trigger" onClick={() => toggleNavDropdown('live-demos')} aria-expanded={openNavDropdown === 'live-demos'}>Live Demos <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
               <div className="nav-demo-dropdown">
                 <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>
                   <small>Home Services</small>
