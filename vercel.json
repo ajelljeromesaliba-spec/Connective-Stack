@@ -52,23 +52,23 @@
     },
     {
       "source": "/case-studies/:path*",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/solutions/:path*",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/ajell-saliba",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/seo-guides",
-      "destination": "/index.html"
+      "destination": "/"
     },
     {
       "source": "/guides/:path*",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ]
 }
