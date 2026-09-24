@@ -6,7 +6,6 @@ import RealEstateDemo from './RealEstateDemo'
 import HealthcareDemo from './HealthcareDemo'
 import CaseStudy from './CaseStudy'
 import GhlSystems from './GhlSystems'
-import { Resources, Guide, Solution, AboutAjell, guideSlugs, solutionSlugs } from './SeoPages'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -464,7 +463,6 @@ function App() {
             </div>
             <a href="#process" onClick={closeMenu}>Process</a>
             <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
-            <a href="/resources" onClick={closeMenu}>Resources</a>
             <a href="/ajell-saliba" onClick={closeMenu}>About AJ</a>
           </div>
           <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Show me the problem <Arrow /></a>
@@ -782,20 +780,9 @@ const ghlSystemSlug = currentPath === '/ghl-systems'
   ? new URLSearchParams(window.location.search).get('system')
   : null
 
-const resourceSlug = currentPath.startsWith('/resources/') ? currentPath.replace('/resources/', '') : null
-const solutionSlug = currentPath.startsWith('/solutions/') ? currentPath.replace('/solutions/', '') : null
-
-const route = currentPath === '/resources'
-  ? <Resources />
-  : guideSlugs.has(resourceSlug)
-    ? <Guide slug={resourceSlug} />
-    : solutionSlugs.has(solutionSlug)
-      ? <Solution slug={solutionSlug} />
-      : currentPath === '/ajell-saliba'
-        ? <AboutAjell />
-        : currentPath === '/ghl-systems'
-          ? <GhlSystems slug={ghlSystemSlug || undefined} />
-          : currentPath === '/demos/hvac-ai-front-desk'
+const route = currentPath === '/ghl-systems'
+  ? <GhlSystems slug={ghlSystemSlug || undefined} />
+  : currentPath === '/demos/hvac-ai-front-desk'
     ? <HvacDemo />
     : currentPath === '/demos/luxury-real-estate'
       ? <RealEstateDemo />
