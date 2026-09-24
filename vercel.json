@@ -55,14 +55,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/resources",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/resources/:path*",
-      "destination": "/index.html"
-    },
-    {
       "source": "/solutions/:path*",
       "destination": "/index.html"
     },
