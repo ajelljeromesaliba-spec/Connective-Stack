@@ -6,6 +6,7 @@ import RealEstateDemo from './RealEstateDemo'
 import HealthcareDemo from './HealthcareDemo'
 import CaseStudy from './CaseStudy'
 import GhlSystems from './GhlSystems'
+import { GuideHub, Guide, Solution, AboutAjell, guideSlugs, solutionSlugs } from './SeoPages'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -463,6 +464,7 @@ function App() {
             </div>
             <a href="#process" onClick={closeMenu}>Process</a>
             <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
+            <a href="/seo-guides" onClick={closeMenu}>Guides</a>
             <a href="/ajell-saliba" onClick={closeMenu}>About AJ</a>
           </div>
           <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Show me the problem <Arrow /></a>
@@ -586,37 +588,6 @@ function App() {
             ))}
           </div>
           <p className="concept-disclosure">These are self-initiated concept projects built to demonstrate strategy, interface design, and system planning. Fictional data is labeled, and no performance metric is presented as a client result.</p>
-        </section>
-
-        <section className="evidence-section" id="proof">
-          <div className="evidence-heading" data-reveal>
-            <span className="kicker">How I prove the work</span>
-            <h2>See how I think through a problem before you hire me.</h2>
-            <p>The strongest proof is not a long software list. It is a visible customer path, the logic behind it, the failure cases considered, and a build you can inspect.</p>
-          </div>
-          <div className="evidence-grid">
-            <article data-reveal><span>01</span><h3>Start at the failure point</h3><p>I map where the customer, lead, data, or internal handoff stops behaving the way the business expects.</p></article>
-            <article data-reveal><span>02</span><h3>Trace the full path</h3><p>I check the page, form, CRM record, workflow, calendar, notification, domain, deployment, or integration involved instead of treating the symptom in isolation.</p></article>
-            <article data-reveal><span>03</span><h3>Plan for the non-happy path</h3><p>Duplicate contacts, missing fields, no-shows, failed webhooks, routing errors, and fallback actions are part of the system design.</p></article>
-            <article data-reveal><span>04</span><h3>Make the fix inspectable</h3><p>Live demos, case studies, workflow maps, and defined scope show what was changed, what the system is meant to do, and where third-party limits remain.</p></article>
-          </div>
-        </section>
-
-        <section className="surreal-manifesto" aria-label="ConnectiveStack design philosophy">
-          <div className="surreal-manifesto-art" data-reveal>
-            <img src="/assets/portfolio-surreal-journey.webp" alt="Surreal path connecting floating ideas into one system" loading="lazy" />
-            <div className="surreal-manifesto-index">CS / 04</div>
-          </div>
-          <div className="surreal-manifesto-copy" data-reveal>
-            <span className="kicker">Clarity meets imagination</span>
-            <h2>Distinctive enough to be remembered. Clear enough to be trusted.</h2>
-            <p>Every visual decision supports the message. Every interaction points toward a useful next step. The result is a website with character, plus a system that works behind it.</p>
-            <div className="manifesto-principles">
-              <span>01 / Art direction</span>
-              <span>02 / Clear journeys</span>
-              <span>03 / Connected systems</span>
-            </div>
-          </div>
         </section>
 
         <section className="price-section">
@@ -780,9 +751,20 @@ const ghlSystemSlug = currentPath === '/ghl-systems'
   ? new URLSearchParams(window.location.search).get('system')
   : null
 
-const route = currentPath === '/ghl-systems'
-  ? <GhlSystems slug={ghlSystemSlug || undefined} />
-  : currentPath === '/demos/hvac-ai-front-desk'
+const guideSlug = currentPath.startsWith('/guides/') ? currentPath.replace('/guides/', '') : null
+const solutionSlug = currentPath.startsWith('/solutions/') ? currentPath.replace('/solutions/', '') : null
+
+const route = currentPath === '/seo-guides'
+  ? <GuideHub />
+  : guideSlugs.has(guideSlug)
+    ? <Guide slug={guideSlug} />
+    : solutionSlugs.has(solutionSlug)
+      ? <Solution slug={solutionSlug} />
+      : currentPath === '/ajell-saliba'
+        ? <AboutAjell />
+        : currentPath === '/ghl-systems'
+          ? <GhlSystems slug={ghlSystemSlug || undefined} />
+          : currentPath === '/demos/hvac-ai-front-desk'
     ? <HvacDemo />
     : currentPath === '/demos/luxury-real-estate'
       ? <RealEstateDemo />
