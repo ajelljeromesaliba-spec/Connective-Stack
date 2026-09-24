@@ -6,6 +6,7 @@ import RealEstateDemo from './RealEstateDemo'
 import HealthcareDemo from './HealthcareDemo'
 import CaseStudy from './CaseStudy'
 import GhlSystems from './GhlSystems'
+import { Resources, Guide, Solution, AboutAjell, guideSlugs, solutionSlugs } from './SeoPages'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -463,7 +464,8 @@ function App() {
             </div>
             <a href="#process" onClick={closeMenu}>Process</a>
             <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
-            <a href="#about" onClick={closeMenu}>About</a>
+            <a href="/resources" onClick={closeMenu}>Resources</a>
+            <a href="/ajell-saliba" onClick={closeMenu}>About AJ</a>
           </div>
           <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Show me the problem <Arrow /></a>
         </nav>
@@ -732,48 +734,6 @@ function App() {
           </div>
         </section>
 
-        <section className="about-section" id="about">
-          <div className="about-visual" data-reveal>
-            <div className="about-portrait">
-              <img src="/assets/ajell-saliba.webp" alt="Ajell Saliba, founder and independent specialist at ConnectiveStack" loading="lazy" />
-              <div className="portrait-shade" />
-              <div className="portrait-label">
-                <span>AJELL SALIBA</span>
-                <small>WEB + SYSTEMS SPECIALIST</small>
-              </div>
-              <div className="portrait-code">
-                <span>STATUS</span>
-                <strong><i /> Project-based and hourly support</strong>
-              </div>
-            </div>
-            <div className="experience-chip"><strong>11</strong><span>Years of overall professional experience</span></div>
-          </div>
-          <div className="about-copy" data-reveal>
-            <span className="kicker kicker-dark">About AJ</span>
-            <h2>I work across the layers where small-business systems usually break.</h2>
-            <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. My 11 years of professional experience span customer service, sales, quality assurance, leadership of a 17-person QA team, GoHighLevel operations, website delivery, DNS, deployments, and integrations.</p>
-            <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
-            <div className="tool-matrix">
-              <div className="tool-group">
-                <span>Web, hosting and deployment</span>
-                <div>{['GoHighLevel', 'Lovable', 'Vercel', 'GitHub', 'Cloudflare', 'Porkbun', 'WordPress', 'Shopify', 'Framer'].map(tool => <b key={tool}>{tool}</b>)}</div>
-              </div>
-              <div className="tool-group">
-                <span>AI, automation and integrations</span>
-                <div>{['ChatGPT', 'Claude', 'Zapier', 'Make', 'VAPI', 'Chatbase', 'Supabase', 'Resend', 'Mailgun'].map(tool => <b key={tool}>{tool}</b>)}</div>
-              </div>
-              <div className="tool-group">
-                <span>CRM, sales and scheduling</span>
-                <div>{['GoHighLevel', 'HubSpot', 'Salesforce', 'Zoho', 'Calendly', 'Google Calendar', 'Aircall', 'Stripe', 'PayPal'].map(tool => <b key={tool}>{tool}</b>)}</div>
-              </div>
-              <div className="tool-group">
-                <span>Operations, support and creative</span>
-                <div>{['Google Workspace', 'Microsoft 365', 'Slack', 'Trello', 'ClickUp', 'Freshdesk', 'Zendesk', 'Canva', 'Figma', 'CapCut'].map(tool => <b key={tool}>{tool}</b>)}</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="contact-section" id="contact">
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
@@ -822,9 +782,20 @@ const ghlSystemSlug = currentPath === '/ghl-systems'
   ? new URLSearchParams(window.location.search).get('system')
   : null
 
-const route = currentPath === '/ghl-systems'
-  ? <GhlSystems slug={ghlSystemSlug || undefined} />
-  : currentPath === '/demos/hvac-ai-front-desk'
+const resourceSlug = currentPath.startsWith('/resources/') ? currentPath.replace('/resources/', '') : null
+const solutionSlug = currentPath.startsWith('/solutions/') ? currentPath.replace('/solutions/', '') : null
+
+const route = currentPath === '/resources'
+  ? <Resources />
+  : guideSlugs.has(resourceSlug)
+    ? <Guide slug={resourceSlug} />
+    : solutionSlugs.has(solutionSlug)
+      ? <Solution slug={solutionSlug} />
+      : currentPath === '/ajell-saliba'
+        ? <AboutAjell />
+        : currentPath === '/ghl-systems'
+          ? <GhlSystems slug={ghlSystemSlug || undefined} />
+          : currentPath === '/demos/hvac-ai-front-desk'
     ? <HvacDemo />
     : currentPath === '/demos/luxury-real-estate'
       ? <RealEstateDemo />
