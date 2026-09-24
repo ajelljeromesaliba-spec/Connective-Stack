@@ -18,33 +18,63 @@ const Check = () => (
 const services = [
   {
     number: '01',
-    title: 'Website design and build',
-    copy: 'A polished, mobile-first website that makes your business clear, credible, and easy to contact.',
-    tags: ['Custom design', 'Responsive build', 'Fast deployment'],
-    summary: 'A complete customer-facing website built around your offer, audience, and primary call to action.',
-    includes: ['Page structure and conversion-focused layout', 'Responsive design for desktop, tablet, and mobile', 'Clear service messaging and calls to action', 'Basic on-page SEO, domain setup, and deployment'],
-    bestFor: 'Service businesses launching a new site or replacing an outdated one.',
-    result: 'A credible website that clearly explains what you do and gives visitors an easy next step.',
+    title: 'Leads come in, but follow-up breaks',
+    copy: 'A form gets submitted, but the lead stalls between the inbox, CRM, owner, calendar, or next follow-up.',
+    tags: ['Lead routing', 'Follow-up', 'Booking'],
+    summary: 'I trace the lead path from first submission to the person or system responsible for the next action, then fix the handoffs where leads are getting delayed or lost.',
+    includes: ['Form and lead-source mapping', 'CRM contact and opportunity creation', 'Owner, pipeline, and notification routing', 'Calendar, reminder, and follow-up logic'],
+    bestFor: 'Businesses generating inquiries but seeing slow responses, missed follow-up, or unclear ownership.',
+    result: 'A lead path where every inquiry has a defined destination, next action, and fallback.',
   },
   {
     number: '02',
-    title: 'Lead-ready setup',
-    copy: 'Forms, calendars, calls, and email routes connected so every inquiry reaches the right place.',
-    tags: ['Lead forms', 'Booking flows', 'Notifications'],
-    summary: 'The conversion layer that turns website interest into an organized inquiry or scheduled conversation.',
-    includes: ['Lead forms with the right qualification fields', 'Calendar or appointment booking connections', 'Click-to-call and email contact paths', 'Lead notifications and routing to the right inbox or team'],
-    bestFor: 'Businesses getting traffic but losing leads through unclear or disconnected contact paths.',
-    result: 'A shorter path from visitor interest to a lead your team can actually follow up with.',
+    title: 'The website works until the technical layer breaks',
+    copy: 'The page may look fine while DNS, deployment, forms, email delivery, redirects, or third-party connections fail behind it.',
+    tags: ['DNS', 'Deployment', 'Troubleshooting'],
+    summary: 'I work backward from the visible failure, isolate the layer causing it, and repair the connection without treating every issue like a redesign.',
+    includes: ['Domain and DNS checks', 'Vercel and GitHub deployment troubleshooting', 'Form and email-delivery verification', 'Redirect, routing, and integration checks'],
+    bestFor: 'Teams with a site that is live but has technical issues affecting leads, access, delivery, or deployment.',
+    result: 'A working customer path with the underlying technical issue identified and corrected.',
   },
   {
     number: '03',
-    title: 'Integrations and automation',
-    copy: 'Connect your site to the CRM and tools you already use, then automate the repetitive handoffs.',
-    tags: ['CRM connections', 'Workflows', 'AI add-ons'],
-    summary: 'Connected workflows that reduce manual handoffs between your website, CRM, calendar, and follow-up tools.',
-    includes: ['CRM contact and opportunity creation', 'Workflow triggers, alerts, and follow-up sequences', 'Form, calendar, and pipeline connections', 'Optional AI chat or voice assistant integration'],
-    bestFor: 'Teams that already use several tools but still copy information or follow up manually.',
-    result: 'A cleaner operating flow with faster routing, fewer missed inquiries, and less repetitive admin work.',
+    title: 'Your tools do not talk to each other',
+    copy: 'Website, CRM, calendar, email, phone, and automation tools exist, but people still copy data or chase updates manually.',
+    tags: ['Integrations', 'Webhooks', 'CRM'],
+    summary: 'I map what information needs to move between systems, then connect the tools around the actual business process instead of adding another disconnected app.',
+    includes: ['Website-to-CRM connections', 'Webhook and workflow setup', 'Calendar, email, phone, and database handoffs', 'Zapier, Make, API, or native integrations where appropriate'],
+    bestFor: 'Businesses already paying for multiple platforms but still relying on manual handoffs.',
+    result: 'A connected flow where data reaches the next system or person without unnecessary re-entry.',
+  },
+  {
+    number: '04',
+    title: 'The customer journey has too much friction',
+    copy: 'Visitors cannot tell what to do next, forms ask the wrong questions, or booking and qualification paths create unnecessary drop-off.',
+    tags: ['UX', 'Qualification', 'Conversion path'],
+    summary: 'I simplify the journey around the real decision the customer needs to make, then connect that action to the system behind it.',
+    includes: ['CTA and page-flow review', 'Form and qualification structure', 'Booking-path simplification', 'Mobile and responsive journey checks'],
+    bestFor: 'Businesses with traffic or interest but a confusing path from first visit to inquiry or appointment.',
+    result: 'A clearer customer journey with fewer unnecessary steps between intent and action.',
+  },
+  {
+    number: '05',
+    title: 'Automation works until an edge case happens',
+    copy: 'The happy path runs, but duplicates, missing fields, failed webhooks, no-shows, or unanswered leads expose weak spots.',
+    tags: ['Fallback logic', 'Edge cases', 'Testing'],
+    summary: 'I test beyond the ideal workflow and add rules for the cases that usually create silent failures or manual cleanup.',
+    includes: ['Duplicate-contact handling', 'Missing-data and status checks', 'Failure notifications and fallback tasks', 'No-show, no-response, and retry paths'],
+    bestFor: 'Teams with automations that technically run but still require frequent manual rescue.',
+    result: 'A workflow that has a defined response when the normal path does not complete.',
+  },
+  {
+    number: '06',
+    title: 'Internal handoffs depend on memory',
+    copy: 'A deal closes or a status changes, but the next person only knows because someone sends a message or remembers to create a task.',
+    tags: ['Tasks', 'Notifications', 'Onboarding'],
+    summary: 'I turn repeatable handoffs into visible workflow steps so ownership, timing, and required actions are easier to track.',
+    includes: ['Task creation and assignment', 'Internal alerts and status changes', 'Client onboarding sequences', 'Pipeline and delivery-stage updates'],
+    bestFor: 'Small teams where important follow-through still depends on manual reminders and scattered messages.',
+    result: 'A repeatable handoff with clear ownership and fewer steps left to memory.',
   },
 ]
 
@@ -84,7 +114,7 @@ const projects = [
     image: '/assets/hvac-hero-technician.webp',
     accent: 'mint',
     photo: true,
-    goal: 'Turn high-intent local searches into calls and estimate requests.',
+    goal: 'High-intent visitors can still be lost when calls, estimates, follow-up, and booking are disconnected.',
     outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
     visualTags: ['Mobile-first', 'Call + booking', 'Local trust'],
     href: '/demos/hvac-ai-front-desk',
@@ -98,7 +128,7 @@ const projects = [
     image: '/assets/realestate-austin-premium.webp',
     accent: 'sand',
     photo: true,
-    goal: 'Turn premium property interest into qualified conversations with the right broker.',
+    goal: 'Premium buyers need the right property and broker without being pushed through a generic one-size-fits-all journey.',
     outcomes: ['Smarter broker routing', 'Qualified buyer intent', 'Private tour requests'],
     visualTags: ['Multi-broker', 'AI concierge', 'Buyer tools'],
     href: '/demos/luxury-real-estate',
@@ -112,7 +142,7 @@ const projects = [
     image: '/assets/healthcare-hero-v1.webp',
     accent: 'mint',
     photo: true,
-    goal: 'Turn a complex patient journey into clear, coordinated administrative steps.',
+    goal: 'Patient intake, provider selection, benefits, estimates, and scheduling can fragment across too many separate steps.',
     outcomes: ['Conditional intake', 'Provider routing', 'Benefits workflow'],
     visualTags: ['Multi-provider', 'Smart intake', 'Cost estimator'],
     href: '/demos/healthcare-patient-experience',
@@ -195,7 +225,7 @@ function ServiceModal({ service, onClose }) {
       <section className="legal-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
         <div className="legal-header service-modal-header">
           <div>
-            <span>CONNECTIVE STACK / SERVICE {service.number}</span>
+            <span>CONNECTIVE STACK / PROBLEM AREA {service.number}</span>
             <h2 id="service-modal-title">{service.title}</h2>
           </div>
           <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>×</button>
@@ -204,15 +234,15 @@ function ServiceModal({ service, onClose }) {
           <p className="service-modal-summary">{service.summary}</p>
           <div className="service-modal-grid">
             <div className="service-modal-includes">
-              <span>What can be included</span>
+              <span>What I usually check and fix</span>
               <ul>{service.includes.map(item => <li key={item}><Check /> <span>{item}</span></li>)}</ul>
             </div>
             <div className="service-modal-aside">
-              <div><span>Best for</span><p>{service.bestFor}</p></div>
-              <div><span>Delivery objective</span><p>{service.result}</p></div>
+              <div><span>Common when</span><p>{service.bestFor}</p></div>
+              <div><span>Target outcome</span><p>{service.result}</p></div>
             </div>
           </div>
-          <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this service <Arrow /></a>
+          <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this problem <Arrow /></a>
         </div>
       </section>
     </div>
@@ -268,15 +298,15 @@ function ProjectInquiryForm() {
     <form className="inquiry-form" onSubmit={submitInquiry}>
       <div className="inquiry-form-heading">
         <span>PROJECT INQUIRY</span>
-        <h3>Describe the current setup.</h3>
-        <p>Share the business goal, current website or tools, broken handoffs, required deadline, and available budget. I use these details to recommend a realistic scope.</p>
+        <h3>Tell me what should happen, and what happens instead.</h3>
+        <p>Share the current setup, the failure or bottleneck, the result you expected, and any deadline or budget constraint. I use that to narrow the problem before recommending a build.</p>
       </div>
       <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
       <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
       <label>Phone number <small>Optional</small><input name="phone" type="tel" autoComplete="tel" placeholder="US or international number" /></label>
       <label>Company or business<input name="company" autoComplete="organization" placeholder="Company name" /></label>
       <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
-      <label>How can I help?<select name="service" required defaultValue=""><option value="" disabled>Select a service</option><option>New website</option><option>Website redesign</option><option>Landing page</option><option>Website plus lead capture</option><option>CRM or GoHighLevel setup</option><option>Automation or integration</option><option>AI chat or voice agent</option><option>Hourly technical support</option><option>Not sure yet</option></select></label>
+      <label>What is going wrong?<select name="service" required defaultValue=""><option value="" disabled>Select the closest problem</option><option>Leads are not being followed up correctly</option><option>Website or form is not working as expected</option><option>CRM, calendar, or tools are disconnected</option><option>Customer journey or booking flow has too much friction</option><option>Automation is failing on edge cases</option><option>Internal handoffs are too manual</option><option>I need a new website around a better customer path</option><option>Technical troubleshooting / hourly support</option><option>Not sure yet</option></select></label>
       <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
       <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,250 to $2,250</option><option>$2,250 to $3,750</option><option>$3,750 to $6,000</option><option>$6,000+</option><option>Need a recommendation</option></select></label>
       <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
@@ -356,7 +386,7 @@ function App() {
         </button>
         <nav id="site-navigation" className={menuOpen ? 'nav-open' : ''}>
           <div className="nav-primary">
-            <a href="#services" onClick={closeMenu}>Services</a>
+            <a href="#services" onClick={closeMenu}>Problems I Solve</a>
             <div className={`nav-demo-menu ${openNavDropdown === 'case-studies' ? 'mobile-open' : ''}`}>
               <button type="button" className="nav-demo-trigger" onClick={() => toggleNavDropdown('case-studies')} aria-expanded={openNavDropdown === 'case-studies'}>Case Studies <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
               <div className="nav-demo-dropdown">
@@ -401,7 +431,7 @@ function App() {
             <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
             <a href="#about" onClick={closeMenu}>About</a>
           </div>
-          <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Start a project <Arrow /></a>
+          <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Show me the problem <Arrow /></a>
         </nav>
       </header>
 
@@ -414,16 +444,16 @@ function App() {
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
             <div className="eyebrow"><span className="status-dot" /> AJ Saliba • Independent web and systems specialist</div>
-            <h1>Distinctive websites built around the <em>customer journey behind them.</em></h1>
-            <p className="hero-lead">I design and deploy websites for service businesses, then connect the lead forms, booking, CRM routing, notifications, and follow-up included in the agreed scope.</p>
+            <h1>I fix the systems that break between <em>your website, leads, and operations.</em></h1>
+            <p className="hero-lead">When leads disappear, forms stop routing, tools do not connect, DNS breaks, follow-up stalls, or a customer journey has too many handoffs, I trace where the system fails and fix the path behind it.</p>
             <div className="hero-actions">
-              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Discuss a project <Arrow /></a>
-              <a href="#work" className="button button-secondary">See sample work</a>
+              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Show me what's broken <Arrow /></a>
+              <a href="#services" className="button button-secondary">See problems I solve</a>
             </div>
             <div className="hero-meta">
-              <div><strong>Projects from $1,250</strong><span>Pages, revisions, and support defined in writing</span></div>
-              <div><strong>Independent specialist</strong><span>Direct planning, build, testing, and handoff</span></div>
-              <div><strong>Concept work labeled</strong><span>No invented client metrics or testimonials</span></div>
+              <div><strong>Diagnose before build</strong><span>Find the broken handoff before adding another tool</span></div>
+              <div><strong>One technical owner</strong><span>Website, CRM, automation, DNS, and deployment in one path</span></div>
+              <div><strong>Proof you can inspect</strong><span>Live demos, case studies, workflow maps, and clear boundaries</span></div>
             </div>
           </div>
 
@@ -458,9 +488,9 @@ function App() {
 
         <section className="section services" id="services">
           <div className="section-heading" data-reveal>
-            <span className="kicker">What I build</span>
-            <h2>Design, lead capture, and system handoff in one scope.</h2>
-            <p>The work is separated into clear deliverables so you know what is being designed, what is being connected, and what remains a third-party responsibility.</p>
+            <span className="kicker">Problems I solve</span>
+            <h2>Start with what is breaking. Then fix the system around it.</h2>
+            <p>Sometimes the fix is a page. Sometimes it is DNS, CRM routing, a workflow, calendar logic, email delivery, a webhook, or a deployment issue. I start with the failure point, not a preset package.</p>
           </div>
           <div className="service-list">
             {services.map(service => (
@@ -482,10 +512,10 @@ function App() {
         <section className="section work" id="work">
           <div className="section-heading heading-row" data-reveal>
             <div>
-              <span className="kicker">Selected concepts</span>
-              <h2>Designed around the result, not just the page.</h2>
+              <span className="kicker">Problem-led concept work</span>
+              <h2>Each build starts with something that is not working.</h2>
             </div>
-            <p>Each concept starts with a business problem, then connects the design, message, and customer journey around a useful outcome.</p>
+            <p>The demos and case studies show how I break a problem into the customer path, system logic, integrations, edge cases, and next action.</p>
           </div>
           <div className="project-grid">
             {projects.map((project, index) => (
@@ -506,11 +536,11 @@ function App() {
                   <h3>{project.title}</h3>
                   <p>{project.copy}</p>
                   <div className="project-goal">
-                    <small>Business goal</small>
+                    <small>Problem being solved</small>
                     <strong>{project.goal}</strong>
                   </div>
                   <div className="project-outcomes">
-                    <small>Designed to improve</small>
+                    <small>What the system addresses</small>
                     <ul>{project.outcomes.map(outcome => <li key={outcome}><Check />{outcome}</li>)}</ul>
                   </div>
                   <div className="project-action-links">
@@ -526,15 +556,15 @@ function App() {
 
         <section className="evidence-section" id="proof">
           <div className="evidence-heading" data-reveal>
-            <span className="kicker">Evidence before promises</span>
-            <h2>What a prospect can inspect before contacting me.</h2>
-            <p>Credibility should come from visible work, clear boundaries, and a scope that can be checked.</p>
+            <span className="kicker">How I prove the work</span>
+            <h2>See how I think through a problem before you hire me.</h2>
+            <p>The strongest proof is not a long software list. It is a visible customer path, the logic behind it, the failure cases considered, and a build you can inspect.</p>
           </div>
           <div className="evidence-grid">
-            <article data-reveal><span>01</span><h3>Interactive demos</h3><p>Open and test the actual customer journeys, forms, calculators, routing logic, and responsive interfaces instead of judging isolated screenshots.</p></article>
-            <article data-reveal><span>02</span><h3>Documented reasoning</h3><p>Each case study explains the business problem, assumptions, design decisions, workflow, safeguards, and production requirements.</p></article>
-            <article data-reveal><span>03</span><h3>Honest proof boundaries</h3><p>Concept data stays fictional, intended outcomes are not reported as measured results, and automated tools are not presented as replacements for human judgment.</p></article>
-            <article data-reveal><span>04</span><h3>Defined commercial terms</h3><p>Starting prices identify page limits, revision rounds, support periods, integrations, and costs that remain outside the project fee.</p></article>
+            <article data-reveal><span>01</span><h3>Start at the failure point</h3><p>I map where the customer, lead, data, or internal handoff stops behaving the way the business expects.</p></article>
+            <article data-reveal><span>02</span><h3>Trace the full path</h3><p>I check the page, form, CRM record, workflow, calendar, notification, domain, deployment, or integration involved instead of treating the symptom in isolation.</p></article>
+            <article data-reveal><span>03</span><h3>Plan for the non-happy path</h3><p>Duplicate contacts, missing fields, no-shows, failed webhooks, routing errors, and fallback actions are part of the system design.</p></article>
+            <article data-reveal><span>04</span><h3>Make the fix inspectable</h3><p>Live demos, case studies, workflow maps, and defined scope show what was changed, what the system is meant to do, and where third-party limits remain.</p></article>
           </div>
         </section>
 
@@ -557,9 +587,9 @@ function App() {
 
         <section className="price-section">
           <div className="price-intro" data-reveal>
-            <span className="kicker">Project-based pricing</span>
-            <h2>Choose the level of build your business actually needs.</h2>
-            <p>Website projects start at $1,250. Final investment depends on page count, integrations, automation complexity, and content readiness. Every engagement has a defined scope, deliverables, and price before work begins.</p>
+            <span className="kicker">Scope after diagnosis</span>
+            <h2>Once the problem is clear, the build gets specific.</h2>
+            <p>These are starting scopes, not a prescription before I understand the issue. Website projects start at $1,250; final investment depends on the pages, integrations, automation logic, and technical work actually required.</p>
           </div>
           <div className="pricing-grid" data-reveal>
             {pricingTiers.map(tier => (
@@ -623,10 +653,10 @@ function App() {
         <section className="process-showcase" id="process">
           <div className="process-heading" data-reveal>
             <div>
-              <span className="kicker">How I work</span>
-              <h2>From business brief to connected digital system.</h2>
+              <span className="kicker">How I solve it</span>
+              <h2>Find the failure point. Fix the path. Verify the handoff.</h2>
             </div>
-            <p>I handle the customer-facing website and the technical details behind it, so the full experience is planned, built, connected, tested, and launched as one system.</p>
+            <p>I work across the customer-facing page and the technical layers behind it, so the fix is tested through the full path instead of stopping at the first screen that looks correct.</p>
           </div>
 
           <div className="process-stage">
@@ -686,7 +716,7 @@ function App() {
           </div>
           <div className="about-copy" data-reveal>
             <span className="kicker kicker-dark">About AJ</span>
-            <h2>One specialist. Direct communication. Practical execution.</h2>
+            <h2>I work across the layers where small-business systems usually break.</h2>
             <p>I’m Ajell Saliba, an independent web and systems specialist based in the Philippines and working with US businesses. My 11 years of professional experience span customer service, sales, quality assurance, leadership of a 17-person QA team, GoHighLevel operations, website delivery, DNS, deployments, and integrations.</p>
             <p>You work directly with me from planning through launch. No layers of account management and no vague handoffs.</p>
             <div className="tool-matrix">
@@ -713,9 +743,9 @@ function App() {
         <section className="contact-section" id="contact">
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
-            <span className="kicker kicker-dark">Start with the current problem</span>
-            <h2>Show me where the customer journey or handoff breaks.</h2>
-            <p>Send the current website, tools, desired outcome, deadline, and budget range. I will recommend a realistic scope or tell you when the project is not a fit.</p>
+            <span className="kicker kicker-dark">Start with the problem</span>
+            <h2>Show me what is broken, slow, disconnected, or still manual.</h2>
+            <p>Send the current website, tools, what should happen, what happens instead, and any deadline or budget constraint. I will trace the likely failure points and recommend a realistic scope.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
               <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
@@ -732,7 +762,7 @@ function App() {
 
       <footer className="portfolio-footer">
         <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" /></a>
-        <p>Websites, integrations, and automation for service businesses.</p>
+        <p>Fixing the systems between websites, leads, CRM, automation, and customer handoffs.</p>
         <div>
           <span>© {new Date().getFullYear()} ConnectiveStack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
