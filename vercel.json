@@ -52,7 +52,7 @@
     },
     {
       "source": "/case-studies/:path*",
-      "destination": "/"
+      "destination": "/index.html"
     },
     {
       "source": "/resources",
