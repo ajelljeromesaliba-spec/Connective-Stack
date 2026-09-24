@@ -82,15 +82,15 @@ const services = [
 const pricingTiers = [
   {
     name: 'Professional Website',
-    price: '1,250',
+    price: '1,249',
     label: 'Starting project investment',
     description: 'A professionally built website that gives your business a credible online presence and a clear path for customers to take action.',
     bestFor: 'Best for established service businesses ready for a stronger online presence',
-    includes: ['One landing page or up to 3 simple pages', 'Custom mobile-responsive design', 'Client-provided content and brand setup', 'Contact form and clear calls to action', 'Basic on-page SEO', 'Domain connection and deployment', 'One revision round', '7 days of post-launch support'],
+    includes: ['One landing page or up to 3 simple pages', 'Custom mobile-responsive design', 'Client-provided content and brand setup', 'Contact form and clear calls to action', 'Essential on-page SEO', 'Domain connection and deployment', 'One revision round', '7 days of post-launch support'],
   },
   {
     name: 'Lead-Ready Website',
-    price: '2,250',
+    price: '2,249',
     label: 'Starting project investment',
     description: 'A more complete service website designed to capture inquiries and move visitors toward a call or appointment.',
     bestFor: 'Best for businesses actively generating leads',
@@ -99,11 +99,11 @@ const pricingTiers = [
   },
   {
     name: 'Connected Website System',
-    price: '3,750',
+    price: '3,749',
     label: 'Starting project investment',
     description: 'A website connected to the systems behind the business, with lead routing and practical automation included.',
     bestFor: 'Best for teams that need fewer manual handoffs',
-    includes: ['Up to 5 pages', 'Everything in the Lead-Ready Website', 'CRM contact and pipeline connection', 'Workflow and notification setup', 'Calendar, form, and lead routing', 'One standard third-party integration', 'Automation testing and handoff', '30 days of post-launch technical support'],
+    includes: ['Up to 5 pages', 'Everything in the Lead-Ready Website', 'CRM contact and pipeline connection', 'Workflow and notification setup', 'Calendar, form, and lead routing', 'One customized third-party integration', 'Automation testing and handoff', '30 days of post-launch technical support'],
   },
 ]
 
@@ -328,7 +328,7 @@ function ProjectInquiryForm() {
       <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
       <label>What is going wrong?<select name="service" required defaultValue=""><option value="" disabled>Select the closest problem</option><option>Leads are not being followed up correctly</option><option>Website or form is not working as expected</option><option>CRM, calendar, or tools are disconnected</option><option>Customer journey or booking flow has too much friction</option><option>Automation is failing on edge cases</option><option>Internal handoffs are too manual</option><option>I need a new website around a better customer path</option><option>Technical troubleshooting / hourly support</option><option>Not sure yet</option></select></label>
       <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
-      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,250 to $2,250</option><option>$2,250 to $3,750</option><option>$3,750 to $6,000</option><option>$6,000+</option><option>Need a recommendation</option></select></label>
+      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,249 to $2,249</option><option>$2,249 to $3,749</option><option>$3,749 to $6,000</option><option>$6,000+</option><option>Need a recommendation</option></select></label>
       <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
       <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the current problem, the pages or systems you need, and the outcome you want." /></label>
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
@@ -594,7 +594,7 @@ function App() {
           <div className="price-intro" data-reveal>
             <span className="kicker">Scope after diagnosis</span>
             <h2>Once the problem is clear, the build gets specific.</h2>
-            <p>These are starting scopes, not a prescription before I understand the issue. Website projects start at $1,250; final investment depends on the pages, integrations, automation logic, and technical work actually required.</p>
+            <p>These are starting scopes, not a prescription before I understand the issue. Website projects start at $1,249; final investment depends on the pages, integrations, automation logic, and technical work actually required.</p>
           </div>
           <div className="pricing-grid" data-reveal>
             {pricingTiers.map(tier => (
@@ -651,7 +651,7 @@ function App() {
           </div>
           <div className="pricing-note" data-reveal>
             <strong>Need something outside these tiers?</strong>
-            <p>Additional pages, full copywriting, e-commerce, AI chat or voice agents, advanced API work, and custom automations are quoted based on scope. Domain, hosting, software, messaging, and other third-party subscription costs are not included.</p>
+            <p>Additional pages, full copywriting, e-commerce, AI chat or voice agents, advanced API work, and custom automations are quoted based on scope. Domain, hosting, software, messaging, and other third-party subscription fees are not included.</p>
           </div>
         </section>
 
