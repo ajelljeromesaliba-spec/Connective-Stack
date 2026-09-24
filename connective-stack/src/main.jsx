@@ -81,7 +81,7 @@ const services = [
 const pricingTiers = [
   {
     name: 'Professional Website',
-    price: '1,249',
+    price: '1,199',
     label: 'Starting project investment',
     description: 'A professionally built website that gives your business a credible online presence and a clear path for customers to take action.',
     bestFor: 'Best for established service businesses ready for a stronger online presence',
@@ -89,7 +89,7 @@ const pricingTiers = [
   },
   {
     name: 'Lead-Ready Website',
-    price: '2,249',
+    price: '2,199',
     label: 'Starting project investment',
     description: 'A more complete service website designed to capture inquiries and move visitors toward a call or appointment.',
     bestFor: 'Best for businesses actively generating leads',
@@ -98,7 +98,7 @@ const pricingTiers = [
   },
   {
     name: 'Connected Website System',
-    price: '3,749',
+    price: '3,699',
     label: 'Starting project investment',
     description: 'A website connected to the systems behind the business, with lead routing and practical automation included.',
     bestFor: 'Best for teams that need fewer manual handoffs',
@@ -327,7 +327,7 @@ function ProjectInquiryForm() {
       <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
       <label>What is going wrong?<select name="service" required defaultValue=""><option value="" disabled>Select the closest problem</option><option>Leads are not being followed up correctly</option><option>Website or form is not working as expected</option><option>CRM, calendar, or tools are disconnected</option><option>Customer journey or booking flow has too much friction</option><option>Automation is failing on edge cases</option><option>Internal handoffs are too manual</option><option>I need a new website around a better customer path</option><option>Technical troubleshooting / hourly support</option><option>Not sure yet</option></select></label>
       <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
-      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,249 to $2,249</option><option>$2,249 to $3,749</option><option>$3,749 to $6,000</option><option>$6,000+</option><option>Need a recommendation</option></select></label>
+      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,199 to $2,199</option><option>$2,199 to $3,699</option><option>$3,699 to $6,000</option><option>$6,000+</option><option>Need a recommendation</option></select></label>
       <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
       <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the current problem, the pages or systems you need, and the outcome you want." /></label>
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
@@ -623,7 +623,7 @@ function App() {
           <div className="price-intro" data-reveal>
             <span className="kicker">Scope after diagnosis</span>
             <h2>Once the problem is clear, the build gets specific.</h2>
-            <p>These are starting scopes, not a prescription before I understand the issue. Website projects start at $1,249; final investment depends on the pages, integrations, automation logic, and technical work actually required.</p>
+            <p>These are starting scopes, not a prescription before I understand the issue. Website projects start at $1,199; final investment depends on the pages, integrations, automation logic, and technical work actually required.</p>
           </div>
           <div className="pricing-grid" data-reveal>
             {pricingTiers.map(tier => (
