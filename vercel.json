@@ -61,6 +61,14 @@
     {
       "source": "/ajell-saliba",
       "destination": "/index.html"
+    },
+    {
+      "source": "/seo-guides",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/:path*",
+      "destination": "/index.html"
     }
   ]
 }
