@@ -530,7 +530,7 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
 }
 
 .portfolio-main .hero h1 {
-  max-width: 10.4ch;
+  max-width: 11.8ch;
   margin-top: 1.4rem;
   font-size: clamp(3.5rem, 6.15vw, 7.15rem);
   line-height: 0.92;
