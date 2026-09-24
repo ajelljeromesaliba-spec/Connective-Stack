@@ -178,6 +178,8 @@ function LegalModal({ type, onClose }) {
               <p>ConnectiveStack respects your privacy. This policy explains how information may be collected and used when you visit this website or contact AJ about a project.</p>
               <h3>Information collected</h3>
               <p>Information may include your name, email address, company details, project requirements, and anything else you choose to provide through email or a contact form. Basic technical and analytics data may also be collected, such as device type, browser, referring page, and general location.</p>
+              <h3>Cookies and browser storage</h3>
+              <p>This website may use essential browser storage to remember site preferences, including your cookie choice. Optional analytics or marketing technologies should only be activated after consent where required. You can reopen Cookie Preferences from the footer and change your choice.</p>
               <h3>How information is used</h3>
               <ul>
                 <li>To respond to inquiries and prepare project estimates</li>
@@ -250,6 +252,23 @@ function ServiceModal({ service, onClose }) {
 }
 
 const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+function CookieConsent({ onChoice, onPrivacy }) {
+  return (
+    <aside className="cookie-consent" role="dialog" aria-live="polite" aria-label="Cookie consent">
+      <div className="cookie-consent-copy">
+        <span>COOKIE PREFERENCES</span>
+        <strong>Your privacy, your choice.</strong>
+        <p>This site uses essential browser storage for preferences. Optional analytics or marketing tools, if added, should only run after consent. You can change your choice later.</p>
+        <button type="button" className="cookie-privacy-link" onClick={onPrivacy}>Read Privacy Policy</button>
+      </div>
+      <div className="cookie-consent-actions">
+        <button type="button" className="cookie-secondary" onClick={() => onChoice('necessary')}>Necessary only</button>
+        <button type="button" className="cookie-primary" onClick={() => onChoice('all')}>Accept all</button>
+      </div>
+    </aside>
+  )
+}
+
 function ProjectInquiryForm() {
   const [status, setStatus] = useState('idle')
   const [feedback, setFeedback] = useState('')
@@ -324,6 +343,14 @@ function App() {
   const [openNavDropdown, setOpenNavDropdown] = useState(null)
   const [legalModal, setLegalModal] = useState(null)
   const [activeService, setActiveService] = useState(null)
+  const [cookieConsent, setCookieConsent] = useState(() => {
+    try { return window.localStorage.getItem('connectivestack_cookie_consent') }
+    catch { return null }
+  })
+  const [showCookieConsent, setShowCookieConsent] = useState(() => {
+    try { return !window.localStorage.getItem('connectivestack_cookie_consent') }
+    catch { return true }
+  })
 
   useEffect(() => {
     const revealItems = [...document.querySelectorAll('[data-reveal]')]
@@ -373,6 +400,13 @@ function App() {
 
   const toggleNavDropdown = name => {
     setOpenNavDropdown(current => current === name ? null : name)
+  }
+
+  const saveCookieConsent = choice => {
+    try { window.localStorage.setItem('connectivestack_cookie_consent', choice) } catch {}
+    setCookieConsent(choice)
+    setShowCookieConsent(false)
+    window.dispatchEvent(new CustomEvent('connectivestack:cookie-consent', { detail: { choice } }))
   }
 
   return (
@@ -767,10 +801,12 @@ function App() {
           <span>© {new Date().getFullYear()} ConnectiveStack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
           <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
+          <button type="button" onClick={() => setShowCookieConsent(true)}>Cookie Preferences</button>
           <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
           <a href="mailto:ajell.saliba@connectivestack.com">Email AJ</a>
         </div>
       </footer>
+      {showCookieConsent && <CookieConsent onChoice={saveCookieConsent} onPrivacy={() => setLegalModal('privacy')} />}
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
       {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
     </>
