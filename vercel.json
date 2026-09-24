@@ -53,6 +53,22 @@
     {
       "source": "/case-studies/:path*",
       "destination": "/"
+    },
+    {
+      "source": "/resources",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/solutions/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ajell-saliba",
+      "destination": "/index.html"
     }
   ]
 }
