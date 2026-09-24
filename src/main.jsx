@@ -631,7 +631,7 @@ function App() {
           <div className="hourly-support" data-reveal>
             <div className="hourly-support-rate">
               <span>Flexible support</span>
-              <strong><sup>$</sup>50<small>/hour</small></strong>
+              <strong><sup>$</sup>49<small>/hour</small></strong>
               <p>For smaller updates, fixes, and ongoing technical help.</p>
             </div>
             <div className="hourly-support-details">
@@ -715,7 +715,7 @@ function App() {
             </div>
             <div className="contact-expectations">
               <div><strong>Project-based</strong><span>Defined scope, price, and delivery plan</span></div>
-              <div><strong>$50/hour</strong><span>Technical support with a one-hour minimum</span></div>
+              <div><strong>$49/hour</strong><span>Technical support with a one-hour minimum</span></div>
               <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
             </div>
           </div>
