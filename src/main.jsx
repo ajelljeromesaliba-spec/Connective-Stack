@@ -342,6 +342,7 @@ function ProjectInquiryForm() {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeStory, setActiveStory] = useState(0)
+  const [heroSecond, setHeroSecond] = useState(false)
   const [openNavDropdown, setOpenNavDropdown] = useState(null)
   const [legalModal, setLegalModal] = useState(null)
   const [activeService, setActiveService] = useState(null)
@@ -382,6 +383,8 @@ function App() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
     const scenes = [...document.querySelectorAll('[data-scroll-scene]')]
+    const hero = document.querySelector('.cinematic-hero')
+    const heroVideo = hero?.querySelector('.hero-video-reveal video')
     let frame = 0
     const update = () => {
       frame = 0
@@ -390,6 +393,18 @@ function App() {
         const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)))
         scene.style.setProperty('--scene-progress', progress.toFixed(3))
       })
+      if (hero) {
+        const rect = hero.getBoundingClientRect()
+        const travel = Math.max(1, rect.height - window.innerHeight + 78)
+        const progress = Math.max(0, Math.min(1, -rect.top / travel))
+        const wipe = Math.max(0, Math.min(100, (progress - .25) / .42 * 100))
+        hero.style.setProperty('--hero-progress', progress.toFixed(3))
+        hero.style.setProperty('--hero-wipe', `${wipe.toFixed(1)}%`)
+        const nextPhase = progress > .52
+        setHeroSecond(current => current === nextPhase ? current : nextPhase)
+        if (heroVideo && progress > .24 && rect.bottom > 0 && heroVideo.paused) heroVideo.play().catch(() => {})
+        if (heroVideo && (progress < .2 || rect.bottom <= 0) && !heroVideo.paused) heroVideo.pause()
+      }
     }
     const requestUpdate = () => { if (!frame) frame = window.requestAnimationFrame(update) }
     update()
@@ -520,29 +535,31 @@ function App() {
       </header>
 
       <main id="top" className="portfolio-main">
-        <section className="hero cinematic-hero" data-scroll-scene>
-          <div className="cinematic-hero-image" aria-hidden="true"><img src="/assets/portfolio-surreal-hero.webp" alt="" fetchPriority="high" /></div>
-          <div className="hero-surreal-field" aria-hidden="true">
-            <span className="hero-field-orb hero-field-orb-one" />
-            <span className="hero-field-orb hero-field-orb-two" />
-          </div>
-          <div className="hero-grid grid-lines" aria-hidden="true" />
-          <div className="hero-copy" data-reveal>
-            <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
-            <h1>I fix what breaks <em>after the click.</em></h1>
-            <p className="hero-lead">A site, CRM, calendar, and follow-up only work when the handoffs do. I find the failure and build a clear path from inquiry to next action.</p>
-            <div className="hero-actions">
-              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Show me what's broken <Arrow /></a>
-              <a href="#work" className="button button-secondary">Explore the work <Arrow /></a>
+        <section className={`hero cinematic-hero ${heroSecond ? 'hero-second' : ''}`} data-scroll-scene>
+          <div className="hero-pinned">
+            <div className="cinematic-hero-image" aria-hidden="true"><img src="/assets/hero-service-operations-v2.webp" alt="" fetchPriority="high" /></div>
+            <div className="hero-video-reveal" aria-hidden="true">
+              <video src="/assets/connective-stack-commercial.mp4" muted loop playsInline preload="metadata" poster="/assets/build-process-poster.jpg" />
             </div>
-            <div className="hero-meta">
-              <div><strong>Diagnose before build</strong><span>Find the broken handoff before adding another tool</span></div>
-              <div><strong>One technical owner</strong><span>Website, CRM, automation, DNS, and deployment in one path</span></div>
-              <div><strong>Proof you can inspect</strong><span>Live demos, case studies, workflow maps, and clear boundaries</span></div>
+            <div className="hero-grid grid-lines" aria-hidden="true" />
+            <div className="hero-copy" data-reveal aria-hidden={heroSecond}>
+              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
+              <h1>I fix what breaks <em>after the click.</em></h1>
+              <p className="hero-lead">A site, CRM, calendar, and follow-up only work when the handoffs do. I find the failure and build a clear path from inquiry to next action.</p>
+              <div className="hero-actions">
+                <a href={CALENDAR_URL} tabIndex={heroSecond ? -1 : 0} target="_blank" rel="noreferrer" className="button button-primary">Show me what's broken <Arrow /></a>
+                <a href="#work" tabIndex={heroSecond ? -1 : 0} className="button button-secondary">Explore the work <Arrow /></a>
+              </div>
             </div>
+            <div className="hero-second-copy" aria-hidden={!heroSecond}>
+              <span className="hero-chapter-label">02 / THE HANDOFF</span>
+              <h2>AN INQUIRY IS ONLY THE START.</h2>
+              <p>Website. CRM. The right person. Calendar. Follow-up. I connect and test the path between them.</p>
+              <a href="#work" tabIndex={heroSecond ? 0 : -1} className="button button-primary">See the work <Arrow /></a>
+            </div>
+            <div className="hero-scroll-cue" aria-hidden="true"><span>{heroSecond ? 'Explore the work' : 'Scroll to see the system'}</span><span className="hero-scroll-line" /></div>
+            <div className="hero-motion-track" aria-hidden="true"><span /></div>
           </div>
-
-          <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to explore</span><span className="hero-scroll-line" /></div>
         </section>
 
         <section className="work story-work" id="work" aria-labelledby="work-heading">
