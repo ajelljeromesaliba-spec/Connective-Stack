@@ -58,3 +58,8 @@
 }
 @media(max-width:430px){.re-header .re-brand small{display:none}.re-header>button{max-width:118px}.re-hero-copy{padding-top:190px}.re-hero-caption{display:none}.re-role-tabs strong{font-size:19px}.re-listing-image{height:270px}.re-avatar{height:330px}.re-routed>i{display:none}.re-chat-launcher span{display:none}.re-chat-launcher{width:52px;padding:0;justify-content:center}.re-calc-result>strong{font-size:44px}}
 @media(prefers-reduced-motion:reduce){.re-page *{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}.re-reveal{opacity:1;transform:none}}
+
+@media (max-width: 760px) {
+  .re-properties.visible .re-listings article { animation: none; }
+  .re-listing-image > button, .re-video-status { backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
