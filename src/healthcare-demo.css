@@ -17,3 +17,10 @@
 @keyframes hc-logo-trace{0%{stroke-dashoffset:42;opacity:.6}42%,72%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:-42;opacity:.65}}@keyframes hc-logo-orbit{0%,100%{transform:scale(.96);opacity:.45}50%{transform:scale(1.07);opacity:.85}}@keyframes hc-logo-dot{0%,100%{transform:scale(.8);opacity:.65}50%{transform:scale(1.15);opacity:1}}
 @media(max-width:680px){.hc-brand>span.hc-brand-mark{width:36px;height:36px;border-radius:12px}.hc-brand-mark svg{width:22px;height:22px}}
 @media(prefers-reduced-motion:reduce){.hc-brand-mark:before,.hc-brand-mark:after,.hc-brand-mark svg path{animation:none!important;stroke-dashoffset:0}}
+
+@media (max-width: 760px) {
+  .hc-hero-card, .hc-lock, .hc-status-result i,
+  .hc-brand-mark::before, .hc-brand-mark::after,
+  .hc-brand-mark svg path { animation: none; }
+  .hc-brand-mark svg path { stroke-dashoffset: 0; }
+}
