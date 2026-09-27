@@ -266,7 +266,7 @@ export default function RealEstateDemo() {
   }, [])
 
   useEffect(() => {
-    const videos = document.querySelectorAll('.re-listing-image video')
+    const videos = document.querySelectorAll('.re-hero-image, .re-listing-image video')
     const playbackObserver = new IntersectionObserver(entries => entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.play().catch(() => {})
       else entry.target.pause()
@@ -316,7 +316,7 @@ export default function RealEstateDemo() {
           <div className="re-category-guide">{categoryGuide.map(item => <button type="button" className={filter === item.name ? 'active' : ''} onClick={() => setFilter(item.name)} key={item.name}><span>{item.name}</span><strong>{item.range}</strong><small>{item.note}</small></button>)}</div>
           <div className="re-filters">{['All Homes', 'Luxury', 'Premium', 'Starter', 'Affordable'].map(item => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div>
           <div className="re-listings">{shown.map(item => <article key={item.id}>
-            <div className="re-listing-image"><video autoPlay muted loop playsInline preload="metadata" poster={item.image} aria-label={`Video preview of ${item.neighborhood}`}><source src={item.video} type="video/mp4" /></video><div className="re-video-status"><i /><span>LIVE PREVIEW</span></div><div className="re-listing-badges"><span>{item.category}</span><small>{item.type}</small></div><button className={saved.includes(item.id) ? 'saved' : ''} onClick={() => setSaved(ids => ids.includes(item.id) ? ids.filter(id => id !== item.id) : [...ids, item.id])} aria-label="Save property"><Icon name="heart" /></button></div>
+            <div className="re-listing-image"><video muted loop playsInline preload="none" poster={item.image} aria-label={`Video preview of ${item.neighborhood}`}><source src={item.video} type="video/mp4" /></video><div className="re-video-status"><i /><span>LIVE PREVIEW</span></div><div className="re-listing-badges"><span>{item.category}</span><small>{item.type}</small></div><button className={saved.includes(item.id) ? 'saved' : ''} onClick={() => setSaved(ids => ids.includes(item.id) ? ids.filter(id => id !== item.id) : [...ids, item.id])} aria-label="Save property"><Icon name="heart" /></button></div>
             <div className="re-listing-copy"><small><Icon name="pin" /> {item.city}, {item.state}</small><h3>{item.neighborhood}</h3><strong>{money(item.price)}</strong><div><span><Icon name="bed" /> {item.beds} beds</span><span><Icon name="bath" /> {item.baths} baths</span><span><Icon name="area" /> {item.sqft} sq ft</span></div><button onClick={() => setTour(item)}>View private details <Icon name="arrow" /></button></div>
           </article>)}</div>
         </section>
