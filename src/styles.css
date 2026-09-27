@@ -2471,3 +2471,28 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .portfolio-main .hero-pinned .eyebrow { font-size: .62rem; }
   .story-content h3 { font-size: 2.1rem; }
 }
+
+/* Opacity stays on the compositor; animating a mask over video repaints every frame. */
+.hero-video-reveal {
+  opacity: var(--hero-video-opacity, 0);
+  mask-image: none;
+  -webkit-mask-image: none;
+  clip-path: none;
+  will-change: opacity;
+}
+.story-scene {
+  visibility: visible;
+  pointer-events: none;
+  transition: opacity .65s ease;
+}
+.story-scene.is-active { pointer-events: auto; }
+.story-visual img,
+.story-scene.is-active .story-visual img {
+  transform: none;
+  filter: none;
+  transition: none;
+}
+@media (max-width: 760px) {
+  .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(247,250,248,.98); }
+  .hero-pinned .cinematic-hero-image img { transform: none; }
+}
