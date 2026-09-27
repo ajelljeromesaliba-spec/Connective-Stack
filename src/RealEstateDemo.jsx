@@ -267,12 +267,22 @@ export default function RealEstateDemo() {
 
   useEffect(() => {
     const videos = document.querySelectorAll('.re-hero-image, .re-listing-image video')
-    const playbackObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.play().catch(() => {})
-      else entry.target.pause()
-    }), { threshold: .2 })
+    const ratios = new Map()
+    const playbackObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => ratios.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0))
+      const selected = [...videos].reduce((best, video) =>
+        (ratios.get(video) || 0) > (ratios.get(best) || 0) ? video : best, null)
+      videos.forEach(video => {
+        if (video === selected && (ratios.get(video) || 0) >= .2) {
+          if (video.paused) video.play().catch(() => {})
+        } else if (!video.paused) video.pause()
+      })
+    }, { threshold: [0, .2, .5, .75, 1] })
     videos.forEach(video => playbackObserver.observe(video))
-    return () => playbackObserver.disconnect()
+    return () => {
+      playbackObserver.disconnect()
+      videos.forEach(video => video.pause())
+    }
   }, [filter])
 
   useEffect(() => {
@@ -300,7 +310,7 @@ export default function RealEstateDemo() {
       </header>
       <main>
         <section className="re-hero re-reveal" id="home">
-          <video className="re-hero-image" autoPlay muted loop playsInline poster="/assets/realestate-hero.svg" aria-label="Cinematic preview of the featured Beverly Hills residence"><source src="/assets/realestate-hero-flow-v1.mp4" type="video/mp4" /></video>
+          <video className="re-hero-image" muted loop playsInline preload="metadata" poster="/assets/realestate-hero.svg" aria-label="Cinematic preview of the featured Beverly Hills residence"><source src="/assets/realestate-hero-flow-v1.mp4" type="video/mp4" /></video>
           <div className="re-hero-shade" />
           <div className="re-hero-copy"><span>CURATED HOMES · TRUSTED ADVISORS</span><h1>Exceptional property.<br /><em>Personal representation.</em></h1><p>One private search, intelligently routed to the broker who knows your market, property type, and priorities.</p><div><a href="#properties">Explore residences <Icon name="arrow" /></a><button onClick={() => setTour(listings[0])}>Request a private search</button></div></div>
           <div className="re-market-card"><small>LIVE MARKET PULSE</small><strong>14</strong><span>qualified opportunities</span><div><i /> Los Angeles <b>7</b></div><div><i /> Malibu <b>4</b></div><div><i /> Scottsdale <b>3</b></div></div>
