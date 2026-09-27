@@ -341,6 +341,7 @@ function ProjectInquiryForm() {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeStory, setActiveStory] = useState(0)
   const [openNavDropdown, setOpenNavDropdown] = useState(null)
   const [legalModal, setLegalModal] = useState(null)
   const [activeService, setActiveService] = useState(null)
@@ -389,6 +390,30 @@ function App() {
         const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)))
         scene.style.setProperty('--scene-progress', progress.toFixed(3))
       })
+    }
+    const requestUpdate = () => { if (!frame) frame = window.requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+    return () => {
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  useEffect(() => {
+    const stage = document.querySelector('[data-story-stage]')
+    if (!stage) return undefined
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const rect = stage.getBoundingClientRect()
+      const travel = Math.max(1, rect.height - window.innerHeight + 78)
+      const progress = Math.max(0, Math.min(1, -rect.top / travel))
+      const index = Math.min(projects.length - 1, Math.floor(progress * projects.length))
+      setActiveStory(current => current === index ? current : index)
+      stage.style.setProperty('--story-progress', progress.toFixed(3))
     }
     const requestUpdate = () => { if (!frame) frame = window.requestAnimationFrame(update) }
     update()
@@ -504,8 +529,8 @@ function App() {
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
             <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
-            <h1>I fix what breaks <em>between your website and your business.</em></h1>
-            <p className="hero-lead">When leads disappear, forms stop routing, tools do not connect, DNS breaks, follow-up stalls, or a customer journey has too many handoffs, I trace where the system fails and fix the path behind it.</p>
+            <h1>I fix what breaks <em>after the click.</em></h1>
+            <p className="hero-lead">A site, CRM, calendar, and follow-up only work when the handoffs do. I find the failure and build a clear path from inquiry to next action.</p>
             <div className="hero-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Show me what's broken <Arrow /></a>
               <a href="#work" className="button button-secondary">Explore the work <Arrow /></a>
@@ -518,6 +543,40 @@ function App() {
           </div>
 
           <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to explore</span><span className="hero-scroll-line" /></div>
+        </section>
+
+        <section className="work story-work" id="work" aria-labelledby="work-heading">
+          <div className="story-intro" data-reveal>
+            <span className="kicker">Selected concept work / 01—03</span>
+            <h2 id="work-heading">A better path from first contact to next action.</h2>
+            <p>Explore three interactive concepts. Each starts with a customer problem and shows the system I built around it.</p>
+          </div>
+          <div className="story-stage" data-story-stage>
+            <div className="story-sticky">
+              {projects.map((project, index) => (
+                <article className={`story-scene ${activeStory === index ? 'is-active' : ''}`} key={project.title} aria-hidden={activeStory !== index}>
+                  <div className="story-visual">
+                    <img src={project.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
+                  </div>
+                  <div className="story-shade" />
+                  <div className="story-content">
+                    <span className="story-overline">0{index + 1} / 0{projects.length} &nbsp; • &nbsp; {project.label} &nbsp; • &nbsp; Interactive concept</span>
+                    <h3>{project.title}</h3>
+                    <p className="story-problem">{project.goal}</p>
+                    <p className="story-solution">{project.copy}</p>
+                    <div className="story-actions">
+                      <a href={project.href} tabIndex={activeStory === index ? 0 : -1} className="story-primary">Explore the live demo <Arrow /></a>
+                      <a href={project.caseStudyHref} tabIndex={activeStory === index ? 0 : -1} className="story-secondary">Read the case study <Arrow /></a>
+                    </div>
+                  </div>
+                  <div className="story-counter" aria-hidden="true"><strong>0{index + 1}</strong><span>/ 0{projects.length}</span></div>
+                </article>
+              ))}
+              <div className="story-track" aria-hidden="true"><span style={{ width: `${((activeStory + 1) / projects.length) * 100}%` }} /></div>
+              <span className="story-scroll-hint" aria-hidden="true">Scroll to change chapter ↓</span>
+            </div>
+          </div>
+          <p className="concept-disclosure">These are self-initiated concept projects. Fictional data is labeled; no performance metric is presented as a client result.</p>
         </section>
 
         <section className="credibility-strip" aria-label="What prospects can verify">
@@ -548,48 +607,6 @@ function App() {
               </article>
             ))}
           </div>
-        </section>
-
-        <section className="section work" id="work">
-          <div className="section-heading heading-row" data-reveal>
-            <div>
-              <span className="kicker">Problem-led concept work</span>
-              <h2>Each build starts with something that is not working.</h2>
-            </div>
-            <p>The demos and case studies show how I break a problem into the customer path, system logic, integrations, edge cases, and next action.</p>
-          </div>
-          <div className="project-grid">
-            {projects.map((project, index) => (
-              <article className={`project-card ${project.live ? 'project-wide' : ''}`} key={project.title} data-scroll-scene>
-                <div className={`project-image ${project.accent} ${project.photo ? 'photo-project' : ''}`}>
-                  <picture>
-                    {project.mobileImage && <source media="(max-width: 760px)" srcSet={project.mobileImage} />}
-                    <img src={project.image} alt={`${project.title} sample concept`} loading="lazy" />
-                  </picture>
-                  <span className="concept-badge">{project.live ? 'Live interactive demo' : 'Outcome-led concept'}</span>
-                  <span className="project-index">0{index + 1}</span>
-                </div>
-                <div className="project-copy">
-                  <span>{project.label}</span>
-                  <h3>{project.title}</h3>
-                  <p>{project.copy}</p>
-                  <div className="project-goal">
-                    <small>Problem being solved</small>
-                    <strong>{project.goal}</strong>
-                  </div>
-                  <div className="project-outcomes">
-                    <small>What the system addresses</small>
-                    <ul>{project.outcomes.map(outcome => <li key={outcome}><Check />{outcome}</li>)}</ul>
-                  </div>
-                  <div className="project-action-links">
-                    {project.caseStudyHref && <a className="project-case-link" href={project.caseStudyHref}>Read the case study <Arrow /></a>}
-                    {project.href && <a className="project-demo-link" href={project.href}>Try the live demo <Arrow /></a>}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-          <p className="concept-disclosure">These are self-initiated concept projects built to demonstrate strategy, interface design, and system planning. Fictional data is labeled, and no performance metric is presented as a client result.</p>
         </section>
 
         <section className="price-section">
