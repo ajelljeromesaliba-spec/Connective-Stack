@@ -386,19 +386,16 @@ function App() {
     const hero = document.querySelector('.cinematic-hero')
     const heroVideo = hero?.querySelector('.hero-video-reveal video')
     let frame = 0
-    let displayedProgress = 0
-    let lastFrameTime = performance.now()
+    let phase = false
     const smoothstep = value => {
       const t = Math.max(0, Math.min(1, value))
       return t * t * (3 - 2 * t)
     }
     const update = () => {
       frame = 0
-      const now = performance.now()
-      const blend = 1 - Math.exp(-(now - lastFrameTime) / 135)
-      lastFrameTime = now
       scenes.forEach(scene => {
         const rect = scene.getBoundingClientRect()
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return
         const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)))
         scene.style.setProperty('--scene-progress', progress.toFixed(3))
       })
@@ -406,31 +403,30 @@ function App() {
         const rect = hero.getBoundingClientRect()
         const travel = Math.max(1, rect.height - window.innerHeight + 78)
         const targetProgress = Math.max(0, Math.min(1, -rect.top / travel))
-        displayedProgress += (targetProgress - displayedProgress) * blend
-        if (Math.abs(targetProgress - displayedProgress) < .0005) displayedProgress = targetProgress
-        const progress = displayedProgress
-        const wipe = smoothstep((progress - .18) / .64) * 105
+        const progress = targetProgress
+        const videoOpacity = smoothstep((progress - .2) / .48)
         const firstOpacity = 1 - smoothstep((progress - .38) / .17)
         const secondOpacity = smoothstep((progress - .45) / .18)
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
-        hero.style.setProperty('--hero-wipe', `${wipe.toFixed(1)}%`)
+        hero.style.setProperty('--hero-video-opacity', videoOpacity.toFixed(3))
         hero.style.setProperty('--hero-first-opacity', firstOpacity.toFixed(3))
         hero.style.setProperty('--hero-second-opacity', secondOpacity.toFixed(3))
         hero.style.setProperty('--hero-first-y', `${(-38 * (1 - firstOpacity)).toFixed(1)}px`)
         hero.style.setProperty('--hero-second-y', `${(38 * (1 - secondOpacity)).toFixed(1)}px`)
         const nextPhase = progress > .52
-        setHeroSecond(current => current === nextPhase ? current : nextPhase)
+        if (nextPhase !== phase) {
+          phase = nextPhase
+          setHeroSecond(nextPhase)
+        }
         if (heroVideo && targetProgress > .18 && rect.bottom > 0 && heroVideo.paused && !heroVideo.ended) heroVideo.play().catch(() => {})
         if (heroVideo && (targetProgress < .12 || rect.bottom <= 0)) {
           if (!heroVideo.paused) heroVideo.pause()
           if (targetProgress < .12 && heroVideo.ended) heroVideo.currentTime = 0
         }
-        if (displayedProgress !== targetProgress) frame = window.requestAnimationFrame(update)
       }
     }
     const requestUpdate = () => {
       if (frame) return
-      lastFrameTime = performance.now() - 16
       frame = window.requestAnimationFrame(update)
     }
     update()
@@ -441,6 +437,17 @@ function App() {
       window.removeEventListener('resize', requestUpdate)
       if (frame) window.cancelAnimationFrame(frame)
     }
+  }, [])
+
+  useEffect(() => {
+    const video = document.querySelector('.process-film video')
+    if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) video.play().catch(() => {})
+      else video.pause()
+    }, { threshold: .15 })
+    observer.observe(video)
+    return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
@@ -728,7 +735,7 @@ function App() {
 
           <div className="process-stage">
             <div className="process-film" data-reveal>
-              <video autoPlay muted loop playsInline preload="metadata" poster="/assets/build-process-poster.jpg">
+              <video muted loop playsInline preload="none" poster="/assets/build-process-poster.jpg">
                 <source src="/assets/build-process.mp4" type="video/mp4" />
               </video>
               <div className="process-film-topbar">
