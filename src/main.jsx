@@ -386,8 +386,17 @@ function App() {
     const hero = document.querySelector('.cinematic-hero')
     const heroVideo = hero?.querySelector('.hero-video-reveal video')
     let frame = 0
+    let displayedProgress = 0
+    let lastFrameTime = performance.now()
+    const smoothstep = value => {
+      const t = Math.max(0, Math.min(1, value))
+      return t * t * (3 - 2 * t)
+    }
     const update = () => {
       frame = 0
+      const now = performance.now()
+      const blend = 1 - Math.exp(-(now - lastFrameTime) / 135)
+      lastFrameTime = now
       scenes.forEach(scene => {
         const rect = scene.getBoundingClientRect()
         const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)))
@@ -396,17 +405,31 @@ function App() {
       if (hero) {
         const rect = hero.getBoundingClientRect()
         const travel = Math.max(1, rect.height - window.innerHeight + 78)
-        const progress = Math.max(0, Math.min(1, -rect.top / travel))
-        const wipe = Math.max(0, Math.min(100, (progress - .25) / .42 * 100))
+        const targetProgress = Math.max(0, Math.min(1, -rect.top / travel))
+        displayedProgress += (targetProgress - displayedProgress) * blend
+        if (Math.abs(targetProgress - displayedProgress) < .0005) displayedProgress = targetProgress
+        const progress = displayedProgress
+        const wipe = smoothstep((progress - .18) / .64) * 105
+        const firstOpacity = 1 - smoothstep((progress - .38) / .17)
+        const secondOpacity = smoothstep((progress - .52) / .18)
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
         hero.style.setProperty('--hero-wipe', `${wipe.toFixed(1)}%`)
+        hero.style.setProperty('--hero-first-opacity', firstOpacity.toFixed(3))
+        hero.style.setProperty('--hero-second-opacity', secondOpacity.toFixed(3))
+        hero.style.setProperty('--hero-first-y', `${(-38 * (1 - firstOpacity)).toFixed(1)}px`)
+        hero.style.setProperty('--hero-second-y', `${(38 * (1 - secondOpacity)).toFixed(1)}px`)
         const nextPhase = progress > .52
         setHeroSecond(current => current === nextPhase ? current : nextPhase)
-        if (heroVideo && progress > .24 && rect.bottom > 0 && heroVideo.paused) heroVideo.play().catch(() => {})
-        if (heroVideo && (progress < .2 || rect.bottom <= 0) && !heroVideo.paused) heroVideo.pause()
+        if (heroVideo && targetProgress > .18 && rect.bottom > 0 && heroVideo.paused) heroVideo.play().catch(() => {})
+        if (heroVideo && (targetProgress < .12 || rect.bottom <= 0) && !heroVideo.paused) heroVideo.pause()
+        if (displayedProgress !== targetProgress) frame = window.requestAnimationFrame(update)
       }
     }
-    const requestUpdate = () => { if (!frame) frame = window.requestAnimationFrame(update) }
+    const requestUpdate = () => {
+      if (frame) return
+      lastFrameTime = performance.now() - 16
+      frame = window.requestAnimationFrame(update)
+    }
     update()
     window.addEventListener('scroll', requestUpdate, { passive: true })
     window.addEventListener('resize', requestUpdate)
@@ -542,7 +565,7 @@ function App() {
               <video src="/assets/connective-stack-commercial.mp4" muted loop playsInline preload="metadata" poster="/assets/build-process-poster.jpg" />
             </div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
-            <div className="hero-copy" data-reveal aria-hidden={heroSecond}>
+            <div className="hero-copy" aria-hidden={heroSecond}>
               <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
               <h1>I fix what breaks <em>after the click.</em></h1>
               <p className="hero-lead">A site, CRM, calendar, and follow-up only work when the handoffs do. I find the failure and build a clear path from inquiry to next action.</p>
