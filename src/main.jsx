@@ -411,7 +411,7 @@ function App() {
         const progress = displayedProgress
         const wipe = smoothstep((progress - .18) / .64) * 105
         const firstOpacity = 1 - smoothstep((progress - .38) / .17)
-        const secondOpacity = smoothstep((progress - .52) / .18)
+        const secondOpacity = smoothstep((progress - .45) / .18)
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
         hero.style.setProperty('--hero-wipe', `${wipe.toFixed(1)}%`)
         hero.style.setProperty('--hero-first-opacity', firstOpacity.toFixed(3))
@@ -420,8 +420,11 @@ function App() {
         hero.style.setProperty('--hero-second-y', `${(38 * (1 - secondOpacity)).toFixed(1)}px`)
         const nextPhase = progress > .52
         setHeroSecond(current => current === nextPhase ? current : nextPhase)
-        if (heroVideo && targetProgress > .18 && rect.bottom > 0 && heroVideo.paused) heroVideo.play().catch(() => {})
-        if (heroVideo && (targetProgress < .12 || rect.bottom <= 0) && !heroVideo.paused) heroVideo.pause()
+        if (heroVideo && targetProgress > .18 && rect.bottom > 0 && heroVideo.paused && !heroVideo.ended) heroVideo.play().catch(() => {})
+        if (heroVideo && (targetProgress < .12 || rect.bottom <= 0)) {
+          if (!heroVideo.paused) heroVideo.pause()
+          if (targetProgress < .12 && heroVideo.ended) heroVideo.currentTime = 0
+        }
         if (displayedProgress !== targetProgress) frame = window.requestAnimationFrame(update)
       }
     }
@@ -562,7 +565,7 @@ function App() {
           <div className="hero-pinned">
             <div className="cinematic-hero-image" aria-hidden="true"><img src="/assets/hero-service-operations-v2.webp" alt="" fetchPriority="high" /></div>
             <div className="hero-video-reveal" aria-hidden="true">
-              <video src="/assets/connective-stack-commercial.mp4" muted loop playsInline preload="metadata" poster="/assets/build-process-poster.jpg" />
+              <video src="/assets/hero-system-flow-v2.mp4" muted playsInline preload="metadata" poster="/assets/build-process-poster.jpg" />
             </div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy" aria-hidden={heroSecond}>
