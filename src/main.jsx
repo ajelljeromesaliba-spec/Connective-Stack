@@ -379,6 +379,29 @@ function App() {
   }, [])
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const scenes = [...document.querySelectorAll('[data-scroll-scene]')]
+    let frame = 0
+    const update = () => {
+      frame = 0
+      scenes.forEach(scene => {
+        const rect = scene.getBoundingClientRect()
+        const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)))
+        scene.style.setProperty('--scene-progress', progress.toFixed(3))
+      })
+    }
+    const requestUpdate = () => { if (!frame) frame = window.requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+    return () => {
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  useEffect(() => {
     if (!legalModal && !activeService && !menuOpen) return undefined
     const closeOnEscape = event => {
       if (event.key !== 'Escape') return
@@ -472,19 +495,20 @@ function App() {
       </header>
 
       <main id="top" className="portfolio-main">
-        <section className="hero">
+        <section className="hero cinematic-hero" data-scroll-scene>
+          <div className="cinematic-hero-image" aria-hidden="true"><img src="/assets/portfolio-surreal-hero.webp" alt="" fetchPriority="high" /></div>
           <div className="hero-surreal-field" aria-hidden="true">
             <span className="hero-field-orb hero-field-orb-one" />
             <span className="hero-field-orb hero-field-orb-two" />
           </div>
           <div className="hero-grid grid-lines" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
-            <div className="eyebrow"><span className="status-dot" /> AJ Saliba • Independent web and systems specialist</div>
-            <h1>I fix the systems that break between <em>your website, leads, and operations.</em></h1>
+            <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
+            <h1>I fix what breaks <em>between your website and your business.</em></h1>
             <p className="hero-lead">When leads disappear, forms stop routing, tools do not connect, DNS breaks, follow-up stalls, or a customer journey has too many handoffs, I trace where the system fails and fix the path behind it.</p>
             <div className="hero-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Show me what's broken <Arrow /></a>
-              <a href="#services" className="button button-secondary">See problems I solve</a>
+              <a href="#work" className="button button-secondary">Explore the work <Arrow /></a>
             </div>
             <div className="hero-meta">
               <div><strong>Diagnose before build</strong><span>Find the broken handoff before adding another tool</span></div>
@@ -493,26 +517,7 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-media surreal-hero" data-reveal>
-            <figure className="surreal-canvas">
-              <img src="/assets/portfolio-surreal-hero.webp" alt="Surreal architectural world of connected digital systems" fetchPriority="high" />
-              <figcaption>
-                <span>PORTFOLIO / DIGITAL ARCHITECTURE</span>
-                <strong>Ideas become useful systems.</strong>
-              </figcaption>
-            </figure>
-            <div className="surreal-orbit surreal-orbit-one" aria-hidden="true" />
-            <div className="surreal-orbit surreal-orbit-two" aria-hidden="true" />
-            <div className="floating-card floating-card-one">
-              <span className="mini-icon">↗</span>
-              <div><small>Designed to convert</small><strong>Clear next actions</strong></div>
-              <span className="live-dot" />
-            </div>
-            <div className="floating-card floating-card-two">
-              <div className="flow-nodes"><i /><i /><i /></div>
-              <div><small>Built as a system</small><strong>Connected</strong></div>
-            </div>
-          </div>
+          <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to explore</span><span className="hero-scroll-line" /></div>
         </section>
 
         <section className="credibility-strip" aria-label="What prospects can verify">
@@ -555,7 +560,7 @@ function App() {
           </div>
           <div className="project-grid">
             {projects.map((project, index) => (
-              <article className={`project-card ${project.live ? 'project-wide' : ''}`} key={project.title} data-reveal>
+              <article className={`project-card ${project.live ? 'project-wide' : ''}`} key={project.title} data-scroll-scene>
                 <div className={`project-image ${project.accent} ${project.photo ? 'photo-project' : ''}`}>
                   <picture>
                     {project.mobileImage && <source media="(max-width: 760px)" srcSet={project.mobileImage} />}
@@ -563,9 +568,6 @@ function App() {
                   </picture>
                   <span className="concept-badge">{project.live ? 'Live interactive demo' : 'Outcome-led concept'}</span>
                   <span className="project-index">0{index + 1}</span>
-                  <div className="visual-tags">
-                    {project.visualTags.map(tag => <span key={tag}><i />{tag}</span>)}
-                  </div>
                 </div>
                 <div className="project-copy">
                   <span>{project.label}</span>
