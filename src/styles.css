@@ -2387,3 +2387,87 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .hero-video-reveal, .hero-second-copy { display: none; }
   .portfolio-main .hero-pinned .hero-copy { opacity: 1; transform: none; }
 }
+
+/* Phones use a framed visual above the copy so wide source media stays visible. */
+@media (max-width: 760px) {
+  .hero-pinned {
+    min-height: 0;
+    height: calc(100svh - 68px);
+  }
+  .hero-pinned .cinematic-hero-image {
+    background: radial-gradient(ellipse at 55% 20%, #1d3938, #071112 65%);
+  }
+  .hero-pinned .cinematic-hero-image img {
+    position: absolute;
+    inset: 1rem 1rem auto;
+    width: calc(100% - 2rem);
+    height: 34%;
+    object-fit: contain;
+    object-position: center;
+    border-radius: .75rem;
+    transform: none;
+    filter: saturate(.96) contrast(1.02);
+  }
+  .hero-video-reveal { background: radial-gradient(ellipse at 55% 20%, #183a3b, #071112 65%); }
+  .hero-video-reveal video {
+    position: absolute;
+    inset: 1rem 1rem auto;
+    width: calc(100% - 2rem);
+    height: 34%;
+    object-fit: contain;
+    border-radius: .75rem;
+  }
+  .hero-pinned::after {
+    background: linear-gradient(0deg, #071112 0%, rgba(7,17,18,.97) 36%, rgba(7,17,18,.28) 60%, transparent 83%);
+  }
+  .hero-video-reveal::after { background: none; }
+  .portfolio-main .hero-pinned .hero-copy,
+  .hero-second-copy {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: clamp(1.5rem, 4svh, 2.5rem);
+    width: auto;
+  }
+  .portfolio-main .hero-pinned h1 {
+    margin: .75rem 0;
+    font-size: clamp(2.6rem, 10vw, 3.7rem);
+    line-height: .94;
+  }
+  .portfolio-main .hero-pinned .hero-copy::before { margin-bottom: .55rem; }
+  .portfolio-main .hero-pinned .hero-lead { font-size: .92rem; line-height: 1.45; }
+  .portfolio-main .hero-pinned .hero-actions { margin: 1rem 0 0; gap: .55rem; }
+  .portfolio-main .hero-pinned .hero-actions .button { min-height: 2.8rem; font-size: .78rem; padding-inline: .9rem; }
+  .hero-chapter-label { margin-bottom: .8rem; }
+  .hero-second-copy h2 { margin-bottom: .8rem; font-size: clamp(2.6rem, 10vw, 3.7rem); line-height: .94; }
+  .hero-second-copy p { font-size: .92rem; line-height: 1.45; }
+  .hero-second-copy .button { margin-top: .85rem; }
+
+  .story-sticky { min-height: 0; height: calc(100svh - 68px); }
+  .story-visual { background: radial-gradient(ellipse at 50% 15%, #29403e, #081213 70%); }
+  .story-visual img,
+  .story-scene.is-active .story-visual img {
+    position: absolute;
+    inset: 1rem 1rem auto;
+    width: calc(100% - 2rem);
+    height: 36%;
+    object-fit: contain;
+    object-position: center;
+    border-radius: .75rem;
+    transform: none;
+  }
+  .story-shade { background: linear-gradient(0deg, #081213 0%, rgba(8,18,19,.98) 34%, rgba(8,18,19,.2) 62%, transparent 85%); }
+  .story-content { margin: 0 1.25rem 1.5rem; }
+  .story-overline { margin-bottom: .65rem; font-size: .65rem; }
+  .story-content h3 { margin-bottom: .75rem; font-size: clamp(2.15rem, 8vw, 3.4rem); }
+  .story-problem { font-size: .93rem; line-height: 1.35; }
+  .story-solution { font-size: .84rem; line-height: 1.4; }
+  .story-actions { margin-top: 1rem; }
+  .story-scroll-hint { top: auto; bottom: 1.1rem; }
+}
+@media (max-width: 380px), (max-height: 700px) {
+  .portfolio-main .hero-pinned h1 { font-size: clamp(2.3rem, 9.3vw, 3rem); }
+  .hero-second-copy h2 { font-size: clamp(2.35rem, 9.3vw, 3rem); }
+  .portfolio-main .hero-pinned .hero-copy::before { display: none; }
+  .portfolio-main .hero-pinned .eyebrow { font-size: .62rem; }
+  .story-content h3 { font-size: 2.1rem; }
+}
