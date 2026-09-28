@@ -2700,3 +2700,42 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .portfolio-main .hero-pinned h1, .hero-second-copy h2 { font-size: clamp(2.65rem, 10vw, 4rem); }
 }
 @media (prefers-reduced-motion: reduce) { .automation-path .automation-path-pulse { animation: none; } }
+
+/* Keep the message legible while the workflow changes behind it. */
+.portfolio-main .hero-pinned::after {
+  display: block;
+  background: linear-gradient(90deg, #071315 0%, rgba(7,19,21,.97) 27%, rgba(7,19,21,.78) 47%, transparent 72%);
+}
+.portfolio-main .hero-pinned .hero-copy,
+.portfolio-main .hero-pinned .hero-copy.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  pointer-events: auto;
+  transition: none;
+}
+.portfolio-main .hero-pinned .hero-copy h1 { color: #f3fbf7; }
+.portfolio-main .hero-pinned .hero-lead { color: #dcece8; }
+@media (max-width: 760px) {
+  .portfolio-main .hero-pinned::after {
+    background: linear-gradient(0deg, #071315 0%, #071315 29%, rgba(7,19,21,.97) 43%, rgba(7,19,21,.58) 59%, transparent 75%);
+  }
+  .portfolio-main .hero-pinned .hero-copy {
+    left: 1.25rem;
+    right: 1.25rem;
+    bottom: clamp(1.25rem, 3svh, 2rem);
+    width: auto;
+  }
+  .portfolio-main .hero-pinned h1 {
+    font-size: clamp(2.35rem, 8.8vw, 3.25rem);
+    line-height: 1;
+  }
+  .portfolio-main .hero-pinned .hero-lead { font-size: .88rem; line-height: 1.42; }
+  .automation-stage, .hero-system { height: min(34%, 255px); }
+}
+@media (max-width: 380px), (max-height: 700px) {
+  .portfolio-main .hero-pinned h1 { font-size: clamp(2rem, 8vw, 2.55rem); }
+  .portfolio-main .hero-pinned .hero-copy .eyebrow { font-size: .58rem; }
+  .portfolio-main .hero-pinned .hero-lead { font-size: .8rem; }
+  .portfolio-main .hero-pinned .hero-actions .button { min-height: 2.55rem; }
+}
