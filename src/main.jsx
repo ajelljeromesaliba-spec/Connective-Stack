@@ -116,6 +116,7 @@ const projects = [
     accent: 'mint',
     photo: true,
     goal: 'High-intent visitors can still be lost when calls, estimates, follow-up, and booking are disconnected.',
+    journey: ['Service need', 'Estimate', 'Booking'],
     outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
     visualTags: ['Mobile-first', 'Call + booking', 'Local trust'],
     href: '/demos/hvac-ai-front-desk',
@@ -130,6 +131,7 @@ const projects = [
     accent: 'sand',
     photo: true,
     goal: 'Premium buyers need the right property and broker without being pushed through a generic one-size-fits-all journey.',
+    journey: ['Property match', 'Broker', 'Private tour'],
     outcomes: ['Smarter broker routing', 'Qualified buyer intent', 'Private tour requests'],
     visualTags: ['Multi-broker', 'AI concierge', 'Buyer tools'],
     href: '/demos/luxury-real-estate',
@@ -144,6 +146,7 @@ const projects = [
     accent: 'mint',
     photo: true,
     goal: 'Patient intake, provider selection, benefits, estimates, and scheduling can fragment across too many separate steps.',
+    journey: ['Find provider', 'Intake', 'Appointment'],
     outcomes: ['Conditional intake', 'Provider routing', 'Benefits workflow'],
     visualTags: ['Multi-provider', 'Smart intake', 'Cost estimator'],
     href: '/demos/healthcare-patient-experience',
@@ -384,7 +387,6 @@ function App() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
     const scenes = [...document.querySelectorAll('[data-scroll-scene]')]
     const hero = document.querySelector('.cinematic-hero')
-    const heroVideo = hero?.querySelector('.hero-video-reveal video')
     let frame = 0
     let phase = false
     const smoothstep = value => {
@@ -404,11 +406,11 @@ function App() {
         const travel = Math.max(1, rect.height - window.innerHeight + 78)
         const targetProgress = Math.max(0, Math.min(1, -rect.top / travel))
         const progress = targetProgress
-        const videoOpacity = smoothstep((progress - .2) / .48)
+        const sceneOpacity = smoothstep((progress - .22) / .46)
         const firstOpacity = 1 - smoothstep((progress - .38) / .17)
         const secondOpacity = smoothstep((progress - .45) / .18)
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
-        hero.style.setProperty('--hero-video-opacity', videoOpacity.toFixed(3))
+        hero.style.setProperty('--hero-scene-opacity', sceneOpacity.toFixed(3))
         hero.style.setProperty('--hero-first-opacity', firstOpacity.toFixed(3))
         hero.style.setProperty('--hero-second-opacity', secondOpacity.toFixed(3))
         hero.style.setProperty('--hero-first-y', `${(-38 * (1 - firstOpacity)).toFixed(1)}px`)
@@ -417,11 +419,6 @@ function App() {
         if (nextPhase !== phase) {
           phase = nextPhase
           setHeroSecond(nextPhase)
-        }
-        if (heroVideo && targetProgress > .18 && rect.bottom > 0 && heroVideo.paused && !heroVideo.ended) heroVideo.play().catch(() => {})
-        if (heroVideo && (targetProgress < .12 || rect.bottom <= 0)) {
-          if (!heroVideo.paused) heroVideo.pause()
-          if (targetProgress < .12 && heroVideo.ended) heroVideo.currentTime = 0
         }
       }
     }
@@ -570,25 +567,26 @@ function App() {
       <main id="top" className="portfolio-main">
         <section className={`hero cinematic-hero ${heroSecond ? 'hero-second' : ''}`} data-scroll-scene>
           <div className="hero-pinned">
-            <div className="cinematic-hero-image" aria-hidden="true"><img src="/assets/hero-service-operations-v2.webp" alt="" fetchPriority="high" /></div>
-            <div className="hero-video-reveal" aria-hidden="true">
-              <video src="/assets/hero-system-flow-v2.mp4" muted playsInline preload="metadata" poster="/assets/build-process-poster.jpg" />
-            </div>
+            <div className="cinematic-hero-image" aria-hidden="true"><img src="/assets/hero-hvac-customer-v1.webp" alt="" fetchPriority="high" /></div>
+            <div className="hero-scene-reveal" aria-hidden="true"><img src="/assets/hero-hvac-arrival-v1.webp" alt="" /></div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy" aria-hidden={heroSecond}>
-              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
-              <h1>I fix what breaks <em>after the click.</em></h1>
-              <p className="hero-lead">A site, CRM, calendar, and follow-up only work when the handoffs do. I find the failure and build a clear path from inquiry to next action.</p>
+              <div className="eyebrow"><span className="status-dot" /> 01 / Home services concept by AJ Saliba</div>
+              <h1>The AC fails. <em>The lead shouldn't.</em></h1>
+              <p className="hero-lead">A homeowner needs help now. I designed a service path that makes the next step clear, from the first visit to an estimate request and booking.</p>
               <div className="hero-actions">
-                <a href={CALENDAR_URL} tabIndex={heroSecond ? -1 : 0} target="_blank" rel="noreferrer" className="button button-primary">Show me what's broken <Arrow /></a>
-                <a href="#work" tabIndex={heroSecond ? -1 : 0} className="button button-secondary">Explore the work <Arrow /></a>
+                <a href="/demos/hvac-ai-front-desk" tabIndex={heroSecond ? -1 : 0} className="button button-primary">Explore the HVAC demo <Arrow /></a>
+                <a href="#work" tabIndex={heroSecond ? -1 : 0} className="button button-secondary">See all three concepts <Arrow /></a>
               </div>
             </div>
             <div className="hero-second-copy" aria-hidden={!heroSecond}>
-              <span className="hero-chapter-label">02 / THE HANDOFF</span>
-              <h2>AN INQUIRY IS ONLY THE START.</h2>
-              <p>Website. CRM. The right person. Calendar. Follow-up. I connect and test the path between them.</p>
-              <a href="#work" tabIndex={heroSecond ? 0 : -1} className="button button-primary">See the work <Arrow /></a>
+              <span className="hero-chapter-label">02 / FROM REQUEST TO RESPONSE</span>
+              <h2>HELP HAS TO ARRIVE.</h2>
+              <p>The HVAC concept connects a clear service request, an estimate path, and a booking action. Explore the live demo, then see how I apply the same thinking to other industries.</p>
+              <div className="hero-handoff" aria-label="HVAC concept path">
+                <span><b>01</b> Issue reported</span><span><b>02</b> Estimate requested</span><span><b>03</b> Visit booked</span>
+              </div>
+              <a href="/demos/hvac-ai-front-desk" tabIndex={heroSecond ? 0 : -1} className="button button-primary">See the HVAC demo <Arrow /></a>
             </div>
             <div className="hero-scroll-cue" aria-hidden="true"><span>{heroSecond ? 'Explore the work' : 'Scroll to see the system'}</span><span className="hero-scroll-line" /></div>
             <div className="hero-motion-track" aria-hidden="true"><span /></div>
@@ -597,9 +595,9 @@ function App() {
 
         <section className="work story-work" id="work" aria-labelledby="work-heading">
           <div className="story-intro" data-reveal>
-            <span className="kicker">Selected concept work / 01—03</span>
-            <h2 id="work-heading">A better path from first contact to next action.</h2>
-            <p>Explore three interactive concepts. Each starts with a customer problem and shows the system I built around it.</p>
+            <span className="kicker">Three industries / three concept builds</span>
+            <h2 id="work-heading">Different businesses. Specific customer paths.</h2>
+            <p>HVAC, real estate, and healthcare each need a different response. Explore the interactive concepts and the decisions behind each one.</p>
           </div>
           <div className="story-stage" data-story-stage>
             <div className="story-sticky">
@@ -614,6 +612,7 @@ function App() {
                     <h3>{project.title}</h3>
                     <p className="story-problem">{project.goal}</p>
                     <p className="story-solution">{project.copy}</p>
+                    <div className="story-journey" aria-label="Concept path">{project.journey.map((step, stepIndex) => <span key={step}>{stepIndex > 0 && <b aria-hidden="true">→</b>}{step}</span>)}</div>
                     <div className="story-actions">
                       <a href={project.href} tabIndex={activeStory === index ? 0 : -1} className="story-primary">Explore the live demo <Arrow /></a>
                       <a href={project.caseStudyHref} tabIndex={activeStory === index ? 0 : -1} className="story-secondary">Read the case study <Arrow /></a>
