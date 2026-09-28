@@ -2739,3 +2739,101 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .portfolio-main .hero-pinned .hero-lead { font-size: .8rem; }
   .portfolio-main .hero-pinned .hero-actions .button { min-height: 2.55rem; }
 }
+
+/* Cinematic automation scene. The diagram fills the canvas instead of sitting in a card. */
+.portfolio-main .cinematic-hero { background: #061214; }
+.portfolio-main .hero-pinned {
+  background: radial-gradient(ellipse at 78% 48%, #145950 0%, #103c39 24%, #0a2628 47%, #061214 82%);
+}
+.portfolio-main .hero-pinned::after {
+  background: linear-gradient(90deg, #061214 0%, rgba(6,18,20,.96) 19%, rgba(6,18,20,.72) 40%, rgba(6,18,20,.08) 73%),
+    linear-gradient(0deg, rgba(6,18,20,.7), transparent 23%);
+}
+.portfolio-main .hero-pinned .hero-copy {
+  width: min(640px, 47vw);
+  left: clamp(1.5rem, 6vw, 7rem);
+}
+.portfolio-main .hero-pinned h1 {
+  max-width: 11ch;
+  margin: 1rem 0 1.25rem;
+  color: #f6fffb;
+  font-size: clamp(3.4rem, 5.55vw, 6.5rem);
+  line-height: .94;
+  letter-spacing: -.065em;
+}
+.portfolio-main .hero-pinned h1 em { color: #a7eddc; }
+.portfolio-main .hero-pinned .hero-lead { max-width: 520px; }
+.automation-stage, .hero-system {
+  top: 0;
+  right: 0;
+  width: 68%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  overflow: hidden;
+}
+.automation-stage::before {
+  inset: 0;
+  background-image: linear-gradient(rgba(144,242,216,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(144,242,216,.09) 1px, transparent 1px);
+  background-size: clamp(50px, 6vw, 100px) clamp(50px, 6vw, 100px);
+  mask-image: radial-gradient(ellipse at 60% 50%, #000 14%, transparent 74%);
+}
+.automation-stage-head { top: 9%; left: 32%; right: 7%; color: #d0fff0; }
+.automation-stage-head span:last-child { color: #a7eddc; }
+.automation-stage-foot { bottom: 9%; left: 33%; right: 4%; gap: .65rem; color: #c7eee1; }
+.automation-orbit { position: absolute; border: 1px solid rgba(151,246,218,.26); border-radius: 50%; pointer-events: none; }
+.automation-orbit-one { width: 55vw; height: 55vw; max-width: 850px; max-height: 850px; left: 21%; top: 50%; transform: translateY(-50%); }
+.automation-orbit-two { width: 35vw; height: 35vw; max-width: 570px; max-height: 570px; left: 36%; top: 50%; transform: translateY(-50%); border-color: rgba(151,246,218,.37); }
+.automation-core {
+  position: absolute; z-index: 2; left: 52%; top: 50%; transform: translate(-50%,-50%);
+  display: grid; place-items: center; width: clamp(130px, 18vw, 270px); aspect-ratio: 1; border: 1px solid rgba(169,255,229,.7); border-radius: 50%;
+  background: radial-gradient(circle at 45% 40%, #257b68, #0b3333 70%);
+  box-shadow: 0 0 0 18px rgba(104,233,195,.07), 0 0 100px rgba(92,246,194,.26), inset 0 0 45px rgba(121,245,207,.12);
+  color: #effff7; text-align: center; font-size: clamp(.7rem, 1.2vw, 1.15rem); font-weight: 800; line-height: 1.12; letter-spacing: .1em;
+}
+.automation-core b { position: absolute; bottom: 18%; color: #a7eddc; font-size: 1.4rem; font-weight: 400; }
+.automation-path { inset: 0; width: 100%; height: 100%; opacity: .75; }
+.automation-node { width: clamp(140px, 17vw, 245px); min-height: 0; padding: .8rem 1rem; border-color: rgba(167,237,220,.56); border-radius: 10px; background: rgba(7,35,35,.89); box-shadow: 0 18px 42px rgba(0,0,0,.26); }
+.automation-node-one { top: 19%; left: 25%; }
+.automation-node-two { top: 27%; right: 5%; }
+.automation-node-three { top: 65%; left: 21%; }
+.automation-node-four { top: 70%; right: 6%; }
+.hero-system { display: grid; place-items: center; padding-left: 22%; }
+.automation-result { max-width: 530px; padding: clamp(1.4rem, 3vw, 3rem); border-color: rgba(167,237,220,.48); background: rgba(7,36,35,.94); }
+.automation-result > strong { font-size: clamp(2.4rem, 3.5vw, 4rem); }
+@media (max-width: 760px) {
+  .portfolio-main .hero-pinned { background: radial-gradient(ellipse at 50% 20%, #145950, #0a2628 46%, #061214 78%); }
+  .portfolio-main .hero-pinned::after { background: linear-gradient(0deg, #061214 0%, #061214 38%, rgba(6,18,20,.95) 52%, rgba(6,18,20,.12) 70%, transparent 85%); }
+  .portfolio-main .hero-pinned .hero-copy { left: 1.2rem; right: 1.2rem; bottom: 1.35rem; width: auto; }
+  .portfolio-main .hero-pinned h1 { max-width: 13ch; margin: .55rem 0 .65rem; font-size: clamp(2.1rem, 8.4vw, 3.2rem); line-height: .96; }
+  .portfolio-main .hero-pinned .hero-lead { max-width: 38rem; font-size: .84rem; line-height: 1.38; }
+  .portfolio-main .hero-pinned .hero-actions { margin-top: .75rem; }
+  .automation-stage, .hero-system { top: 0; left: 0; right: 0; width: 100%; height: 47%; border-radius: 0; }
+  .automation-orbit-one { width: 82vw; height: 82vw; left: 8%; }
+  .automation-orbit-two { width: 54vw; height: 54vw; left: 23%; }
+  .automation-core { left: 50%; width: clamp(95px, 26vw, 150px); font-size: .62rem; }
+  .automation-core b { font-size: 1rem; }
+  .automation-stage-head { top: 8%; left: 6%; right: 6%; font-size: .52rem; }
+  .automation-stage-foot { bottom: 4%; left: 6%; right: 4%; gap: .35rem; font-size: .5rem; letter-spacing: .04em; }
+  .automation-node { width: 37%; padding: .35rem .45rem; border-radius: 6px; }
+  .automation-node small { font-size: .43rem; }
+  .automation-node strong { font-size: .65rem; }
+  .automation-node-one { top: 22%; left: 3%; }
+  .automation-node-two { top: 23%; right: 3%; }
+  .automation-node-three { top: 68%; left: 3%; }
+  .automation-node-four { top: 67%; right: 3%; }
+  .hero-system { padding: 2.5rem 1rem 0; }
+  .automation-result { max-width: 390px; padding: .85rem 1rem; }
+  .automation-result-icon { margin: .5rem 0 .35rem; }
+  .automation-result > strong { font-size: 1.35rem; margin: .25rem 0 .4rem; }
+}
+@media (max-height: 700px) and (max-width: 760px) {
+  .automation-stage, .hero-system { height: 41%; }
+  .portfolio-main .hero-pinned h1 { font-size: clamp(1.9rem, 7.6vw, 2.5rem); }
+  .portfolio-main .hero-pinned .hero-lead { font-size: .77rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .automation-stage, .hero-system { transition: none; transform: none; }
+}
