@@ -408,6 +408,7 @@ function App() {
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
         hero.style.setProperty('--hero-first-opacity', (1 - secondOpacity).toFixed(3))
         hero.style.setProperty('--hero-second-opacity', secondOpacity.toFixed(3))
+        hero.style.setProperty('--hero-reveal', `${(secondOpacity * 100).toFixed(1)}%`)
       }
     }
     const requestUpdate = () => {
