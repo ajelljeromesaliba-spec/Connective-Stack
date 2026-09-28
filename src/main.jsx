@@ -630,9 +630,9 @@ function App() {
         <section className="live-project" aria-labelledby="pawnova-heading">
           <div className="live-project-inner" data-reveal>
             <div className="live-project-copy">
-              <span className="kicker">Live project / Ecommerce</span>
+              <span className="kicker">Live project / Amazon affiliate</span>
               <h2 id="pawnova-heading">Pawnova</h2>
-              <p>Explore a live ecommerce website. This is a real site, separate from the interactive concepts above.</p>
+              <p>Pawnova is an Amazon affiliate website for discovering products and following links to Amazon. It is a live project, separate from the interactive concepts above.</p>
               <a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer" className="live-project-link">Visit Pawnova <Arrow /></a>
             </div>
             <div className="live-project-mark" aria-hidden="true"><span>PN</span><span>PAWNOVA</span></div>
