@@ -627,6 +627,18 @@ function App() {
           <p className="concept-disclosure">These are self-initiated concept projects. Fictional data is labeled; no performance metric is presented as a client result.</p>
         </section>
 
+        <section className="live-project" aria-labelledby="pawnova-heading">
+          <div className="live-project-inner" data-reveal>
+            <div className="live-project-copy">
+              <span className="kicker">Live project / Ecommerce</span>
+              <h2 id="pawnova-heading">Pawnova</h2>
+              <p>Explore a live ecommerce website. This is a real site, separate from the interactive concepts above.</p>
+              <a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer" className="live-project-link">Visit Pawnova <Arrow /></a>
+            </div>
+            <div className="live-project-mark" aria-hidden="true"><span>PN</span><span>PAWNOVA</span></div>
+          </div>
+        </section>
+
         <section className="credibility-strip" aria-label="What prospects can verify">
           <div data-reveal><strong>3</strong><span>Interactive industry demos</span></div>
           <div data-reveal><strong>3</strong><span>Documented concept case studies</span></div>
