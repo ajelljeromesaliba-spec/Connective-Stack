@@ -2271,6 +2271,16 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   background: linear-gradient(90deg, rgba(4,12,14,.64) 0%, rgba(4,12,14,.20) 55%, rgba(4,12,14,.02) 100%),
     linear-gradient(0deg, rgba(3,10,11,.6), transparent 33%);
 }
+.hero-pinned::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: #061012;
+  opacity: var(--hero-scene-shade, 0);
+  will-change: opacity;
+}
 .hero-pinned .cinematic-hero-image { z-index: 0; }
 .hero-pinned .cinematic-hero-image img {
   object-position: center;
