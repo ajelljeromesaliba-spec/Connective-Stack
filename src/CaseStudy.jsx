@@ -286,9 +286,9 @@ export default function CaseStudy({ slug }) {
 
   useEffect(() => {
     document.title = `${study.title} | ConnectiveStack Case Study`
-    const pageUrl = `https://www.connectivestack.com/case-studies/${slug}`
+    const pageUrl = `https://connectivestack.com/case-studies/${slug}`
     const pageDescription = study.summary
-    const socialImage = `https://www.connectivestack.com${study.image}`
+    const socialImage = `https://connectivestack.com${study.image}`
     const setMeta = (selector, attribute, value) => {
       const element = document.head.querySelector(selector)
       if (element) element.setAttribute(attribute, value)
