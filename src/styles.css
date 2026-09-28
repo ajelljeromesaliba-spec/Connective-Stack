@@ -2837,3 +2837,23 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
 @media (prefers-reduced-motion: reduce) {
   .automation-stage, .hero-system { transition: none; transform: none; }
 }
+
+/* The finished state wipes over the flow, so labels never ghost through one another. */
+.automation-stage { opacity: 1; transform: none; }
+.hero-system {
+  z-index: 2;
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 calc(100% - var(--hero-reveal, 0%)) 0 0);
+  background: radial-gradient(ellipse at 64% 48%, #176257 0%, #0b3435 45%, #071a1e 100%);
+  will-change: clip-path;
+}
+.automation-result {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-system { clip-path: inset(0); }
+}
