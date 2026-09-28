@@ -387,6 +387,8 @@ function App() {
     const scenes = [...document.querySelectorAll('[data-scroll-scene]')]
     const hero = document.querySelector('.cinematic-hero')
     let frame = 0
+    let heroVisualProgress = null
+    let lastFrameTime = 0
     const smoothstep = value => {
       const t = Math.max(0, Math.min(1, value))
       return t * t * (3 - 2 * t)
@@ -403,7 +405,11 @@ function App() {
         const rect = hero.getBoundingClientRect()
         const travel = Math.max(1, rect.height - window.innerHeight + 78)
         const targetProgress = Math.max(0, Math.min(1, -rect.top / travel))
-        const progress = targetProgress
+        const now = performance.now()
+        const easing = 1 - Math.exp(-Math.min(now - lastFrameTime, 32) / 105)
+        heroVisualProgress = heroVisualProgress === null ? targetProgress : heroVisualProgress + (targetProgress - heroVisualProgress) * easing
+        lastFrameTime = now
+        const progress = heroVisualProgress
         const secondOpacity = smoothstep((progress - .25) / .5)
         const middleOpacity = smoothstep((progress - .2) / .16) * (1 - smoothstep((progress - .61) / .16))
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
@@ -413,6 +419,7 @@ function App() {
         hero.style.setProperty('--hero-film-last', smoothstep((progress - .62) / .18).toFixed(3))
         hero.style.setProperty('--hero-camera-one', (1.03 + progress * .12).toFixed(3))
         hero.style.setProperty('--hero-camera-two', (1.12 - progress * .09).toFixed(3))
+        if (Math.abs(targetProgress - progress) > .001) frame = window.requestAnimationFrame(update)
       }
     }
     const requestUpdate = () => {
