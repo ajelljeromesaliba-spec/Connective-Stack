@@ -556,13 +556,16 @@ function App() {
         <section className="hero cinematic-hero" data-scroll-scene>
           <div className="hero-pinned">
             <div className="automation-stage" aria-hidden="true">
-              <div className="automation-stage-head"><span><i /> CONNECTED WORKFLOW</span><span>RUN 01 / ACTIVE</span></div>
+              <div className="automation-stage-head"><span><i /> CONNECTIVE STACK / LIVE SYSTEM</span><span>01 — 04</span></div>
+              <div className="automation-orbit automation-orbit-one" />
+              <div className="automation-orbit automation-orbit-two" />
+              <div className="automation-core"><span>INQUIRY<br />IN MOTION</span><b>↗</b></div>
               <svg className="automation-path" viewBox="0 0 550 540" preserveAspectRatio="none"><path d="M130 105 C 185 105, 190 175, 270 175 S 365 245, 420 245 S 405 355, 290 355 S 210 445, 365 445" /><path className="automation-path-pulse" d="M130 105 C 185 105, 190 175, 270 175 S 365 245, 420 245 S 405 355, 290 355 S 210 445, 365 445" /></svg>
               <div className="automation-node automation-node-one"><small>01 / INCOMING</small><strong>Website inquiry</strong><span>Request captured</span></div>
               <div className="automation-node automation-node-two"><small>02 / RULES</small><strong>Qualify + route</strong><span>Right team, right context</span></div>
               <div className="automation-node automation-node-three"><small>03 / RECORD</small><strong>CRM updated</strong><span>Owner notified</span></div>
               <div className="automation-node automation-node-four"><small>04 / RESPONSE</small><strong>Next step booked</strong><span>Confirmation sent</span></div>
-              <div className="automation-stage-foot"><span>FORM</span><b>→</b><span>LOGIC</span><b>→</b><span>CRM</span><b>→</b><span>CALENDAR</span></div>
+              <div className="automation-stage-foot"><span>CAPTURE</span><b>→</b><span>ROUTE</span><b>→</b><span>FOLLOW UP</span><b>→</b><span>BOOK</span></div>
             </div>
             <div className="hero-system" aria-hidden="true">
               <div className="automation-result">
@@ -577,8 +580,8 @@ function App() {
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
               <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
-              <h1>The work starts <em>after the click.</em></h1>
-              <p className="hero-lead">I connect websites, forms, CRM, calendars, and follow-up into one clear path. When a request comes in, the next action should already have a place to go.</p>
+              <h1>THE NEXT STEP <em>IS ALREADY IN MOTION.</em></h1>
+              <p className="hero-lead">A request comes in. The right person gets the context. Follow-up happens. I build the connections between your website, CRM, and calendar that make that possible.</p>
               <div className="hero-actions">
                 <a href="#work" className="button button-primary">Explore the work <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
