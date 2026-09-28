@@ -565,25 +565,30 @@ function App() {
       <main id="top" className="portfolio-main">
         <section className={`hero cinematic-hero ${heroSecond ? 'hero-second' : ''}`} data-scroll-scene>
           <div className="hero-pinned">
-            <div className="hero-showcase" aria-hidden="true">
-              {projects.map((project, index) => <div className="hero-showcase-card" key={project.label} style={{ '--card-index': index }}>
-                <img src={project.image} alt="" fetchPriority={index === 0 ? 'high' : undefined} />
-                <div><small>0{index + 1} / {project.label}</small><strong>{project.journey.join(' → ')}</strong></div>
-              </div>)}
+            <div className="automation-stage" aria-hidden="true">
+              <div className="automation-stage-head"><span><i /> CONNECTED WORKFLOW</span><span>RUN 01 / ACTIVE</span></div>
+              <svg className="automation-path" viewBox="0 0 550 540" preserveAspectRatio="none"><path d="M130 105 C 185 105, 190 175, 270 175 S 365 245, 420 245 S 405 355, 290 355 S 210 445, 365 445" /><path className="automation-path-pulse" d="M130 105 C 185 105, 190 175, 270 175 S 365 245, 420 245 S 405 355, 290 355 S 210 445, 365 445" /></svg>
+              <div className="automation-node automation-node-one"><small>01 / INCOMING</small><strong>Website inquiry</strong><span>Request captured</span></div>
+              <div className="automation-node automation-node-two"><small>02 / RULES</small><strong>Qualify + route</strong><span>Right team, right context</span></div>
+              <div className="automation-node automation-node-three"><small>03 / RECORD</small><strong>CRM updated</strong><span>Owner notified</span></div>
+              <div className="automation-node automation-node-four"><small>04 / RESPONSE</small><strong>Next step booked</strong><span>Confirmation sent</span></div>
+              <div className="automation-stage-foot"><span>FORM</span><b>→</b><span>LOGIC</span><b>→</b><span>CRM</span><b>→</b><span>CALENDAR</span></div>
             </div>
             <div className="hero-system" aria-hidden="true">
-              <div className="hero-system-panel">
-                <div className="hero-system-top"><span>CONNECTED PATH / 01—03</span><span className="status-dot" /></div>
-                <div className="hero-system-step"><b>01</b><div><small>WEBSITE</small><strong>Capture the request</strong><span>Form, call, or inquiry</span></div></div>
-                <div className="hero-system-step"><b>02</b><div><small>ROUTING</small><strong>Send it to the right place</strong><span>CRM, team, or provider</span></div></div>
-                <div className="hero-system-step"><b>03</b><div><small>NEXT ACTION</small><strong>Make the follow-through clear</strong><span>Appointment or response</span></div></div>
+              <div className="automation-result">
+                <div className="automation-result-bar"><span>WORKFLOW / COMPLETED PATH</span><span className="automation-live-dot" /></div>
+                <div className="automation-result-icon">✓</div>
+                <span className="automation-result-label">NEXT ACTION CONFIRMED</span>
+                <strong>One inquiry.<br />A clear handoff.</strong>
+                <div className="automation-result-steps"><span><b>01</b> Captured</span><span><b>02</b> Routed</span><span><b>03</b> Booked</span></div>
+                <div className="automation-result-footer"><span>Website → CRM → Calendar</span><span>CONNECTED</span></div>
               </div>
             </div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy" aria-hidden={heroSecond}>
               <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
-              <h1>Every click needs <em>a next step.</em></h1>
-              <p className="hero-lead">I build websites and the paths behind them: forms, CRM routing, calendars, notifications, and follow-up. Explore how that work changes across three industries.</p>
+              <h1>The work starts <em>after the click.</em></h1>
+              <p className="hero-lead">I connect websites, forms, CRM, calendars, and follow-up into one clear path. When a request comes in, the next action should already have a place to go.</p>
               <div className="hero-actions">
                 <a href="#work" tabIndex={heroSecond ? -1 : 0} className="button button-primary">Explore the work <Arrow /></a>
                 <a href={CALENDAR_URL} tabIndex={heroSecond ? -1 : 0} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
@@ -591,8 +596,8 @@ function App() {
             </div>
             <div className="hero-second-copy" aria-hidden={!heroSecond}>
               <span className="hero-chapter-label">02 / WHAT HAPPENS AFTER THE CLICK</span>
-              <h2>THE HANDOFF IS THE WORK.</h2>
-              <p>A visitor's request has to reach the right person and lead to a clear next action. I map, build, and test that path for the business in front of me.</p>
+              <h2>LESS DROPPED WORK. CLEARER NEXT STEPS.</h2>
+              <p>I map what happens between an inquiry and a response, then build and test the connections. The demos below show different ways that can work.</p>
               <a href="#work" tabIndex={heroSecond ? 0 : -1} className="button button-primary">See three examples <Arrow /></a>
             </div>
             <div className="hero-scroll-cue" aria-hidden="true"><span>{heroSecond ? 'Explore the work' : 'Scroll to see the system'}</span><span className="hero-scroll-line" /></div>
