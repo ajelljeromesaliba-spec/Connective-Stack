@@ -2853,3 +2853,31 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   background: none;
   box-shadow: none;
 }
+
+/* Case study chapters must fit between the fixed header and the bottom edge. */
+.story-sticky { min-height: 0; }
+.story-content {
+  width: min(780px, 62vw);
+  margin-bottom: clamp(2rem, 4svh, 3.5rem);
+}
+.story-content h3 {
+  max-width: 14ch;
+  margin-bottom: clamp(.7rem, 1.5svh, 1rem);
+  font-size: clamp(3rem, min(4.3vw, 8.7svh), 5.2rem);
+  line-height: .97;
+}
+.story-overline { margin-bottom: clamp(.6rem, 1.5svh, 1rem); }
+.story-actions { margin-top: clamp(.85rem, 2svh, 1.35rem); }
+@media (max-width: 760px) {
+  .story-content { width: auto; margin: 0 1.2rem 1.5rem; }
+  .story-content h3 { max-width: 16ch; font-size: clamp(1.9rem, min(7.5vw, 6.6svh), 3rem); }
+  .story-overline { font-size: .58rem; }
+  .story-problem { font-size: .88rem; line-height: 1.35; }
+  .story-solution { font-size: .78rem; line-height: 1.38; }
+  .story-actions { gap: .65rem; }
+}
+@media (max-height: 680px) {
+  .story-content h3 { font-size: clamp(2rem, min(3.6vw, 6.5svh), 3.5rem); }
+  .story-content { margin-bottom: 1.2rem; }
+  .story-problem, .story-solution { line-height: 1.3; }
+}
