@@ -2925,3 +2925,18 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .hero-film-shot-two { display: none; }
   .film-caption-two, .film-caption-three { display: none; }
 }
+
+/* Live portfolio project */
+.portfolio-main .live-project { padding: clamp(3rem, 6vw, 6rem) 1.5rem; background: #f4f7f6; }
+.portfolio-main .live-project-inner { max-width: 1180px; margin: 0 auto; padding: clamp(2rem, 5vw, 4.5rem); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(210px, .65fr); align-items: center; gap: 2rem; background: #102724; border-radius: 24px; overflow: hidden; }
+.portfolio-main .live-project-copy { min-width: 0; position: relative; z-index: 1; }
+.portfolio-main .live-project .kicker { color: #a5ded0; }
+.portfolio-main .live-project h2 { color: #fff; font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.05; margin: 1rem 0; }
+.portfolio-main .live-project p { color: #d0e0dc; font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.7; max-width: 37rem; }
+.portfolio-main .live-project-link { display: inline-flex; align-items: center; gap: .75rem; margin-top: 1.6rem; padding: .9rem 1.25rem; border-radius: 999px; color: #102724; background: #b9efdb; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+.portfolio-main .live-project-link:hover { transform: translateY(-2px); background: #d4f8e8; }
+.portfolio-main .live-project-link:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.portfolio-main .live-project-mark { min-height: 220px; display: grid; place-content: center; text-align: center; border: 1px solid rgba(185,239,219,.32); border-radius: 20px; background: radial-gradient(circle at 45% 30%, #31574c, #16362f 62%, #102724); color: #d5f6e6; }
+.portfolio-main .live-project-mark span:first-child { font-size: clamp(4rem, 8vw, 7rem); font-weight: 800; line-height: 1; letter-spacing: -.08em; }
+.portfolio-main .live-project-mark span:last-child { margin-top: .75rem; font-size: .8rem; font-weight: 700; letter-spacing: .3em; }
+@media (max-width: 700px) { .portfolio-main .live-project-inner { grid-template-columns: 1fr; padding: 2rem 1.5rem; } .portfolio-main .live-project-mark { min-height: 160px; } }
