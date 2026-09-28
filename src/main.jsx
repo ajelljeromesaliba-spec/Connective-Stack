@@ -404,11 +404,15 @@ function App() {
         const travel = Math.max(1, rect.height - window.innerHeight + 78)
         const targetProgress = Math.max(0, Math.min(1, -rect.top / travel))
         const progress = targetProgress
-        const firstOpacity = 1 - smoothstep((progress - .34) / .16)
-        const secondOpacity = smoothstep((progress - .49) / .16)
+        const secondOpacity = smoothstep((progress - .25) / .5)
+        const middleOpacity = smoothstep((progress - .2) / .16) * (1 - smoothstep((progress - .61) / .16))
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
-        hero.style.setProperty('--hero-first-opacity', firstOpacity.toFixed(3))
         hero.style.setProperty('--hero-second-opacity', secondOpacity.toFixed(3))
+        hero.style.setProperty('--hero-film-middle', middleOpacity.toFixed(3))
+        hero.style.setProperty('--hero-film-first', (1 - smoothstep((progress - .18) / .18)).toFixed(3))
+        hero.style.setProperty('--hero-film-last', smoothstep((progress - .62) / .18).toFixed(3))
+        hero.style.setProperty('--hero-camera-one', (1.03 + progress * .12).toFixed(3))
+        hero.style.setProperty('--hero-camera-two', (1.12 - progress * .09).toFixed(3))
       }
     }
     const requestUpdate = () => {
@@ -556,26 +560,14 @@ function App() {
       <main id="top" className="portfolio-main">
         <section className="hero cinematic-hero" data-scroll-scene>
           <div className="hero-pinned">
-            <div className="automation-stage" aria-hidden="true">
-              <div className="automation-stage-head"><span><i /> CONNECTIVE STACK / LIVE SYSTEM</span><span>01 — 04</span></div>
-              <div className="automation-orbit automation-orbit-one" />
-              <div className="automation-orbit automation-orbit-two" />
-              <div className="automation-core"><span>INQUIRY<br />IN MOTION</span><b>↗</b></div>
-              <svg className="automation-path" viewBox="0 0 550 540" preserveAspectRatio="none"><path d="M130 105 C 185 105, 190 175, 270 175 S 365 245, 420 245 S 405 355, 290 355 S 210 445, 365 445" /><path className="automation-path-pulse" d="M130 105 C 185 105, 190 175, 270 175 S 365 245, 420 245 S 405 355, 290 355 S 210 445, 365 445" /></svg>
-              <div className="automation-node automation-node-one"><small>01 / INCOMING</small><strong>Website inquiry</strong><span>Request captured</span></div>
-              <div className="automation-node automation-node-two"><small>02 / RULES</small><strong>Qualify + route</strong><span>Right team, right context</span></div>
-              <div className="automation-node automation-node-three"><small>03 / RECORD</small><strong>CRM updated</strong><span>Owner notified</span></div>
-              <div className="automation-node automation-node-four"><small>04 / RESPONSE</small><strong>Next step booked</strong><span>Confirmation sent</span></div>
-              <div className="automation-stage-foot"><span>CAPTURE</span><b>→</b><span>ROUTE</span><b>→</b><span>FOLLOW UP</span><b>→</b><span>BOOK</span></div>
-            </div>
-            <div className="hero-system" aria-hidden="true">
-              <div className="automation-result">
-                <div className="automation-result-bar"><span>WORKFLOW / COMPLETED PATH</span><span className="automation-live-dot" /></div>
-                <div className="automation-result-icon">✓</div>
-                <span className="automation-result-label">NEXT ACTION CONFIRMED</span>
-                <strong>One inquiry.<br />A clear handoff.</strong>
-                <div className="automation-result-steps"><span><b>01</b> Captured</span><span><b>02</b> Routed</span><span><b>03</b> Booked</span></div>
-                <div className="automation-result-footer"><span>Website → CRM → Calendar</span><span>CONNECTED</span></div>
+            <div className="hero-film" aria-hidden="true">
+              <img className="hero-film-shot hero-film-shot-one" src="/images/automation-signal.webp" alt="" fetchPriority="high" />
+              <img className="hero-film-shot hero-film-shot-two" src="/images/automation-arrival.webp" alt="" />
+              <div className="hero-film-vignette" />
+              <div className="hero-film-caption">
+                <span className="film-caption-one">01 / REQUEST RECEIVED</span>
+                <span className="film-caption-two">02 / ROUTED WITH CONTEXT</span>
+                <span className="film-caption-three">03 / NEXT STEP CONFIRMED</span>
               </div>
             </div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
