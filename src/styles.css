@@ -2936,7 +2936,6 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
 .portfolio-main .live-project-link { display: inline-flex; align-items: center; gap: .75rem; margin-top: 1.6rem; padding: .9rem 1.25rem; border-radius: 999px; color: #102724; background: #b9efdb; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
 .portfolio-main .live-project-link:hover { transform: translateY(-2px); background: #d4f8e8; }
 .portfolio-main .live-project-link:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
-.portfolio-main .live-project-mark { min-height: 220px; display: grid; place-content: center; text-align: center; border: 1px solid rgba(185,239,219,.32); border-radius: 20px; background: radial-gradient(circle at 45% 30%, #31574c, #16362f 62%, #102724); color: #d5f6e6; }
-.portfolio-main .live-project-mark span:first-child { font-size: clamp(4rem, 8vw, 7rem); font-weight: 800; line-height: 1; letter-spacing: -.08em; }
-.portfolio-main .live-project-mark span:last-child { margin-top: .75rem; font-size: .8rem; font-weight: 700; letter-spacing: .3em; }
+.portfolio-main .live-project-mark { min-height: 220px; display: grid; place-items: center; padding: 1rem; border: 1px solid rgba(185,239,219,.32); border-radius: 20px; background: #fff; overflow: hidden; }
+.portfolio-main .live-project-mark img { display: block; width: 100%; max-width: 390px; height: auto; object-fit: contain; }
 @media (max-width: 700px) { .portfolio-main .live-project-inner { grid-template-columns: 1fr; padding: 2rem 1.5rem; } .portfolio-main .live-project-mark { min-height: 160px; } }
