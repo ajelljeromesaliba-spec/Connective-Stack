@@ -404,11 +404,11 @@ function App() {
         const travel = Math.max(1, rect.height - window.innerHeight + 78)
         const targetProgress = Math.max(0, Math.min(1, -rect.top / travel))
         const progress = targetProgress
-        const secondOpacity = smoothstep((progress - .38) / .25)
+        const firstOpacity = 1 - smoothstep((progress - .34) / .16)
+        const secondOpacity = smoothstep((progress - .49) / .16)
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
-        hero.style.setProperty('--hero-first-opacity', (1 - secondOpacity).toFixed(3))
+        hero.style.setProperty('--hero-first-opacity', firstOpacity.toFixed(3))
         hero.style.setProperty('--hero-second-opacity', secondOpacity.toFixed(3))
-        hero.style.setProperty('--hero-reveal', `${(secondOpacity * 100).toFixed(1)}%`)
       }
     }
     const requestUpdate = () => {
