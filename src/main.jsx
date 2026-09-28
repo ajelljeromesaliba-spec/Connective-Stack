@@ -345,7 +345,6 @@ function ProjectInquiryForm() {
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeStory, setActiveStory] = useState(0)
-  const [heroSecond, setHeroSecond] = useState(false)
   const [openNavDropdown, setOpenNavDropdown] = useState(null)
   const [legalModal, setLegalModal] = useState(null)
   const [activeService, setActiveService] = useState(null)
@@ -388,7 +387,6 @@ function App() {
     const scenes = [...document.querySelectorAll('[data-scroll-scene]')]
     const hero = document.querySelector('.cinematic-hero')
     let frame = 0
-    let phase = false
     const smoothstep = value => {
       const t = Math.max(0, Math.min(1, value))
       return t * t * (3 - 2 * t)
@@ -406,18 +404,10 @@ function App() {
         const travel = Math.max(1, rect.height - window.innerHeight + 78)
         const targetProgress = Math.max(0, Math.min(1, -rect.top / travel))
         const progress = targetProgress
-        const firstOpacity = 1 - smoothstep((progress - .35) / .2)
-        const secondOpacity = smoothstep((progress - .44) / .2)
+        const secondOpacity = smoothstep((progress - .38) / .25)
         hero.style.setProperty('--hero-progress', progress.toFixed(3))
-        hero.style.setProperty('--hero-first-opacity', firstOpacity.toFixed(3))
+        hero.style.setProperty('--hero-first-opacity', (1 - secondOpacity).toFixed(3))
         hero.style.setProperty('--hero-second-opacity', secondOpacity.toFixed(3))
-        hero.style.setProperty('--hero-first-y', `${(-38 * (1 - firstOpacity)).toFixed(1)}px`)
-        hero.style.setProperty('--hero-second-y', `${(38 * (1 - secondOpacity)).toFixed(1)}px`)
-        const nextPhase = progress > .52
-        if (nextPhase !== phase) {
-          phase = nextPhase
-          setHeroSecond(nextPhase)
-        }
       }
     }
     const requestUpdate = () => {
@@ -563,7 +553,7 @@ function App() {
       </header>
 
       <main id="top" className="portfolio-main">
-        <section className={`hero cinematic-hero ${heroSecond ? 'hero-second' : ''}`} data-scroll-scene>
+        <section className="hero cinematic-hero" data-scroll-scene>
           <div className="hero-pinned">
             <div className="automation-stage" aria-hidden="true">
               <div className="automation-stage-head"><span><i /> CONNECTED WORKFLOW</span><span>RUN 01 / ACTIVE</span></div>
@@ -585,22 +575,16 @@ function App() {
               </div>
             </div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
-            <div className="hero-copy" aria-hidden={heroSecond}>
+            <div className="hero-copy">
               <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
               <h1>The work starts <em>after the click.</em></h1>
               <p className="hero-lead">I connect websites, forms, CRM, calendars, and follow-up into one clear path. When a request comes in, the next action should already have a place to go.</p>
               <div className="hero-actions">
-                <a href="#work" tabIndex={heroSecond ? -1 : 0} className="button button-primary">Explore the work <Arrow /></a>
-                <a href={CALENDAR_URL} tabIndex={heroSecond ? -1 : 0} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
+                <a href="#work" className="button button-primary">Explore the work <Arrow /></a>
+                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
               </div>
             </div>
-            <div className="hero-second-copy" aria-hidden={!heroSecond}>
-              <span className="hero-chapter-label">02 / WHAT HAPPENS AFTER THE CLICK</span>
-              <h2>LESS DROPPED WORK. CLEARER NEXT STEPS.</h2>
-              <p>I map what happens between an inquiry and a response, then build and test the connections. The demos below show different ways that can work.</p>
-              <a href="#work" tabIndex={heroSecond ? 0 : -1} className="button button-primary">See three examples <Arrow /></a>
-            </div>
-            <div className="hero-scroll-cue" aria-hidden="true"><span>{heroSecond ? 'Explore the work' : 'Scroll to see the system'}</span><span className="hero-scroll-line" /></div>
+            <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see the system</span><span className="hero-scroll-line" /></div>
             <div className="hero-motion-track" aria-hidden="true"><span /></div>
           </div>
         </section>
