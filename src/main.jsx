@@ -564,8 +564,8 @@ function App() {
       <main id="top" className="portfolio-main">
         <section className="hero cinematic-hero" data-scroll-scene>
           <div className="hero-pinned">
-            <div className="hero-film helix-stage" aria-hidden="true">
-              <div className="helix-atmosphere" />
+            <div className="hero-film connection-stage" aria-hidden="true">
+              <div className="connection-atmosphere" />
               <ConnectionScene />
               <div className="hero-film-vignette" />
               <div className="connection-captions"><span>INTAKE / WEBSITE</span><span>CONNECTED SYSTEM</span><span>HUMAN HANDOFF</span></div>

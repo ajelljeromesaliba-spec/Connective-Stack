@@ -22,126 +22,122 @@ export default function ConnectionScene() {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 760 ? 1.25 : 1.6))
       renderer.outputColorSpace = THREE.SRGBColorSpace
       renderer.toneMapping = THREE.ACESFilmicToneMapping
-      renderer.toneMappingExposure = 1.6
-      const scene = new THREE.Scene()
-      const camera = new THREE.PerspectiveCamera(36, 1, .1, 100)
-      camera.position.set(0, .25, 13.4)
-      const rig = new THREE.Group()
-      scene.add(rig)
-      scene.add(new THREE.AmbientLight(0xffe7bd, 2.5))
-      const key = new THREE.PointLight(0xffda93, 100)
-      key.position.set(1.5, 4, 6)
-      scene.add(key)
-      const rim = new THREE.PointLight(0xffffff, 75)
-      rim.position.set(-4, -3, -2)
-      scene.add(rim)
+      renderer.toneMappingExposure = 1.9
 
-      const gold = new THREE.MeshStandardMaterial({ color: 0xc69650, metalness: .85, roughness: .23 })
-      const ivory = new THREE.MeshStandardMaterial({ color: 0xe8d9bd, metalness: .74, roughness: .23 })
-      const dark = new THREE.MeshStandardMaterial({ color: 0x292724, metalness: .88, roughness: .28 })
-      const pulseMaterial = new THREE.MeshBasicMaterial({ color: 0xffdd99 })
-      const ringMaterial = new THREE.MeshStandardMaterial({ color: 0xd5aa68, emissive: 0x4e2c0a, emissiveIntensity: .4, metalness: .85, roughness: .22 })
-      const geometry = []
-      const add = (mesh, parent = rig) => { parent.add(mesh); geometry.push(mesh.geometry); return mesh }
-      const tube = (points, radius, material, parent = rig) => add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), Math.max(48, points.length * 4), radius, 8, false), material), parent)
-      const box = (w, h, d, x, y, z, material, parent = rig) => {
-        const mesh = add(new THREE.Mesh(new THREE.BoxGeometry(w, h, d), material), parent)
-        mesh.position.set(x, y, z)
+      const scene = new THREE.Scene()
+      const camera = new THREE.PerspectiveCamera(38, 1, .1, 100)
+      camera.position.set(0, .2, 11)
+      const sculpture = new THREE.Group()
+      scene.add(sculpture)
+      scene.add(new THREE.AmbientLight(0xf1d8aa, 1.45))
+      const light = (color, power, x, y, z) => {
+        const point = new THREE.PointLight(color, power)
+        point.position.set(x, y, z)
+        scene.add(point)
+      }
+      light(0xffdb9b, 95, -3, 4, 5)
+      light(0xffffff, 68, 4, -2, 5)
+      light(0x9c5a20, 55, 0, 1, -4)
+
+      const materials = [
+        new THREE.MeshStandardMaterial({ color: 0xb58951, metalness: .9, roughness: .23 }),
+        new THREE.MeshStandardMaterial({ color: 0xe2cfaa, metalness: .85, roughness: .2 }),
+        new THREE.MeshStandardMaterial({ color: 0x282521, metalness: .8, roughness: .32 }),
+        new THREE.MeshStandardMaterial({ color: 0x151412, metalness: .83, roughness: .26 }),
+        new THREE.MeshStandardMaterial({ color: 0xf6d99d, emissive: 0x7a3e0d, emissiveIntensity: .32, metalness: .7, roughness: .19 }),
+      ]
+      const meshes = []
+      const add = (geometry, material, parent = sculpture) => {
+        const mesh = new THREE.Mesh(geometry, material)
+        parent.add(mesh)
+        meshes.push(mesh)
         return mesh
       }
-      const sphereGeometry = new THREE.SphereGeometry(.11, 12, 10)
-      const strands = [gold, ivory]
-      for (let strand = 0; strand < 2; strand++) {
-        const points = []
-        for (let i = 0; i <= 100; i++) {
-          const t = i / 100
-          const angle = t * Math.PI * 5 + strand * Math.PI
-          points.push(new THREE.Vector3((t - .5) * 7.8, Math.sin(angle) * .76, Math.cos(angle) * .76))
-        }
-        tube(points, .085, strands[strand])
-      }
-      for (let i = 0; i <= 25; i++) {
-        const t = i / 25
-        const a = t * Math.PI * 5
-        const x = (t - .5) * 7.8
-        const pointA = new THREE.Vector3(x, Math.sin(a) * .76, Math.cos(a) * .76)
-        const pointB = new THREE.Vector3(x, -pointA.y, -pointA.z)
-        tube([pointA, pointB], .023, i % 5 === 0 ? gold : dark)
-        if (i % 5 === 0) {
-          const node = add(new THREE.Mesh(sphereGeometry, ivory))
-          node.position.copy(pointA)
-          const pair = add(new THREE.Mesh(sphereGeometry, gold))
-          pair.position.copy(pointB)
-        }
-      }
 
-      // The two ends are solid spatial objects: an intake browser and an output handoff ring.
-      const browser = new THREE.Group()
-      rig.add(browser)
-      browser.position.x = -4.25
-      const browserBars = [
-        [1.75, .075, .1, 0, 1, 0], [1.75, .075, .1, 0, -.95, 0],
-        [.075, 2, .1, -.84, .025, 0], [.075, 2, .1, .84, .025, 0],
-        [1.64, .06, .08, 0, .66, 0], [.52, .055, .07, -.36, .25, 0],
-        [.9, .055, .07, -.17, -.05, 0], [.67, .055, .07, -.28, -.34, 0],
+      // Dense center, separated rings and their moving carriers create real occlusion.
+      const core = add(new THREE.SphereGeometry(.92, 48, 32), materials[3])
+      const face = add(new THREE.SphereGeometry(.43, 32, 20), materials[2])
+      face.position.z = .74
+      const iris = add(new THREE.SphereGeometry(.18, 24, 16), materials[4])
+      iris.position.z = 1.08
+      const halo = add(new THREE.TorusGeometry(.64, .028, 10, 72), materials[0])
+      halo.position.z = .88
+
+      const rings = [
+        { radius: 2.1, tube: .105, material: materials[0], x: .45, y: -.42, z: .18 },
+        { radius: 1.66, tube: .065, material: materials[1], x: 1.08, y: .45, z: -.27 },
+        { radius: 1.31, tube: .043, material: materials[0], x: -.27, y: 1.16, z: .22 },
+      ].map(({ radius, tube, material, x, y, z }) => {
+        const pivot = new THREE.Group()
+        sculpture.add(pivot)
+        pivot.rotation.set(x, y, z)
+        add(new THREE.TorusGeometry(radius, tube, 12, 96), material, pivot)
+        return { pivot, radius }
+      })
+      // Gunmetal sections interrupt the polish. The object reads as machinery, not neon art.
+      const bands = [
+        add(new THREE.TorusGeometry(1.03, .12, 12, 72, Math.PI * .7), materials[2]),
+        add(new THREE.TorusGeometry(1.03, .12, 12, 72, Math.PI * .7), materials[2]),
       ]
-      browserBars.forEach(([w, h, d, x, y, z], i) => box(w, h, d, x, y, z, i < 5 ? gold : ivory, browser))
-      box(1.68, 1.92, .055, 0, .025, -.16, dark, browser)
-      const output = new THREE.Group()
-      rig.add(output)
-      output.position.x = 4.25
-      const ring = add(new THREE.Mesh(new THREE.TorusGeometry(.96, .09, 12, 64), ringMaterial), output)
-      ring.rotation.y = .36
-      const innerRing = add(new THREE.Mesh(new THREE.TorusGeometry(.66, .018, 8, 64), ivory), output)
-      innerRing.rotation.y = .36
-      const core = add(new THREE.Mesh(new THREE.IcosahedronGeometry(.28, 1), gold), output)
-      const pulses = Array.from({ length: 5 }, () => add(new THREE.Mesh(new THREE.SphereGeometry(.075, 10, 8), pulseMaterial)))
+      bands[0].rotation.set(.33, .38, .2)
+      bands[1].rotation.set(.33, .38, Math.PI + .2)
+      const carrierGeometry = new THREE.IcosahedronGeometry(.145, 1)
+      const carriers = rings.map(({ pivot }, i) => add(carrierGeometry, i === 1 ? materials[4] : materials[1], pivot))
+      const satellites = []
+      for (let i = 0; i < 14; i++) {
+        const marker = add(new THREE.OctahedronGeometry(i % 4 === 0 ? .055 : .025), i % 4 === 0 ? materials[0] : materials[2])
+        satellites.push(marker)
+      }
 
-      let active = true
       let raf = 0
+      let active = true
       let smoothed = 0
-      let lastTime = 0
+      let last = 0
       let width = 0
       let height = 0
       const resize = () => {
         const rect = canvas.getBoundingClientRect()
-        const nextWidth = Math.max(1, Math.round(rect.width))
-        const nextHeight = Math.max(1, Math.round(rect.height))
-        if (width === nextWidth && height === nextHeight) return
-        width = nextWidth; height = nextHeight
+        const w = Math.max(1, Math.round(rect.width))
+        const h = Math.max(1, Math.round(rect.height))
+        if (w === width && h === height) return
+        width = w; height = h
         renderer.setSize(width, height, false)
         camera.aspect = width / height
         camera.updateProjectionMatrix()
       }
-      const animate = (now) => {
+      const animate = now => {
         if (!active || disposed) return
-        raf = window.requestAnimationFrame(animate)
-        if (now - lastTime < (window.innerWidth < 760 ? 30 : 16)) return
-        lastTime = now
+        raf = requestAnimationFrame(animate)
+        if (now - last < (window.innerWidth < 760 ? 32 : 18)) return
+        last = now
         resize()
         const rect = hero.getBoundingClientRect()
-        const target = clamp(-rect.top / Math.max(1, rect.height - window.innerHeight + 78), 0, 1)
+        const travel = Math.max(1, rect.height - window.innerHeight + 78)
+        const target = clamp(-rect.top / travel, 0, 1)
         smoothed += (target - smoothed) * .085
         const mobile = width < 760
-        const breathe = Math.sin(now * .00045) * .035
-        rig.rotation.y = -.2 + smoothed * 1.52 + breathe
-        rig.rotation.x = .1 + smoothed * .17
-        rig.rotation.z = -.08 + smoothed * .12
-        rig.position.x = mobile ? 0 : 2.08 - smoothed * .45
-        rig.position.y = mobile ? .65 - smoothed * .22 : -.08
-        const scale = mobile ? .34 : clamp(width / 1350, .72, 1.1)
-        rig.scale.setScalar(scale * (1 + smoothed * .1))
-        camera.position.z = 13.4 - smoothed * 2.8
-        camera.lookAt(mobile ? 0 : 1.4, mobile ? .55 : 0, 0)
-        core.rotation.x += .012
-        core.rotation.y += .015
-        ring.rotation.z = smoothed * .7
-        pulses.forEach((pulse, i) => {
-          const t = (now * .00011 + i / pulses.length + smoothed * .5) % 1
-          const angle = t * Math.PI * 5
-          pulse.position.set((t - .5) * 7.8, Math.sin(angle) * .76, Math.cos(angle) * .76)
-          pulse.scale.setScalar(.5 + .8 * Math.sin(Math.PI * t))
+        sculpture.position.set(mobile ? 0 : 2.1 - smoothed * .36, mobile ? .42 : -.08, 0)
+        sculpture.scale.setScalar(mobile ? .66 : clamp(width / 1348, .8, 1.1))
+        sculpture.rotation.y = -.22 + smoothed * 1.16 + Math.sin(now * .00023) * .07
+        sculpture.rotation.x = .09 + smoothed * .24
+        rings[0].pivot.rotation.y = -.42 + smoothed * .42 + now * .00005
+        rings[1].pivot.rotation.x = 1.08 - smoothed * .52
+        rings[2].pivot.rotation.y = 1.16 + smoothed * .47
+        carriers.forEach((carrier, i) => {
+          const a = now * (.00031 + i * .00007) + smoothed * 1.2 + i * 2.1
+          carrier.position.set(Math.cos(a) * rings[i].radius, Math.sin(a) * rings[i].radius, 0)
+          carrier.rotation.y += .018
         })
+        satellites.forEach((point, i) => {
+          const a = i * 2.399 + now * .00008
+          const radius = 2.45 + (i % 3) * .1
+          point.position.set(Math.cos(a) * radius, Math.sin(a) * radius * .73, Math.sin(a * .9) * .62)
+        })
+        core.rotation.y += .003
+        face.rotation.y = core.rotation.y
+        iris.scale.setScalar(1 + .12 * Math.sin(now * .002))
+        camera.position.z = 11 - smoothed * 1.35
+        camera.lookAt(mobile ? 0 : 1.25, mobile ? .4 : 0, 0)
         hero.dataset.connectionStage = String(Math.min(3, Math.floor(smoothed * 4)))
         renderer.render(scene, camera)
         hero.classList.add('connection-ready')
@@ -155,9 +151,9 @@ export default function ConnectionScene() {
       cleanup = () => {
         observer.disconnect()
         if (raf) cancelAnimationFrame(raf)
-        geometry.forEach(item => item.dispose())
-        sphereGeometry.dispose()
-        ;[gold, ivory, dark, pulseMaterial, ringMaterial].forEach(item => item.dispose())
+        meshes.forEach(mesh => { if (mesh.geometry !== carrierGeometry) mesh.geometry.dispose() })
+        carrierGeometry.dispose()
+        materials.forEach(material => material.dispose())
         renderer.dispose()
       }
     })

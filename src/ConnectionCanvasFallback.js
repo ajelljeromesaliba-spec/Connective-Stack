@@ -1,52 +1,42 @@
-// Project the same spatial story into a 2D canvas when WebGL is unavailable.
+// The same ring assembly projected into 2D when the browser has no WebGL.
 export function startConnectionFallback(canvas, hero) {
   const ctx = canvas.getContext('2d')
   if (!ctx) return () => {}
-  let active = true
-  let frame = 0
-  let last = 0
-  let progress = 0
-  let width = 0
-  let height = 0
-  const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
-  const project = (x, y, z, angle, mobile) => {
-    const ry = angle
-    const rz = -.08 + progress * .11
-    const nx = x * Math.cos(ry) + z * Math.sin(ry)
-    const nz = -x * Math.sin(ry) + z * Math.cos(ry)
-    const ny = y * Math.cos(rz) + nx * Math.sin(rz)
-    const px = nx * Math.cos(rz) - y * Math.sin(rz)
-    const depth = 10 / (10 - nz)
-    const unit = (mobile ? width * .077 : clamp(width * .055, 50, 78)) * (1 + progress * .14)
-    return { x: width * (mobile ? .5 : .755) + px * unit * depth,
-      y: height * (mobile ? .52 : .49) - ny * unit * depth, depth, z: nz }
+  let frame = 0, active = true, last = 0, progress = 0, width = 0, height = 0
+  const clamp = (v, low, high) => Math.min(high, Math.max(low, v))
+  const project = (x, y, z, rotations, mobile) => {
+    const [rx, ry, rz] = rotations
+    const ay = y * Math.cos(rx) - z * Math.sin(rx)
+    const az = y * Math.sin(rx) + z * Math.cos(rx)
+    const bx = x * Math.cos(ry) + az * Math.sin(ry)
+    const bz = -x * Math.sin(ry) + az * Math.cos(ry)
+    const cx = bx * Math.cos(rz) - ay * Math.sin(rz)
+    const cy = bx * Math.sin(rz) + ay * Math.cos(rz)
+    const depth = 9 / (9 - bz)
+    const unit = mobile ? width * .13 : clamp(width * .085, 76, 118)
+    return { x: width * (mobile ? .5 : .755) + cx * unit * depth,
+      y: height * (mobile ? .49 : .48) - cy * unit * depth, z: bz, depth }
   }
-  const path = (points, color, thick, highlight) => {
-    ctx.beginPath()
-    points.forEach((point, index) => index ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y))
-    ctx.lineCap = 'round'; ctx.lineJoin = 'round'
-    ctx.strokeStyle = '#2a1d0d'; ctx.lineWidth = thick + 5; ctx.stroke()
-    ctx.shadowColor = color; ctx.shadowBlur = 18
-    ctx.strokeStyle = color; ctx.lineWidth = thick; ctx.stroke()
-    ctx.shadowBlur = 0
-    ctx.strokeStyle = highlight; ctx.lineWidth = Math.max(1, thick * .26); ctx.stroke()
+  const stroke = (a, b, width, color, shine) => {
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y)
+    ctx.lineCap = 'round'; ctx.strokeStyle = '#18130e'; ctx.lineWidth = width + 3; ctx.stroke()
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke()
+    ctx.strokeStyle = shine; ctx.lineWidth = Math.max(1, width * .18); ctx.stroke()
   }
-  const node = (point, radius, color) => {
+  const orb = (point, radius, colors) => {
     const r = radius * point.depth
-    const g = ctx.createRadialGradient(point.x - r * .3, point.y - r * .4, 0, point.x, point.y, r)
-    g.addColorStop(0, '#fff6da'); g.addColorStop(.38, color); g.addColorStop(1, '#39230e')
-    ctx.shadowColor = color; ctx.shadowBlur = r * 1.7
-    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(point.x, point.y, r, 0, Math.PI * 2); ctx.fill()
-    ctx.shadowBlur = 0
+    const gradient = ctx.createRadialGradient(point.x - r * .38, point.y - r * .42, r * .05, point.x, point.y, r)
+    gradient.addColorStop(0, colors[0]); gradient.addColorStop(.38, colors[1]); gradient.addColorStop(1, colors[2])
+    ctx.fillStyle = gradient
+    ctx.beginPath(); ctx.arc(point.x, point.y, r, 0, Math.PI * 2); ctx.fill()
   }
   const animate = now => {
     if (!active) return
     frame = requestAnimationFrame(animate)
-    if (now - last < (innerWidth < 760 ? 34 : 23)) return
+    if (now - last < (innerWidth < 760 ? 33 : 22)) return
     last = now
     const rect = canvas.getBoundingClientRect()
-    const w = Math.max(1, Math.round(rect.width))
-    const h = Math.max(1, Math.round(rect.height))
+    const w = Math.max(1, Math.round(rect.width)), h = Math.max(1, Math.round(rect.height))
     const dpr = Math.min(devicePixelRatio || 1, 1.5)
     if (w !== width || h !== height) {
       width = w; height = h
@@ -58,52 +48,41 @@ export function startConnectionFallback(canvas, hero) {
     const target = clamp(-heroRect.top / Math.max(1, heroRect.height - innerHeight + 78), 0, 1)
     progress += (target - progress) * .09
     const mobile = width < 760
-    const angle = -.14 + progress * 1.34 + Math.sin(now * .0005) * .03
-    const pos = (x, y, z) => project(x, y, z, angle, mobile)
-    const left = [pos(-5.2, 1.06, .05), pos(-3.5, 1.06, .05), pos(-3.5, -1.02, .05), pos(-5.2, -1.02, .05)]
-    // The intake panel has a visible side face and metal rim.
-    ctx.fillStyle = 'rgba(33,29,23,.76)'
-    ctx.beginPath(); left.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.closePath(); ctx.fill()
-    for (let i = 0; i < 4; i++) path([left[i], left[(i + 1) % 4]], '#bb8a47', mobile ? 3 : 5, '#f9dfac')
-    path([pos(-5.2, .72, .06), pos(-3.5, .72, .06)], '#d2a762', 2, '#ffe7bd')
-    for (let i = 0; i < 3; i++) {
-      const yy = .42 - i * .33
-      path([pos(-4.95, yy, .07), pos(-3.8 + i * .1, yy, .07)], '#977c53', 2, '#e2c28a')
+    const baseY = -.22 + progress * 1.16 + Math.sin(now * .00023) * .07
+    const shape = (x, y, z, rx, ry, rz) => project(x, y, z, [rx + .09 + progress * .24, ry + baseY, rz], mobile)
+    const configurations = [
+      { radius: 2.1, tilt: [.45, -.42 + progress * .42 + now * .00005, .18], color: '#a87a44', highlight: '#f3d8a2', thick: mobile ? 5 : 9 },
+      { radius: 1.66, tilt: [1.08 - progress * .52, .45, -.27], color: '#b8a486', highlight: '#fff4d6', thick: mobile ? 3 : 6 },
+      { radius: 1.31, tilt: [-.27, 1.16 + progress * .47, .22], color: '#8c653e', highlight: '#dfb779', thick: mobile ? 2 : 4 },
+    ]
+    const rings = configurations.map(({radius,tilt}) => Array.from({length:97}, (_, i) => {
+      const a = i / 96 * Math.PI * 2
+      return shape(Math.cos(a) * radius, Math.sin(a) * radius, 0, ...tilt)
+    }))
+    const drawRing = (front) => {
+      rings.forEach((points, index) => {
+        const config = configurations[index]
+        for (let i = 0; i < 96; i++) {
+          const a = points[i], b = points[i + 1]
+          const isFront = (a.z + b.z) > 0
+          if (isFront !== front) continue
+          const shade = isFront ? config.color : '#4b3d2b'
+          stroke(a, b, config.thick * ((a.depth + b.depth) / 2), shade, isFront ? config.highlight : '#9f8159')
+        }
+      })
     }
-    const ringPoints = Array.from({ length: 65 }, (_, i) => {
-      const a = i / 64 * Math.PI * 2
-      return pos(4.35, Math.cos(a) * 1.08, Math.sin(a) * 1.08)
+    drawRing(false)
+    const center = shape(0, 0, 0, 0, 0, 0)
+    orb(center, mobile ? width * .11 : 83, ['#84745e', '#292723', '#080808'])
+    // A recessed lens gives the center a physical face rather than a glowing dot.
+    orb({ ...center, x: center.x + (mobile ? 8 : 13), y: center.y - (mobile ? 3 : 6), depth: 1 }, mobile ? width * .049 : 37, ['#ddbf85', '#453622', '#0a0908'])
+    orb({ ...center, x: center.x + (mobile ? 8 : 13), y: center.y - (mobile ? 3 : 6), depth: 1 }, mobile ? 6 : 11, ['#fff3d7', '#c9974f', '#53330e'])
+    drawRing(true)
+    rings.forEach((points, i) => {
+      const t = (now * (.00005 + i * .00001) + progress * .2 + i * .34) % 1
+      const point = points[Math.floor(t * 96)]
+      orb(point, mobile ? 5 : 9, ['#fff8df', '#dbb676', '#50341a'])
     })
-    path(ringPoints, '#af793b', mobile ? 8 : 13, '#ffdf9b')
-    const inner = Array.from({ length: 65 }, (_, i) => {
-      const a = i / 64 * Math.PI * 2
-      return pos(4.35, Math.cos(a) * .74, Math.sin(a) * .74)
-    })
-    path(inner, '#9b7440', mobile ? 1.6 : 2.4, '#fff1cc')
-    node(pos(4.35, 0, 0), mobile ? 9 : 16, '#d6a25d')
-    const strands = [[], []]
-    for (let i = 0; i <= 120; i++) {
-      const t = i / 120
-      const a = t * Math.PI * 5
-      const x = (t - .5) * 7.8
-      strands[0].push(pos(x, Math.sin(a) * .77, Math.cos(a) * .77))
-      strands[1].push(pos(x, -Math.sin(a) * .77, -Math.cos(a) * .77))
-    }
-    for (let i = 0; i <= 25; i++) {
-      const j = Math.round(i * 120 / 25)
-      path([strands[0][j], strands[1][j]], '#54412b', mobile ? 1.7 : 2.6, i % 5 === 0 ? '#eac285' : '#81725d')
-    }
-    path(strands[1], '#caa77a', mobile ? 6 : 10, '#fff0cd')
-    path(strands[0], '#ad712f', mobile ? 7 : 11, '#f5cb83')
-    for (let i = 0; i <= 25; i += 5) {
-      const j = Math.round(i * 120 / 25)
-      node(strands[0][j], mobile ? 4 : 7, '#e3aa5c')
-      node(strands[1][j], mobile ? 4 : 7, '#d7c19b')
-    }
-    for (let i = 0; i < 4; i++) {
-      const t = (now * .0001 + i * .25 + progress * .32) % 1
-      node(strands[0][Math.floor(t * 120)], mobile ? 4.5 : 8, '#ffcf79')
-    }
     hero.dataset.connectionStage = String(Math.min(3, Math.floor(progress * 4)))
     hero.classList.add('connection-ready')
   }
