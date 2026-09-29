@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import './real-estate-demo.css'
 
 const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
@@ -57,6 +57,42 @@ const categoryGuide = [
 ]
 
 const money = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value)
+
+function PropertyGallery({ properties, onTour }) {
+  const [active, setActive] = useState(0)
+  const touchStart = useRef(null)
+  const count = properties.length
+  const current = properties[active] || properties[0]
+  useEffect(() => setActive(0), [properties[0]?.id])
+  if (!current) return null
+  const move = direction => setActive(index => (index + direction + count) % count)
+
+  return <div className="re-gallery" aria-label="Spatial property gallery">
+    <div className="re-gallery-intro"><span>THE COLLECTION / IN DEPTH</span><p>Move through the homes, then open a property to request a private tour.</p></div>
+    <div className="re-gallery-stage" role="group" aria-label="Property gallery. Use the arrow keys or swipe to change homes" tabIndex={0}
+      onKeyDown={event => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); move(event.key === 'ArrowRight' ? 1 : -1) } }}
+      onTouchStart={event => { touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY } }}
+      onTouchEnd={event => { if (!touchStart.current) return; const deltaX = event.changedTouches[0].clientX - touchStart.current.x; const deltaY = event.changedTouches[0].clientY - touchStart.current.y; if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) { event.preventDefault(); move(deltaX < 0 ? 1 : -1) } touchStart.current = null }}>
+      <div className="re-gallery-halo" aria-hidden="true" />
+      {properties.map((item, index) => {
+        const forward = (index - active + count) % count
+        const slot = count === 2 ? (index === active ? 0 : index > active ? 1 : -1) : forward > count / 2 ? forward - count : forward
+        const visible = Math.abs(slot) <= 1
+        return <button type="button" key={item.id} className="re-gallery-card" data-slot={visible ? slot : 'hidden'}
+          disabled={!visible} aria-label={`${slot === 0 ? 'Selected' : 'Show'} ${item.neighborhood}, ${item.city}, ${money(item.price)}`}
+          aria-current={slot === 0 ? 'true' : undefined} onClick={() => setActive(index)}>
+          <img src={item.image} alt="" loading={slot === 0 ? 'eager' : 'lazy'} />
+          <span className="re-gallery-card-shade" />
+          <span className="re-gallery-card-copy"><small>{item.category} / {item.city}</small><strong>{item.neighborhood}</strong></span>
+        </button>
+      })}
+    </div>
+    <div className="re-gallery-details" aria-live="polite">
+      <div><small>{String(active + 1).padStart(2, '0')} / {String(count).padStart(2, '0')} · {current.city}, {current.state}</small><strong>{current.neighborhood}</strong><p>{money(current.price)} <span>· {current.beds} beds · {current.baths} baths · {current.sqft} sq ft</span></p></div>
+      <div className="re-gallery-actions"><button type="button" onClick={() => move(-1)} disabled={count < 2} aria-label="Previous property"><Icon name="arrow" /></button><button type="button" onClick={() => move(1)} disabled={count < 2} aria-label="Next property"><Icon name="arrow" /></button><button type="button" className="re-gallery-tour" onClick={() => onTour(current)}>Request a private tour <Icon name="arrow" /></button></div>
+    </div>
+  </div>
+}
 
 function MortgageCalculator() {
   const [price, setPrice] = useState(3180000)
@@ -325,6 +361,7 @@ export default function RealEstateDemo() {
           <div className="re-heading"><div><span>PRIVATE COLLECTION</span><h2>Residences selected with intention.</h2></div><p>Filter the portfolio, save a property, and request a private viewing. Every inquiry is matched to the right advisor.</p></div>
           <div className="re-category-guide">{categoryGuide.map(item => <button type="button" className={filter === item.name ? 'active' : ''} onClick={() => setFilter(item.name)} key={item.name}><span>{item.name}</span><strong>{item.range}</strong><small>{item.note}</small></button>)}</div>
           <div className="re-filters">{['All Homes', 'Luxury', 'Premium', 'Starter', 'Affordable'].map(item => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div>
+          <PropertyGallery properties={shown} onTour={setTour} />
           <div className="re-listings">{shown.map(item => <article key={item.id}>
             <div className="re-listing-image"><video muted loop playsInline preload="none" poster={item.image} aria-label={`Video preview of ${item.neighborhood}`}><source src={item.video} type="video/mp4" /></video><div className="re-video-status"><i /><span>LIVE PREVIEW</span></div><div className="re-listing-badges"><span>{item.category}</span><small>{item.type}</small></div><button className={saved.includes(item.id) ? 'saved' : ''} onClick={() => setSaved(ids => ids.includes(item.id) ? ids.filter(id => id !== item.id) : [...ids, item.id])} aria-label="Save property"><Icon name="heart" /></button></div>
             <div className="re-listing-copy"><small><Icon name="pin" /> {item.city}, {item.state}</small><h3>{item.neighborhood}</h3><strong>{money(item.price)}</strong><div><span><Icon name="bed" /> {item.beds} beds</span><span><Icon name="bath" /> {item.baths} baths</span><span><Icon name="area" /> {item.sqft} sq ft</span></div><button onClick={() => setTour(item)}>View private details <Icon name="arrow" /></button></div>
