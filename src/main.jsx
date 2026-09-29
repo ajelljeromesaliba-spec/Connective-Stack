@@ -107,54 +107,6 @@ const pricingTiers = [
   },
 ]
 
-const projects = [
-  {
-    label: 'Home Services',
-    title: 'Conversion-first HVAC website',
-    copy: 'A focused service site with clear calls to action, trust signals, and an appointment path built for mobile visitors.',
-    image: '/assets/hvac-hero-technician.webp',
-    accent: 'mint',
-    photo: true,
-    goal: 'High-intent visitors can still be lost when calls, estimates, follow-up, and booking are disconnected.',
-    journey: ['Service need', 'Estimate', 'Booking'],
-    outcomes: ['Faster mobile actions', 'Stronger local trust', 'Clear booking path'],
-    visualTags: ['Mobile-first', 'Call + booking', 'Local trust'],
-    href: '/demos/hvac-ai-front-desk',
-    caseStudyHref: '/case-studies/hvac-lead-system',
-    live: true,
-  },
-  {
-    label: 'Real Estate',
-    title: 'Premium multi-broker property experience',
-    copy: 'A luxury brokerage concept with curated listings, smart property matching, broker routing, affordability tools, and private tour requests.',
-    image: '/assets/realestate-austin-premium.webp',
-    accent: 'sand',
-    photo: true,
-    goal: 'Premium buyers need the right property and broker without being pushed through a generic one-size-fits-all journey.',
-    journey: ['Property match', 'Broker', 'Private tour'],
-    outcomes: ['Smarter broker routing', 'Qualified buyer intent', 'Private tour requests'],
-    visualTags: ['Multi-broker', 'AI concierge', 'Buyer tools'],
-    href: '/demos/luxury-real-estate',
-    caseStudyHref: '/case-studies/luxury-real-estate',
-    live: true,
-  },
-  {
-    label: 'Healthcare',
-    title: 'Connected multi-provider patient experience',
-    copy: 'A fictional clinic platform with conditional intake, provider routing, scheduling, simulated benefits, estimates, and privacy-conscious workflows.',
-    image: '/assets/healthcare-hero-v1.webp',
-    accent: 'mint',
-    photo: true,
-    goal: 'Patient intake, provider selection, benefits, estimates, and scheduling can fragment across too many separate steps.',
-    journey: ['Find provider', 'Intake', 'Appointment'],
-    outcomes: ['Conditional intake', 'Provider routing', 'Benefits workflow'],
-    visualTags: ['Multi-provider', 'Smart intake', 'Cost estimator'],
-    href: '/demos/healthcare-patient-experience',
-    caseStudyHref: '/case-studies/healthcare-patient-experience',
-    live: true,
-  },
-]
-
 const process = [
   ['01', 'Audit the current journey', 'We document the offer, audience, lead path, required pages, existing tools, and the handoffs that currently fail.'],
   ['02', 'Structure and build', 'I turn the approved scope into page hierarchy, conversion copy, visual direction, and responsive components.'],
@@ -344,7 +296,6 @@ function ProjectInquiryForm() {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [activeStory, setActiveStory] = useState(0)
   const [openNavDropdown, setOpenNavDropdown] = useState(null)
   const [legalModal, setLegalModal] = useState(null)
   const [activeService, setActiveService] = useState(null)
@@ -480,30 +431,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const stage = document.querySelector('[data-story-stage]')
-    if (!stage) return undefined
-    let frame = 0
-    const update = () => {
-      frame = 0
-      const rect = stage.getBoundingClientRect()
-      const travel = Math.max(1, rect.height - window.innerHeight + 78)
-      const progress = Math.max(0, Math.min(1, -rect.top / travel))
-      const index = Math.min(projects.length - 1, Math.floor(progress * projects.length))
-      setActiveStory(current => current === index ? current : index)
-      stage.style.setProperty('--story-progress', progress.toFixed(3))
-    }
-    const requestUpdate = () => { if (!frame) frame = window.requestAnimationFrame(update) }
-    update()
-    window.addEventListener('scroll', requestUpdate, { passive: true })
-    window.addEventListener('resize', requestUpdate)
-    return () => {
-      window.removeEventListener('scroll', requestUpdate)
-      window.removeEventListener('resize', requestUpdate)
-      if (frame) window.cancelAnimationFrame(frame)
-    }
-  }, [])
-
-  useEffect(() => {
     if (!legalModal && !activeService && !menuOpen) return undefined
     const closeOnEscape = event => {
       if (event.key !== 'Escape') return
@@ -615,7 +542,7 @@ function App() {
               <h1>THE NEXT STEP <em>IS ALREADY IN MOTION.</em></h1>
               <p className="hero-lead">A request comes in. The right person gets the context. Follow-up happens. I build the connections between your website, CRM, and calendar that make that possible.</p>
               <div className="hero-actions">
-                <a href="#work" className="button button-primary">Explore the work <Arrow /></a>
+                <a href="#work" className="button button-primary">See a live project <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
               </div>
             </div>
@@ -624,58 +551,16 @@ function App() {
           </div>
         </section>
 
-        <section className="work story-work" id="work" aria-labelledby="work-heading">
-          <div className="story-intro" data-reveal>
-            <span className="kicker">Three industries / three concept builds</span>
-            <h2 id="work-heading">Different businesses. Specific customer paths.</h2>
-            <p>HVAC, real estate, and healthcare each need a different response. Explore the interactive concepts and the decisions behind each one.</p>
-          </div>
-          <div className="story-stage" data-story-stage>
-            <div className="story-sticky">
-              {projects.map((project, index) => (
-                <article className={`story-scene ${activeStory === index ? 'is-active' : ''}`} key={project.title} aria-hidden={activeStory !== index}>
-                  <div className="story-visual">
-                    <img src={project.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
-                  </div>
-                  <div className="story-shade" />
-                  <div className="story-content">
-                    <span className="story-overline">0{index + 1} / 0{projects.length} &nbsp; • &nbsp; {project.label} &nbsp; • &nbsp; Interactive concept</span>
-                    <h3>{project.title}</h3>
-                    <p className="story-problem">{project.goal}</p>
-                    <p className="story-solution">{project.copy}</p>
-                    <div className="story-journey" aria-label="Concept path">{project.journey.map((step, stepIndex) => <span key={step}>{stepIndex > 0 && <b aria-hidden="true">→</b>}{step}</span>)}</div>
-                    <div className="story-actions">
-                      <a href={project.href} tabIndex={activeStory === index ? 0 : -1} className="story-primary">Explore the live demo <Arrow /></a>
-                      <a href={project.caseStudyHref} tabIndex={activeStory === index ? 0 : -1} className="story-secondary">Read the case study <Arrow /></a>
-                    </div>
-                  </div>
-                  <div className="story-counter" aria-hidden="true"><strong>0{index + 1}</strong><span>/ 0{projects.length}</span></div>
-                </article>
-              ))}
-              <div className="story-track" aria-hidden="true"><span style={{ width: `${((activeStory + 1) / projects.length) * 100}%` }} /></div>
-              <span className="story-scroll-hint" aria-hidden="true">Scroll to change chapter ↓</span>
-            </div>
-          </div>
-          <p className="concept-disclosure">These are self-initiated concept projects. Fictional data is labeled; no performance metric is presented as a client result.</p>
-        </section>
-
-        <section className="live-project" aria-labelledby="pawnova-heading">
+        <section className="live-project" id="work" aria-labelledby="pawnova-heading">
           <div className="live-project-inner" data-reveal>
             <div className="live-project-copy">
               <span className="kicker">Live project / Amazon affiliate</span>
               <h2 id="pawnova-heading">Pawnova</h2>
-              <p>Pawnova is an Amazon affiliate website for discovering products and following links to Amazon. It is a live project, separate from the interactive concepts above.</p>
+              <p>A live Amazon affiliate website for discovering products and following links to Amazon. Explore the published project and its customer-facing experience.</p>
               <a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer" className="live-project-link">Visit Pawnova <Arrow /></a>
             </div>
             <div className="live-project-mark"><img src="/assets/pawnova-logo-transparent.png" alt="Paw Nova Co! logo" loading="lazy" /></div>
           </div>
-        </section>
-
-        <section className="credibility-strip" aria-label="What prospects can verify">
-          <div data-reveal><strong>3</strong><span>Interactive industry demos</span></div>
-          <div data-reveal><strong>3</strong><span>Documented concept case studies</span></div>
-          <div data-reveal><strong>11 years</strong><span>Across service, sales, QA, leadership, and digital operations</span></div>
-          <div data-reveal><strong>1 specialist</strong><span>Responsible from scope through launch</span></div>
         </section>
 
         <section className="section services" id="services">
