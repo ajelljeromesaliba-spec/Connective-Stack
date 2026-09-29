@@ -31,6 +31,7 @@
 .helix-endpoints i { width: clamp(55px, 8vw, 120px); height: 1px; background: linear-gradient(90deg, #8c6d3d, #f5d8a0); }
 .portfolio-main .hero-pinned .hero-copy { transform: translateZ(85px); }
 .portfolio-main .hero-pinned h1 { max-width: 12ch; }
+.portfolio-main .hero-copy::before, .portfolio-main .services .kicker { color: #d9b978; }
 
 /* Navigation has depth only on devices that can hover. */
 .portfolio-header, .seo-head, .ghl-detail-nav { perspective: 850px; }
@@ -102,6 +103,8 @@
   mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent);
 }
 .seo-about section { perspective: 1200px; isolation: isolate; }
+.seo-about section { position: relative; }
+.seo-about section::before { content: ''; position: absolute; z-index: -1; right: -8%; top: 3%; width: 62%; height: 86%; background: url('/assets/connection-helix.webp') center / contain no-repeat; opacity: .12; transform: rotateY(-18deg) translateZ(-80px); pointer-events: none; }
 .seo-about img { border: 1px solid rgba(223,185,116,.42); border-radius: 10px; box-shadow: 26px 30px 70px rgba(0,0,0,.46), -1px -1px rgba(255,222,160,.25); transform: rotateY(-7deg) rotateX(3deg); transition: transform 600ms cubic-bezier(.2,.8,.2,1); }
 .seo-about img:hover { transform: rotateY(0) rotateX(0) translateZ(25px); }
 .seo-grid { perspective: 1100px; }
@@ -110,6 +113,8 @@
 .ghl-system-grid, .ghl-architecture-grid { perspective: 1200px; }
 .ghl-flow-stage, .ghl-detail-cta { box-shadow: 0 28px 55px rgba(0,0,0,.32), inset 0 1px rgba(235,197,127,.18); }
 .case-hero-visual { transform: perspective(1100px) rotateY(-3deg); box-shadow: 25px 35px 65px rgba(0,0,0,.25); }
+.case-back img { display: block; width: clamp(170px, 17vw, 210px); height: auto; filter: drop-shadow(0 5px 8px rgba(218,169,85,.2)); transition: transform 350ms ease, filter 350ms ease; }
+.case-back:hover img { transform: perspective(750px) rotateY(-10deg) translateZ(16px); filter: drop-shadow(8px 10px 10px rgba(218,169,85,.35)); }
 .case-goal-grid, .case-strategy-grid, .case-build-grid, .case-testing-grid, .case-outcome-grid { perspective: 1100px; }
 .case-goal-grid article:hover, .case-strategy-grid article:hover, .case-build-grid article:hover,
 .case-testing-grid article:hover, .case-outcome-grid article:hover { transform: translateY(-6px) rotateX(2deg) rotateY(-1deg); }
@@ -158,8 +163,12 @@
   .portfolio-main .service-card { grid-template-columns: minmax(0, 1fr) 40px; gap: 14px; }
   .portfolio-main .service-tags { grid-column: 1 / -1; grid-row: 2; }
   .portfolio-main .service-arrow { grid-column: 2; grid-row: 1; }
+  .calendly-direct-badge { display: none; }
   .seo-hero::after { width: 82vw; opacity: .14; top: 2%; right: -35%; }
+  .seo-about section::before { right: -30%; top: 40%; width: 100%; opacity: .1; }
   .seo-about img, .case-hero-visual { transform: none; }
+  .case-back img { width: min(45vw, 170px); }
+  .case-back::after { content: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .helix-object, .helix-atmosphere, .helix-endpoints,

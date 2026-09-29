@@ -356,7 +356,7 @@ export default function CaseStudy({ slug }) {
   return (
     <div className={`case-page case-theme-${study.theme}`}>
       <header className="case-header">
-        <a className="case-back" href="/">← ConnectiveStack portfolio</a>
+        <a className="case-back" href="/" aria-label="ConnectiveStack portfolio"><img src="/assets/connectivestack-metallic-logo.jpg" alt="ConnectiveStack" /></a>
         <span>CONCEPT CASE STUDY</span>
         <a className="case-header-cta" href={study.demoHref}>{study.demoLabel} <Arrow /></a>
       </header>
