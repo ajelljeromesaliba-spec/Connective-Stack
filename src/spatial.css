@@ -34,7 +34,7 @@
 @keyframes endpoint-travel { 0%, 12% { left: 0; opacity: 0; } 25% { opacity: 1; } 80% { left: calc(100% - 7px); opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
 .portfolio-main .hero-pinned .hero-copy { transform: translateZ(85px); }
 .portfolio-main .hero-pinned h1 { max-width: 12ch; }
-.portfolio-main .hero-copy::before, .portfolio-main .services .kicker { color: #d9b978; }
+.portfolio-main .cinematic-hero .hero-copy::before, .portfolio-main .services .kicker { color: #d9b978; }
 
 /* Navigation has depth only on devices that can hover. */
 .portfolio-header, .seo-head, .ghl-detail-nav { perspective: 850px; }
