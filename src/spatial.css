@@ -1,0 +1,171 @@
+/* Spatial motion lives in the brand pages. Concept demos keep their own UI. */
+.portfolio-main, .seo-main, .ghl-page, .case-page { perspective: 1400px; }
+
+/* A single connected object carries the hero story through the scroll. */
+.portfolio-main .hero-pinned { background: #030303; isolation: isolate; }
+.portfolio-main .hero-pinned::after { display: none; }
+.helix-stage { perspective: 1400px; background: #030303; }
+.helix-atmosphere {
+  position: absolute; inset: -15%;
+  background: radial-gradient(ellipse at 75% 48%, rgba(172,117,49,.18), transparent 40%), radial-gradient(ellipse at 60% 95%, rgba(114,81,42,.1), transparent 46%);
+  transform: translate3d(0, calc(var(--helix-rise, 0px) * -.28), -80px);
+}
+.helix-object {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+  object-fit: cover; object-position: center;
+  transform-origin: 70% 52%;
+  transform: translate3d(0, var(--helix-rise, 0px), 0) rotateY(var(--helix-turn, -7deg)) scale(var(--helix-scale, 1.02));
+  backface-visibility: hidden; will-change: transform;
+}
+.portfolio-main .hero-film-vignette {
+  z-index: 1;
+  background: linear-gradient(90deg, #030303 0%, rgba(3,3,3,.97) 23%, rgba(3,3,3,.72) 43%, rgba(3,3,3,.1) 78%),
+    linear-gradient(0deg, #030303 0%, transparent 30%, transparent 78%, rgba(3,3,3,.45));
+}
+.helix-endpoints {
+  position: absolute; z-index: 2; right: clamp(26px, 6vw, 90px); bottom: 7rem;
+  display: flex; align-items: center; gap: .9rem; color: #ebd6af;
+  font: 750 .63rem/1.2 var(--font-body); letter-spacing: .18em;
+  transform: translate3d(0, calc(var(--helix-rise, 0px) * -.2), 60px);
+}
+.helix-endpoints i { width: clamp(55px, 8vw, 120px); height: 1px; background: linear-gradient(90deg, #8c6d3d, #f5d8a0); }
+.portfolio-main .hero-pinned .hero-copy { transform: translateZ(85px); }
+.portfolio-main .hero-pinned h1 { max-width: 12ch; }
+
+/* Navigation has depth only on devices that can hover. */
+.portfolio-header, .seo-head, .ghl-detail-nav { perspective: 850px; }
+.portfolio-header .brand img, .seo-logo img, .ghl-brand img, .portfolio-footer .footer-brand img {
+  transform-origin: center; backface-visibility: hidden;
+  filter: drop-shadow(0 3px 5px rgba(215,169,91,.24));
+}
+.portfolio-header .nav-primary > a, .portfolio-header .nav-demo-trigger,
+.seo-head nav a, .ghl-detail-nav a { display: inline-flex; transform-style: preserve-3d; }
+.portfolio-header .nav-demo-dropdown { transform-origin: 50% 0; }
+
+/* Objects sit on a dark plane; the rim and shadow show their depth. */
+.portfolio-main .live-project-inner,
+.portfolio-main .pricing-tier,
+.portfolio-main .pricing-trust-points article,
+.portfolio-main .hourly-support,
+.portfolio-main .service-card,
+.portfolio-main .process-steps article,
+.portfolio-main .contact-panel,
+.seo-grid article, .ghl-system-card, .ghl-architecture-card,
+.case-goal-grid article, .case-strategy-grid article, .case-build-grid article,
+.case-testing-grid article, .case-outcome-grid article {
+  position: relative; transform-style: preserve-3d; backface-visibility: hidden;
+}
+.portfolio-main [data-depth-card][data-reveal].is-visible {
+  transform: perspective(1100px) rotateX(var(--tilt-x, 1deg)) rotateY(var(--tilt-y, -1deg)) translateZ(0);
+  transition: transform 180ms ease-out, border-color 350ms ease, box-shadow 350ms ease, opacity 700ms ease;
+}
+.portfolio-main [data-depth-card]::before,
+.seo-grid article::before, .ghl-system-card::before, .ghl-architecture-card::before {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit;
+  background: radial-gradient(380px circle at var(--glint-x, 70%) var(--glint-y, 15%), rgba(236,190,112,.12), transparent 62%);
+  opacity: .6; transition: opacity 300ms ease;
+}
+.portfolio-main [data-depth-card] > *, .seo-grid article > *, .ghl-system-card > *, .ghl-architecture-card > * { position: relative; }
+.portfolio-main [data-depth-card]:hover::before, .seo-grid article:hover::before,
+.ghl-system-card:hover::before, .ghl-architecture-card:hover::before { opacity: 1; }
+.portfolio-main .live-project-inner { box-shadow: 0 38px 70px rgba(0,0,0,.55), inset 0 1px rgba(255,232,184,.18); }
+.portfolio-main .live-project-mark {
+  transform: translate3d(0, var(--scene-shift, 0px), 65px) rotateY(var(--scene-turn, 0deg));
+  box-shadow: -22px 25px 45px rgba(0,0,0,.35), inset 0 1px rgba(239,206,142,.25);
+}
+.portfolio-main .pricing-tier { box-shadow: 0 24px 44px rgba(0,0,0,.25), inset 0 1px rgba(255,231,188,.14); }
+.portfolio-main .pricing-tier.featured { box-shadow: 0 35px 65px rgba(0,0,0,.37), inset 0 1px rgba(255,231,188,.2); }
+.portfolio-main .pricing-tier:hover { box-shadow: 0 38px 72px rgba(0,0,0,.47), 0 0 0 1px rgba(231,185,106,.34); }
+.portfolio-main .service-card { padding: 1.35rem 1.2rem; margin-inline: -.8rem; border-radius: 12px; }
+.portfolio-main .service-card { grid-template-columns: minmax(0, 1.2fr) minmax(180px, .7fr) 46px; }
+.portfolio-main .service-card:hover { background: linear-gradient(115deg, rgba(183,128,57,.12), rgba(15,14,12,.7)); box-shadow: 0 25px 45px rgba(0,0,0,.25), inset 0 1px rgba(232,190,126,.22); }
+.portfolio-main .process-stage { perspective: 1300px; }
+.portfolio-main .process-film {
+  transform: translate3d(0, var(--scene-shift, 0px), 25px) rotateY(var(--scene-turn, 0deg));
+  box-shadow: 0 30px 55px rgba(0,0,0,.38);
+}
+.portfolio-main .process-steps article { box-shadow: inset 0 1px rgba(255,226,171,.07); }
+.portfolio-main .process-steps article { grid-template-columns: 1fr; }
+.portfolio-main .process-steps article:hover { box-shadow: 0 16px 35px rgba(0,0,0,.26); }
+.portfolio-main .contact-panel { box-shadow: 0 40px 75px rgba(0,0,0,.44), inset 0 1px rgba(255,226,171,.1); }
+.portfolio-main .signal-rail-node { width: 30px; height: 30px; border: 3px solid #d9b978; box-shadow: 0 0 0 6px #130f0b, 0 0 19px #9e7143; }
+.portfolio-main .signal-rail-steps::before { top: 15px; }
+.portfolio-main .signal-rail-steps::after { top: 10px; }
+.portfolio-main [data-depth-card]:not([data-reveal]) { transform: perspective(1100px) rotateX(var(--tilt-x, 1deg)) rotateY(var(--tilt-y, -1deg)) translateZ(0); transition: transform 180ms ease-out, box-shadow 350ms ease, border-color 350ms ease; }
+
+/* Editorial pages and case studies use the same spatial language. */
+.seo-hero { position: relative; overflow: hidden; isolation: isolate; }
+.seo-hero::after {
+  content: ''; position: absolute; z-index: -1; width: min(46vw, 700px); aspect-ratio: 1.7;
+  right: -6%; top: 4%; background: url('/assets/connection-helix.webp') center / cover no-repeat;
+  opacity: .32; transform: perspective(1000px) rotateY(-14deg) rotateX(4deg);
+  mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent);
+}
+.seo-about section { perspective: 1200px; isolation: isolate; }
+.seo-about img { border: 1px solid rgba(223,185,116,.42); border-radius: 10px; box-shadow: 26px 30px 70px rgba(0,0,0,.46), -1px -1px rgba(255,222,160,.25); transform: rotateY(-7deg) rotateX(3deg); transition: transform 600ms cubic-bezier(.2,.8,.2,1); }
+.seo-about img:hover { transform: rotateY(0) rotateX(0) translateZ(25px); }
+.seo-grid { perspective: 1100px; }
+.seo-grid article, .ghl-system-card, .ghl-architecture-card { box-shadow: 0 22px 44px rgba(0,0,0,.22), inset 0 1px rgba(232,196,135,.13); transition: transform 450ms cubic-bezier(.2,.8,.2,1), box-shadow 450ms ease, border-color 450ms ease; }
+.seo-grid article:hover, .ghl-system-card:hover, .ghl-architecture-card:hover { transform: perspective(900px) translateY(-8px) rotateX(2deg) rotateY(-2deg); box-shadow: 0 35px 65px rgba(0,0,0,.48), inset 0 1px rgba(245,210,150,.23); border-color: #bb965c; }
+.ghl-system-grid, .ghl-architecture-grid { perspective: 1200px; }
+.ghl-flow-stage, .ghl-detail-cta { box-shadow: 0 28px 55px rgba(0,0,0,.32), inset 0 1px rgba(235,197,127,.18); }
+.case-hero-visual { transform: perspective(1100px) rotateY(-3deg); box-shadow: 25px 35px 65px rgba(0,0,0,.25); }
+.case-goal-grid, .case-strategy-grid, .case-build-grid, .case-testing-grid, .case-outcome-grid { perspective: 1100px; }
+.case-goal-grid article:hover, .case-strategy-grid article:hover, .case-build-grid article:hover,
+.case-testing-grid article:hover, .case-outcome-grid article:hover { transform: translateY(-6px) rotateX(2deg) rotateY(-1deg); }
+.case-journey article, .case-decision-list article { grid-template-columns: 1fr; }
+.case-goal-grid h3, .case-strategy-grid h3 { margin-top: 1.3rem; }
+.case-flow > div { justify-content: center; }
+.case-page { --case-ink: #f3eee5; --case-muted: #b8b0a3; --case-line: rgba(218,184,116,.25); --case-paper: #090909; --case-accent: #d9b978; --case-deep: #17130e; --case-soft: #191611; }
+.case-header { background: #050505; }
+.case-hero { background: radial-gradient(circle at 75% 30%, rgba(174,122,56,.14), transparent 40%), #0b0a09; }
+.case-button-primary { color: #17120b !important; background: #d9b978; border-color: #d9b978; }
+.case-disclosure, .case-strategy-grid article, .case-testing-grid article, .case-decisions { background: #171511; }
+.case-meta, .case-challenge, .case-build, .case-outcomes, .case-final-cta, .case-footer { background: #100f0d; }
+.case-goal-grid article, .case-strategy-grid article, .case-build-grid article, .case-testing-grid article, .case-outcome-grid article { box-shadow: 0 20px 42px rgba(0,0,0,.26), inset 0 1px rgba(238,200,132,.13); }
+.case-implementation { background: #191611; }
+.case-implementation ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--case-line); }
+.case-implementation li { display: block; }
+.case-implementation li p { color: #e7dfd2; }
+.case-button-light { color: #17120b !important; background: #d9b978; border-color: #d9b978; }
+.case-button-ghost { color: #e9dfd0 !important; }
+.case-final-cta > span, .case-kicker, .case-section-label { color: #d9b978; }
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .portfolio-header .brand:hover img, .seo-logo:hover img, .ghl-brand:hover img { transform: rotateY(-13deg) rotateX(6deg) translateZ(18px); filter: drop-shadow(9px 12px 9px rgba(229,180,97,.34)); }
+  .portfolio-header .nav-primary > a:hover, .portfolio-header .nav-demo-trigger:hover,
+  .seo-head nav a:hover, .ghl-detail-nav a:hover { transform: translateY(-3px) rotateX(12deg) translateZ(12px); text-shadow: 0 8px 14px rgba(221,176,98,.3); }
+  .portfolio-header .nav-demo-menu:hover .nav-demo-dropdown { transform: translate(-50%, 0) rotateX(0); }
+  .portfolio-header .nav-cta:hover { transform: translateY(calc(-50% - 3px)) rotateX(8deg); box-shadow: 0 16px 32px rgba(192,142,73,.3); }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .seo-grid article, .ghl-system-card, .ghl-architecture-card, .case-goal-grid article,
+    .case-strategy-grid article, .case-build-grid article, .case-testing-grid article,
+    .case-outcome-grid article { animation: spatial-arrive linear both; animation-timeline: view(); animation-range: entry 0% entry 85%; }
+    @keyframes spatial-arrive { from { opacity: .35; translate: 0 36px; } to { opacity: 1; translate: 0 0; } }
+  }
+}
+@media (max-width: 760px) {
+  .helix-object { object-position: 73% 32%; transform: none !important; }
+  .portfolio-main .hero-film-vignette { background: linear-gradient(0deg, #030303 0%, #030303 24%, rgba(3,3,3,.96) 42%, rgba(3,3,3,.1) 80%), linear-gradient(90deg, rgba(3,3,3,.16), transparent); }
+  .helix-endpoints { top: 1.2rem; right: 1.25rem; bottom: auto; font-size: .48rem; gap: .45rem; transform: none; }
+  .helix-endpoints i { width: 28px; }
+  .portfolio-main .hero-pinned .hero-copy { transform: none; }
+  .portfolio-main .live-project-mark, .portfolio-main .process-film { transform: none; }
+  .portfolio-main [data-depth-card][data-reveal].is-visible { transform: none; }
+  .portfolio-main .service-card { margin-inline: 0; padding-inline: .7rem; }
+  .portfolio-main .service-card { grid-template-columns: minmax(0, 1fr) 40px; gap: 14px; }
+  .portfolio-main .service-tags { grid-column: 1 / -1; grid-row: 2; }
+  .portfolio-main .service-arrow { grid-column: 2; grid-row: 1; }
+  .seo-hero::after { width: 82vw; opacity: .14; top: 2%; right: -35%; }
+  .seo-about img, .case-hero-visual { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .helix-object, .helix-atmosphere, .helix-endpoints,
+  .portfolio-main .live-project-mark, .portfolio-main .process-film,
+  .seo-about img, .case-hero-visual { transform: none !important; animation: none !important; }
+  .portfolio-main [data-depth-card][data-reveal].is-visible,
+  .portfolio-main [data-depth-card]:not([data-reveal]),
+  .seo-grid article, .ghl-system-card, .ghl-architecture-card { transform: none !important; transition: none !important; }
+}

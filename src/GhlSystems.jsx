@@ -201,7 +201,7 @@ export default function GhlSystems({ slug }) {
         </header>
 
         <article className="ghl-detail">
-          <div className="ghl-detail-kicker">GHL WORKFLOW / {system.number}</div>
+          <div className="ghl-detail-kicker">GHL WORKFLOW</div>
           <h1>{system.title}</h1>
           <p className="ghl-detail-lead">{system.description}</p>
 
@@ -223,10 +223,10 @@ export default function GhlSystems({ slug }) {
           </div>
 
           <section className="ghl-build-notes">
-            <div><small>01</small><strong>Capture</strong><span>Define the trigger, required fields, source, and contact record.</span></div>
-            <div><small>02</small><strong>Route</strong><span>Apply qualification, ownership, pipeline, and notification logic.</span></div>
-            <div><small>03</small><strong>Automate</strong><span>Build timed actions, follow-ups, status checks, and fallback paths.</span></div>
-            <div><small>04</small><strong>Verify</strong><span>Test successful paths, edge cases, duplicate contacts, and handoff behavior.</span></div>
+            <div><strong>Capture</strong><span>Define the trigger, required fields, source, and contact record.</span></div>
+            <div><strong>Route</strong><span>Apply qualification, ownership, pipeline, and notification logic.</span></div>
+            <div><strong>Automate</strong><span>Build timed actions, follow-ups, status checks, and fallback paths.</span></div>
+            <div><strong>Verify</strong><span>Test successful paths, edge cases, duplicate contacts, and handoff behavior.</span></div>
           </section>
 
           <section className="ghl-detail-cta">
@@ -254,7 +254,7 @@ export default function GhlSystems({ slug }) {
       <section className="ghl-system-grid">
         {ghlSystems.map(system => (
           <a className="ghl-system-card" href={'/ghl-systems?system=' + system.slug} key={system.slug}>
-            <div className="ghl-card-top"><span>{system.number}</span><small>OPEN SYSTEM ↗</small></div>
+            <div className="ghl-card-top"><span>CONNECTED WORKFLOW</span><small>OPEN SYSTEM ↗</small></div>
             <h2>{system.title}</h2>
             <Flow steps={system.flow} />
             <p>{system.outcome}</p>
@@ -274,7 +274,7 @@ export default function GhlSystems({ slug }) {
           {systemArchitectures.map(item => (
             <article className="ghl-architecture-card" key={item.number}>
               <div className="ghl-architecture-top">
-                <span>{item.number}</span>
+                <span>CONNECTED SYSTEM</span>
                 <small>ARCHITECTURE MAP</small>
               </div>
               <h3>{item.title}</h3>

@@ -9,6 +9,7 @@ import GhlSystems from './GhlSystems'
 import { GuideHub, Guide, Solution, AboutAjell, guideSlugs, solutionSlugs } from './SeoPages'
 import './premium.css'
 import './secondary-dark.css'
+import './spatial.css'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -185,7 +186,7 @@ function ServiceModal({ service, onClose }) {
       <section className="legal-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
         <div className="legal-header service-modal-header">
           <div>
-            <span>CONNECTIVE STACK / PROBLEM AREA {service.number}</span>
+            <span>CONNECTIVE STACK / PROBLEM AREA</span>
             <h2 id="service-modal-title">{service.title}</h2>
           </div>
           <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>×</button>
@@ -385,6 +386,8 @@ function App() {
         if (rect.bottom < 0 || rect.top > window.innerHeight) return
         const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)))
         scene.style.setProperty('--scene-progress', progress.toFixed(3))
+        scene.style.setProperty('--scene-shift', `${((.5 - progress) * 54).toFixed(1)}px`)
+        scene.style.setProperty('--scene-turn', `${((progress - .5) * 5).toFixed(2)}deg`)
       })
       if (hero) {
         const rect = hero.getBoundingClientRect()
@@ -402,8 +405,9 @@ function App() {
         hero.style.setProperty('--hero-film-middle', middleOpacity.toFixed(3))
         hero.style.setProperty('--hero-film-first', (1 - smoothstep((progress - .18) / .18)).toFixed(3))
         hero.style.setProperty('--hero-film-last', smoothstep((progress - .62) / .18).toFixed(3))
-        hero.style.setProperty('--hero-camera-one', (1.03 + progress * .12).toFixed(3))
-        hero.style.setProperty('--hero-camera-two', (1.12 - progress * .09).toFixed(3))
+        hero.style.setProperty('--helix-turn', `${(-7 + progress * 16).toFixed(2)}deg`)
+        hero.style.setProperty('--helix-rise', `${(progress * -90).toFixed(1)}px`)
+        hero.style.setProperty('--helix-scale', (1.02 + progress * .16).toFixed(3))
         if (Math.abs(targetProgress - progress) > .001) frame = window.requestAnimationFrame(update)
       }
     }
@@ -419,6 +423,40 @@ function App() {
       window.removeEventListener('resize', requestUpdate)
       if (frame) window.cancelAnimationFrame(frame)
     }
+  }, [])
+
+  useEffect(() => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return undefined
+    const cards = [...document.querySelectorAll('[data-depth-card]')]
+    const cleanups = cards.map(card => {
+      let frame = 0
+      const onMove = event => {
+        if (frame) cancelAnimationFrame(frame)
+        const { clientX, clientY } = event
+        frame = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect()
+          const x = (clientX - rect.left) / rect.width - .5
+          const y = (clientY - rect.top) / rect.height - .5
+          card.style.setProperty('--tilt-x', `${(-y * 6).toFixed(2)}deg`)
+          card.style.setProperty('--tilt-y', `${(x * 6).toFixed(2)}deg`)
+          card.style.setProperty('--glint-x', `${((x + .5) * 100).toFixed(1)}%`)
+          card.style.setProperty('--glint-y', `${((y + .5) * 100).toFixed(1)}%`)
+        })
+      }
+      const onLeave = () => {
+        if (frame) cancelAnimationFrame(frame)
+        card.style.removeProperty('--tilt-x')
+        card.style.removeProperty('--tilt-y')
+      }
+      card.addEventListener('pointermove', onMove, { passive: true })
+      card.addEventListener('pointerleave', onLeave)
+      return () => {
+        card.removeEventListener('pointermove', onMove)
+        card.removeEventListener('pointerleave', onLeave)
+        if (frame) cancelAnimationFrame(frame)
+      }
+    })
+    return () => cleanups.forEach(cleanup => cleanup())
   }, [])
 
   useEffect(() => {
@@ -528,15 +566,11 @@ function App() {
       <main id="top" className="portfolio-main">
         <section className="hero cinematic-hero" data-scroll-scene>
           <div className="hero-pinned">
-            <div className="hero-film" aria-hidden="true">
-              <img className="hero-film-shot hero-film-shot-one" src="/images/automation-signal.webp" alt="" fetchPriority="high" />
-              <img className="hero-film-shot hero-film-shot-two" src="/images/automation-arrival.webp" alt="" />
+            <div className="hero-film helix-stage" aria-hidden="true">
+              <div className="helix-atmosphere" />
+              <img className="helix-object" src="/assets/connection-helix.webp" alt="" fetchPriority="high" />
               <div className="hero-film-vignette" />
-              <div className="hero-film-caption">
-                <span className="film-caption-one">01 / REQUEST RECEIVED</span>
-                <span className="film-caption-two">02 / ROUTED WITH CONTEXT</span>
-                <span className="film-caption-three">03 / NEXT STEP CONFIRMED</span>
-              </div>
+              <div className="helix-endpoints"><span>WEBSITE</span><i /><span>HUMAN HANDOFF</span></div>
             </div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
@@ -553,19 +587,19 @@ function App() {
           </div>
         </section>
 
-        <section className="signal-rail" aria-label="A connected inquiry path">
+        <section className="signal-rail" aria-label="A connected inquiry path" data-scroll-scene>
           <div className="signal-rail-inner">
-            <div className="signal-rail-label">ONE CONNECTED PATH <span>01 — 04</span></div>
+            <div className="signal-rail-label">ONE CONNECTED PATH <span>FROM INQUIRY TO BOOKING</span></div>
             <div className="signal-rail-steps">
-              {['Request received', 'Lead routed', 'Follow-up sent', 'Time booked'].map((step, index) => (
-                <div className="signal-rail-step" key={step}><span className="signal-rail-node">0{index + 1}</span><strong>{step}</strong></div>
+              {['Request received', 'Lead routed', 'Follow-up sent', 'Time booked'].map(step => (
+                <div className="signal-rail-step" key={step}><span className="signal-rail-node" /><strong>{step}</strong></div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="live-project" id="work" aria-labelledby="pawnova-heading">
-          <div className="live-project-inner" data-reveal>
+        <section className="live-project" id="work" aria-labelledby="pawnova-heading" data-scroll-scene>
+          <div className="live-project-inner" data-reveal data-depth-card>
             <div className="live-project-copy">
               <span className="kicker">Live project / Amazon affiliate</span>
               <h2 id="pawnova-heading">Pawnova</h2>
@@ -576,7 +610,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section services" id="services">
+        <section className="section services" id="services" data-scroll-scene>
           <div className="section-heading" data-reveal>
             <span className="kicker">Problems I solve</span>
             <h2>Start with what is breaking. Then fix the system around it.</h2>
@@ -584,8 +618,7 @@ function App() {
           </div>
           <div className="service-list">
             {services.map(service => (
-              <article className="service-card" key={service.number} data-reveal>
-                <span className="service-number">{service.number}</span>
+              <article className="service-card" key={service.title} data-reveal data-depth-card>
                 <div>
                   <h3>{service.title}</h3>
                   <p>{service.copy}</p>
@@ -599,7 +632,7 @@ function App() {
           </div>
         </section>
 
-        <section className="price-section">
+        <section className="price-section" data-scroll-scene>
           <div className="price-intro" data-reveal>
             <span className="kicker">Scope after diagnosis</span>
             <h2>Once the problem is clear, the build gets specific.</h2>
@@ -607,7 +640,7 @@ function App() {
           </div>
           <div className="pricing-grid" data-reveal>
             {pricingTiers.map(tier => (
-              <article className={`pricing-tier ${tier.featured ? 'featured' : ''}`} key={tier.name}>
+              <article className={`pricing-tier ${tier.featured ? 'featured' : ''}`} key={tier.name} data-depth-card>
                 {tier.featured && <span className="pricing-popular">Most practical</span>}
                 <div className="pricing-tier-head">
                   <span>{tier.name}</span>
@@ -622,14 +655,14 @@ function App() {
             ))}
           </div>
           <div className="pricing-trust-points" data-reveal>
-            <article>
+            <article data-depth-card>
               <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
               <div>
                 <strong>You Own What We Build</strong>
                 <p>Your production accounts, domain, and project assets remain under your ownership. ConnectiveStack simply gets the access needed to build and manage your system.</p>
               </div>
             </article>
-            <article>
+            <article data-depth-card>
               <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
               <div>
                 <strong>30-Day Post-Launch Support</strong>
@@ -637,7 +670,7 @@ function App() {
               </div>
             </article>
           </div>
-          <div className="hourly-support" data-reveal>
+          <div className="hourly-support" data-reveal data-depth-card>
             <div className="hourly-support-rate">
               <span>Flexible support</span>
               <strong><sup>$</sup>49<small>/hour</small></strong>
@@ -664,7 +697,7 @@ function App() {
           </div>
         </section>
 
-        <section className="process-showcase" id="process">
+        <section className="process-showcase" id="process" data-scroll-scene>
           <div className="process-heading" data-reveal>
             <div>
               <span className="kicker">How I solve it</span>
@@ -681,7 +714,7 @@ function App() {
               <div className="process-film-topbar">
                 <span><i /> Build sequence</span>
                 <span>Strategy / Web / Systems / Launch</span>
-                <span>08 sec</span>
+                <span>Connected system</span>
               </div>
               <div className="process-film-caption">
                 <small>Connected execution</small>
@@ -690,9 +723,8 @@ function App() {
             </div>
 
             <div className="process-steps" data-reveal>
-              {process.map(([number, title, copy]) => (
-                <article key={number}>
-                  <span>{number}</span>
+              {process.map(([, title, copy]) => (
+                <article key={title} data-depth-card>
                   <div>
                     <h3>{title}</h3>
                     <p>{copy}</p>
@@ -712,7 +744,7 @@ function App() {
           </div>
         </section>
 
-        <section className="contact-section" id="contact">
+        <section className="contact-section" id="contact" data-scroll-scene>
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
             <span className="kicker kicker-dark">Start with the problem</span>

@@ -387,7 +387,7 @@ export default function CaseStudy({ slug }) {
         </section>
 
         <section className="case-section case-context" id="case-details">
-          <div className="case-section-label">01 / CONTEXT</div>
+          <div className="case-section-label">CONTEXT</div>
           <div className="case-section-copy">
             <span className="case-kicker">Business context</span>
             <h2>Why this experience needed to exist.</h2>
@@ -405,13 +405,13 @@ export default function CaseStudy({ slug }) {
         </section>
 
         <section className="case-section">
-          <div className="case-section-label">02 / OBJECTIVES</div>
+          <div className="case-section-label">OBJECTIVES</div>
           <div className="case-section-copy">
             <span className="case-kicker">Project goals</span>
             <h2>Define the outcome before designing the screens.</h2>
             <div className="case-goal-grid">
               {study.goals.map(([title, copy], index) => (
-                <article key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>
+                <article key={title}><h3>{title}</h3><p>{copy}</p></article>
               ))}
             </div>
           </div>
@@ -419,24 +419,24 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-strategy">
           <div className="case-strategy-heading">
-            <span className="case-kicker">03 / Strategy</span>
+            <span className="case-kicker">Strategy</span>
             <h2>The decisions that shaped the experience.</h2>
           </div>
           <div className="case-strategy-grid">
             {study.strategy.map(([number, title, copy]) => (
-              <article key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>
+              <article key={title}><h3>{title}</h3><p>{copy}</p></article>
             ))}
           </div>
         </section>
 
         <section className="case-section">
-          <div className="case-section-label">04 / JOURNEY</div>
+          <div className="case-section-label">JOURNEY</div>
           <div className="case-section-copy">
             <span className="case-kicker">Customer journey</span>
             <h2>Each step moves the visitor toward a useful handoff.</h2>
             <div className="case-journey">
               {study.journey.map(([title, copy], index) => (
-                <article key={title}><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{copy}</p></div></article>
+                <article key={title}><div><h3>{title}</h3><p>{copy}</p></div></article>
               ))}
             </div>
           </div>
@@ -444,7 +444,7 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-build">
           <div className="case-build-heading">
-            <span className="case-kicker">05 / What was built</span>
+            <span className="case-kicker">What was built</span>
             <h2>A complete experience, not an isolated landing page.</h2>
           </div>
           <div className="case-build-grid">
@@ -455,12 +455,12 @@ export default function CaseStudy({ slug }) {
         </section>
 
         <section className="case-section">
-          <div className="case-section-label">06 / SYSTEM</div>
+          <div className="case-section-label">SYSTEM</div>
           <div className="case-section-copy">
             <span className="case-kicker">System flow</span>
             <h2>The website starts the operational workflow.</h2>
             <div className="case-flow">
-              {study.flow.map((step, index) => <React.Fragment key={step}><div><span>0{index + 1}</span><strong>{step}</strong></div>{index < study.flow.length - 1 && <i>→</i>}</React.Fragment>)}
+              {study.flow.map((step, index) => <React.Fragment key={step}><div><strong>{step}</strong></div>{index < study.flow.length - 1 && <i>→</i>}</React.Fragment>)}
             </div>
             <p className="case-flow-note">The exact CRM, calendar, messaging, and automation tools would be selected around the client’s existing operations.</p>
           </div>
@@ -468,18 +468,18 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-decisions">
           <div className="case-decisions-heading">
-            <span className="case-kicker">07 / Design rationale</span>
+            <span className="case-kicker">Design rationale</span>
             <h2>Why the experience works the way it does.</h2>
           </div>
           <div className="case-decision-list">
             {study.decisions.map(([title, copy], index) => (
-              <article key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{copy}</p></div></article>
+              <article key={title}><div><h3>{title}</h3><p>{copy}</p></div></article>
             ))}
           </div>
         </section>
 
         <section className="case-section">
-          <div className="case-section-label">08 / QA</div>
+          <div className="case-section-label">QA</div>
           <div className="case-section-copy">
             <span className="case-kicker">Quality and safeguards</span>
             <h2>Professional delivery includes the edge cases.</h2>
@@ -491,7 +491,7 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-outcomes">
           <div className="case-outcomes-heading">
-            <span className="case-kicker">09 / Designed outcomes</span>
+            <span className="case-kicker">Designed outcomes</span>
             <h2>What this concept is intended to improve.</h2>
             <p>These are design objectives, not measured client results. A live engagement would establish baseline data and reporting before making performance claims.</p>
           </div>
@@ -502,11 +502,11 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-implementation">
           <div>
-            <span className="case-kicker">10 / Real implementation</span>
+            <span className="case-kicker">Real implementation</span>
             <h2>What would happen before a client launch.</h2>
             <p>The concept demonstrates the experience and system direction. Production work would replace assumptions with verified business rules, content, integrations, and compliance requirements.</p>
           </div>
-          <ol>{study.implementation.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
+          <ul>{study.implementation.map(item => <li key={item}><p>{item}</p></li>)}</ul>
         </section>
 
         <section className="case-final-cta">
