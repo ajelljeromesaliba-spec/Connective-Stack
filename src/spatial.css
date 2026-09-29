@@ -295,6 +295,9 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
   font-family: var(--font-display);
 }
 .portfolio-main .hero-pinned h1 { font-weight: 600; letter-spacing: -.055em; line-height: .99; }
+@media (min-width: 901px) {
+  .portfolio-main .hero-pinned h1 { max-width: 15ch; font-size: clamp(3.6rem, 5.7vw, 6rem); }
+}
 .portfolio-main h2, .seo-main h1, .seo-main h2,
 .ghl-page h1, .ghl-page h2, .case-page h1, .case-page h2 {
   font-weight: 600;
