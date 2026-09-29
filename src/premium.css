@@ -21,7 +21,7 @@ body:has(.portfolio-main)::before { display: none; }
   box-shadow: 0 9px 36px rgba(0, 0, 0, .32);
 }
 .portfolio-header .brand { flex: 0 0 auto; }
-.portfolio-header .brand img { width: clamp(220px, 21vw, 282px); height: auto; }
+.portfolio-header .brand img { width: 220px; height: auto; }
 .portfolio-header .nav-primary > a,
 .portfolio-header .nav-demo-trigger { color: #d2ccc2; }
 .portfolio-header .nav-primary > a:hover,
