@@ -4,7 +4,26 @@
 /* A single connected object carries the hero story through the scroll. */
 .portfolio-main .hero-pinned { background: #030303; isolation: isolate; }
 .portfolio-main .hero-pinned::after { display: none; }
-.helix-stage { perspective: 1400px; background: #030303; }
+.helix-stage { perspective: 1400px; background: #030303 url('/assets/connection-helix.webp') 73% center / cover no-repeat; }
+.connection-ready .helix-stage { background-image: none; }
+.connection-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+.helix-stage::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 77% 48%, transparent 14%, rgba(0,0,0,.22) 58%, #030303 100%); }
+.connection-captions { position: absolute; z-index: 2; right: clamp(25px, 6vw, 90px); bottom: 17%; display: flex; gap: clamp(1rem, 4vw, 4rem); color: #cbb382; font: 750 .56rem/1.4 var(--font-body); letter-spacing: .15em; text-shadow: 0 2px 8px #000; }
+.connection-captions span { opacity: .42; transition: opacity .3s ease; }
+.cinematic-hero[data-connection-stage="0"] .connection-captions span:first-child,
+.cinematic-hero[data-connection-stage="1"] .connection-captions span:nth-child(2),
+.cinematic-hero[data-connection-stage="2"] .connection-captions span:nth-child(2),
+.cinematic-hero[data-connection-stage="3"] .connection-captions span:last-child { opacity: 1; }
+.connection-stage-label { position: absolute; z-index: 4; right: clamp(25px, 6vw, 90px); top: 14%; color: #b9a584; font: 700 .62rem/1.3 var(--font-body); letter-spacing: .2em; }
+.connection-stage-label span { display: none; }
+.connection-stage-label span:first-child { display: block; }
+.connection-stage-label strong { color: #f2d6a1; }
+.cinematic-hero[data-connection-stage="1"] .connection-stage-label span,
+.cinematic-hero[data-connection-stage="2"] .connection-stage-label span,
+.cinematic-hero[data-connection-stage="3"] .connection-stage-label span { display: none; }
+.cinematic-hero[data-connection-stage="1"] .connection-stage-label span:nth-child(2),
+.cinematic-hero[data-connection-stage="2"] .connection-stage-label span:nth-child(3),
+.cinematic-hero[data-connection-stage="3"] .connection-stage-label span:nth-child(4) { display: block; }
 .helix-atmosphere {
   position: absolute; inset: -15%;
   background: radial-gradient(ellipse at 75% 48%, rgba(172,117,49,.18), transparent 40%), radial-gradient(ellipse at 60% 95%, rgba(114,81,42,.1), transparent 46%);
@@ -19,8 +38,8 @@
 }
 .portfolio-main .hero-film-vignette {
   z-index: 1;
-  background: linear-gradient(90deg, #030303 0%, rgba(3,3,3,.97) 23%, rgba(3,3,3,.72) 43%, rgba(3,3,3,.1) 78%),
-    linear-gradient(0deg, #030303 0%, transparent 30%, transparent 78%, rgba(3,3,3,.45));
+  background: linear-gradient(90deg, #030303 0%, rgba(3,3,3,.96) 25%, rgba(3,3,3,.68) 44%, rgba(3,3,3,0) 70%),
+    linear-gradient(0deg, #030303 0%, transparent 18%, transparent 84%, rgba(3,3,3,.5));
 }
 .helix-endpoints {
   position: absolute; z-index: 2; right: clamp(26px, 6vw, 90px); bottom: 7rem;
@@ -166,8 +185,11 @@
   .seo-head nav.is-open { display: flex; }
   .seo-head nav a:not(.seo-pill) { display: block; padding: 12px 5px; }
   .seo-head .seo-pill { justify-content: center; margin-top: 10px; }
-  .helix-object { object-position: 73% 32%; transform: none !important; }
-  .portfolio-main .hero-film-vignette { background: linear-gradient(0deg, #030303 0%, #030303 24%, rgba(3,3,3,.96) 42%, rgba(3,3,3,.1) 80%), linear-gradient(90deg, rgba(3,3,3,.16), transparent); }
+  .connection-canvas { height: 58%; }
+  .helix-stage::after { background: linear-gradient(0deg, #030303 0%, transparent 70%); }
+  .portfolio-main .hero-film-vignette { background: linear-gradient(0deg, #030303 0%, #030303 30%, rgba(3,3,3,.85) 45%, transparent 72%); }
+  .connection-captions { top: 32%; bottom: auto; right: 1rem; left: 1rem; justify-content: space-between; gap: .2rem; font-size: .4rem; }
+  .connection-stage-label { top: 1.1rem; right: 1rem; font-size: .5rem; }
   .helix-endpoints { top: 1.2rem; right: 1.25rem; bottom: auto; font-size: .48rem; gap: .45rem; transform: none; }
   .helix-endpoints i { width: 28px; }
   .portfolio-main .hero-pinned .hero-copy { transform: none; }
@@ -186,6 +208,8 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .helix-endpoints i::after { animation: none; }
+  .connection-canvas { display: none; }
+  .helix-stage { background: #030303 url('/assets/connection-helix.webp') 70% 28% / cover no-repeat; }
   .helix-object, .helix-atmosphere, .helix-endpoints,
   .portfolio-main .live-project-mark, .portfolio-main .process-film,
   .seo-about img, .case-hero-visual { transform: none !important; animation: none !important; }

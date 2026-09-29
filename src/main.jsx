@@ -10,6 +10,7 @@ import { GuideHub, Guide, Solution, AboutAjell, guideSlugs, solutionSlugs } from
 import './premium.css'
 import './secondary-dark.css'
 import './spatial.css'
+import ConnectionScene from './ConnectionScene'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -327,7 +328,7 @@ function App() {
         window.Calendly.initBadgeWidget({
           url: CALENDAR_URL,
           text: 'Schedule time with me',
-          color: '#0069ff',
+          color: '#c69a58',
           textColor: '#ffffff',
           branding: true,
         })
@@ -405,9 +406,6 @@ function App() {
         hero.style.setProperty('--hero-film-middle', middleOpacity.toFixed(3))
         hero.style.setProperty('--hero-film-first', (1 - smoothstep((progress - .18) / .18)).toFixed(3))
         hero.style.setProperty('--hero-film-last', smoothstep((progress - .62) / .18).toFixed(3))
-        hero.style.setProperty('--helix-turn', `${(-7 + progress * 16).toFixed(2)}deg`)
-        hero.style.setProperty('--helix-rise', `${(progress * -90).toFixed(1)}px`)
-        hero.style.setProperty('--helix-scale', (1.02 + progress * .16).toFixed(3))
         if (Math.abs(targetProgress - progress) > .001) frame = window.requestAnimationFrame(update)
       }
     }
@@ -568,9 +566,9 @@ function App() {
           <div className="hero-pinned">
             <div className="hero-film helix-stage" aria-hidden="true">
               <div className="helix-atmosphere" />
-              <img className="helix-object" src="/assets/connection-helix.webp" alt="" fetchPriority="high" />
+              <ConnectionScene />
               <div className="hero-film-vignette" />
-              <div className="helix-endpoints"><span>WEBSITE</span><i /><span>HUMAN HANDOFF</span></div>
+              <div className="connection-captions"><span>INTAKE / WEBSITE</span><span>CONNECTED SYSTEM</span><span>HUMAN HANDOFF</span></div>
             </div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
@@ -583,6 +581,12 @@ function App() {
               </div>
             </div>
             <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see the system</span><span className="hero-scroll-line" /></div>
+            <div className="connection-stage-label" aria-hidden="true">
+              <span>THE PATH / <strong>CAPTURE</strong></span>
+              <span>THE PATH / <strong>ROUTE</strong></span>
+              <span>THE PATH / <strong>FOLLOW UP</strong></span>
+              <span>THE PATH / <strong>HANDOFF</strong></span>
+            </div>
             <div className="hero-motion-track" aria-hidden="true"><span /></div>
           </div>
         </section>
