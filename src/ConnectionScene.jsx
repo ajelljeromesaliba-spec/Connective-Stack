@@ -13,11 +13,14 @@ export default function ConnectionScene() {
 
     let disposed = false
     let cleanup = () => {}
+    let gl = null
+    try { gl = canvas.getContext('webgl2', { alpha: true, antialias: window.innerWidth > 760 }) } catch { /* The 2D path remains available. */ }
+    if (!gl) return startConnectionFallback(canvas, hero)
     import('three').then(THREE => {
       if (disposed) return
       let renderer
       try {
-        renderer = new THREE.WebGLRenderer({ canvas, antialias: window.innerWidth > 760, alpha: true, powerPreference: 'high-performance' })
+        renderer = new THREE.WebGLRenderer({ canvas, context: gl, antialias: window.innerWidth > 760, alpha: true, powerPreference: 'high-performance' })
       } catch { cleanup = startConnectionFallback(canvas, hero); return }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 760 ? 1.25 : 1.6))
       renderer.outputColorSpace = THREE.SRGBColorSpace
