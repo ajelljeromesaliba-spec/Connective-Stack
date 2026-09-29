@@ -251,18 +251,10 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 .seo-about .about-role-current { background: radial-gradient(circle at 100% 0%, rgba(182,131,62,.14), transparent 42%), linear-gradient(135deg, #221b13, #100e0b 75%); }
 .seo-about .about-role-top { display: flex; justify-content: space-between; gap: 20px; align-items: baseline; padding-bottom: 22px; border-bottom: 1px solid rgba(218,184,116,.19); }
 .seo-about .about-role-top strong { color: #e7d1a7; font-size: .9rem; }
-.seo-about .about-role h3, .seo-about .about-earlier h3, .seo-about .about-skills-grid h3, .seo-about .about-proof h3 { margin: 24px 0 10px; color: #f3eee5; font: 750 clamp(1.35rem, 2vw, 1.8rem)/1.2 var(--font-display); letter-spacing: -.03em; }
+.seo-about .about-role h3, .seo-about .about-skills-grid h3, .seo-about .about-proof h3 { margin: 24px 0 10px; color: #f3eee5; font: 750 clamp(1.35rem, 2vw, 1.8rem)/1.2 var(--font-display); letter-spacing: -.03em; }
 .seo-about .about-role p { margin: 0 0 22px; }
 .seo-about .about-role ul { display: grid; gap: 15px; margin: 0; padding-left: 20px; color: #b8b0a3; line-height: 1.65; }
 .seo-about .about-role li::marker { color: #d9b978; }
-.seo-about .about-earlier { margin-top: 42px; padding-top: 36px; border-top: 1px solid rgba(218,184,116,.2); }
-.seo-about .about-earlier h3 { margin-top: 0; }
-.seo-about .about-earlier > p { max-width: 800px; }
-.seo-about .about-earlier-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 34px; margin-top: 24px; }
-.seo-about .about-earlier-list > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 16px; padding: 18px 0; border-top: 1px solid rgba(218,184,116,.16); }
-.seo-about .about-earlier-list strong { color: #f0e8db; font-size: .96rem; }
-.seo-about .about-earlier-list span { grid-column: 1; color: #b8b0a3; font-size: .86rem; }
-.seo-about .about-earlier-list small { grid-column: 2; grid-row: 1 / 3; align-self: center; color: #c8aa77; white-space: nowrap; font-size: .75rem; }
 .seo-about .about-skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .seo-about .about-skills-grid article { min-height: 198px; padding: 28px; }
 .seo-about .about-skills-grid h3 { margin: 0 0 14px; font-size: 1.25rem; }
@@ -283,9 +275,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
   .seo-about .about-intro { padding-block: 72px; }
   .seo-about .about-intro h1 { font-size: clamp(2.4rem, 10vw, 3.6rem); }
   .seo-about .about-intro img { max-height: 430px; }
-  .seo-about .about-earlier-list, .seo-about .about-skills-grid { grid-template-columns: 1fr; }
-  .seo-about .about-earlier-list > div { grid-template-columns: 1fr; gap: 2px; }
-  .seo-about .about-earlier-list small { grid-column: 1; grid-row: auto; margin-top: 2px; }
+  .seo-about .about-skills-grid { grid-template-columns: 1fr; }
   .seo-about .about-role-top { flex-wrap: wrap; gap: 8px; }
   .seo-about .about-proof { display: block; }
   .seo-about .about-back-link { display: inline-block; margin-top: 24px; }
@@ -293,8 +283,8 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 
 /* A restrained type system for ConnectiveStack; demo concepts keep their own typography. */
 body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.case-page) {
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 }
 .portfolio-header, .portfolio-main, .portfolio-footer,
@@ -375,4 +365,58 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 }
 @media (prefers-reduced-motion: reduce) {
   .offer-marquee-track { animation: none; will-change: auto; }
+}
+
+/* Problem dialogs inherit the same dark surfaces and readable type as the site. */
+body:has(.portfolio-main) .service-modal {
+  border: 1px solid rgba(218, 184, 116, .35);
+  background: #0e0d0b;
+  color: #f3eee5;
+  font-family: var(--font-body);
+  box-shadow: 0 32px 110px rgba(0, 0, 0, .75);
+}
+body:has(.portfolio-main) .service-modal-header {
+  border-bottom: 1px solid rgba(218, 184, 116, .24);
+  background: radial-gradient(circle at 85% 0%, rgba(187, 136, 66, .2), transparent 48%), #17130f;
+}
+body:has(.portfolio-main) .service-modal-header span,
+body:has(.portfolio-main) .service-modal-grid > div > span,
+body:has(.portfolio-main) .service-modal-aside div > span {
+  color: #d9b978;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: .08em;
+}
+body:has(.portfolio-main) .service-modal-header h2 {
+  color: #f5f0e8;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.8vw, 2.65rem);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: 1.14;
+  text-wrap: balance;
+}
+body:has(.portfolio-main) .service-modal .legal-close {
+  border-color: rgba(218, 184, 116, .38);
+  background: #211a12;
+  color: #f3eee5;
+}
+body:has(.portfolio-main) .service-modal .legal-close:hover { background: #3b2c19; }
+body:has(.portfolio-main) .service-modal-body { color: #d0c9bd; }
+body:has(.portfolio-main) .service-modal-summary { color: #f0e9dc; }
+body:has(.portfolio-main) .service-modal-includes li { color: #e5ded2; }
+body:has(.portfolio-main) .service-modal-includes li svg { color: #d9b978; }
+body:has(.portfolio-main) .service-modal-aside div {
+  border-color: rgba(218, 184, 116, .22);
+  background: #1b1712;
+}
+body:has(.portfolio-main) .service-modal-aside p { color: #d0c9bd; }
+body:has(.portfolio-main) .service-modal-cta {
+  border-color: #d9b978;
+  background: linear-gradient(120deg, #efd49f, #c39653);
+  color: #1b140c;
+}
+@media (max-width: 620px) {
+  body:has(.portfolio-main) .service-modal-header h2 { font-size: clamp(1.5rem, 6.4vw, 2.1rem); }
+  body:has(.portfolio-main) .service-modal-body { padding: 22px 20px; }
 }

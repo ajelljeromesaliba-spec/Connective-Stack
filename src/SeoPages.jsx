@@ -27,13 +27,6 @@ function Foot(){return <footer className="seo-foot"><a href="/"><img src="/asset
 export function GuideHub(){const [q,setQ]=useState('');const list=Object.entries(pages).filter(([,p])=>(p[1]+' '+p[2]+' '+p[3]).toLowerCase().includes(q.toLowerCase()));return <><Meta title="Website, CRM and AI Automation Guides | ConnectiveStack" desc="Practical ConnectiveStack guides for website SEO, HVAC lead generation, CRM automation, AI receptionists and business system integrations." path="/seo-guides"/><Head/><main className="seo-main"><section className="seo-hero"><span>PRACTICAL SYSTEM GUIDES</span><h1>Find the problem before adding another tool.</h1><p>Technical guides for service businesses dealing with weak website visibility, lost leads, disconnected CRM workflows, missed calls and manual handoffs.</p><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search website, CRM, HVAC, AI..." aria-label="Search guides"/></section><section className="seo-grid">{list.map(([slug,p])=><article key={slug}><small>{p[0]}</small><h2>{p[1]}</h2><p>{p[2]}</p><a href={'/guides/'+slug}>Read guide</a></article>)}</section></main><Foot/></>}
 export function Guide({slug}){const p=pages[slug];if(!p)return <GuideHub/>;return <><Meta title={p[1]+' | ConnectiveStack'} desc={p[2]} path={'/guides/'+slug}/><Head/><main className="seo-main seo-article"><a href="/seo-guides">Back to guides</a><article><span>{p[0]}</span><h1>{p[1]}</h1><p className="lead">{p[2]}</p><h2>Start with what can be verified</h2><p>A visible symptom does not always reveal the layer causing the problem. Check the customer path before deciding whether the fix belongs in the website, search setup, CRM, automation or integration.</p><h2>What to check</h2><ul><li>Can the right customer discover and understand the page?</li><li>Is the primary call, form, estimate or booking action easy to complete?</li><li>Does submitted information reach the correct system and owner?</li><li>Is there a defined response when a webhook, field, notification or human handoff fails?</li></ul><h2>What the system should accomplish</h2><p>The goal is a clear path from customer intent to the next business action. That means fewer silent failures, fewer manual handoffs and enough visibility to understand what happened when something breaks.</p><div className="seo-next"><strong>Related solution</strong><a href={p[4]}>Explore {p[3]}</a></div></article></main><Foot/></>}
 export function Solution({slug}){const p=sols[slug];if(!p)return <GuideHub/>;const demo=slug==='hvac'?'/demos/hvac-ai-front-desk':slug==='real-estate'?'/demos/luxury-real-estate':slug==='healthcare'?'/demos/healthcare-patient-experience':null;return <><Meta title={p[1]+' | ConnectiveStack'} desc={p[2]} path={'/solutions/'+slug}/><Head/><main className="seo-main"><section className="seo-hero"><span>{p[0]}</span><h1>{p[1]}</h1><p>{p[2]}</p><div className="seo-actions">{demo&&<a className="primary" href={demo}>Try the live demo</a>}<a href="/seo-guides">Read related guides</a></div></section><section className="seo-grid"><article><small>TRACE</small><h2>Trace the current path</h2><p>Start with the customer action, the information it creates and every handoff that follows.</p></article><article><small>REPAIR</small><h2>Fix the actual failure</h2><p>Change the page, routing, workflow or integration that evidence points to instead of adding unnecessary software.</p></article><article><small>TEST</small><h2>Test edge cases</h2><p>Verify mobile behavior, missing fields, duplicates, failed notifications, retries and human escalation.</p></article><article><small>MEASURE</small><h2>Make it measurable</h2><p>Track meaningful customer and operational actions so the business can see where the journey succeeds or stalls.</p></article></section></main><Foot/></>}
-const earlierRoles = [
-  ['Transparent BPO', 'Sales, cold calling, health insurance and QA', 'Nov 2020 – Nov 2022'],
-  ['Teleperformance Philippines', 'Customer service', 'Mar 2019 – Aug 2020'],
-  ['Teletech Philippines', 'Technical support', 'Oct 2017 – Mar 2019'],
-  ['iQor Philippines', 'Collections', 'Jan 2017 – Oct 2017'],
-  ['Telus International', 'Technical support', 'Apr 2015 – Jan 2017'],
-]
 const technicalSkills = [
   ['Websites and deployment', 'React, JavaScript, HTML, CSS, responsive UI, WordPress, Shopify, Framer, Lovable, GitHub and Vercel.'],
   ['CRM and automation', 'GoHighLevel funnels, forms, calendars, pipelines, segmentation, workflows and follow-up; Zapier and n8n.'],
@@ -57,12 +50,12 @@ export function AboutAjell(){return <>
     </section>
 
     <section className="about-work" aria-labelledby="about-work-heading">
-      <div className="about-section-head"><span>WORK HISTORY</span><h2 id="about-work-heading">The work behind the portfolio</h2><p>Website delivery, GHL operations and years of direct customer problem solving. These are the roles and responsibilities behind the work shown here.</p></div>
+      <div className="about-section-head"><span>EXPERIENCE IN PRACTICE</span><h2 id="about-work-heading">From the customer click to the technical handoff</h2><p>The work spans customer-facing pages, the systems behind them and the people who need a reliable next step.</p></div>
       <div className="about-work-grid">
         <article className="about-role about-role-current">
-          <div className="about-role-top"><span>2025 – PRESENT</span><strong>AI Acquisition (AIA)</strong></div>
-          <h3>Web and AI automation specialist</h3>
-          <p>I build and maintain websites and landing pages for North American service businesses, consultants and agencies, then connect the customer actions to the systems behind them.</p>
+          <div className="about-role-top"><span>WEB / SYSTEMS</span><strong>Delivery and repair</strong></div>
+          <h3>Build the page. Connect what happens next.</h3>
+          <p>I build and maintain websites and landing pages, then connect customer actions to the CRM, calendar and follow-up behind them.</p>
           <ul>
             <li>Build responsive pages, apply client feedback, fix broken CTAs and forms, and check the experience through launch.</li>
             <li>Set up GoHighLevel forms, calendars, pipelines, lead routing, notifications and follow-up workflows; troubleshoot missing data and broken handoffs.</li>
@@ -71,20 +64,15 @@ export function AboutAjell(){return <>
           </ul>
         </article>
         <article className="about-role">
-          <div className="about-role-top"><span>NOV 2022 – JUL 2025</span><strong>ProClick</strong></div>
-          <h3>VA team lead, GHL specialist and e-commerce support</h3>
-          <p>I managed day-to-day delivery and quality for a VA team while working directly on GoHighLevel and customer operations.</p>
+          <div className="about-role-top"><span>OPERATIONS / QA</span><strong>People and process</strong></div>
+          <h3>Find the point where a handoff fails.</h3>
+          <p>My customer operations, technical support, sales and team leadership work shaped how I diagnose a broken journey. I have led quality work for a VA team while handling CRM and customer issues directly.</p>
           <ul>
             <li>Built and maintained funnels, forms, calendars, pipelines, opportunity tracking, segmentation and automated follow-up.</li>
             <li>Connected surveys, booking paths and third-party tools, then investigated workflow and CRM issues when the expected action did not happen.</li>
-            <li>Supported Shopify and Amazon e-commerce operations, customer service, retention and team QA.</li>
+            <li>Supported Shopify and Amazon operations, customer service, retention and team QA.</li>
           </ul>
         </article>
-      </div>
-      <div className="about-earlier">
-        <h3>Earlier roles built the troubleshooting foundation</h3>
-        <p>Before website and GHL delivery, I worked in technical support, customer service, collections, sales and QA. Those roles taught me to ask what the customer tried, what the system recorded and where the next action stopped.</p>
-        <div className="about-earlier-list">{earlierRoles.map(([company,role,dates])=><div key={company}><strong>{company}</strong><span>{role}</span><small>{dates}</small></div>)}</div>
       </div>
     </section>
 
