@@ -29,6 +29,9 @@
   transform: translate3d(0, calc(var(--helix-rise, 0px) * -.2), 60px);
 }
 .helix-endpoints i { width: clamp(55px, 8vw, 120px); height: 1px; background: linear-gradient(90deg, #8c6d3d, #f5d8a0); }
+.helix-endpoints i { position: relative; }
+.helix-endpoints i::after { content: ''; position: absolute; top: -3px; left: 0; width: 7px; height: 7px; border-radius: 50%; background: #ffe4b1; box-shadow: 0 0 14px 5px rgba(232,182,97,.5); animation: endpoint-travel 3.8s ease-in-out infinite; }
+@keyframes endpoint-travel { 0%, 12% { left: 0; opacity: 0; } 25% { opacity: 1; } 80% { left: calc(100% - 7px); opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
 .portfolio-main .hero-pinned .hero-copy { transform: translateZ(85px); }
 .portfolio-main .hero-pinned h1 { max-width: 12ch; }
 .portfolio-main .hero-copy::before, .portfolio-main .services .kicker { color: #d9b978; }
@@ -79,7 +82,8 @@
 .portfolio-main .pricing-tier { box-shadow: 0 24px 44px rgba(0,0,0,.25), inset 0 1px rgba(255,231,188,.14); }
 .portfolio-main .pricing-tier.featured { box-shadow: 0 35px 65px rgba(0,0,0,.37), inset 0 1px rgba(255,231,188,.2); }
 .portfolio-main .pricing-tier:hover { box-shadow: 0 38px 72px rgba(0,0,0,.47), 0 0 0 1px rgba(231,185,106,.34); }
-.portfolio-main .service-card { padding: 1.35rem 1.2rem; margin-inline: -.8rem; border-radius: 12px; }
+.portfolio-main .service-list { display: grid; gap: 14px; border-top: 0; }
+.portfolio-main .service-card { padding: 1.5rem 1.4rem; margin-inline: 0; border: 1px solid rgba(218,184,116,.2); border-radius: 15px; background: linear-gradient(115deg, #171511, #0e0d0b 72%); box-shadow: 0 16px 34px rgba(0,0,0,.3), inset 0 1px rgba(255,224,164,.12); }
 .portfolio-main .service-card { grid-template-columns: minmax(0, 1.2fr) minmax(180px, .7fr) 46px; }
 .portfolio-main .service-card:hover { background: linear-gradient(115deg, rgba(183,128,57,.12), rgba(15,14,12,.7)); box-shadow: 0 25px 45px rgba(0,0,0,.25), inset 0 1px rgba(232,190,126,.22); }
 .portfolio-main .process-stage { perspective: 1300px; }
@@ -181,6 +185,7 @@
   .case-back::after { content: none; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .helix-endpoints i::after { animation: none; }
   .helix-object, .helix-atmosphere, .helix-endpoints,
   .portfolio-main .live-project-mark, .portfolio-main .process-film,
   .seo-about img, .case-hero-visual { transform: none !important; animation: none !important; }
