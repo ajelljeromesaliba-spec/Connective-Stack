@@ -2762,7 +2762,7 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
 .portfolio-main .live-project .kicker { color: #a5ded0; }
 .portfolio-main .live-project h2 { color: #fff; font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1.05; margin: 1rem 0; }
 .portfolio-main .live-project p { color: #d0e0dc; font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.7; max-width: 37rem; }
-.portfolio-main .live-project-link { display: inline-flex; align-items: center; gap: .75rem; margin-top: 1.6rem; padding: .9rem 1.25rem; border-radius: 999px; color: #102724; background: #b9efdb; font-weight: 700; text-decoration: none; transition: transform .2s ease, background-color .2s ease; }
+.portfolio-main .live-project-link { display: inline-flex; align-items: center; gap: .75rem; margin-top: 1.6rem; padding: .9rem 1.25rem; border-radius: 999px; color: #102724; background: #b9efdb; font-weight: 700; text-decoration: none; white-space: nowrap; transition: transform .2s ease, background-color .2s ease; }
 .portfolio-main .live-project-link:hover { transform: translateY(-2px); background: #d4f8e8; }
 .portfolio-main .live-project-link:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
 .portfolio-main .live-project-mark { min-height: 220px; display: grid; place-items: center; padding: 1rem; border: 1px solid rgba(185,239,219,.22); border-radius: 20px; background: radial-gradient(circle at 50% 40%, #244a42, #16362f 68%, #102724); overflow: hidden; }
