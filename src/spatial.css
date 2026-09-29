@@ -290,3 +290,89 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
   .seo-about .about-proof { display: block; }
   .seo-about .about-back-link { display: inline-block; margin-top: 24px; }
 }
+
+/* A restrained type system for ConnectiveStack; demo concepts keep their own typography. */
+body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.case-page) {
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+.portfolio-header, .portfolio-main, .portfolio-footer,
+.seo-head, .seo-main, .seo-foot, .ghl-page, .ghl-detail-nav,
+.case-page, .case-header { font-family: var(--font-body); }
+.portfolio-main :is(h1, h2, h3), .seo-main :is(h1, h2, h3),
+.ghl-page :is(h1, h2, h3), .case-page :is(h1, h2, h3) {
+  font-family: var(--font-display);
+}
+.portfolio-main .hero-pinned h1 { font-weight: 600; letter-spacing: -.055em; line-height: .99; }
+.portfolio-main h2, .seo-main h1, .seo-main h2,
+.ghl-page h1, .ghl-page h2, .case-page h1, .case-page h2 {
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: 1.08;
+}
+.portfolio-main h3, .seo-main h3, .ghl-page h3, .case-page h3 {
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.18;
+}
+.portfolio-main :is(.kicker, .eyebrow), .seo-main .kicker {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: .08em;
+}
+
+/* Two identical groups make the right-to-left loop meet without a visible jump. */
+.offer-marquee {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-top: 1px solid #f0d7a2;
+  border-bottom: 1px solid #644821;
+  background: linear-gradient(180deg, #dbc18b, #bd9558);
+  color: #1c140b;
+}
+.offer-marquee-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.offer-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: offer-marquee-scroll 48s linear infinite;
+  will-change: transform;
+}
+.offer-marquee-group { display: flex; flex: none; align-items: center; }
+.offer-marquee-item {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: clamp(18px, 2.5vw, 36px);
+  padding: 15px clamp(18px, 2.5vw, 36px);
+  font: 600 clamp(11px, 1vw, 14px)/1.2 var(--font-display);
+  letter-spacing: .105em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.offer-marquee-item::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #674a25;
+  opacity: .7;
+}
+@keyframes offer-marquee-scroll { to { transform: translate3d(-50%, 0, 0); } }
+@media (max-width: 700px) {
+  .offer-marquee-item { padding-block: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer-marquee-track { animation: none; will-change: auto; }
+}

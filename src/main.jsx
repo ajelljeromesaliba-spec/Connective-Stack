@@ -212,6 +212,16 @@ function ServiceModal({ service, onClose }) {
 }
 
 const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
+const offerTicker = [
+  'Website build & repair',
+  'GoHighLevel workflows',
+  'CRM & lead routing',
+  'DNS & email delivery',
+  'API & webhook integrations',
+  'Booking & follow-up',
+  'Technical SEO',
+  'AI voice systems',
+]
 function CookieConsent({ onChoice, onPrivacy }) {
   return (
     <aside className="cookie-consent" role="dialog" aria-live="polite" aria-label="Cookie consent">
@@ -594,14 +604,12 @@ function App() {
           </div>
         </section>
 
-        <section className="signal-rail" aria-label="A connected inquiry path" data-scroll-scene>
-          <div className="signal-rail-inner">
-            <div className="signal-rail-label">ONE CONNECTED PATH <span>FROM INQUIRY TO BOOKING</span></div>
-            <div className="signal-rail-steps">
-              {['Request received', 'Lead routed', 'Follow-up sent', 'Time booked'].map(step => (
-                <div className="signal-rail-step" key={step}><span className="signal-rail-node" /><strong>{step}</strong></div>
-              ))}
-            </div>
+        <section className="offer-marquee" aria-label="Website and automation services">
+          <p className="offer-marquee-accessible">{offerTicker.join(', ')}</p>
+          <div className="offer-marquee-track" aria-hidden="true">
+            {[0, 1].map(copy => <div className="offer-marquee-group" key={copy}>
+              {offerTicker.map(item => <span className="offer-marquee-item" key={item}>{item}</span>)}
+            </div>)}
           </div>
         </section>
 
