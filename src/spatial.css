@@ -35,6 +35,8 @@
 
 /* Navigation has depth only on devices that can hover. */
 .portfolio-header, .seo-head, .ghl-detail-nav { perspective: 850px; }
+.ghl-detail-nav .ghl-nav-cta { color: #17120b; }
+.seo-menu-toggle { display: none; }
 .portfolio-header .brand img, .seo-logo img, .ghl-brand img, .portfolio-footer .footer-brand img {
   transform-origin: center; backface-visibility: hidden;
   filter: drop-shadow(0 3px 5px rgba(215,169,91,.24));
@@ -104,6 +106,7 @@
 }
 .seo-about section { perspective: 1200px; isolation: isolate; }
 .seo-about section { position: relative; }
+.seo-about { overflow: hidden; }
 .seo-about section::before { content: ''; position: absolute; z-index: -1; right: -8%; top: 3%; width: 62%; height: 86%; background: url('/assets/connection-helix.webp') center / contain no-repeat; opacity: .12; transform: rotateY(-18deg) translateZ(-80px); pointer-events: none; }
 .seo-about img { border: 1px solid rgba(223,185,116,.42); border-radius: 10px; box-shadow: 26px 30px 70px rgba(0,0,0,.46), -1px -1px rgba(255,222,160,.25); transform: rotateY(-7deg) rotateX(3deg); transition: transform 600ms cubic-bezier(.2,.8,.2,1); }
 .seo-about img:hover { transform: rotateY(0) rotateX(0) translateZ(25px); }
@@ -152,6 +155,13 @@
   }
 }
 @media (max-width: 760px) {
+  .seo-head { min-height: 68px; padding: 0 18px; }
+  .seo-menu-toggle { width: 38px; height: 38px; padding: 8px; display: grid; align-content: center; gap: 6px; margin-left: auto; border: 0; background: transparent; cursor: pointer; }
+  .seo-menu-toggle span { height: 1px; width: 25px; background: #e0bd7f; }
+  .seo-head nav { position: absolute; top: 100%; left: 0; right: 0; z-index: 40; display: none; flex-direction: column; align-items: stretch; gap: 0; max-height: calc(100svh - 68px); overflow-y: auto; padding: 12px 20px 20px; background: #0a0908; border-bottom: 1px solid #6b5230; }
+  .seo-head nav.is-open { display: flex; }
+  .seo-head nav a:not(.seo-pill) { display: block; padding: 12px 5px; }
+  .seo-head .seo-pill { justify-content: center; margin-top: 10px; }
   .helix-object { object-position: 73% 32%; transform: none !important; }
   .portfolio-main .hero-film-vignette { background: linear-gradient(0deg, #030303 0%, #030303 24%, rgba(3,3,3,.96) 42%, rgba(3,3,3,.1) 80%), linear-gradient(90deg, rgba(3,3,3,.16), transparent); }
   .helix-endpoints { top: 1.2rem; right: 1.25rem; bottom: auto; font-size: .48rem; gap: .45rem; transform: none; }
