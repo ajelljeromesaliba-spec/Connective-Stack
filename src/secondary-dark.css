@@ -1,0 +1,52 @@
+/* Keep the editorial and system pages within the ConnectiveStack identity. */
+.seo-head, .ghl-detail-nav { background: rgba(4, 4, 4, .96); border-color: rgba(218,184,116,.24); }
+.seo-logo img, .seo-foot img { width: clamp(190px, 20vw, 250px); }
+.seo-head a, .ghl-detail-nav a { color: #ddd5c8; }
+.seo-head .seo-pill, .ghl-nav-cta { background: #d9b978; color: #1b150c; }
+.seo-main, .ghl-page { background: #090909; color: #f3eee5; }
+.seo-hero { background: radial-gradient(circle at 84% 20%, rgba(190,143,75,.17), transparent 35%), #0d0c0b; }
+.seo-hero>span, .seo-about section>div>span, .seo-article article>span,
+.seo-grid small, .seo-grid a, .seo-article>a, .ghl-index-hero>span,
+.ghl-detail-kicker, .ghl-label, .ghl-card-top>span,
+.ghl-build-notes small, .ghl-architecture-top>span { color: #d9b978; }
+.seo-hero>p, .lead, .seo-grid p, .seo-article p,
+.seo-article li, .seo-about p, .ghl-index-hero p,
+.ghl-system-card>p, .ghl-detail-lead, .ghl-detail-grid p,
+.ghl-build-notes span, .ghl-architecture-head p,
+.ghl-architecture-problem, .ghl-architecture-detail p,
+.ghl-architecture-detail ul { color: #b8b0a3; }
+.seo-hero input { background: #171613; border-color: #5e4b30; color: #f3eee5; }
+.seo-hero input::placeholder { color: #a39a8b; }
+.seo-grid { background: #30281d; }
+.seo-grid article, .ghl-system-card, .ghl-architecture-card { background: #171613; border-color: rgba(218,184,116,.23); }
+.seo-actions a, .seo-next a { border-color: #745c37; color: #e4d6bd; }
+.seo-actions .primary { background: #d9b978; border-color: #d9b978; color: #17120b; }
+.seo-next { background: #1b1813; }
+.seo-foot { background: #000; }
+.seo-foot p { color: #b8b0a3; }
+.ghl-system-card:hover { border-color: #bd995f; box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.ghl-card-top small, .ghl-architecture-top small, .ghl-mini-label { color: #ab9e8b; }
+.ghl-flow span { background: #252119; border-color: #57472f; color: #e3d8c7; }
+.ghl-flow b { color: #d9b978; }
+.ghl-card-tags span, .ghl-integration-list span { background: #302719; color: #e1c797; }
+.ghl-integrations, .ghl-flow-stage, .ghl-detail-cta { background: #17130e; }
+.ghl-integrations>div span, .ghl-flow-stage .ghl-flow span { background: #2b241a; border-color: #5b4b32; color: #e9ddc9; }
+.ghl-flow-stage { border-color: #5b4b32; }
+.ghl-flow-stage>span, .ghl-detail-cta span { color: #e5c993; }
+.ghl-build-notes, .ghl-build-notes>div { border-color: #51422d; }
+.ghl-detail-cta a { background: #d9b978; color: #17120b; }
+.ghl-architecture { background: #0e0d0b; border-color: #51422d; }
+.ghl-architecture-card>.ghl-flow { background: #0d0c0a; }
+.ghl-architecture-card>.ghl-flow span { background: #292319; border-color: #5b4b32; }
+.ghl-architecture-card>.ghl-flow b { color: #d9b978; }
+.ghl-fallback { background: #292319; }
+.ghl-fallback .ghl-mini-label { color: #d9b978; }
+.ghl-fallback p { color: #e0d2bb; }
+@media (max-width:650px) {
+  .seo-logo img { width: min(49vw, 185px); }
+  .seo-head { gap: 12px; padding: 13px 16px; }
+  .seo-head .seo-pill { padding: 9px 11px; font-size: 11px; }
+  .ghl-brand img { width: min(46vw, 175px); }
+  .ghl-detail-nav { gap: 8px; }
+  .ghl-nav-cta { font-size: 11px; white-space: nowrap; }
+}

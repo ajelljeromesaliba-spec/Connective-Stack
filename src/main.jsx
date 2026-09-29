@@ -7,6 +7,8 @@ import HealthcareDemo from './HealthcareDemo'
 import CaseStudy from './CaseStudy'
 import GhlSystems from './GhlSystems'
 import { GuideHub, Guide, Solution, AboutAjell, guideSlugs, solutionSlugs } from './SeoPages'
+import './premium.css'
+import './secondary-dark.css'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -466,7 +468,7 @@ function App() {
     <>
       <header className="site-header portfolio-header">
         <a href="#top" className="brand" aria-label="ConnectiveStack home">
-          <img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" />
+          <img src="/assets/connectivestack-metallic-logo.jpg" alt="ConnectiveStack" />
         </a>
         <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="site-navigation">
           <span /><span />
@@ -538,9 +540,9 @@ function App() {
             </div>
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
-              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Independent web and systems specialist</div>
-              <h1>THE NEXT STEP <em>IS ALREADY IN MOTION.</em></h1>
-              <p className="hero-lead">A request comes in. The right person gets the context. Follow-up happens. I build the connections between your website, CRM, and calendar that make that possible.</p>
+              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Websites and connected systems</div>
+              <h1>FROM FIRST CLICK <em>TO NEXT ACTION.</em></h1>
+              <p className="hero-lead">I build websites and connect the CRM, calendar, and follow-up behind them, so new requests reach the right person and move forward.</p>
               <div className="hero-actions">
                 <a href="#work" className="button button-primary">See a live project <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
@@ -548,6 +550,17 @@ function App() {
             </div>
             <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see the system</span><span className="hero-scroll-line" /></div>
             <div className="hero-motion-track" aria-hidden="true"><span /></div>
+          </div>
+        </section>
+
+        <section className="signal-rail" aria-label="A connected inquiry path">
+          <div className="signal-rail-inner">
+            <div className="signal-rail-label">ONE CONNECTED PATH <span>01 — 04</span></div>
+            <div className="signal-rail-steps">
+              {['Request received', 'Lead routed', 'Follow-up sent', 'Time booked'].map((step, index) => (
+                <div className="signal-rail-step" key={step}><span className="signal-rail-node">0{index + 1}</span><strong>{step}</strong></div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -720,7 +733,7 @@ function App() {
       </main>
 
       <footer className="portfolio-footer">
-        <a href="#top" className="footer-brand"><img src="/assets/connective-stack-logo.png" alt="ConnectiveStack" /></a>
+        <a href="#top" className="footer-brand"><img src="/assets/connectivestack-metallic-logo.jpg" alt="ConnectiveStack" /></a>
         <p>Fixing the systems between websites, leads, CRM, automation, and customer handoffs.</p>
         <div>
           <span>© {new Date().getFullYear()} ConnectiveStack</span>
