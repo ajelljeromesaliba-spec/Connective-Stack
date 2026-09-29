@@ -712,8 +712,8 @@ function App() {
 
           <div className="process-stage">
             <div className="process-film" data-reveal>
-              <video muted loop playsInline preload="none" poster="/assets/build-process-poster.jpg">
-                <source src="/assets/build-process.mp4" type="video/mp4" />
+              <video muted loop playsInline preload="none" poster="/assets/automation-process-poster.jpg">
+                <source src="/assets/automation-process.mp4" type="video/mp4" />
               </video>
               <div className="process-film-topbar">
                 <span><i /> Build sequence</span>
