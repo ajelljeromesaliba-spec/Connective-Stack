@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './case-study.css'
 
-const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>

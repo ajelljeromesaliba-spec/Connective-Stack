@@ -5,7 +5,7 @@ import './hvac-demo.css'
 const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY || '58e493a2-aed3-4a98-a192-6baca6d23d64'
 const VAPI_ASSISTANT_ID = 'a1db8e60-1a21-4fab-b5ef-94f7e5671359'
 const VAPI_SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.7.0/+esm'
-const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack'
 
 const Icon = ({ name }) => {
   const paths = {

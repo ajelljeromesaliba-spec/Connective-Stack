@@ -2939,3 +2939,30 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
 .portfolio-main .live-project-mark { min-height: 220px; display: grid; place-items: center; padding: 1rem; border: 1px solid rgba(185,239,219,.22); border-radius: 20px; background: radial-gradient(circle at 50% 40%, #244a42, #16362f 68%, #102724); overflow: hidden; }
 .portfolio-main .live-project-mark img { display: block; width: 100%; max-width: 390px; height: auto; object-fit: contain; }
 @media (max-width: 700px) { .portfolio-main .live-project-inner { grid-template-columns: 1fr; padding: 2rem 1.5rem; } .portfolio-main .live-project-mark { min-height: 160px; } }
+
+/* Scheduling badge: keep the direct link available when optional widgets are declined. */
+.calendly-direct-badge {
+  position: fixed;
+  right: 20px;
+  bottom: 15px;
+  z-index: 9998;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #0069ff;
+  color: #fff;
+  font: 700 14px/1.2 Arial, sans-serif;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .22);
+}
+.calendly-direct-badge:hover { background: #0054cf; }
+.calendly-direct-badge:focus-visible { outline: 3px solid #111; outline-offset: 3px; }
+@media (max-width: 700px) {
+  .calendly-direct-badge { right: 12px; bottom: 12px; max-width: calc(100vw - 24px); }
+  .calendly-badge-widget { right: 12px !important; bottom: 12px !important; }
+}
+
+body:has(.cookie-consent) .calendly-badge-widget { display: none !important; }

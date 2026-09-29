@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import './real-estate-demo.css'
 
-const CALENDAR_URL = 'https://calendar.app.google/1tdYCWw6gwfTx3E56'
+const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack'
 
 const Icon = ({ name }) => {
   const paths = {
