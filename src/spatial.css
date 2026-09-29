@@ -229,3 +229,64 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 @media (prefers-reduced-motion: reduce) {
   .portfolio-main .services-background video { display: none; }
 }
+
+/* About page: work history and capabilities, with the same dark metal palette. */
+.seo-about { background: #080706; }
+.seo-about .about-intro { min-height: 720px; grid-template-columns: minmax(0, 1.22fr) minmax(270px, .78fr); gap: clamp(36px, 6vw, 100px); padding-block: clamp(85px, 9vw, 130px); background: radial-gradient(circle at 82% 26%, rgba(183,133,62,.16), transparent 33%), #080706; }
+.seo-about .about-intro-copy { position: relative; z-index: 1; }
+.seo-about .about-intro h1 { max-width: 850px; font-size: clamp(3rem, 5.3vw, 5.8rem); line-height: 1.02; }
+.seo-about .about-intro .lead { max-width: 700px; color: #efe5d3; font-size: clamp(1.1rem, 1.5vw, 1.35rem); line-height: 1.55; }
+.seo-about .about-intro-copy > p:not(.lead) { max-width: 690px; font-size: 1.05rem; }
+.seo-about .about-intro img { width: 100%; max-height: 610px; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+.seo-about .about-work, .seo-about .about-skills { display: block; padding: clamp(76px, 8vw, 116px) clamp(24px, 8vw, 120px); }
+.seo-about .about-work { border-top: 1px solid rgba(218,184,116,.18); background: #0d0b09; }
+.seo-about .about-skills { border-top: 1px solid rgba(218,184,116,.18); background: #080706; }
+.seo-about .about-work::before, .seo-about .about-skills::before { content: none; }
+.seo-about .about-section-head { max-width: 850px; margin-bottom: 42px; }
+.seo-about .about-section-head > span, .seo-about .about-role-top > span, .seo-about .about-proof span { color: #d9b978; font: 800 .66rem/1.4 var(--font-body); letter-spacing: .16em; }
+.seo-about .about-section-head h2 { margin: 12px 0 15px; color: #f3eee5; font: 800 clamp(2.3rem, 4.2vw, 4.5rem)/1.08 var(--font-display); letter-spacing: -.055em; }
+.seo-about .about-section-head p { max-width: 690px; margin: 0; font-size: 1.05rem; }
+.seo-about .about-work-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+.seo-about .about-role, .seo-about .about-skills-grid article { min-width: 0; padding: clamp(25px, 3vw, 42px); border: 1px solid rgba(218,184,116,.23); border-radius: 22px; background: linear-gradient(135deg, #1b1712, #100e0b 75%); box-shadow: inset 0 1px rgba(255,223,164,.09), 0 20px 38px rgba(0,0,0,.17); }
+.seo-about .about-role-current { background: radial-gradient(circle at 100% 0%, rgba(182,131,62,.14), transparent 42%), linear-gradient(135deg, #221b13, #100e0b 75%); }
+.seo-about .about-role-top { display: flex; justify-content: space-between; gap: 20px; align-items: baseline; padding-bottom: 22px; border-bottom: 1px solid rgba(218,184,116,.19); }
+.seo-about .about-role-top strong { color: #e7d1a7; font-size: .9rem; }
+.seo-about .about-role h3, .seo-about .about-earlier h3, .seo-about .about-skills-grid h3, .seo-about .about-proof h3 { margin: 24px 0 10px; color: #f3eee5; font: 750 clamp(1.35rem, 2vw, 1.8rem)/1.2 var(--font-display); letter-spacing: -.03em; }
+.seo-about .about-role p { margin: 0 0 22px; }
+.seo-about .about-role ul { display: grid; gap: 15px; margin: 0; padding-left: 20px; color: #b8b0a3; line-height: 1.65; }
+.seo-about .about-role li::marker { color: #d9b978; }
+.seo-about .about-earlier { margin-top: 42px; padding-top: 36px; border-top: 1px solid rgba(218,184,116,.2); }
+.seo-about .about-earlier h3 { margin-top: 0; }
+.seo-about .about-earlier > p { max-width: 800px; }
+.seo-about .about-earlier-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 34px; margin-top: 24px; }
+.seo-about .about-earlier-list > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 16px; padding: 18px 0; border-top: 1px solid rgba(218,184,116,.16); }
+.seo-about .about-earlier-list strong { color: #f0e8db; font-size: .96rem; }
+.seo-about .about-earlier-list span { grid-column: 1; color: #b8b0a3; font-size: .86rem; }
+.seo-about .about-earlier-list small { grid-column: 2; grid-row: 1 / 3; align-self: center; color: #c8aa77; white-space: nowrap; font-size: .75rem; }
+.seo-about .about-skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.seo-about .about-skills-grid article { min-height: 198px; padding: 28px; }
+.seo-about .about-skills-grid h3 { margin: 0 0 14px; font-size: 1.25rem; }
+.seo-about .about-skills-grid p { margin: 0; font-size: .95rem; }
+.seo-about .about-proof { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-top: 42px; padding: 32px 0 0; border-top: 1px solid rgba(218,184,116,.2); }
+.seo-about .about-proof h3 { margin: 8px 0; }
+.seo-about .about-proof p { max-width: 770px; margin: 0; }
+.seo-about .about-proof p a { color: #e7c88d; text-decoration: underline; text-underline-offset: 3px; }
+.seo-about .about-back-link { flex: 0 0 auto; padding: 12px 18px; border: 1px solid rgba(218,184,116,.42); border-radius: 999px; color: #e7d1a7; font-weight: 700; }
+
+@media (max-width: 900px) {
+  .seo-about .about-intro { min-height: 0; grid-template-columns: 1fr; }
+  .seo-about .about-intro img { width: min(100%, 520px); max-height: 560px; }
+  .seo-about .about-work-grid { grid-template-columns: 1fr; }
+  .seo-about .about-skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .seo-about .about-intro { padding-block: 72px; }
+  .seo-about .about-intro h1 { font-size: clamp(2.4rem, 10vw, 3.6rem); }
+  .seo-about .about-intro img { max-height: 430px; }
+  .seo-about .about-earlier-list, .seo-about .about-skills-grid { grid-template-columns: 1fr; }
+  .seo-about .about-earlier-list > div { grid-template-columns: 1fr; gap: 2px; }
+  .seo-about .about-earlier-list small { grid-column: 1; grid-row: auto; margin-top: 2px; }
+  .seo-about .about-role-top { flex-wrap: wrap; gap: 8px; }
+  .seo-about .about-proof { display: block; }
+  .seo-about .about-back-link { display: inline-block; margin-top: 24px; }
+}

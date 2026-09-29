@@ -558,7 +558,7 @@ function App() {
             <a href="#process" onClick={closeMenu}>Process</a>
             <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
             <a href="/seo-guides" onClick={closeMenu}>Guides</a>
-            <a href="/ajell-saliba" onClick={closeMenu}>About AJ</a>
+            <a href="/ajell-saliba" onClick={closeMenu}>About</a>
           </div>
           <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Show me the problem <Arrow /></a>
         </nav>
