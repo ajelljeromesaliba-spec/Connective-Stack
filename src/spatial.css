@@ -8,12 +8,12 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 .connection-stage { perspective: 1400px; background: radial-gradient(ellipse at 76% 48%, #21170d 0%, #080706 34%, #030303 72%); }
 .connection-canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
 .connection-stage::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 77% 48%, transparent 19%, rgba(0,0,0,.2) 63%, #030303 100%); }
-.connection-captions { position: absolute; z-index: 2; right: clamp(25px, 6vw, 90px); bottom: 17%; display: flex; gap: clamp(1rem, 4vw, 4rem); color: #cbb382; font: 750 .56rem/1.4 var(--font-body); letter-spacing: .15em; text-shadow: 0 2px 8px #000; }
-.connection-captions span { opacity: .42; transition: opacity .3s ease; }
+.connection-captions { position: absolute; z-index: 2; right: clamp(25px, 6vw, 90px); bottom: 14%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(38vw, 490px); gap: 8px; color: #cbb382; font: 750 .56rem/1.4 var(--font-body); letter-spacing: .12em; text-shadow: 0 2px 8px #000; }
+.connection-captions span { padding: 12px 8px; border: 1px solid rgba(207,164,91,.22); background: rgba(12,10,8,.78); text-align: center; opacity: .48; transform: perspective(600px) rotateX(8deg) translateY(4px); transition: opacity .4s ease, transform .5s ease, border-color .4s ease, box-shadow .4s ease; }
 .cinematic-hero[data-connection-stage="0"] .connection-captions span:first-child,
 .cinematic-hero[data-connection-stage="1"] .connection-captions span:nth-child(2),
 .cinematic-hero[data-connection-stage="2"] .connection-captions span:nth-child(2),
-.cinematic-hero[data-connection-stage="3"] .connection-captions span:last-child { opacity: 1; }
+.cinematic-hero[data-connection-stage="3"] .connection-captions span:last-child { opacity: 1; transform: perspective(600px) rotateX(0) translateY(0); border-color: rgba(235,193,119,.62); box-shadow: 0 12px 25px rgba(0,0,0,.4), inset 0 1px rgba(255,223,162,.2); }
 .connection-stage-label { position: absolute; z-index: 4; right: clamp(25px, 6vw, 90px); top: 14%; color: #b9a584; font: 700 .62rem/1.3 var(--font-body); letter-spacing: .2em; }
 .connection-stage-label span { display: none; }
 .connection-stage-label span:first-child { display: block; }
@@ -171,7 +171,8 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
   .connection-canvas { height: 58%; }
   .connection-stage::after { background: linear-gradient(0deg, #030303 0%, transparent 70%); }
   .portfolio-main .hero-film-vignette { background: linear-gradient(0deg, #030303 0%, #030303 30%, rgba(3,3,3,.85) 45%, transparent 72%); }
-  .connection-captions { top: 43%; bottom: auto; right: 1rem; left: 1rem; justify-content: space-between; gap: .2rem; font-size: .4rem; }
+  .connection-captions { top: 43%; bottom: auto; right: 1rem; left: 1rem; width: auto; gap: 4px; font-size: .38rem; }
+  .connection-captions span { padding: 7px 2px; }
   .connection-stage-label { top: 1.1rem; right: 1rem; font-size: .5rem; }
   .portfolio-main .hero-pinned .hero-copy { transform: none; }
   .portfolio-main .live-project-mark, .portfolio-main .process-film { transform: none; }

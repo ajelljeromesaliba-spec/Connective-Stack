@@ -17,11 +17,14 @@ export function startConnectionFallback(canvas, hero) {
     return { x: width * (mobile ? .5 : .755) + cx * unit * depth,
       y: height * (mobile ? .49 : .48) - cy * unit * depth, z: bz, depth }
   }
-  const stroke = (a, b, width, color, shine) => {
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y)
-    ctx.lineCap = 'round'; ctx.strokeStyle = '#18130e'; ctx.lineWidth = width + 3; ctx.stroke()
+  const stroke = (points, width, color, shine) => {
+    if (points.length < 2) return
+    ctx.beginPath()
+    points.forEach((point, i) => i ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y))
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round'
+    ctx.strokeStyle = '#17120d'; ctx.lineWidth = width + 4; ctx.stroke()
     ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke()
-    ctx.strokeStyle = shine; ctx.lineWidth = Math.max(1, width * .18); ctx.stroke()
+    ctx.strokeStyle = shine; ctx.lineWidth = Math.max(1, width * .16); ctx.stroke()
   }
   const orb = (point, radius, colors) => {
     const r = radius * point.depth
@@ -62,13 +65,19 @@ export function startConnectionFallback(canvas, hero) {
     const drawRing = (front) => {
       rings.forEach((points, index) => {
         const config = configurations[index]
+        let run = []
+        const flush = () => {
+          stroke(run, config.thick, front ? config.color : '#4b3d2b', front ? config.highlight : '#9f8159')
+          run = []
+        }
         for (let i = 0; i < 96; i++) {
           const a = points[i], b = points[i + 1]
           const isFront = (a.z + b.z) > 0
-          if (isFront !== front) continue
-          const shade = isFront ? config.color : '#4b3d2b'
-          stroke(a, b, config.thick * ((a.depth + b.depth) / 2), shade, isFront ? config.highlight : '#9f8159')
+          if (isFront !== front) { flush(); continue }
+          if (!run.length) run.push(a)
+          run.push(b)
         }
+        flush()
       })
     }
     drawRing(false)
