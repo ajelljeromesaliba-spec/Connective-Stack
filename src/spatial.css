@@ -214,6 +214,13 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 .portfolio-main .section-heading .kicker,
 .portfolio-main .price-intro .kicker,
 .portfolio-main .process-heading .kicker { color: var(--brand-gold); }
+.portfolio-main .hero-scroll-line { background: var(--brand-gold-light); }
+.portfolio-main .pricing-tier.featured .pricing-tier-head sup,
+.portfolio-main .pricing-tier.featured .pricing-tier-head b,
+.portfolio-main .pricing-tier.featured em,
+.portfolio-main .pricing-tier.featured li svg { color: var(--brand-gold); }
+.portfolio-main .pricing-tier.featured .button-primary:hover { border-color: var(--brand-gold-light); background: var(--brand-gold-light); color: #17120b; }
+.portfolio-main .process-film-topbar i { box-shadow: 0 0 0 4px rgba(217,185,120,.12); }
 
 @media (max-width: 700px) {
   .portfolio-main .services-background video { object-position: 50% center; opacity: .4; }
