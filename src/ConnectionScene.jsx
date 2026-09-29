@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { startConnectionFallback } from './ConnectionCanvasFallback'
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
 
@@ -17,7 +18,7 @@ export default function ConnectionScene() {
       let renderer
       try {
         renderer = new THREE.WebGLRenderer({ canvas, antialias: window.innerWidth > 760, alpha: true, powerPreference: 'high-performance' })
-      } catch { return }
+      } catch { cleanup = startConnectionFallback(canvas, hero); return }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 760 ? 1.25 : 1.6))
       renderer.outputColorSpace = THREE.SRGBColorSpace
       renderer.toneMapping = THREE.ACESFilmicToneMapping
