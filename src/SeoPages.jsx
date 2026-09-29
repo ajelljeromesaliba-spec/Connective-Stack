@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import './seo-pages.css'
 const SITE='https://connectivestack.com'
-const CAL='https://calendly.com/ajell-saliba-connectivestack'
+const CAL='https://calendly.com/ajell-saliba-connectivestack/30min'
 const pages={
 'website-not-showing-on-google':['Website SEO','Why Your Business Website Is Not Showing Up on Google','A practical guide to indexing, technical SEO, local signals and discoverability when a live business website is difficult to find.','Website Development','/solutions/website-development'],
 'hvac-website-not-showing-on-google':['HVAC SEO',"Why Your HVAC Website Isn't Showing Up on Google",'What HVAC companies can check when a website is live but difficult to find in branded or local service searches.','HVAC','/solutions/hvac'],

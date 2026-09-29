@@ -41,7 +41,7 @@ const reasons = {
 }
 
 const slots = ['9:00 AM','10:30 AM','1:00 PM','2:30 PM','4:00 PM']
-const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack'
+const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
 const getToday = () => new Date().toISOString().slice(0, 10)
 const getDemoDate = () => {
   const date = new Date()

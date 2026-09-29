@@ -255,7 +255,7 @@ function ServiceModal({ service, onClose }) {
   )
 }
 
-const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack'
+const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
 function CookieConsent({ onChoice, onPrivacy }) {
   return (
     <aside className="cookie-consent" role="dialog" aria-live="polite" aria-label="Cookie consent">

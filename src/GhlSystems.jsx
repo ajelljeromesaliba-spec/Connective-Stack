@@ -1,7 +1,7 @@
 import React from 'react'
 import './ghl-systems.css'
 
-const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack'
+const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
 
 export const ghlSystems = [
   {
