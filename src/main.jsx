@@ -458,13 +458,16 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const video = document.querySelector('.process-film video')
-    if (!video || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) video.play().catch(() => {})
-      else video.pause()
+    const videos = document.querySelectorAll('.process-film video, .services-background video')
+    if (!videos.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const video = entry.target
+        if (entry.isIntersecting) video.play().catch(() => {})
+        else video.pause()
+      })
     }, { threshold: .15 })
-    observer.observe(video)
+    videos.forEach(video => observer.observe(video))
     return () => observer.disconnect()
   }, [])
 
@@ -615,6 +618,11 @@ function App() {
         </section>
 
         <section className="section services" id="services" data-scroll-scene>
+          <div className="services-background" aria-hidden="true">
+            <video muted loop playsInline preload="none" poster="/assets/problems-motion-poster.jpg">
+              <source src="/assets/problems-motion.mp4" type="video/mp4" />
+            </video>
+          </div>
           <div className="section-heading" data-reveal>
             <span className="kicker">Problems I solve</span>
             <h2>Start with what is breaking. Then fix the system around it.</h2>
@@ -712,8 +720,8 @@ function App() {
 
           <div className="process-stage">
             <div className="process-film" data-reveal>
-              <video muted loop playsInline preload="none" poster="/assets/automation-process-poster.jpg">
-                <source src="/assets/automation-process.mp4" type="video/mp4" />
+              <video muted loop playsInline preload="none" poster="/assets/automation-process-gold-poster.jpg">
+                <source src="/assets/automation-process-gold.mp4" type="video/mp4" />
               </video>
               <div className="process-film-topbar">
                 <span><i /> Build sequence</span>

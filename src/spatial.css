@@ -198,3 +198,27 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
   .portfolio-main [data-depth-card]:not([data-reveal]),
   .seo-grid article, .ghl-system-card, .ghl-architecture-card { transform: none !important; transition: none !important; }
 }
+
+/* The supplied gold motion is atmospheric, below every heading and card. */
+.portfolio-main .services { overflow: hidden; isolation: isolate; background: #080706; }
+.portfolio-main .services-background { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; background: #080706 url('/assets/problems-motion-poster.jpg') center / cover no-repeat; }
+.portfolio-main .services-background video { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .55; }
+.portfolio-main .services-background::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,4,3,.48), rgba(5,4,3,.68) 36%, rgba(5,4,3,.83) 100%), linear-gradient(90deg, rgba(5,4,3,.48), transparent 70%); }
+.portfolio-main .services::before { z-index: 1; }
+.portfolio-main .services > .section-heading,
+.portfolio-main .services > .service-list { position: relative; z-index: 1; }
+.portfolio-main .services .service-card { background: linear-gradient(115deg, rgba(26,21,15,.93), rgba(10,9,8,.86)); }
+.portfolio-main .services .service-card:hover { background: linear-gradient(115deg, rgba(51,37,19,.94), rgba(16,13,10,.9)); }
+
+/* Old portfolio rules used teal after the dark theme was added. */
+.portfolio-main .section-heading .kicker,
+.portfolio-main .price-intro .kicker,
+.portfolio-main .process-heading .kicker { color: var(--brand-gold); }
+
+@media (max-width: 700px) {
+  .portfolio-main .services-background video { object-position: 50% center; opacity: .4; }
+  .portfolio-main .services-background::after { background: linear-gradient(180deg, rgba(5,4,3,.65), rgba(5,4,3,.8) 42%, rgba(5,4,3,.92)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-main .services-background video { display: none; }
+}
