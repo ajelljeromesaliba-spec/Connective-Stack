@@ -17,7 +17,7 @@ export function startConnectionFallback(canvas, hero) {
     const ny = y * Math.cos(rz) + nx * Math.sin(rz)
     const px = nx * Math.cos(rz) - y * Math.sin(rz)
     const depth = 10 / (10 - nz)
-    const unit = (mobile ? width * .103 : clamp(width * .055, 50, 78)) * (1 + progress * .14)
+    const unit = (mobile ? width * .077 : clamp(width * .055, 50, 78)) * (1 + progress * .14)
     return { x: width * (mobile ? .5 : .755) + px * unit * depth,
       y: height * (mobile ? .52 : .49) - ny * unit * depth, depth, z: nz }
   }

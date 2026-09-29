@@ -132,7 +132,7 @@ export default function ConnectionScene() {
         rig.rotation.z = -.08 + smoothed * .12
         rig.position.x = mobile ? 0 : 2.08 - smoothed * .45
         rig.position.y = mobile ? .65 - smoothed * .22 : -.08
-        const scale = mobile ? .55 : clamp(width / 1350, .72, 1.1)
+        const scale = mobile ? .34 : clamp(width / 1350, .72, 1.1)
         rig.scale.setScalar(scale * (1 + smoothed * .1))
         camera.position.z = 13.4 - smoothed * 2.8
         camera.lookAt(mobile ? 0 : 1.4, mobile ? .55 : 0, 0)

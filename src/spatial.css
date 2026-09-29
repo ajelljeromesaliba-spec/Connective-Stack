@@ -1,5 +1,6 @@
 /* Spatial motion lives in the brand pages. Concept demos keep their own UI. */
 .portfolio-main, .seo-main, .ghl-page, .case-page { perspective: 1400px; }
+body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.case-page) { --teal: #d9b978; --teal-dark: #b78c50; }
 
 /* A single connected object carries the hero story through the scroll. */
 .portfolio-main .hero-pinned { background: #030303; isolation: isolate; }
@@ -53,6 +54,7 @@
 @keyframes endpoint-travel { 0%, 12% { left: 0; opacity: 0; } 25% { opacity: 1; } 80% { left: calc(100% - 7px); opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
 .portfolio-main .hero-pinned .hero-copy { transform: translateZ(85px); }
 .portfolio-main .hero-pinned h1 { max-width: 12ch; }
+.portfolio-main .cinematic-hero .eyebrow { background: rgba(25,19,11,.72); border-color: rgba(217,185,120,.31); color: #ebd8b5; }
 .portfolio-main .cinematic-hero .hero-copy::before, .portfolio-main .services .kicker { color: #d9b978; }
 
 /* Navigation has depth only on devices that can hover. */
@@ -188,7 +190,7 @@
   .connection-canvas { height: 58%; }
   .helix-stage::after { background: linear-gradient(0deg, #030303 0%, transparent 70%); }
   .portfolio-main .hero-film-vignette { background: linear-gradient(0deg, #030303 0%, #030303 30%, rgba(3,3,3,.85) 45%, transparent 72%); }
-  .connection-captions { top: 32%; bottom: auto; right: 1rem; left: 1rem; justify-content: space-between; gap: .2rem; font-size: .4rem; }
+  .connection-captions { top: 43%; bottom: auto; right: 1rem; left: 1rem; justify-content: space-between; gap: .2rem; font-size: .4rem; }
   .connection-stage-label { top: 1.1rem; right: 1rem; font-size: .5rem; }
   .helix-endpoints { top: 1.2rem; right: 1.25rem; bottom: auto; font-size: .48rem; gap: .45rem; transform: none; }
   .helix-endpoints i { width: 28px; }
