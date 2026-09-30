@@ -86,16 +86,16 @@ const services = [
 const pricingTiers = [
   {
     name: 'Professional Website',
-    price: '1,199',
-    label: 'Starting project investment',
+    price: '1,500',
+    label: 'Starting project price · USD',
     description: 'A professionally built website that gives your business a credible online presence and a clear path for customers to take action.',
     bestFor: 'Best for established service businesses ready for a stronger online presence',
-    includes: ['One landing page or up to 3 simple pages', 'Custom mobile-responsive design', 'Client-provided content and brand setup', 'Contact form and clear calls to action', 'Essential on-page SEO', 'Domain connection and deployment', 'One revision round', '7 days of post-launch support'],
+    includes: ['One landing page or up to 3 simple pages', 'Custom mobile-responsive design', 'Client-provided content and brand setup', 'Contact form and clear calls to action', 'Essential on-page SEO', 'Domain connection and deployment', 'One revision round', '30 days of post-launch technical support'],
   },
   {
     name: 'Lead-Ready Website',
-    price: '2,199',
-    label: 'Starting project investment',
+    price: '3,000',
+    label: 'Starting project price · USD',
     description: 'A more complete service website designed to capture inquiries and move visitors toward a call or appointment.',
     bestFor: 'Best for businesses actively generating leads',
     featured: true,
@@ -103,8 +103,8 @@ const pricingTiers = [
   },
   {
     name: 'Connected Website System',
-    price: '3,699',
-    label: 'Starting project investment',
+    price: '5,000',
+    label: 'Starting project price · USD',
     description: 'A website connected to the systems behind the business, with lead routing and practical automation included.',
     bestFor: 'Best for teams that need fewer manual handoffs',
     includes: ['Up to 5 pages', 'Everything in the Lead-Ready Website', 'CRM contact and pipeline connection', 'Workflow and notification setup', 'Calendar, form, and lead routing', 'One customized third-party integration', 'Automation testing and handoff', '30 days of post-launch technical support'],
@@ -297,7 +297,7 @@ function ProjectInquiryForm() {
       <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
       <label>What is going wrong?<select name="service" required defaultValue=""><option value="" disabled>Select the closest problem</option><option>Leads are not being followed up correctly</option><option>Website or form is not working as expected</option><option>CRM, calendar, or tools are disconnected</option><option>Customer journey or booking flow has too much friction</option><option>Automation is failing on edge cases</option><option>Internal handoffs are too manual</option><option>I need a new website around a better customer path</option><option>Technical troubleshooting / hourly support</option><option>Not sure yet</option></select></label>
       <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
-      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,199 to $2,199</option><option>$2,199 to $3,699</option><option>$3,699 to $6,000</option><option>$6,000+</option><option>Need a recommendation</option></select></label>
+      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,500–$2,999</option><option>$3,000–$4,999</option><option>$5,000–$7,499</option><option>$7,500+</option><option>Need a recommendation</option></select></label>
       <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
       <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the current problem, the pages or systems you need, and the outcome you want." /></label>
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
@@ -654,14 +654,14 @@ function App() {
 
         <section className="price-section" data-scroll-scene>
           <div className="price-intro" data-reveal>
-            <span className="kicker">Scope after diagnosis</span>
-            <h2>Once the problem is clear, the build gets specific.</h2>
-            <p>These are starting scopes, not a prescription before I understand the issue. Website projects start at $1,199; final investment depends on the pages, integrations, automation logic, and technical work actually required.</p>
+            <span className="kicker">Project pricing</span>
+            <h2>A clear scope. A price agreed before we build.</h2>
+            <p>Projects start at $1,500 USD. Your proposal defines the pages, integrations, deliverables, and timeline before work begins. Platform subscriptions and usage fees are separate.</p>
           </div>
           <div className="pricing-grid" data-reveal>
             {pricingTiers.map(tier => (
               <article className={`pricing-tier ${tier.featured ? 'featured' : ''}`} key={tier.name} data-depth-card>
-                {tier.featured && <span className="pricing-popular">Most practical</span>}
+                {tier.featured && <span className="pricing-popular">Website + lead capture</span>}
                 <div className="pricing-tier-head">
                   <span>{tier.name}</span>
                   <strong><sup>$</sup>{tier.price}<b>+</b></strong>
@@ -670,7 +670,7 @@ function App() {
                 <p>{tier.description}</p>
                 <em>{tier.bestFor}</em>
                 <ul>{tier.includes.map(item => <li key={item}><Check />{item}</li>)}</ul>
-                <a className={`button ${tier.featured ? 'button-primary' : 'button-secondary'}`} href={CALENDAR_URL} target="_blank" rel="noreferrer">Request this project <Arrow /></a>
+                <a className={`button ${tier.featured ? 'button-primary' : 'button-secondary'}`} href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss this project <Arrow /></a>
               </article>
             ))}
           </div>
@@ -693,7 +693,7 @@ function App() {
           <div className="hourly-support" data-reveal data-depth-card>
             <div className="hourly-support-rate">
               <span>Flexible support</span>
-              <strong><sup>$</sup>49<small>/hour</small></strong>
+              <strong><sup>$</sup>75<small>/hour</small></strong>
               <p>For smaller updates, fixes, and ongoing technical help.</p>
             </div>
             <div className="hourly-support-details">
@@ -776,7 +776,7 @@ function App() {
             </div>
             <div className="contact-expectations">
               <div><strong>Project-based</strong><span>Defined scope, price, and delivery plan</span></div>
-              <div><strong>$49/hour</strong><span>Technical support with a one-hour minimum</span></div>
+              <div><strong>$75/hour</strong><span>Technical support with a one-hour minimum</span></div>
               <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
             </div>
           </div>
