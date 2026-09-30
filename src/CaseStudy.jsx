@@ -387,17 +387,17 @@ export default function CaseStudy({ slug }) {
         </section>
 
         <section className="case-section case-context" id="case-details">
-          <div className="case-section-label">CONTEXT</div>
+          <div className="case-section-label">DIAGNOSIS</div>
           <div className="case-section-copy">
-            <span className="case-kicker">Business context</span>
-            <h2>Why this experience needed to exist.</h2>
+            <span className="case-kicker">01 / Diagnose the problem</span>
+            <h2>What is breaking in the customer path?</h2>
             {study.context.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </section>
 
         <section className="case-challenge">
           <div>
-            <span className="case-kicker">Core challenge</span>
+            <span className="case-kicker">Failure point</span>
             <h2>{study.challenge.title}</h2>
             <p>{study.challenge.copy}</p>
           </div>
@@ -405,10 +405,10 @@ export default function CaseStudy({ slug }) {
         </section>
 
         <section className="case-section">
-          <div className="case-section-label">OBJECTIVES</div>
+          <div className="case-section-label">SUCCESS CRITERIA</div>
           <div className="case-section-copy">
-            <span className="case-kicker">Project goals</span>
-            <h2>Define the outcome before designing the screens.</h2>
+            <span className="case-kicker">02 / Define the target state</span>
+            <h2>What must be true for the fix to count as useful?</h2>
             <div className="case-goal-grid">
               {study.goals.map(([title, copy], index) => (
                 <article key={title}><h3>{title}</h3><p>{copy}</p></article>
@@ -419,8 +419,8 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-strategy">
           <div className="case-strategy-heading">
-            <span className="case-kicker">Strategy</span>
-            <h2>The decisions that shaped the experience.</h2>
+            <span className="case-kicker">03 / Prescribe the fix</span>
+            <h2>Choose the system response before choosing the tools.</h2>
           </div>
           <div className="case-strategy-grid">
             {study.strategy.map(([number, title, copy]) => (
@@ -432,8 +432,8 @@ export default function CaseStudy({ slug }) {
         <section className="case-section">
           <div className="case-section-label">JOURNEY</div>
           <div className="case-section-copy">
-            <span className="case-kicker">Customer journey</span>
-            <h2>Each step moves the visitor toward a useful handoff.</h2>
+            <span className="case-kicker">Path under test</span>
+            <h2>Trace the customer action through every handoff that has to work.</h2>
             <div className="case-journey">
               {study.journey.map(([title, copy], index) => (
                 <article key={title}><div><h3>{title}</h3><p>{copy}</p></div></article>
@@ -444,8 +444,8 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-build">
           <div className="case-build-heading">
-            <span className="case-kicker">What was built</span>
-            <h2>A complete experience, not an isolated landing page.</h2>
+            <span className="case-kicker">04 / Build the prescribed system</span>
+            <h2>Build only the customer-facing and operational pieces the diagnosis calls for.</h2>
           </div>
           <div className="case-build-grid">
             {study.build.map(group => (
@@ -457,8 +457,8 @@ export default function CaseStudy({ slug }) {
         <section className="case-section">
           <div className="case-section-label">SYSTEM</div>
           <div className="case-section-copy">
-            <span className="case-kicker">System flow</span>
-            <h2>The website starts the operational workflow.</h2>
+            <span className="case-kicker">Handoff map</span>
+            <h2>Follow the information from customer intent to the person or system responsible for the next action.</h2>
             <div className="case-flow">
               {study.flow.map((step, index) => <React.Fragment key={step}><div><strong>{step}</strong></div>{index < study.flow.length - 1 && <i>→</i>}</React.Fragment>)}
             </div>
@@ -468,8 +468,8 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-decisions">
           <div className="case-decisions-heading">
-            <span className="case-kicker">Design rationale</span>
-            <h2>Why the experience works the way it does.</h2>
+            <span className="case-kicker">System decisions</span>
+            <h2>Each decision answers a specific failure, constraint, or handoff requirement.</h2>
           </div>
           <div className="case-decision-list">
             {study.decisions.map(([title, copy], index) => (
@@ -481,8 +481,8 @@ export default function CaseStudy({ slug }) {
         <section className="case-section">
           <div className="case-section-label">QA</div>
           <div className="case-section-copy">
-            <span className="case-kicker">Quality and safeguards</span>
-            <h2>Professional delivery includes the edge cases.</h2>
+            <span className="case-kicker">05 / Verify the path</span>
+            <h2>Test the normal path, the failure cases, and the boundaries before calling the system ready.</h2>
             <div className="case-testing-grid">
               {study.testing.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}
             </div>
@@ -491,8 +491,8 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-outcomes">
           <div className="case-outcomes-heading">
-            <span className="case-kicker">Designed outcomes</span>
-            <h2>What this concept is intended to improve.</h2>
+            <span className="case-kicker">What we would measure</span>
+            <h2>The concept defines the behaviors to measure in a live implementation.</h2>
             <p>These are design objectives, not measured client results. A live engagement would establish baseline data and reporting before making performance claims.</p>
           </div>
           <div className="case-outcome-grid">
@@ -502,17 +502,17 @@ export default function CaseStudy({ slug }) {
 
         <section className="case-implementation">
           <div>
-            <span className="case-kicker">Real implementation</span>
-            <h2>What would happen before a client launch.</h2>
+            <span className="case-kicker">From concept to production</span>
+            <h2>Replace assumptions with verified business rules, live integrations, baseline data, and production safeguards.</h2>
             <p>The concept demonstrates the experience and system direction. Production work would replace assumptions with verified business rules, content, integrations, and compliance requirements.</p>
           </div>
           <ul>{study.implementation.map(item => <li key={item}><p>{item}</p></li>)}</ul>
         </section>
 
         <section className="case-final-cta">
-          <span>Have a similar operational challenge?</span>
-          <h2>Build the customer journey and the system behind it.</h2>
-          <p>Tell me how leads currently reach your business, where the handoffs break, and what should happen after someone takes action.</p>
+          <span>Something in your customer path keeps breaking?</span>
+          <h2>Start with the failure. Then build only what fixes it.</h2>
+          <p>Show me what a prospect does, what should happen next, and where the real process breaks. I’ll trace the path before recommending the build.</p>
           <div>
             <a className="case-button case-button-light" href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a project <Arrow /></a>
             <a className="case-button case-button-ghost" href={study.demoHref}>{study.demoLabel}</a>
@@ -522,7 +522,7 @@ export default function CaseStudy({ slug }) {
 
       <footer className="case-footer">
         <a href="/">ConnectiveStack</a>
-        <span>Concept strategy, web experience, and connected systems by AJ Saliba.</span>
+        <span>Diagnosis, customer-path design, and connected system implementation by AJ Saliba.</span>
         <a href={CALENDAR_URL} target="_blank" rel="noreferrer">Start a project <Arrow /></a>
       </footer>
     </div>
