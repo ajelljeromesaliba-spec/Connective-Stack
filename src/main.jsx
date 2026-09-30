@@ -85,37 +85,37 @@ const services = [
 
 const pricingTiers = [
   {
-    name: 'Professional Website',
+    name: 'Focused Fix',
     price: '1,500',
     label: 'Starting project price · USD',
-    description: 'A professionally built website that gives your business a credible online presence and a clear path for customers to take action.',
-    bestFor: 'Best for established service businesses ready for a stronger online presence',
-    includes: ['One landing page or up to 3 simple pages', 'Custom mobile-responsive design', 'Client-provided content and brand setup', 'Contact form and clear calls to action', 'Essential on-page SEO', 'Domain connection and deployment', 'One revision round', '30 days of post-launch technical support'],
+    description: 'For a contained problem with a clear failure point: a broken lead path, website issue, form, booking flow, routing problem, or technical handoff.',
+    bestFor: 'Best for one clearly defined problem that does not require rebuilding the whole system',
+    includes: ['Diagnosis of the affected customer path', 'Repair or rebuild of the agreed failure point', 'Required configuration and connection work', 'End-to-end testing of the repaired path', 'Clear handoff and documentation', 'Production deployment where required', 'Defined revision scope', '30 days of post-launch technical support'],
   },
   {
-    name: 'Lead-Ready Website',
+    name: 'Acquisition Path Rebuild',
     price: '3,000',
     label: 'Starting project price · USD',
-    description: 'A more complete service website designed to capture inquiries and move visitors toward a call or appointment.',
-    bestFor: 'Best for businesses actively generating leads',
+    description: 'For businesses getting interest but losing momentum between the first click, inquiry, qualification, follow-up, and appointment.',
+    bestFor: 'Best for businesses with demand but an unreliable path from inquiry to next action',
     featured: true,
-    includes: ['Up to 5 pages', 'Everything in the Professional Website', 'Copy refinement and conversion structure', 'Lead form or booking calendar setup', 'Email notification routing', 'Analytics or Meta Pixel installation', 'Two revision rounds', '30 days of post-launch technical support'],
+    includes: ['Full lead-path diagnosis', 'Everything in the Focused Fix', 'Form, qualification, and CTA logic', 'CRM, ownership, and pipeline routing', 'Follow-up and booking automation', 'Tracking for the agreed conversion path', 'End-to-end QA and handoff', '30 days of post-launch technical support'],
   },
   {
-    name: 'Connected Website System',
+    name: 'Connected Acquisition System',
     price: '5,000',
     label: 'Starting project price · USD',
-    description: 'A website connected to the systems behind the business, with lead routing and practical automation included.',
-    bestFor: 'Best for teams that need fewer manual handoffs',
-    includes: ['Up to 5 pages', 'Everything in the Lead-Ready Website', 'CRM contact and pipeline connection', 'Workflow and notification setup', 'Calendar, form, and lead routing', 'One customized third-party integration', 'Automation testing and handoff', '30 days of post-launch technical support'],
+    description: 'For teams whose website, CRM, calendar, email, phone, and automations exist but still behave like separate systems.',
+    bestFor: 'Best for businesses with multiple tools, manual handoffs, and unclear ownership across the customer journey',
+    includes: ['Full lead-path diagnosis', 'Everything in the Acquisition Path Rebuild', 'Website, CRM, calendar, and communication connections', 'Workflow, ownership, and fallback logic', 'Lead routing and lifecycle automation', 'Custom integration work within the agreed scope', 'Failure-path testing, QA, and documentation', '30 days of post-launch technical support'],
   },
 ]
 
 const process = [
-  ['01', 'Audit the current journey', 'We document the offer, audience, lead path, required pages, existing tools, and the handoffs that currently fail.'],
-  ['02', 'Structure and build', 'I turn the approved scope into page hierarchy, conversion copy, visual direction, and responsive components.'],
-  ['03', 'Connect and verify', 'Forms, calendars, CRM fields, notifications, analytics, domains, and fallback paths are tested before launch.'],
-  ['04', 'Launch and document', 'The approved build goes live with named deliverables, access handoff, and the support period defined in the proposal.'],
+  ['01', 'Diagnose the failure', 'We trace what should happen from first customer action to the next business outcome, then identify where data, ownership, communication, or intent breaks.'],
+  ['02', 'Prescribe the smallest useful fix', 'I define what actually needs to change, what should stay, which tools belong in the solution, and the success criteria before implementation starts.'],
+  ['03', 'Build and connect', 'I implement the agreed fix across the customer-facing experience and the systems behind it, without adding tools that do not solve the diagnosed problem.'],
+  ['04', 'Verify the real path', 'We test the normal path and the failure cases end to end, then launch with ownership, documentation, and the next measurement point defined.'],
 ]
 
 function LegalModal({ type, onClose }) {
@@ -213,14 +213,14 @@ function ServiceModal({ service, onClose }) {
 
 const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
 const offerTicker = [
-  'Website build & repair',
-  'GoHighLevel workflows',
-  'CRM & lead routing',
-  'DNS & email delivery',
-  'API & webhook integrations',
-  'Booking & follow-up',
-  'Technical SEO',
-  'AI voice systems',
+  'Customer-path diagnosis',
+  'Lead-path repair',
+  'CRM & ownership routing',
+  'Website & delivery failures',
+  'Disconnected-tool repair',
+  'Booking & follow-up logic',
+  'Technical troubleshooting',
+  'AI where it earns its place',
 ]
 function CookieConsent({ onChoice, onPrivacy }) {
   return (
@@ -580,11 +580,11 @@ function App() {
             <ConnectionScene />
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
-              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Websites and connected systems</div>
-              <h1>Your website should do more than <em>collect inquiries.</em></h1>
-              <p className="hero-lead">I build websites and connect the forms, CRM, calendar, and follow-up so every inquiry has a clear next step.</p>
+              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Customer acquisition systems</div>
+              <h1>Your leads aren’t always the problem. <em>What happens next might be.</em></h1>
+              <p className="hero-lead">I find where prospects get lost between your website, forms, calls, CRM, follow-up, and booking, then build the system that fixes the broken handoffs.</p>
               <div className="hero-actions">
-                <a href="#work" className="button button-primary">See a live project <Arrow /></a>
+                <a href="#work" className="button button-primary">See how I solve it <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
               </div>
             </div>
@@ -643,14 +643,14 @@ function App() {
 
         <section className="price-section" data-scroll-scene>
           <div className="price-intro" data-reveal>
-            <span className="kicker">Project pricing</span>
-            <h2>A clear scope. A price agreed before we build.</h2>
-            <p>Projects start at $1,500 USD. Your proposal defines the pages, integrations, deliverables, and timeline before work begins. Platform subscriptions and usage fees are separate.</p>
+            <span className="kicker">Ways to work together</span>
+            <h2>Diagnose first. Scope the fix second.</h2>
+            <p>I do not prescribe the same stack to every business. We start with the failure point, define the smallest system that fixes it, then agree on scope, price, and success criteria before implementation.</p>
           </div>
           <div className="pricing-grid" data-reveal>
             {pricingTiers.map(tier => (
               <article className={`pricing-tier ${tier.featured ? 'featured' : ''}`} key={tier.name} data-depth-card>
-                {tier.featured && <span className="pricing-popular">Website + lead capture</span>}
+                {tier.featured && <span className="pricing-popular">Most common rebuild</span>}
                 <div className="pricing-tier-head">
                   <span>{tier.name}</span>
                   <strong><sup>$</sup>{tier.price}<b>+</b></strong>
@@ -701,18 +701,18 @@ function App() {
             </div>
           </div>
           <div className="pricing-note" data-reveal>
-            <strong>Need something outside these tiers?</strong>
-            <p>Additional pages, full copywriting, e-commerce, AI chat or voice agents, advanced API work, and custom automations are quoted based on scope. Domain, hosting, software, messaging, and other third-party subscription fees are not included.</p>
+            <strong>The diagnosis does not fit a box?</strong>
+            <p>Good. The point is not to force your business into a package. If the real fix needs custom web work, AI, voice, API integration, or a different architecture, I scope that after understanding the failure. Third-party platform and usage fees remain separate.</p>
           </div>
         </section>
 
         <section className="process-showcase" id="process" data-scroll-scene>
           <div className="process-heading" data-reveal>
             <div>
-              <span className="kicker">How I solve it</span>
-              <h2>Find the failure point. Fix the path. Verify the handoff.</h2>
+              <span className="kicker">The ConnectiveStack method</span>
+              <h2>Diagnose. Prescribe. Build. Verify.</h2>
             </div>
-            <p>I work across the customer-facing page and the technical layers behind it, so the fix is tested through the full path instead of stopping at the first screen that looks correct.</p>
+            <p>The tool is never the starting point. I trace the business problem across the customer-facing experience and the technical layers behind it, then use only the pieces needed to repair the path.</p>
           </div>
 
           <div className="process-stage">
@@ -722,12 +722,12 @@ function App() {
               </video>
               <div className="process-film-topbar">
                 <span><i /> Build sequence</span>
-                <span>Strategy / Web / Systems / Launch</span>
+                <span>Diagnose / Prescribe / Build / Verify</span>
                 <span>Connected system</span>
               </div>
               <div className="process-film-caption">
                 <small>Connected execution</small>
-                <strong>One workflow from first idea to live system</strong>
+                <strong>One method from visible symptom to verified fix</strong>
               </div>
             </div>
 
@@ -744,12 +744,12 @@ function App() {
           </div>
 
           <div className="process-output" data-reveal>
-            <span>What gets connected</span>
-            <div><i /> Strategy and content</div>
-            <div><i /> Responsive website</div>
-            <div><i /> GitHub and Vercel</div>
-            <div><i /> CRM and automation</div>
-            <div><i /> Domain and launch</div>
+            <span>Tools used when the diagnosis calls for them</span>
+            <div><i /> Website and customer experience</div>
+            <div><i /> Forms and qualification</div>
+            <div><i /> CRM and ownership</div>
+            <div><i /> Automation and integrations</div>
+            <div><i /> Infrastructure and deployment</div>
           </div>
         </section>
 
@@ -775,7 +775,7 @@ function App() {
 
       <footer className="portfolio-footer">
         <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
-        <p>Fixing the systems between websites, leads, CRM, automation, and customer handoffs.</p>
+        <p>Diagnosing and fixing the broken handoffs between customer intent, your website, CRM, follow-up, booking, and the people responsible for the next action.</p>
         <div>
           <span>© {new Date().getFullYear()} ConnectiveStack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
