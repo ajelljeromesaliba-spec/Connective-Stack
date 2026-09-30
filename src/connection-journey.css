@@ -74,18 +74,40 @@
  .journey-canvas { top:-8%; height:100%; }
 }
 @media(max-width:600px){
- .portfolio-main .journey-hero .hero-pinned { min-height:820px; }
- .portfolio-main .journey-hero .hero-copy { top:20px; z-index:5; }
- .portfolio-main .journey-hero h1 { font-size:clamp(2rem,10.5vw,2.85rem); line-height:1.08; }
- .portfolio-main .journey-hero .hero-actions { display:grid; grid-template-columns:1fr; }
- .portfolio-main .journey-hero .hero-actions .button { width:100%; justify-content:center; min-height:52px; }
- .connection-journey { top:470px; height:calc(100% - 470px); z-index:1; }
- .journey-fallback { inset:12% 13% 31%; }
- .journey-caption { bottom:11%; }
- .journey-stages { bottom:1.5%; }
- .portfolio-main .journey-hero .hero-scroll-cue { display:none; }
- .calendly-badge-widget,
- .calendly-direct-badge { display:none!important; }
+ .portfolio-main .journey-hero { height:300svh; }
+ .portfolio-main .journey-hero .hero-pinned { min-height:820px; overflow:hidden; }
+ .portfolio-main .journey-hero .hero-copy {
+   top:18px; left:6%; right:6%; width:auto; max-width:none;
+   transform:none!important; z-index:10;
+ }
+ .portfolio-main .journey-hero h1 {
+   font-size:clamp(2rem,10vw,2.75rem); line-height:1.07;
+   max-width:100%; margin:14px 0;
+ }
+ .portfolio-main .journey-hero .hero-lead {
+   font-size:13.5px; line-height:1.5; max-width:none;
+ }
+ .portfolio-main .journey-hero .hero-actions {
+   display:grid; grid-template-columns:1fr; gap:8px; margin-top:14px;
+ }
+ .portfolio-main .journey-hero .hero-actions .button {
+   width:100%; justify-content:center; min-height:50px;
+ }
+ .connection-journey {
+   top:500px; bottom:0; height:auto; width:100%; z-index:1;
+   overflow:hidden;
+ }
+ .journey-topline { display:none; }
+ .journey-fallback { inset:10% 12% 33%; }
+ .journey-caption { left:6%; right:6%; bottom:12%; min-height:48px; }
+ .journey-caption strong { font-size:16px; }
+ .journey-caption p { font-size:11px; line-height:1.45; }
+ .journey-stages { left:6%; right:6%; bottom:2%; }
+ .journey-stages li { font-size:8px; }
+ .portfolio-main .journey-hero .hero-scroll-cue { display:none!important; }
+ body .calendly-badge-widget,
+ body .calendly-badge-widget *,
+ body .calendly-direct-badge { display:none!important; visibility:hidden!important; pointer-events:none!important; }
 }
 @media(prefers-reduced-motion:reduce){
  .portfolio-main .journey-hero { height:auto; }
