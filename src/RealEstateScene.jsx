@@ -52,7 +52,13 @@ export default function RealEstateScene() {
         ariaLabel: 'Interactive real estate scene',
       })
       if (cancelled) scene.destroy()
-      else setReady(true)
+      else if (scene.fallbackOnly) {
+        host.current?.setAttribute('data-render-mode', 'webgl-unavailable')
+        console.warn('Unicorn Studio: WebGL is unavailable; keeping the property image fallback.')
+      } else {
+        host.current?.setAttribute('data-render-mode', 'webgl')
+        setReady(true)
+      }
     }).catch(error => {
       if (!cancelled) console.warn('Real estate scene is using its image fallback:', error)
     })
