@@ -602,15 +602,15 @@ function App() {
           </div>
         </section>
 
-        <section className="live-project" id="work" aria-labelledby="pawnova-heading" data-scroll-scene>
+        <section className="live-project" id="work" aria-labelledby="proof-heading" data-scroll-scene>
           <div className="live-project-inner" data-reveal data-depth-card>
             <div className="live-project-copy">
-              <span className="kicker">Live project / Amazon affiliate</span>
-              <h2 id="pawnova-heading">Pawnova</h2>
-              <p>A live Amazon affiliate website for discovering products and following links to Amazon. Explore the published project and its customer-facing experience.</p>
-              <a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer" className="live-project-link">Visit Pawnova <Arrow /></a>
+              <span className="kicker">Proof of method / Concept case studies</span>
+              <h2 id="proof-heading">See the diagnosis before the build.</h2>
+              <p>These concept case studies show how I trace a broken customer path, define the target state, choose the system response, and test the handoffs. They are capability demonstrations, not claims of measured client results.</p>
+              <a href="/case-studies/hvac-lead-system" className="live-project-link">Open a case study <Arrow /></a>
             </div>
-            <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/pawnova-logo-transparent-optimized.webp" alt="Paw Nova Co! logo" loading="lazy" /></div>
+            <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/pawnova-logo-transparent-optimized.webp" alt="ConnectiveStack project proof" loading="lazy" /></div>
           </div>
         </section>
 
