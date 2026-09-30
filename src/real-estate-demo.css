@@ -117,3 +117,18 @@
 @media (prefers-reduced-motion: reduce) {
   .re-gallery-card { transition: none; will-change: auto; }
 }
+/* A dedicated responsive canvas keeps the main hero copy and CTAs readable. */
+.re-scene-visual { position: relative; width: 100%; height: clamp(320px, 62.5vw, 760px); overflow: hidden; background: #090b0a; }
+.re-scene-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.re-unicorn-scene { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .6s ease; }
+.re-unicorn-scene.is-ready { opacity: 1; }
+.re-unicorn-scene canvas { display: block; }
+.re-hero-shade { pointer-events: none; }
+
+.re-scene-section { padding: 64px clamp(20px, 7vw, 112px); background: #0d110f; color: #f6f0e6; }
+.re-scene-heading { margin-bottom: 28px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+.re-scene-heading span { color: #dcc199; font: 700 9px 'DM Sans', sans-serif; letter-spacing: .16em; }
+.re-scene-heading h2 { margin: 12px 0 0; font: 500 clamp(30px, 4vw, 54px)/1.05 Georgia, serif; letter-spacing: -.035em; }
+.re-scene-heading a { display: inline-flex; align-items: center; gap: 10px; padding: 12px 0; color: #e7ceaa; white-space: nowrap; font-size: 12px; }
+@media (max-width: 760px) { .re-scene-section { padding: 38px 20px; } .re-scene-heading { align-items: start; flex-direction: column; gap: 9px; } .re-scene-visual { height: 360px; } }
+@media (prefers-reduced-motion: reduce) { .re-unicorn-scene { transition: none; } }

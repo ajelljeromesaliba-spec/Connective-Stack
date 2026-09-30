@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+import RealEstateScene from './RealEstateScene'
 import './real-estate-demo.css'
 
 const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
@@ -354,6 +355,11 @@ export default function RealEstateDemo() {
         </section>
 
         <section className="re-proof"><div><strong>$186M</strong><span>Career sales</span></div><div><strong>4</strong><span>Specialist advisors</span></div><div><strong>96%</strong><span>List-to-close ratio</span></div><div><strong>18 min</strong><span>Average lead response</span></div></section>
+
+        <section className="re-scene-section" aria-labelledby="re-scene-title">
+          <div className="re-scene-heading"><div><span>A CLOSER LOOK</span><h2 id="re-scene-title">A different perspective on home.</h2></div><a href="#properties">View the collection <Icon name="arrow" /></a></div>
+          <RealEstateScene />
+        </section>
 
         <VisitorPathway />
 
