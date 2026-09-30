@@ -517,7 +517,7 @@ function App() {
     <>
       <header className="site-header portfolio-header">
         <a href="#top" className="brand" aria-label="ConnectiveStack home">
-          <img src="/assets/connectivestack-metallic-logo.jpg" alt="ConnectiveStack" />
+          <img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" />
         </a>
         <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="site-navigation">
           <span /><span />
@@ -621,7 +621,7 @@ function App() {
               <p>A live Amazon affiliate website for discovering products and following links to Amazon. Explore the published project and its customer-facing experience.</p>
               <a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer" className="live-project-link">Visit Pawnova <Arrow /></a>
             </div>
-            <div className="live-project-mark"><img src="/assets/pawnova-logo-transparent.png" alt="Paw Nova Co! logo" loading="lazy" /></div>
+            <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/pawnova-logo-transparent-optimized.webp" alt="Paw Nova Co! logo" loading="lazy" /></div>
           </div>
         </section>
 
@@ -785,7 +785,7 @@ function App() {
       </main>
 
       <footer className="portfolio-footer">
-        <a href="#top" className="footer-brand"><img src="/assets/connectivestack-metallic-logo.jpg" alt="ConnectiveStack" /></a>
+        <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
         <p>Fixing the systems between websites, leads, CRM, automation, and customer handoffs.</p>
         <div>
           <span>© {new Date().getFullYear()} ConnectiveStack</span>
@@ -804,13 +804,13 @@ function App() {
   )
 }
 
-const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
+export function renderRoute(currentPath, search = '') {
 const caseStudySlug = currentPath.startsWith('/case-studies/')
   ? currentPath.replace('/case-studies/', '')
   : null
 const caseStudySlugs = new Set(['hvac-lead-system', 'luxury-real-estate', 'healthcare-patient-experience'])
 const ghlSystemSlug = currentPath === '/ghl-systems'
-  ? new URLSearchParams(window.location.search).get('system')
+  ? new URLSearchParams(search).get('system')
   : null
 
 const guideSlug = currentPath.startsWith('/guides/') ? currentPath.replace('/guides/', '') : null
@@ -834,6 +834,12 @@ const route = currentPath === '/seo-guides'
         ? <HealthcareDemo />
         : caseStudySlugs.has(caseStudySlug)
           ? <CaseStudy slug={caseStudySlug} />
-          : <App />
+          : currentPath === '/' ? <App /> : <main className="seo-main seo-article"><h1>Page not found</h1><p>This address does not match a page on ConnectiveStack.</p><a href="/">Return to ConnectiveStack</a></main>
 
-createRoot(document.getElementById('root')).render(route)
+return route
+}
+
+if (typeof document !== 'undefined') {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  createRoot(document.getElementById('root')).render(renderRoute(path, window.location.search))
+}

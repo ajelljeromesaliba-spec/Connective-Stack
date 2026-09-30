@@ -11,7 +11,7 @@ const Check = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
 )
 
-const caseStudies = {
+export const caseStudies = {
   'hvac-lead-system': {
     industry: 'Home services',
     title: 'From urgent HVAC problem to an organized service request.',
@@ -286,9 +286,9 @@ export default function CaseStudy({ slug }) {
 
   useEffect(() => {
     document.title = `${study.title} | ConnectiveStack Case Study`
-    const pageUrl = `https://connectivestack.com/case-studies/${slug}`
+    const pageUrl = `https://www.connectivestack.com/case-studies/${slug}`
     const pageDescription = study.summary
-    const socialImage = `https://connectivestack.com${study.image}`
+    const socialImage = `https://www.connectivestack.com${study.image}`
     const setMeta = (selector, attribute, value) => {
       const element = document.head.querySelector(selector)
       if (element) element.setAttribute(attribute, value)
@@ -356,7 +356,7 @@ export default function CaseStudy({ slug }) {
   return (
     <div className={`case-page case-theme-${study.theme}`}>
       <header className="case-header">
-        <a className="case-back" href="/" aria-label="ConnectiveStack portfolio"><img src="/assets/connectivestack-metallic-logo.jpg" alt="ConnectiveStack" /></a>
+        <a className="case-back" href="/" aria-label="ConnectiveStack portfolio"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
         <span>CONCEPT CASE STUDY</span>
         <a className="case-header-cta" href={study.demoHref}>{study.demoLabel} <Arrow /></a>
       </header>

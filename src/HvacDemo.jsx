@@ -508,7 +508,7 @@ export default function HvacDemo() {
           </div>
           <div className="hvac-hero-visual" aria-label="HVAC technician inspecting a home thermostat">
             <div className="hvac-hero-photo">
-              <img src="/assets/hvac-hero-technician.webp" alt="HVAC technician inspecting a smart thermostat in a modern home" />
+              <img width="1586" height="992" decoding="async" src="/assets/hvac-hero-technician.webp" alt="HVAC technician inspecting a smart thermostat in a modern home" />
               <div className="hvac-photo-shade" />
               <div className="hvac-photo-label"><span>ON-SITE EXPERTISE</span><strong>Diagnostics built around the whole system</strong></div>
             </div>
@@ -535,11 +535,11 @@ export default function HvacDemo() {
           </div>
           <div className="hvac-service-showcase" aria-label="HVAC service photography">
             <figure className="service-photo service-photo-large">
-              <img src="/assets/hvac-ac-service.webp" alt="HVAC technician diagnosing an outdoor air conditioning condenser" loading="lazy" />
+              <img width="1400" height="1050" decoding="async" src="/assets/hvac-ac-service.webp" alt="HVAC technician diagnosing an outdoor air conditioning condenser" loading="lazy" />
               <figcaption><span>Cooling systems</span><strong>Detailed diagnostics before recommendations</strong></figcaption>
             </figure>
             <figure className="service-photo">
-              <img src="/assets/hvac-furnace-service.webp" alt="HVAC technician maintaining a residential furnace" loading="lazy" />
+              <img width="1400" height="1050" decoding="async" src="/assets/hvac-furnace-service.webp" alt="HVAC technician maintaining a residential furnace" loading="lazy" />
               <figcaption><span>Heating systems</span><strong>Maintenance that protects comfort and reliability</strong></figcaption>
             </figure>
             <div className="service-visual-note">

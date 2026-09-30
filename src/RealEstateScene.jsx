@@ -23,7 +23,7 @@ function loadSDK() {
 export default function RealEstateScene() {
   const host = useRef(null)
   const [ready, setReady] = useState(false)
-  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [reducedMotion, setReducedMotion] = useState(() => typeof window === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches)
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
