@@ -575,31 +575,20 @@ function App() {
       </header>
 
       <main id="top" className="portfolio-main">
-        <section className="hero cinematic-hero" data-scroll-scene>
+        <section className="hero cinematic-hero journey-hero" data-scroll-scene>
           <div className="hero-pinned">
-            <div className="hero-film connection-stage" aria-hidden="true">
-              <div className="connection-atmosphere" />
-              <ConnectionScene />
-              <div className="hero-film-vignette" />
-              <div className="connection-captions"><span>INTAKE / WEBSITE</span><span>CONNECTED SYSTEM</span><span>HUMAN HANDOFF</span></div>
-            </div>
+            <ConnectionScene />
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
               <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Websites and connected systems</div>
-              <h1>FROM FIRST CLICK <em>TO NEXT ACTION.</em></h1>
-              <p className="hero-lead">I build websites and connect the CRM, calendar, and follow-up behind them, so new requests reach the right person and move forward.</p>
+              <h1>Your website should do more than <em>collect inquiries.</em></h1>
+              <p className="hero-lead">I build websites and connect the forms, CRM, calendar, and follow-up so every inquiry has a clear next step.</p>
               <div className="hero-actions">
                 <a href="#work" className="button button-primary">See a live project <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
               </div>
             </div>
             <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see the system</span><span className="hero-scroll-line" /></div>
-            <div className="connection-stage-label" aria-hidden="true">
-              <span>THE PATH / <strong>CAPTURE</strong></span>
-              <span>THE PATH / <strong>ROUTE</strong></span>
-              <span>THE PATH / <strong>FOLLOW UP</strong></span>
-              <span>THE PATH / <strong>HANDOFF</strong></span>
-            </div>
             <div className="hero-motion-track" aria-hidden="true"><span /></div>
           </div>
         </section>
