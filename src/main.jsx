@@ -215,12 +215,63 @@ const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
 const offerTicker = [
   'Lead response & qualification',
   'AI receptionist & call handling',
+  'Missed-call recovery',
+  'SMS & email follow-up',
   'CRM & ownership routing',
-  'Website conversion paths',
-  'Booking & follow-up logic',
-  'Disconnected-tool repair',
-  'Technical troubleshooting',
-  'AI where it earns its place',
+  'Appointment booking',
+  'Lead reactivation',
+  'Review & reporting workflows',
+]
+
+const leadConversionCapabilities = [
+  {
+    number: '01',
+    title: 'Missed-call recovery',
+    copy: 'When a call is missed, trigger an immediate text-back so the lead gets a response while the intent is still fresh.',
+    outcome: 'Fewer inbound opportunities disappear just because nobody picked up.',
+  },
+  {
+    number: '02',
+    title: 'Instant SMS & email follow-up',
+    copy: 'New form submissions and inquiries can receive the right first response immediately, then continue through a defined follow-up sequence.',
+    outcome: 'Every new lead gets a next step without waiting for someone to remember.',
+  },
+  {
+    number: '03',
+    title: 'Lead qualification & routing',
+    copy: 'Ask the questions that matter, tag the lead, update the CRM, and route qualified opportunities to the right person or pipeline.',
+    outcome: 'Your team spends more time on the leads that actually need them.',
+  },
+  {
+    number: '04',
+    title: 'Appointment booking & reminders',
+    copy: 'Move qualified leads into the right calendar, then send confirmations, reminders, and no-show follow-up around the appointment.',
+    outcome: 'Less friction between interest and an actual conversation on the calendar.',
+  },
+  {
+    number: '05',
+    title: 'CRM pipeline automation',
+    copy: 'Create contacts and opportunities, assign owners, update stages, trigger tasks, and keep the lead history visible in one place.',
+    outcome: 'The next action is tied to the lead record instead of scattered across inboxes and memory.',
+  },
+  {
+    number: '06',
+    title: 'Lead reactivation',
+    copy: 'Re-engage older leads, no-responses, and unfinished conversations with controlled SMS or email sequences instead of letting the database sit idle.',
+    outcome: 'Existing lead data gets another chance to produce conversations before you pay for more traffic.',
+  },
+  {
+    number: '07',
+    title: 'Review & reputation workflows',
+    copy: 'After the right customer milestone, automatically request a review and keep the request process consistent without manual chasing.',
+    outcome: 'Happy customers are asked at the right time instead of only when someone remembers.',
+  },
+  {
+    number: '08',
+    title: 'Reporting & failure alerts',
+    copy: 'Track the agreed lead path and surface failed handoffs, unanswered leads, or workflow errors before they quietly pile up.',
+    outcome: 'You can see where the system is leaking instead of guessing from scattered activity.',
+  },
 ]
 function CookieConsent({ onChoice, onPrivacy }) {
   return (
@@ -641,12 +692,54 @@ function App() {
           </div>
         </section>
 
+        <section className="lead-system-section" id="lead-system" data-scroll-scene aria-labelledby="lead-system-heading">
+          <div className="lead-system-heading" data-reveal>
+            <span className="kicker">What the system can handle</span>
+            <h2 id="lead-system-heading">A lead comes in. The next steps should not depend on memory.</h2>
+            <p>ConnectiveStack can handle the repeatable work between a new inquiry and the next real business action. We use the pieces your process actually needs instead of forcing every business into the same stack.</p>
+          </div>
+
+          <div className="lead-system-flow" data-reveal aria-label="Lead conversion workflow">
+            <span>New lead</span>
+            <i aria-hidden="true">→</i>
+            <span>Immediate response</span>
+            <i aria-hidden="true">→</i>
+            <span>Qualification</span>
+            <i aria-hidden="true">→</i>
+            <span>Appointment</span>
+            <i aria-hidden="true">→</i>
+            <span>CRM + follow-up</span>
+          </div>
+
+          <div className="lead-system-grid">
+            {leadConversionCapabilities.map(item => (
+              <article className="lead-system-card" key={item.title} data-reveal data-depth-card>
+                <span className="lead-system-number">{item.number}</span>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+                <div className="lead-system-outcome">
+                  <small>Business result</small>
+                  <strong>{item.outcome}</strong>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="lead-system-cta" data-reveal>
+            <div>
+              <span>One path, connected end to end</span>
+              <strong>Call, form, text, email, calendar, CRM, and follow-up can work as one system.</strong>
+            </div>
+            <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Map my lead path <Arrow /></a>
+          </div>
+        </section>
+
         <section className="ai-receptionist-section" id="ai-receptionist" data-scroll-scene aria-labelledby="ai-receptionist-heading">
           <div className="ai-receptionist-shell" data-reveal>
             <div className="ai-receptionist-copy">
               <span className="kicker">AI Receptionist</span>
               <h2 id="ai-receptionist-heading">Stop losing leads when nobody answers the phone.</h2>
-              <p>An AI receptionist can answer inbound calls 24/7, handle common questions, capture contact details, qualify the caller, and book appointments into your calendar. When a person should take over, the call or lead can be routed to your team with the context already captured.</p>
+              <p>The AI receptionist is one part of the lead system. It can answer inbound calls 24/7, handle common questions, capture contact details, qualify the caller, and book appointments into your calendar. The same lead can then continue into CRM routing, SMS or email follow-up, reminders, and human handoff without starting over.</p>
               <div className="ai-receptionist-actions">
                 <a href="/demos/hvac-ai-front-desk" className="button button-primary">See the AI front desk demo <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through your call flow <Arrow /></a>
