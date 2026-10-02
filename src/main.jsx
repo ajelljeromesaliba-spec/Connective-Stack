@@ -591,7 +591,7 @@ function App() {
             <a href="/seo-guides" onClick={closeMenu}>Guides</a>
             <a href="/ajell-saliba" onClick={closeMenu}>About</a>
           </div>
-          <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Show me the problem <Arrow /></a>
+          <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Book a system review <Arrow /></a>
         </nav>
       </header>
 
@@ -606,7 +606,7 @@ function App() {
               <p className="hero-lead">ConnectiveStack fixes what happens after someone clicks, calls, or submits: response, qualification, CRM routing, follow-up, and booking. The goal is simple: fewer good leads dying in the gap between interest and action.</p>
               <div className="hero-actions">
                 <a href="#work" className="button button-primary">See how I solve it <Arrow /></a>
-                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
+                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Book a system review <Arrow /></a>
               </div>
             </div>
             <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see the system</span><span className="hero-scroll-line" /></div>
@@ -626,9 +626,9 @@ function App() {
         <section className="live-project" id="work" aria-labelledby="proof-heading" data-scroll-scene>
           <div className="live-project-inner" data-reveal data-depth-card>
             <div className="live-project-copy">
-              <span className="kicker">Proof of method / Concept case studies</span>
-              <h2 id="proof-heading">See the diagnosis before the build.</h2>
-              <p>These concept case studies show how I trace a broken customer path, define the target state, choose the system response, and test the handoffs. They are capability demonstrations, not claims of measured client results.</p>
+              <span className="kicker">System case studies</span>
+              <h2 id="proof-heading">See the thinking behind the build.</h2>
+              <p>These walkthroughs show how I diagnose a broken customer path, define the target state, design the system response, and test the handoffs. They are demonstration builds designed to make the approach and execution inspectable before we work together.</p>
               <a href="/case-studies/hvac-lead-system" className="live-project-link">Open a case study <Arrow /></a>
             </div>
             <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/pawnova-logo-transparent-optimized.webp" alt="ConnectiveStack project proof" loading="lazy" /></div>
