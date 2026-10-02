@@ -107,7 +107,7 @@ const pricingTiers = [
     label: 'Starting project price · USD',
     description: 'For teams whose website, CRM, calendar, email, phone, and automations exist but still behave like separate systems.',
     bestFor: 'Best for businesses with multiple tools, manual handoffs, and unclear ownership across the customer journey',
-    includes: ['Full lead-path diagnosis', 'Everything in the Acquisition Path Rebuild', 'Website, CRM, calendar, and communication connections', 'Workflow, ownership, and fallback logic', 'Lead routing and lifecycle automation', 'Custom integration work within the agreed scope', 'Failure-path testing, QA, and documentation', '30 days of post-launch technical support'],
+    includes: ['Full lead-path diagnosis', 'Everything in the Acquisition Path Rebuild', 'Website, CRM, calendar, and communication connections', 'Workflow, ownership, and fallback logic', 'Lead routing and lifecycle automation', 'Custom integration work within the agreed scope', 'AI receptionist or voice workflow where it fits the diagnosed path', 'Failure-path testing, QA, and documentation', '30 days of post-launch technical support'],
   },
 ]
 
@@ -213,12 +213,12 @@ function ServiceModal({ service, onClose }) {
 
 const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
 const offerTicker = [
-  'Customer-path diagnosis',
-  'Lead-path repair',
+  'Lead response & qualification',
+  'AI receptionist & call handling',
   'CRM & ownership routing',
-  'Website & delivery failures',
-  'Disconnected-tool repair',
+  'Website conversion paths',
   'Booking & follow-up logic',
+  'Disconnected-tool repair',
   'Technical troubleshooting',
   'AI where it earns its place',
 ]
@@ -295,7 +295,7 @@ function ProjectInquiryForm() {
       <label>Phone number <small>Optional</small><input name="phone" type="tel" autoComplete="tel" placeholder="US or international number" /></label>
       <label>Company or business<input name="company" autoComplete="organization" placeholder="Company name" /></label>
       <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
-      <label>What is going wrong?<select name="service" required defaultValue=""><option value="" disabled>Select the closest problem</option><option>Leads are not being followed up correctly</option><option>Website or form is not working as expected</option><option>CRM, calendar, or tools are disconnected</option><option>Customer journey or booking flow has too much friction</option><option>Automation is failing on edge cases</option><option>Internal handoffs are too manual</option><option>I need a new website around a better customer path</option><option>Technical troubleshooting / hourly support</option><option>Not sure yet</option></select></label>
+      <label>What is going wrong?<select name="service" required defaultValue=""><option value="" disabled>Select the closest problem</option><option>Calls are being missed or answered too slowly</option><option>Leads are not being followed up correctly</option><option>Website or form is not working as expected</option><option>CRM, calendar, or tools are disconnected</option><option>Customer journey or booking flow has too much friction</option><option>Automation is failing on edge cases</option><option>Internal handoffs are too manual</option><option>I need a new website around a better customer path</option><option>Technical troubleshooting / hourly support</option><option>Not sure yet</option></select></label>
       <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
       <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,500–$2,999</option><option>$3,000–$4,999</option><option>$5,000–$7,499</option><option>$7,500+</option><option>Need a recommendation</option></select></label>
       <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
@@ -581,8 +581,8 @@ function App() {
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
               <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Customer acquisition systems</div>
-              <h1>Your leads aren’t always the problem. <em>What happens next might be.</em></h1>
-              <p className="hero-lead">I find where prospects get lost between your website, forms, calls, CRM, follow-up, and booking, then build the system that fixes the broken handoffs.</p>
+              <h1>Turn more of the leads you already have into <em>booked appointments.</em></h1>
+              <p className="hero-lead">ConnectiveStack fixes what happens after someone clicks, calls, or submits: response, qualification, CRM routing, follow-up, and booking. The goal is simple: fewer good leads dying in the gap between interest and action.</p>
               <div className="hero-actions">
                 <a href="#work" className="button button-primary">See how I solve it <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through a problem <Arrow /></a>
@@ -621,9 +621,9 @@ function App() {
             </video>
           </div>
           <div className="section-heading" data-reveal>
-            <span className="kicker">Problems I solve</span>
-            <h2>Start with what is breaking. Then fix the system around it.</h2>
-            <p>Sometimes the fix is a page. Sometimes it is DNS, CRM routing, a workflow, calendar logic, email delivery, a webhook, or a deployment issue. I start with the failure point, not a preset package.</p>
+            <span className="kicker">Where leads get lost</span>
+            <h2>Fix the leaks between interest and a booked conversation.</h2>
+            <p>A lead can disappear because nobody answered, the response came too late, the CRM routed it wrong, follow-up stopped, or booking created friction. I trace that path first, then fix the part costing you opportunities.</p>
           </div>
           <div className="service-list">
             {services.map(service => (
@@ -639,6 +639,43 @@ function App() {
               </article>
             ))}
           </div>
+        </section>
+
+        <section className="ai-receptionist-section" id="ai-receptionist" data-scroll-scene aria-labelledby="ai-receptionist-heading">
+          <div className="ai-receptionist-shell" data-reveal>
+            <div className="ai-receptionist-copy">
+              <span className="kicker">AI Receptionist</span>
+              <h2 id="ai-receptionist-heading">Stop losing leads when nobody answers the phone.</h2>
+              <p>An AI receptionist can answer inbound calls 24/7, handle common questions, capture contact details, qualify the caller, and book appointments into your calendar. When a person should take over, the call or lead can be routed to your team with the context already captured.</p>
+              <div className="ai-receptionist-actions">
+                <a href="/demos/hvac-ai-front-desk" className="button button-primary">See the AI front desk demo <Arrow /></a>
+                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through your call flow <Arrow /></a>
+              </div>
+            </div>
+            <div className="ai-receptionist-flow" aria-label="AI receptionist workflow">
+              <article>
+                <span>01</span>
+                <strong>Answer</strong>
+                <p>Pick up inbound calls even when your staff is busy or the office is closed.</p>
+              </article>
+              <article>
+                <span>02</span>
+                <strong>Qualify</strong>
+                <p>Ask the questions your team needs before deciding the next step.</p>
+              </article>
+              <article>
+                <span>03</span>
+                <strong>Book or route</strong>
+                <p>Schedule qualified callers or hand off the conversation when a human should step in.</p>
+              </article>
+              <article>
+                <span>04</span>
+                <strong>Follow through</strong>
+                <p>Send the lead into your CRM, trigger follow-up, and keep the next action visible.</p>
+              </article>
+            </div>
+          </div>
+          <p className="ai-receptionist-note" data-reveal>AI is the mechanism. The business problem is missed calls, slow response, and leads going cold before someone can act.</p>
         </section>
 
         <section className="price-section" data-scroll-scene>
@@ -746,7 +783,7 @@ function App() {
           <div className="process-output" data-reveal>
             <span>Tools used when the diagnosis calls for them</span>
             <div><i /> Website and customer experience</div>
-            <div><i /> Forms and qualification</div>
+            <div><i /> Forms, calls, and qualification</div>
             <div><i /> CRM and ownership</div>
             <div><i /> Automation and integrations</div>
             <div><i /> Infrastructure and deployment</div>
@@ -757,8 +794,8 @@ function App() {
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
             <span className="kicker kicker-dark">Start with the problem</span>
-            <h2>Show me what is broken, slow, disconnected, or still manual.</h2>
-            <p>Send the current website, tools, what should happen, what happens instead, and any deadline or budget constraint. I will trace the likely failure points and recommend a realistic scope.</p>
+            <h2>Show me where leads are getting stuck, missed, or going cold.</h2>
+            <p>Send the current website, call flow, CRM, follow-up setup, and what should happen after a lead reaches you. I will trace the likely leak points and recommend a realistic scope.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
               <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
@@ -775,7 +812,7 @@ function App() {
 
       <footer className="portfolio-footer">
         <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
-        <p>Diagnosing and fixing the broken handoffs between customer intent, your website, CRM, follow-up, booking, and the people responsible for the next action.</p>
+        <p>Fixing the gap between customer intent and the next action: calls answered, leads qualified, follow-up triggered, CRM updated, and appointments booked.</p>
         <div>
           <span>© {new Date().getFullYear()} ConnectiveStack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
