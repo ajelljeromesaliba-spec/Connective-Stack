@@ -83,34 +83,6 @@ const services = [
   },
 ]
 
-const pricingTiers = [
-  {
-    name: 'Focused Fix',
-    price: '1,500',
-    label: 'Starting project price · USD',
-    description: 'For a contained problem with a clear failure point: a broken lead path, website issue, form, booking flow, routing problem, or technical handoff.',
-    bestFor: 'Best for one clearly defined problem that does not require rebuilding the whole system',
-    includes: ['Diagnosis of the affected customer path', 'Repair or rebuild of the agreed failure point', 'Required configuration and connection work', 'End-to-end testing of the repaired path', 'Clear handoff and documentation', 'Production deployment where required', 'Defined revision scope', '30 days of post-launch technical support'],
-  },
-  {
-    name: 'Acquisition Path Rebuild',
-    price: '3,000',
-    label: 'Starting project price · USD',
-    description: 'For businesses getting interest but losing momentum between the first click, inquiry, qualification, follow-up, and appointment.',
-    bestFor: 'Best for businesses with demand but an unreliable path from inquiry to next action',
-    featured: true,
-    includes: ['Full lead-path diagnosis', 'Everything in the Focused Fix', 'Form, qualification, and CTA logic', 'CRM, ownership, and pipeline routing', 'Follow-up and booking automation', 'Tracking for the agreed conversion path', 'End-to-end QA and handoff', '30 days of post-launch technical support'],
-  },
-  {
-    name: 'Connected Acquisition System',
-    price: '5,000',
-    label: 'Starting project price · USD',
-    description: 'For teams whose website, CRM, calendar, email, phone, and automations exist but still behave like separate systems.',
-    bestFor: 'Best for businesses with multiple tools, manual handoffs, and unclear ownership across the customer journey',
-    includes: ['Full lead-path diagnosis', 'Everything in the Acquisition Path Rebuild', 'Website, CRM, calendar, and communication connections', 'Workflow, ownership, and fallback logic', 'Lead routing and lifecycle automation', 'Custom integration work within the agreed scope', 'AI receptionist or voice workflow where it fits the diagnosed path', 'Failure-path testing, QA, and documentation', '30 days of post-launch technical support'],
-  },
-]
-
 const process = [
   ['01', 'Diagnose the failure', 'We trace what should happen from first customer action to the next business outcome, then identify where data, ownership, communication, or intent breaks.'],
   ['02', 'Prescribe the smallest useful fix', 'I define what actually needs to change, what should stay, which tools belong in the solution, and the success criteria before implementation starts.'],
@@ -322,7 +294,6 @@ function ProjectInquiryForm() {
         `Company: ${payload.company || 'Not provided'}`,
         `Service: ${payload.service || ''}`,
         `Engagement: ${payload.engagement || ''}`,
-        `Budget: ${payload.budget || ''}`,
         `Timeline: ${payload.timeline || ''}`,
         '',
         'Project details:',
@@ -339,7 +310,7 @@ function ProjectInquiryForm() {
       <div className="inquiry-form-heading">
         <span>PROJECT INQUIRY</span>
         <h3>Tell me what should happen, and what happens instead.</h3>
-        <p>Share the current setup, the failure or bottleneck, the result you expected, and any deadline or budget constraint. I use that to narrow the problem before recommending a build.</p>
+        <p>Share the current setup, the failure or bottleneck, the result you expected, and any deadline or technical constraint. I use that to narrow the problem before recommending a build.</p>
       </div>
       <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
       <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
@@ -348,7 +319,6 @@ function ProjectInquiryForm() {
       <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
       <label>What is going wrong?<select name="service" required defaultValue=""><option value="" disabled>Select the closest problem</option><option>Calls are being missed or answered too slowly</option><option>Leads are not being followed up correctly</option><option>Website or form is not working as expected</option><option>CRM, calendar, or tools are disconnected</option><option>Customer journey or booking flow has too much friction</option><option>Automation is failing on edge cases</option><option>Internal handoffs are too manual</option><option>I need a new website around a better customer path</option><option>Technical troubleshooting / hourly support</option><option>Not sure yet</option></select></label>
       <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
-      <label>Estimated budget<select name="budget" required defaultValue=""><option value="" disabled>Select a range</option><option>$1,500–$2,999</option><option>$3,000–$4,999</option><option>$5,000–$7,499</option><option>$7,500+</option><option>Need a recommendation</option></select></label>
       <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
       <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the current problem, the pages or systems you need, and the outcome you want." /></label>
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
@@ -771,69 +741,21 @@ function App() {
           <p className="ai-receptionist-note" data-reveal>AI is the mechanism. The business problem is missed calls, slow response, and leads going cold before someone can act.</p>
         </section>
 
-        <section className="price-section" data-scroll-scene>
-          <div className="price-intro" data-reveal>
-            <span className="kicker">Ways to work together</span>
-            <h2>Diagnose first. Scope the fix second.</h2>
-            <p>I do not prescribe the same stack to every business. We start with the failure point, define the smallest system that fixes it, then agree on scope, price, and success criteria before implementation.</p>
-          </div>
-          <div className="pricing-grid" data-reveal>
-            {pricingTiers.map(tier => (
-              <article className={`pricing-tier ${tier.featured ? 'featured' : ''}`} key={tier.name} data-depth-card>
-                {tier.featured && <span className="pricing-popular">Most common rebuild</span>}
-                <div className="pricing-tier-head">
-                  <span>{tier.name}</span>
-                  <strong><sup>$</sup>{tier.price}<b>+</b></strong>
-                  <small>{tier.label}</small>
-                </div>
-                <p>{tier.description}</p>
-                <em>{tier.bestFor}</em>
-                <ul>{tier.includes.map(item => <li key={item}><Check />{item}</li>)}</ul>
-                <a className={`button ${tier.featured ? 'button-primary' : 'button-secondary'}`} href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss this project <Arrow /></a>
-              </article>
-            ))}
-          </div>
-          <div className="pricing-trust-points" data-reveal>
-            <article data-depth-card>
-              <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
-              <div>
-                <strong>You Own What We Build</strong>
-                <p>Your production accounts, domain, and project assets remain under your ownership. ConnectiveStack simply gets the access needed to build and manage your system.</p>
-              </div>
-            </article>
-            <article data-depth-card>
-              <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
-              <div>
-                <strong>30-Day Post-Launch Support</strong>
-                <p>Technical support for the original build is included for 30 days after launch.</p>
-              </div>
-            </article>
-          </div>
-          <div className="hourly-support" data-reveal data-depth-card>
-            <div className="hourly-support-rate">
-              <span>Flexible support</span>
-              <strong><sup>$</sup>75<small>/hour</small></strong>
-              <p>For smaller updates, fixes, and ongoing technical help.</p>
+        <section className="pricing-trust-points engagement-trust" aria-label="What to expect when working with ConnectiveStack" data-scroll-scene>
+          <article data-reveal data-depth-card>
+            <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
+            <div>
+              <strong>You Own What We Build</strong>
+              <p>Your production accounts, domain, and project assets remain under your ownership. ConnectiveStack gets only the access needed to build and manage the agreed system.</p>
             </div>
-            <div className="hourly-support-details">
-              <strong>What hourly support can cover</strong>
-              <ul>
-                <li><Check /> Website content and layout updates</li>
-                <li><Check /> Technical troubleshooting and bug fixes</li>
-                <li><Check /> Domain, DNS, form, and calendar support</li>
-                <li><Check /> CRM, workflow, and integration updates</li>
-              </ul>
+          </article>
+          <article data-reveal data-depth-card>
+            <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
+            <div>
+              <strong>30-Day Post-Launch Support</strong>
+              <p>Technical support for the original build is included for 30 days after launch so issues tied to the delivered scope can be addressed.</p>
             </div>
-            <div className="hourly-support-terms">
-              <span>Clear expectations</span>
-              <p><strong>1-hour minimum</strong> for each support request, then billed in 30-minute increments. I confirm the expected time before starting. Larger builds and new features are quoted as fixed-price projects.</p>
-              <a href={CALENDAR_URL} target="_blank" rel="noreferrer">Request hourly support <Arrow /></a>
-            </div>
-          </div>
-          <div className="pricing-note" data-reveal>
-            <strong>The diagnosis does not fit a box?</strong>
-            <p>Good. The point is not to force your business into a package. If the real fix needs custom web work, AI, voice, API integration, or a different architecture, I scope that after understanding the failure. Third-party platform and usage fees remain separate.</p>
-          </div>
+          </article>
         </section>
 
         <section className="process-showcase" id="process" data-scroll-scene>
@@ -894,8 +816,8 @@ function App() {
               <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
             </div>
             <div className="contact-expectations">
-              <div><strong>Project-based</strong><span>Defined scope, price, and delivery plan</span></div>
-              <div><strong>$75/hour</strong><span>Technical support with a one-hour minimum</span></div>
+              <div><strong>Scoped around the problem</strong><span>Clear deliverables and delivery plan before implementation</span></div>
+              <div><strong>Direct technical support</strong><span>Work with the person diagnosing and building the system</span></div>
               <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
             </div>
           </div>

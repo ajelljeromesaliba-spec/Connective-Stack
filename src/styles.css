@@ -3134,3 +3134,17 @@ body:has(.cookie-consent) .calendly-badge-widget { display: none !important; }
     justify-content: center;
   }
 }
+
+
+/* Trust points retained after removing public pricing */
+.engagement-trust {
+  margin: 0;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 7vw, 7rem);
+  background: #e7eeeb;
+}
+
+@media (max-width: 720px) {
+  .engagement-trust {
+    grid-template-columns: 1fr;
+  }
+}
