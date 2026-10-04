@@ -23,8 +23,8 @@ const Check = () => (
 const services = [
   {
     number: '01',
-    title: 'Leads come in, but follow-up breaks',
-    copy: 'A form gets submitted, but the lead stalls between the inbox, CRM, owner, calendar, or next follow-up.',
+    title: 'Every new lead gets a fast next step',
+    copy: 'New inquiries move from first response to qualification, routing, follow-up, and booking without waiting for someone to remember.',
     tags: ['Lead routing', 'Follow-up', 'Booking'],
     summary: 'I trace the lead path from first submission to the person or system responsible for the next action, then fix the handoffs where leads are getting delayed or lost.',
     includes: ['Form and lead-source mapping', 'CRM contact and opportunity creation', 'Owner, pipeline, and notification routing', 'Calendar, reminder, and follow-up logic'],
@@ -33,8 +33,8 @@ const services = [
   },
   {
     number: '02',
-    title: 'The website works until the technical layer breaks',
-    copy: 'The page may look fine while DNS, deployment, forms, email delivery, redirects, or third-party connections fail behind it.',
+    title: 'Your customer path stays live and reliable',
+    copy: 'Forms submit, emails arrive, domains resolve, redirects work, and the technical layer supports the customer journey instead of interrupting it.',
     tags: ['DNS', 'Deployment', 'Troubleshooting'],
     summary: 'I work backward from the visible failure, isolate the layer causing it, and repair the connection without treating every issue like a redesign.',
     includes: ['Domain and DNS checks', 'Vercel and GitHub deployment troubleshooting', 'Form and email-delivery verification', 'Redirect, routing, and integration checks'],
@@ -43,8 +43,8 @@ const services = [
   },
   {
     number: '03',
-    title: 'Your tools do not talk to each other',
-    copy: 'Website, CRM, calendar, email, phone, and automation tools exist, but people still copy data or chase updates manually.',
+    title: 'Your systems move data without manual re-entry',
+    copy: 'Website, CRM, calendar, email, phone, and automation tools pass the right information forward so your team spends less time copying data or chasing updates.',
     tags: ['Integrations', 'Webhooks', 'CRM'],
     summary: 'I map what information needs to move between systems, then connect the tools around the actual business process instead of adding another disconnected app.',
     includes: ['Website-to-CRM connections', 'Webhook and workflow setup', 'Calendar, email, phone, and database handoffs', 'Zapier, Make, API, or native integrations where appropriate'],
@@ -53,8 +53,8 @@ const services = [
   },
   {
     number: '04',
-    title: 'The customer journey has too much friction',
-    copy: 'Visitors cannot tell what to do next, forms ask the wrong questions, or booking and qualification paths create unnecessary drop-off.',
+    title: 'More visitors reach inquiry or booking',
+    copy: 'Clear calls to action, better qualification, and a simpler booking path make it easier for interested visitors to take the next useful step.',
     tags: ['UX', 'Qualification', 'Conversion path'],
     summary: 'I simplify the journey around the real decision the customer needs to make, then connect that action to the system behind it.',
     includes: ['CTA and page-flow review', 'Form and qualification structure', 'Booking-path simplification', 'Mobile and responsive journey checks'],
@@ -63,8 +63,8 @@ const services = [
   },
   {
     number: '05',
-    title: 'Automation works until an edge case happens',
-    copy: 'The happy path runs, but duplicates, missing fields, failed webhooks, no-shows, or unanswered leads expose weak spots.',
+    title: 'Automations recover instead of silently failing',
+    copy: 'Duplicates, missing fields, failed webhooks, no-shows, and unanswered leads trigger a defined fallback instead of creating invisible cleanup work.',
     tags: ['Fallback logic', 'Edge cases', 'Testing'],
     summary: 'I test beyond the ideal workflow and add rules for the cases that usually create silent failures or manual cleanup.',
     includes: ['Duplicate-contact handling', 'Missing-data and status checks', 'Failure notifications and fallback tasks', 'No-show, no-response, and retry paths'],
@@ -73,8 +73,8 @@ const services = [
   },
   {
     number: '06',
-    title: 'Internal handoffs depend on memory',
-    copy: 'A deal closes or a status changes, but the next person only knows because someone sends a message or remembers to create a task.',
+    title: 'Every handoff has a clear owner and next action',
+    copy: 'When a deal closes or a status changes, the right person gets the task, context, and timing automatically instead of relying on memory.',
     tags: ['Tasks', 'Notifications', 'Onboarding'],
     summary: 'I turn repeatable handoffs into visible workflow steps so ownership, timing, and required actions are easier to track.',
     includes: ['Task creation and assignment', 'Internal alerts and status changes', 'Client onboarding sequences', 'Pipeline and delivery-stage updates'],
@@ -84,10 +84,10 @@ const services = [
 ]
 
 const process = [
-  ['01', 'Diagnose the failure', 'We trace what should happen from first customer action to the next business outcome, then identify where data, ownership, communication, or intent breaks.'],
-  ['02', 'Prescribe the smallest useful fix', 'I define what actually needs to change, what should stay, which tools belong in the solution, and the success criteria before implementation starts.'],
-  ['03', 'Build and connect', 'I implement the agreed fix across the customer-facing experience and the systems behind it, without adding tools that do not solve the diagnosed problem.'],
-  ['04', 'Verify the real path', 'We test the normal path and the failure cases end to end, then launch with ownership, documentation, and the next measurement point defined.'],
+  ['01', 'Define the outcome', 'We start with the business result you want after a customer acts, then define the response time, ownership, qualification, booking, or follow-through that result requires.'],
+  ['02', 'Find the constraint', 'I trace the current customer and data path to identify the smallest set of changes standing between the current setup and the target outcome.'],
+  ['03', 'Build the useful system', 'I implement the customer-facing experience, CRM logic, integrations, and automations needed to produce the agreed next action without adding tools for their own sake.'],
+  ['04', 'Verify end to end', 'We test the normal path and the failure cases, then launch with ownership, documentation, and a clear measurement point for the outcome we set at the start.'],
 ]
 
 function LegalModal({ type, onClose }) {
@@ -159,7 +159,7 @@ function ServiceModal({ service, onClose }) {
       <section className="legal-modal service-modal" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
         <div className="legal-header service-modal-header">
           <div>
-            <span>CONNECTIVE STACK / PROBLEM AREA</span>
+            <span>CONNECTIVE STACK / OUTCOME AREA</span>
             <h2 id="service-modal-title">{service.title}</h2>
           </div>
           <button type="button" className="legal-close" onClick={onClose} aria-label={`Close ${service.title} details`}>×</button>
@@ -176,7 +176,7 @@ function ServiceModal({ service, onClose }) {
               <div><span>Target outcome</span><p>{service.result}</p></div>
             </div>
           </div>
-          <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this problem <Arrow /></a>
+          <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary service-modal-cta" onClick={onClose}>Discuss this outcome <Arrow /></a>
         </div>
       </section>
     </div>
@@ -310,17 +310,17 @@ function ProjectInquiryForm() {
       <div className="inquiry-form-heading">
         <span>PROJECT INQUIRY</span>
         <h3>Tell me what should happen, and what happens instead.</h3>
-        <p>Share the current setup, the failure or bottleneck, the result you expected, and any deadline or technical constraint. I use that to narrow the problem before recommending a build.</p>
+        <p>Share the outcome you want, what happens today, and any deadline or technical constraint. I use that to work backward from the business result before recommending a build.</p>
       </div>
       <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
       <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
       <label>Phone number <small>Optional</small><input name="phone" type="tel" autoComplete="tel" placeholder="US or international number" /></label>
       <label>Company or business<input name="company" autoComplete="organization" placeholder="Company name" /></label>
       <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
-      <label>What is going wrong?<select name="service" required defaultValue=""><option value="" disabled>Select the closest problem</option><option>Calls are being missed or answered too slowly</option><option>Leads are not being followed up correctly</option><option>Website or form is not working as expected</option><option>CRM, calendar, or tools are disconnected</option><option>Customer journey or booking flow has too much friction</option><option>Automation is failing on edge cases</option><option>Internal handoffs are too manual</option><option>I need a new website around a better customer path</option><option>Technical troubleshooting / hourly support</option><option>Not sure yet</option></select></label>
+      <label>Which outcome are you trying to improve?<select name="service" required defaultValue=""><option value="" disabled>Select the closest outcome</option><option>Answer more inbound calls faster</option><option>Improve lead follow-up and booking</option><option>Make the website or form convert more reliably</option><option>Connect CRM, calendar, and other tools</option><option>Simplify the customer journey or booking flow</option><option>Make automations more reliable</option><option>Make internal handoffs automatic and visible</option><option>Build a new website around a stronger customer path</option><option>Resolve a technical issue quickly</option><option>Not sure yet</option></select></label>
       <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
       <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
-      <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the current problem, the pages or systems you need, and the outcome you want." /></label>
+      <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the outcome you want, what happens today, and any pages or systems involved." /></label>
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
       <label className="inquiry-consent inquiry-wide"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about this project and understand that submitting this form does not create a service agreement.</span></label>
       <button className="button button-primary inquiry-submit inquiry-wide" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending inquiry…' : 'Send project inquiry'} <Arrow /></button>
@@ -545,7 +545,7 @@ function App() {
         </button>
         <nav id="site-navigation" className={menuOpen ? 'nav-open' : ''}>
           <div className="nav-primary">
-            <a href="#services" onClick={closeMenu}>Problems I Solve</a>
+            <a href="#services" onClick={closeMenu}>Outcomes</a>
             <div className={`nav-demo-menu ${openNavDropdown === 'case-studies' ? 'mobile-open' : ''}`}>
               <button type="button" className="nav-demo-trigger" onClick={() => toggleNavDropdown('case-studies')} aria-expanded={openNavDropdown === 'case-studies'}>Case Studies <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
               <div className="nav-demo-dropdown">
@@ -602,10 +602,10 @@ function App() {
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
               <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Customer acquisition systems</div>
-              <h1>Turn more of the leads you already have into <em>booked appointments.</em></h1>
-              <p className="hero-lead">ConnectiveStack fixes what happens after someone clicks, calls, or submits: response, qualification, CRM routing, follow-up, and booking. The goal is simple: fewer good leads dying in the gap between interest and action.</p>
+              <h1>Turn more inbound interest into <em>booked appointments.</em></h1>
+              <p className="hero-lead">ConnectiveStack helps you respond faster, qualify consistently, route leads correctly, follow up automatically, and make booking easier. More of the demand you already generate reaches a real sales conversation without adding more admin work.</p>
               <div className="hero-actions">
-                <a href="#work" className="button button-primary">See how I solve it <Arrow /></a>
+                <a href="#work" className="button button-primary">See the outcomes <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Book a system review <Arrow /></a>
               </div>
             </div>
@@ -627,8 +627,8 @@ function App() {
           <div className="live-project-inner" data-reveal data-depth-card>
             <div className="live-project-copy">
               <span className="kicker">System case studies</span>
-              <h2 id="proof-heading">See the thinking behind the build.</h2>
-              <p>These walkthroughs show how I diagnose a broken customer path, define the target state, design the system response, and test the handoffs. They are demonstration builds designed to make the approach and execution inspectable before we work together.</p>
+              <h2 id="proof-heading">See how the outcome gets built.</h2>
+              <p>These walkthroughs start with the business result, map the customer path required to reach it, then show the system logic and handoffs behind the experience. They are demonstration builds designed to make the approach and execution inspectable before we work together.</p>
               <a href="/case-studies/hvac-lead-system" className="live-project-link">Open a case study <Arrow /></a>
             </div>
             <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/pawnova-logo-transparent-optimized.webp" alt="ConnectiveStack project proof" loading="lazy" /></div>
@@ -642,9 +642,9 @@ function App() {
             </video>
           </div>
           <div className="section-heading" data-reveal>
-            <span className="kicker">Where leads get lost</span>
-            <h2>Fix the leaks between interest and a booked conversation.</h2>
-            <p>A lead can disappear because nobody answered, the response came too late, the CRM routed it wrong, follow-up stopped, or booking created friction. I trace that path first, then fix the part costing you opportunities.</p>
+            <span className="kicker">Business outcomes</span>
+            <h2>More leads answered. More follow-up completed. More appointments booked.</h2>
+            <p>The work is built around what should happen after someone shows interest: a fast response, useful qualification, clear ownership, consistent follow-up, and an easy path to the calendar.</p>
           </div>
           <div className="service-list">
             {services.map(service => (
@@ -665,8 +665,8 @@ function App() {
         <section className="lead-system-section" id="lead-system" data-scroll-scene aria-labelledby="lead-system-heading">
           <div className="lead-system-heading" data-reveal>
             <span className="kicker">What the system can handle</span>
-            <h2 id="lead-system-heading">A lead comes in. The next steps should not depend on memory.</h2>
-            <p>ConnectiveStack can handle the repeatable work between a new inquiry and the next real business action. We use the pieces your process actually needs instead of forcing every business into the same stack.</p>
+            <h2 id="lead-system-heading">Make every new lead easier to respond to, qualify, and book.</h2>
+            <p>ConnectiveStack handles the repeatable work between a new inquiry and the next real business action so your team can spend more time on conversations that need a human.</p>
           </div>
 
           <div className="lead-system-flow" data-reveal aria-label="Lead conversion workflow">
@@ -708,8 +708,8 @@ function App() {
           <div className="ai-receptionist-shell" data-reveal>
             <div className="ai-receptionist-copy">
               <span className="kicker">AI Receptionist</span>
-              <h2 id="ai-receptionist-heading">Stop losing leads when nobody answers the phone.</h2>
-              <p>The AI receptionist is one part of the lead system. It can answer inbound calls 24/7, handle common questions, capture contact details, qualify the caller, and book appointments into your calendar. The same lead can then continue into CRM routing, SMS or email follow-up, reminders, and human handoff without starting over.</p>
+              <h2 id="ai-receptionist-heading">Answer more inbound calls and turn more of them into booked appointments.</h2>
+              <p>The AI receptionist can answer inbound calls 24/7, handle common questions, capture contact details, qualify the caller, and book appointments into your calendar. The same lead can continue into CRM routing, SMS or email follow-up, reminders, and human handoff without starting over.</p>
               <div className="ai-receptionist-actions">
                 <a href="/demos/hvac-ai-front-desk" className="button button-primary">See the AI front desk demo <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through your call flow <Arrow /></a>
@@ -738,7 +738,7 @@ function App() {
               </article>
             </div>
           </div>
-          <p className="ai-receptionist-note" data-reveal>AI is the mechanism. The business problem is missed calls, slow response, and leads going cold before someone can act.</p>
+          <p className="ai-receptionist-note" data-reveal>AI is the mechanism. The outcome is simple: more inbound demand gets answered, captured, qualified, and moved to the next step.</p>
         </section>
 
         <section className="pricing-trust-points engagement-trust" aria-label="What to expect when working with ConnectiveStack" data-scroll-scene>
@@ -762,9 +762,9 @@ function App() {
           <div className="process-heading" data-reveal>
             <div>
               <span className="kicker">The ConnectiveStack method</span>
-              <h2>Diagnose. Prescribe. Build. Verify.</h2>
+              <h2>Define the outcome. Build the path. Verify it works.</h2>
             </div>
-            <p>The tool is never the starting point. I trace the business problem across the customer-facing experience and the technical layers behind it, then use only the pieces needed to repair the path.</p>
+            <p>The business result comes first. I define what should happen after a customer acts, work backward through the customer-facing and technical layers, then use only the pieces needed to make that outcome repeatable.</p>
           </div>
 
           <div className="process-stage">
@@ -774,12 +774,12 @@ function App() {
               </video>
               <div className="process-film-topbar">
                 <span><i /> Build sequence</span>
-                <span>Diagnose / Prescribe / Build / Verify</span>
+                <span>Outcome / Constraint / Build / Verify</span>
                 <span>Connected system</span>
               </div>
               <div className="process-film-caption">
                 <small>Connected execution</small>
-                <strong>One method from visible symptom to verified fix</strong>
+                <strong>One method from target outcome to verified result</strong>
               </div>
             </div>
 
@@ -808,15 +808,15 @@ function App() {
         <section className="contact-section" id="contact" data-scroll-scene>
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
-            <span className="kicker kicker-dark">Start with the problem</span>
-            <h2>Show me where leads are getting stuck, missed, or going cold.</h2>
-            <p>Send the current website, call flow, CRM, follow-up setup, and what should happen after a lead reaches you. I will trace the likely leak points and recommend a realistic scope.</p>
+            <span className="kicker kicker-dark">Start with the outcome</span>
+            <h2>Tell me what should happen when a lead reaches you.</h2>
+            <p>More calls answered, faster follow-up, cleaner qualification, more booked appointments, or less manual admin. I will work backward from that result through your current website, CRM, calls, calendar, and follow-up setup, then recommend a realistic scope.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
               <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
             </div>
             <div className="contact-expectations">
-              <div><strong>Scoped around the problem</strong><span>Clear deliverables and delivery plan before implementation</span></div>
+              <div><strong>Scoped around the outcome</strong><span>Clear success criteria, deliverables, and delivery plan before implementation</span></div>
               <div><strong>Direct technical support</strong><span>Work with the person diagnosing and building the system</span></div>
               <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
             </div>
@@ -827,7 +827,7 @@ function App() {
 
       <footer className="portfolio-footer">
         <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
-        <p>Fixing the gap between customer intent and the next action: calls answered, leads qualified, follow-up triggered, CRM updated, and appointments booked.</p>
+        <p>Helping more customer intent become action: calls answered, leads qualified, follow-up completed, CRM updated, and appointments booked.</p>
         <div>
           <span>© {new Date().getFullYear()} ConnectiveStack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
