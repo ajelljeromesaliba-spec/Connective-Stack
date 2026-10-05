@@ -388,7 +388,7 @@ body { margin: 0; }
 @media (max-width: 720px) {
   .case-header { min-height: 64px; padding: 0 18px; gap: 14px; }
   .case-back { font-size: 0; }
-  .case-back::after { content: "← Portfolio"; font-size: 14px; }
+  .case-back::after { content: "← ConnectiveStack"; font-size: 14px; }
   .case-header-cta { font-size: 13px; }
   .case-hero { padding: 56px 20px 70px; gap: 48px; }
   .case-hero h1 { font-size: clamp(43px, 13.5vw, 64px); }
