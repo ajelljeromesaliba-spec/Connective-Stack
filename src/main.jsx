@@ -549,8 +549,8 @@ function App() {
             <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
             <a href="/seo-guides" onClick={closeMenu}>Guides</a>
             <a href="/ajell-saliba" onClick={closeMenu}>About</a>
-            <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Book a system review <Arrow /></a>
           </div>
+          <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Book a system review <Arrow /></a>
         </nav>
       </header>
 
