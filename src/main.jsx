@@ -26,7 +26,7 @@ const services = [
     title: 'Every new lead gets a fast next step',
     copy: 'New inquiries move from first response to qualification, routing, follow-up, and booking without waiting for someone to remember.',
     tags: ['Lead routing', 'Follow-up', 'Booking'],
-    summary: 'I trace the lead path from first submission to the person or system responsible for the next action, then fix the handoffs where leads are getting delayed or lost.',
+    summary: 'ConnectiveStack traces the lead path from first submission to the person or system responsible for the next action, then fixes the handoffs where leads are getting delayed or lost.',
     includes: ['Form and lead-source mapping', 'CRM contact and opportunity creation', 'Owner, pipeline, and notification routing', 'Calendar, reminder, and follow-up logic'],
     bestFor: 'Businesses generating inquiries but seeing slow responses, missed follow-up, or unclear ownership.',
     result: 'A lead path where every inquiry has a defined destination, next action, and fallback.',
@@ -36,7 +36,7 @@ const services = [
     title: 'Your customer path stays live and reliable',
     copy: 'Forms submit, emails arrive, domains resolve, redirects work, and the technical layer supports the customer journey instead of interrupting it.',
     tags: ['DNS', 'Deployment', 'Troubleshooting'],
-    summary: 'I work backward from the visible failure, isolate the layer causing it, and repair the connection without treating every issue like a redesign.',
+    summary: 'ConnectiveStack works backward from the visible failure, isolates the layer causing it, and repairs the connection without treating every issue like a redesign.',
     includes: ['Domain and DNS checks', 'Vercel and GitHub deployment troubleshooting', 'Form and email-delivery verification', 'Redirect, routing, and integration checks'],
     bestFor: 'Teams with a site that is live but has technical issues affecting leads, access, delivery, or deployment.',
     result: 'A working customer path with the underlying technical issue identified and corrected.',
@@ -46,7 +46,7 @@ const services = [
     title: 'Your systems move data without manual re-entry',
     copy: 'Website, CRM, calendar, email, phone, and automation tools pass the right information forward so your team spends less time copying data or chasing updates.',
     tags: ['Integrations', 'Webhooks', 'CRM'],
-    summary: 'I map what information needs to move between systems, then connect the tools around the actual business process instead of adding another disconnected app.',
+    summary: 'ConnectiveStack maps what information needs to move between systems, then connects the tools around the actual business process instead of adding another disconnected app.',
     includes: ['Website-to-CRM connections', 'Webhook and workflow setup', 'Calendar, email, phone, and database handoffs', 'Zapier, Make, API, or native integrations where appropriate'],
     bestFor: 'Businesses already paying for multiple platforms but still relying on manual handoffs.',
     result: 'A connected flow where data reaches the next system or person without unnecessary re-entry.',
@@ -56,7 +56,7 @@ const services = [
     title: 'More visitors reach inquiry or booking',
     copy: 'Clear calls to action, better qualification, and a simpler booking path make it easier for interested visitors to take the next useful step.',
     tags: ['UX', 'Qualification', 'Conversion path'],
-    summary: 'I simplify the journey around the real decision the customer needs to make, then connect that action to the system behind it.',
+    summary: 'ConnectiveStack simplifies the journey around the real decision the customer needs to make, then connects that action to the system behind it.',
     includes: ['CTA and page-flow review', 'Form and qualification structure', 'Booking-path simplification', 'Mobile and responsive journey checks'],
     bestFor: 'Businesses with traffic or interest but a confusing path from first visit to inquiry or appointment.',
     result: 'A clearer customer journey with fewer unnecessary steps between intent and action.',
@@ -66,7 +66,7 @@ const services = [
     title: 'Automations recover instead of silently failing',
     copy: 'Duplicates, missing fields, failed webhooks, no-shows, and unanswered leads trigger a defined fallback instead of creating invisible cleanup work.',
     tags: ['Fallback logic', 'Edge cases', 'Testing'],
-    summary: 'I test beyond the ideal workflow and add rules for the cases that usually create silent failures or manual cleanup.',
+    summary: 'ConnectiveStack tests beyond the ideal workflow and adds rules for the cases that usually create silent failures or manual cleanup.',
     includes: ['Duplicate-contact handling', 'Missing-data and status checks', 'Failure notifications and fallback tasks', 'No-show, no-response, and retry paths'],
     bestFor: 'Teams with automations that technically run but still require frequent manual rescue.',
     result: 'A workflow that has a defined response when the normal path does not complete.',
@@ -76,7 +76,7 @@ const services = [
     title: 'Every handoff has a clear owner and next action',
     copy: 'When a deal closes or a status changes, the right person gets the task, context, and timing automatically instead of relying on memory.',
     tags: ['Tasks', 'Notifications', 'Onboarding'],
-    summary: 'I turn repeatable handoffs into visible workflow steps so ownership, timing, and required actions are easier to track.',
+    summary: 'ConnectiveStack turns repeatable handoffs into visible workflow steps so ownership, timing, and required actions are easier to track.',
     includes: ['Task creation and assignment', 'Internal alerts and status changes', 'Client onboarding sequences', 'Pipeline and delivery-stage updates'],
     bestFor: 'Small teams where important follow-through still depends on manual reminders and scattered messages.',
     result: 'A repeatable handoff with clear ownership and fewer steps left to memory.',
@@ -85,8 +85,8 @@ const services = [
 
 const process = [
   ['01', 'Define the outcome', 'We start with the business result you want after a customer acts, then define the response time, ownership, qualification, booking, or follow-through that result requires.'],
-  ['02', 'Find the constraint', 'I trace the current customer and data path to identify the smallest set of changes standing between the current setup and the target outcome.'],
-  ['03', 'Build the useful system', 'I implement the customer-facing experience, CRM logic, integrations, and automations needed to produce the agreed next action without adding tools for their own sake.'],
+  ['02', 'Find the constraint', 'ConnectiveStack traces the current customer and data path to identify the smallest set of changes standing between the current setup and the target outcome.'],
+  ['03', 'Build the useful system', 'ConnectiveStack implements the customer-facing experience, CRM logic, integrations, and automations needed to produce the agreed next action without adding tools for their own sake.'],
   ['04', 'Verify end to end', 'We test the normal path and the failure cases, then launch with ownership, documentation, and a clear measurement point for the outcome we set at the start.'],
 ]
 
@@ -168,7 +168,7 @@ function ServiceModal({ service, onClose }) {
           <p className="service-modal-summary">{service.summary}</p>
           <div className="service-modal-grid">
             <div className="service-modal-includes">
-              <span>What I usually check and fix</span>
+              <span>What ConnectiveStack checks and fixes</span>
               <ul>{service.includes.map(item => <li key={item}><Check /> <span>{item}</span></li>)}</ul>
             </div>
             <div className="service-modal-aside">
@@ -306,7 +306,7 @@ function ProjectInquiryForm() {
       <div className="inquiry-form-heading">
         <span>PROJECT INQUIRY</span>
         <h3>Tell me what you need.</h3>
-        <p>A short summary is enough. I’ll review it and reply if it looks like a fit.</p>
+        <p>A short summary is enough. ConnectiveStack will review it and reply if it looks like a fit.</p>
       </div>
       <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
       <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
@@ -549,8 +549,8 @@ function App() {
             <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
             <a href="/seo-guides" onClick={closeMenu}>Guides</a>
             <a href="/ajell-saliba" onClick={closeMenu}>About</a>
+            <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Book a system review <Arrow /></a>
           </div>
-          <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Book a system review <Arrow /></a>
         </nav>
       </header>
 
@@ -560,11 +560,11 @@ function App() {
             <ConnectionScene />
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
-              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Web, CRM, automation & AI</div>
+              <div className="eyebrow"><span className="status-dot" /> ConnectiveStack / Web, CRM, automation & AI</div>
               <h1>Turn your systems into a clearer path from <em>customer action to business result.</em></h1>
               <p className="hero-lead">Capture the right information, move it to the right place, automate the repeatable work, keep ownership clear, and make the next step easier to complete. Websites, CRM, integrations, automation, and AI are the tools behind that result.</p>
               <div className="hero-actions">
-                <a href="#services" className="button button-primary">See what I can build <Arrow /></a>
+                <a href="#services" className="button button-primary">Explore capabilities <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Discuss a project <Arrow /></a>
               </div>
             </div>
@@ -645,7 +645,7 @@ function App() {
           <div className="lead-system-cta" data-reveal>
             <div>
               <span>Project-based or ongoing technical support</span>
-              <strong>Bring the problem, current setup, and desired result. I’ll tell you what I can own, what I would change, and what needs deeper specialization.</strong>
+              <strong>Bring the current setup and desired result. You’ll get a clear view of what ConnectiveStack can own, what should change, and where deeper specialization is needed.</strong>
             </div>
             <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Discuss the project <Arrow /></a>
           </div>
@@ -711,7 +711,7 @@ function App() {
               <span className="kicker">The ConnectiveStack method</span>
               <h2>Define the outcome. Build the path. Verify it works.</h2>
             </div>
-            <p>The business result comes first. I define what should happen after a customer acts, work backward through the customer-facing and technical layers, then use only the pieces needed to make that outcome repeatable.</p>
+            <p>The business result comes first. ConnectiveStack defines what should happen after a customer acts, works backward through the customer-facing and technical layers, then uses only the pieces needed to make that outcome repeatable.</p>
           </div>
 
           <div className="process-stage">
@@ -757,7 +757,7 @@ function App() {
           <div className="contact-content" data-reveal>
             <span className="kicker kicker-dark">Start with the outcome</span>
             <h2>Tell me what result you want the system to produce.</h2>
-            <p>That could mean faster response, cleaner handoffs, easier booking, less manual admin, better customer routing, or a technical workflow that reliably completes the next step. I’ll work backward from that result and scope only what is needed.</p>
+            <p>That could mean faster response, cleaner handoffs, easier booking, less manual admin, better customer routing, or a technical workflow that reliably completes the next step. ConnectiveStack works backward from that result and scopes only what is needed.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
               <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
