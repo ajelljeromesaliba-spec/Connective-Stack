@@ -2774,28 +2774,29 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
 .calendly-direct-badge {
   position: fixed;
   right: 20px;
-  bottom: 15px;
+  bottom: 18px;
   z-index: 9998;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 12px 18px;
+  gap: 9px;
+  min-height: 48px;
+  padding: 13px 20px;
+  border: 1px solid rgba(255, 226, 164, .45);
   border-radius: 999px;
-  background: #0069ff;
-  color: #fff;
-  font: 700 14px/1.2 Arial, sans-serif;
+  background: linear-gradient(135deg, #e6c177, #c9974d);
+  color: #111;
+  font: 800 13px/1.2 var(--font-body);
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, .22);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .32);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
 }
-.calendly-direct-badge:hover { background: #0054cf; }
-.calendly-direct-badge:focus-visible { outline: 3px solid #111; outline-offset: 3px; }
+.calendly-direct-badge svg { width: 16px; height: 16px; }
+.calendly-direct-badge:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0, 0, 0, .38); filter: brightness(1.04); }
+.calendly-direct-badge:focus-visible { outline: 3px solid #f4d78c; outline-offset: 3px; }
 @media (max-width: 700px) {
   .calendly-direct-badge { right: 12px; bottom: 12px; max-width: calc(100vw - 24px); }
-  .calendly-badge-widget { right: 12px !important; bottom: 12px !important; }
 }
-
-body:has(.cookie-consent) .calendly-badge-widget { display: none !important; }
 
 
 /* Results-first AI receptionist section */
