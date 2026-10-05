@@ -596,11 +596,11 @@ function App() {
               <h1>Build, connect, and automate the systems your business <em>actually needs.</em></h1>
               <p className="hero-lead">ConnectiveStack works across websites, CRM, automation, integrations, AI-assisted systems, deployment, and technical fixes. I start with the problem and the desired outcome, then use the tools that fit.</p>
               <div className="hero-actions">
-                <a href="#work" className="button button-primary">See selected work <Arrow /></a>
+                <a href="#services" className="button button-primary">See what I can build <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Discuss a project <Arrow /></a>
               </div>
             </div>
-            <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see the system</span><span className="hero-scroll-line" /></div>
+            <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see capabilities</span><span className="hero-scroll-line" /></div>
             <div className="hero-motion-track" aria-hidden="true"><span /></div>
           </div>
         </section>
@@ -611,18 +611,6 @@ function App() {
             {[0, 1].map(copy => <div className="offer-marquee-group" key={copy}>
               {offerTicker.map(item => <span className="offer-marquee-item" key={item}>{item}</span>)}
             </div>)}
-          </div>
-        </section>
-
-        <section className="live-project" id="work" aria-labelledby="proof-heading" data-scroll-scene>
-          <div className="live-project-inner" data-reveal data-depth-card>
-            <div className="live-project-copy">
-              <span className="kicker">Selected work</span>
-              <h2 id="proof-heading">See the systems, builds, and project examples.</h2>
-              <p>The portfolio includes live work and concept builds across websites, CRM, customer flows, automation, integrations, and AI-assisted systems. The examples show how I think through the problem and connect the technical pieces.</p>
-              <a href="/ajell-saliba#projects" className="live-project-link">View projects <Arrow /></a>
-            </div>
-            <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/project-workflow.svg" alt="Connected web, CRM, and automation project preview" loading="lazy" /></div>
           </div>
         </section>
 
