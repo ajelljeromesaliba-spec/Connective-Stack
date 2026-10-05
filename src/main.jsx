@@ -542,7 +542,7 @@ function App() {
               <div className="nav-demo-dropdown">
                 <a href="/case-studies/hvac-lead-system" onClick={closeMenu}>
                   <small>Home Services</small>
-                  <strong>HVAC Lead System</strong>
+                  <strong>Lead System Case Study</strong>
                   <span>Website, intake, booking, and follow-up flow</span>
                 </a>
                 <a href="/case-studies/luxury-real-estate" onClick={closeMenu}>
@@ -561,8 +561,8 @@ function App() {
               <button type="button" className="nav-demo-trigger" onClick={() => toggleNavDropdown('live-demos')} aria-expanded={openNavDropdown === 'live-demos'}>Live Demos <svg viewBox="0 0 12 8" aria-hidden="true"><path d="m1 1 5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
               <div className="nav-demo-dropdown">
                 <a href="/demos/hvac-ai-front-desk" onClick={closeMenu}>
-                  <small>Home Services</small>
-                  <strong>HVAC AI Front Desk</strong>
+                  <small>AI + Voice</small>
+                  <strong>AI Front Desk Example</strong>
                   <span>Chat, voice, estimates, and service intake</span>
                 </a>
                 <a href="/demos/luxury-real-estate" onClick={closeMenu}>
