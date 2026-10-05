@@ -185,64 +185,64 @@ function ServiceModal({ service, onClose }) {
 
 const CALENDAR_URL = 'https://calendly.com/ajell-saliba-connectivestack/30min'
 const offerTicker = [
-  'Lead response & qualification',
-  'AI receptionist & call handling',
-  'Missed-call recovery',
-  'SMS & email follow-up',
-  'CRM & ownership routing',
-  'Appointment booking',
-  'Lead reactivation',
-  'Review & reporting workflows',
+  'Websites & landing pages',
+  'CRM & GHL systems',
+  'Workflow automation',
+  'APIs & webhooks',
+  'AI assistants & receptionists',
+  'Booking & intake flows',
+  'DNS, deployment & email setup',
+  'Technical troubleshooting & QA',
 ]
 
 const leadConversionCapabilities = [
   {
     number: '01',
-    title: 'Missed-call recovery',
-    copy: 'When a call is missed, trigger an immediate text-back so the lead gets a response while the intent is still fresh.',
-    outcome: 'Fewer inbound opportunities disappear just because nobody picked up.',
+    title: 'Websites & landing pages',
+    copy: 'Build responsive pages around the action the visitor needs to take, then connect forms, booking, tracking, and the systems behind them.',
+    outcome: 'A customer-facing experience that is clear, fast, and connected to the next business step.',
   },
   {
     number: '02',
-    title: 'Instant SMS & email follow-up',
-    copy: 'New form submissions and inquiries can receive the right first response immediately, then continue through a defined follow-up sequence.',
-    outcome: 'Every new lead gets a next step without waiting for someone to remember.',
+    title: 'CRM & GoHighLevel systems',
+    copy: 'Set up pipelines, opportunities, forms, calendars, routing, follow-up, segmentation, and the workflow logic around them.',
+    outcome: 'Customer and lead activity is easier to track, assign, and move forward.',
   },
   {
     number: '03',
-    title: 'Lead qualification & routing',
-    copy: 'Ask the questions that matter, tag the lead, update the CRM, and route qualified opportunities to the right person or pipeline.',
-    outcome: 'Your team spends more time on the leads that actually need them.',
+    title: 'Workflow automation',
+    copy: 'Turn repeatable manual steps into triggered workflows with clear conditions, ownership, retries, and fallback actions.',
+    outcome: 'Less routine work depends on memory, copying data, or checking several tools.',
   },
   {
     number: '04',
-    title: 'Appointment booking & reminders',
-    copy: 'Move qualified leads into the right calendar, then send confirmations, reminders, and no-show follow-up around the appointment.',
-    outcome: 'Less friction between interest and an actual conversation on the calendar.',
+    title: 'APIs, webhooks & integrations',
+    copy: 'Connect websites, CRMs, calendars, email, databases, and third-party tools so the right data reaches the right place.',
+    outcome: 'Systems work together instead of creating another manual handoff.',
   },
   {
     number: '05',
-    title: 'CRM pipeline automation',
-    copy: 'Create contacts and opportunities, assign owners, update stages, trigger tasks, and keep the lead history visible in one place.',
-    outcome: 'The next action is tied to the lead record instead of scattered across inboxes and memory.',
+    title: 'AI assistants & receptionists',
+    copy: 'Use AI where it is useful for calls, qualification, support, intake, routing, or structured assistance without making it the source of truth for rules it should not control.',
+    outcome: 'AI handles defined repetitive work while business rules and human review stay where they belong.',
   },
   {
     number: '06',
-    title: 'Lead reactivation',
-    copy: 'Re-engage older leads, no-responses, and unfinished conversations with controlled SMS or email sequences instead of letting the database sit idle.',
-    outcome: 'Existing lead data gets another chance to produce conversations before you pay for more traffic.',
+    title: 'Booking, intake & customer flows',
+    copy: 'Design the path from first contact through qualification, scheduling, reminders, handoff, and follow-up.',
+    outcome: 'Customers have a simpler path to the next step and your team receives better context.',
   },
   {
     number: '07',
-    title: 'Review & reputation workflows',
-    copy: 'After the right customer milestone, automatically request a review and keep the request process consistent without manual chasing.',
-    outcome: 'Happy customers are asked at the right time instead of only when someone remembers.',
+    title: 'DNS, deployment & email setup',
+    copy: 'Handle domains, subdomains, SSL, Vercel and GitHub deployment, SPF, DKIM, DMARC, MX records, and related launch work.',
+    outcome: 'The technical foundation is configured correctly and easier to troubleshoot later.',
   },
   {
     number: '08',
-    title: 'Reporting & failure alerts',
-    copy: 'Track the agreed lead path and surface failed handoffs, unanswered leads, or workflow errors before they quietly pile up.',
-    outcome: 'You can see where the system is leaking instead of guessing from scattered activity.',
+    title: 'Technical QA & troubleshooting',
+    copy: 'Trace broken forms, failed automations, deployment issues, integration errors, routing problems, and edge cases across the full path.',
+    outcome: 'Problems are isolated and fixed at the layer actually causing them.',
   },
 ]
 function CookieConsent({ onChoice, onPrivacy }) {
@@ -592,12 +592,12 @@ function App() {
             <ConnectionScene />
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
-              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Customer acquisition systems</div>
-              <h1>Turn more inbound interest into <em>booked appointments.</em></h1>
-              <p className="hero-lead">ConnectiveStack helps you respond faster, qualify consistently, route leads correctly, follow up automatically, and make booking easier. More of the demand you already generate reaches a real sales conversation without adding more admin work.</p>
+              <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Web, CRM, automation & AI</div>
+              <h1>Build, connect, and automate the systems your business <em>actually needs.</em></h1>
+              <p className="hero-lead">ConnectiveStack works across websites, CRM, automation, integrations, AI-assisted systems, deployment, and technical fixes. I start with the problem and the desired outcome, then use the tools that fit.</p>
               <div className="hero-actions">
-                <a href="#work" className="button button-primary">See the outcomes <Arrow /></a>
-                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Book a system review <Arrow /></a>
+                <a href="#work" className="button button-primary">See selected work <Arrow /></a>
+                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Discuss a project <Arrow /></a>
               </div>
             </div>
             <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see the system</span><span className="hero-scroll-line" /></div>
@@ -617,12 +617,12 @@ function App() {
         <section className="live-project" id="work" aria-labelledby="proof-heading" data-scroll-scene>
           <div className="live-project-inner" data-reveal data-depth-card>
             <div className="live-project-copy">
-              <span className="kicker">System case studies</span>
-              <h2 id="proof-heading">See how the outcome gets built.</h2>
-              <p>These walkthroughs start with the business result, map the customer path required to reach it, then show the system logic and handoffs behind the experience. They are demonstration builds designed to make the approach and execution inspectable before we work together.</p>
-              <a href="/case-studies/hvac-lead-system" className="live-project-link">Open a case study <Arrow /></a>
+              <span className="kicker">Selected work</span>
+              <h2 id="proof-heading">See the systems, builds, and project examples.</h2>
+              <p>The portfolio includes live work and concept builds across websites, CRM, customer flows, automation, integrations, and AI-assisted systems. The examples show how I think through the problem and connect the technical pieces.</p>
+              <a href="/ajell-saliba#projects" className="live-project-link">View projects <Arrow /></a>
             </div>
-            <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/project-hvac.svg" alt="HVAC lead system case study preview" loading="lazy" /></div>
+            <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/project-workflow.svg" alt="Connected web, CRM, and automation project preview" loading="lazy" /></div>
           </div>
         </section>
 
@@ -633,9 +633,9 @@ function App() {
             </video>
           </div>
           <div className="section-heading" data-reveal>
-            <span className="kicker">Business outcomes</span>
-            <h2>More leads answered. More follow-up completed. More appointments booked.</h2>
-            <p>The work is built around what should happen after someone shows interest: a fast response, useful qualification, clear ownership, consistent follow-up, and an easy path to the calendar.</p>
+            <span className="kicker">What I solve</span>
+            <h2>Build what is missing. Connect what is disconnected. Fix what is getting in the way.</h2>
+            <p>The work can start with a website, CRM, automation, integration, AI workflow, deployment issue, or a broken customer process. The scope comes from the problem, not from a fixed industry package.</p>
           </div>
           <div className="service-list">
             {services.map(service => (
@@ -655,21 +655,21 @@ function App() {
 
         <section className="lead-system-section" id="lead-system" data-scroll-scene aria-labelledby="lead-system-heading">
           <div className="lead-system-heading" data-reveal>
-            <span className="kicker">What the system can handle</span>
-            <h2 id="lead-system-heading">Make every new lead easier to respond to, qualify, and book.</h2>
-            <p>ConnectiveStack handles the repeatable work between a new inquiry and the next real business action so your team can spend more time on conversations that need a human.</p>
+            <span className="kicker">What I can build and connect</span>
+            <h2 id="lead-system-heading">One technical partner across the customer-facing and backend pieces.</h2>
+            <p>Projects can involve one layer or several. I can work from the website through CRM, integrations, automation, AI, deployment, and QA without forcing every business into the same template.</p>
           </div>
 
-          <div className="lead-system-flow" data-reveal aria-label="Lead conversion workflow">
-            <span>New lead</span>
+          <div className="lead-system-flow" data-reveal aria-label="Connected delivery workflow">
+            <span>Website</span>
             <i aria-hidden="true">→</i>
-            <span>Immediate response</span>
+            <span>CRM</span>
             <i aria-hidden="true">→</i>
-            <span>Qualification</span>
+            <span>Integrations</span>
             <i aria-hidden="true">→</i>
-            <span>Appointment</span>
+            <span>Automation</span>
             <i aria-hidden="true">→</i>
-            <span>CRM + follow-up</span>
+            <span>AI + QA</span>
           </div>
 
           <div className="lead-system-grid">
@@ -688,10 +688,10 @@ function App() {
 
           <div className="lead-system-cta" data-reveal>
             <div>
-              <span>One path, connected end to end</span>
-              <strong>Call, form, text, email, calendar, CRM, and follow-up can work as one system.</strong>
+              <span>Project-based or ongoing technical support</span>
+              <strong>Bring the problem, current setup, and desired result. I’ll tell you what I can own, what I would change, and what needs deeper specialization.</strong>
             </div>
-            <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Map my lead path <Arrow /></a>
+            <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Discuss the project <Arrow /></a>
           </div>
         </section>
 
@@ -702,7 +702,7 @@ function App() {
               <h2 id="ai-receptionist-heading">Answer more inbound calls and turn more of them into booked appointments.</h2>
               <p>The AI receptionist can answer inbound calls 24/7, handle common questions, capture contact details, qualify the caller, and book appointments into your calendar. The same lead can continue into CRM routing, SMS or email follow-up, reminders, and human handoff without starting over.</p>
               <div className="ai-receptionist-actions">
-                <a href="/demos/hvac-ai-front-desk" className="button button-primary">See the AI front desk demo <Arrow /></a>
+                <a href="/demos/hvac-ai-front-desk" className="button button-primary">See an AI front desk example <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Talk through your call flow <Arrow /></a>
               </div>
             </div>
