@@ -44,7 +44,7 @@ export function AboutAjell(){return <>
         <h1 id="about-heading">I build the website. Then I make the systems behind it work.</h1>
         <p className="lead">A website is only useful when the form, calendar, CRM, notification and follow-up work after someone clicks. My work covers that full path, from the page a customer sees to the handoff a team relies on.</p>
         <p>Across 11 years in technical support, customer operations, sales, QA, team leadership and web delivery, I have learned to trace where a process actually breaks. The last 3+ years have included hands-on GoHighLevel work alongside website builds, deployments and integrations.</p>
-        <div className="seo-actions"><a className="primary" href={CAL} target="_blank" rel="noreferrer">Discuss a technical problem</a><a href="/#work">See a live project</a></div>
+        <div className="seo-actions"><a className="primary" href={CAL} target="_blank" rel="noreferrer">Discuss a technical problem</a><a href="/#services">Explore capabilities</a></div>
       </div>
       <img width="1080" height="1440" decoding="async" src="/assets/ajell-saliba.webp" alt="Portrait of the specialist behind ConnectiveStack"/>
     </section>
@@ -79,7 +79,7 @@ export function AboutAjell(){return <>
     <section className="about-skills" aria-labelledby="about-skills-heading">
       <div className="about-section-head"><span>TOOLS AND TECHNICAL WORK</span><h2 id="about-skills-heading">What I use to build and fix it</h2><p>The tools vary by project. The work usually involves more than one layer, so I test the path across the page, infrastructure, CRM and handoff.</p></div>
       <div className="about-skills-grid">{technicalSkills.map(([title,detail])=><article key={title}><h3>{title}</h3><p>{detail}</p></article>)}</div>
-      <div className="about-proof" id="projects"><div><span>PROJECTS</span><h3>See the built work</h3><p><a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer">Pawnova</a> is a live Amazon affiliate project. The HVAC, real estate and healthcare experiences in the demo menu are clearly labeled concepts, built to show customer journeys and system ideas.</p></div><a href="/" className="about-back-link">Back to portfolio</a></div>
+      <div className="about-proof" id="projects"><div><span>PROJECTS</span><h3>See the built work</h3><p><a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer">Pawnova</a> is a live Amazon affiliate project. The HVAC, real estate and healthcare experiences in the demo menu are clearly labeled concepts, built to show customer journeys and system ideas.</p></div><a href="/" className="about-back-link">Back to ConnectiveStack</a></div>
     </section>
   </main>
   <Foot/>
