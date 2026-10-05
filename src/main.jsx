@@ -593,8 +593,8 @@ function App() {
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
               <div className="eyebrow"><span className="status-dot" /> AJ Saliba / Web, CRM, automation & AI</div>
-              <h1>Build, connect, and automate the systems your business <em>actually needs.</em></h1>
-              <p className="hero-lead">ConnectiveStack works across websites, CRM, automation, integrations, AI-assisted systems, deployment, and technical fixes. I start with the problem and the desired outcome, then use the tools that fit.</p>
+              <h1>Turn your systems into a clearer path from <em>customer action to business result.</em></h1>
+              <p className="hero-lead">Capture the right information, move it to the right place, automate the repeatable work, keep ownership clear, and make the next step easier to complete. Websites, CRM, integrations, automation, and AI are the tools behind that result.</p>
               <div className="hero-actions">
                 <a href="#services" className="button button-primary">See what I can build <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Discuss a project <Arrow /></a>
@@ -621,9 +621,9 @@ function App() {
             </video>
           </div>
           <div className="section-heading" data-reveal>
-            <span className="kicker">What I solve</span>
-            <h2>Build what is missing. Connect what is disconnected. Fix what is getting in the way.</h2>
-            <p>The work can start with a website, CRM, automation, integration, AI workflow, deployment issue, or a broken customer process. The scope comes from the problem, not from a fixed industry package.</p>
+            <span className="kicker">Business outcomes</span>
+            <h2>Faster response. Cleaner handoffs. Less manual work. More completed next steps.</h2>
+            <p>The build is shaped around the result you need, whether that means a better customer journey, a working CRM flow, reliable automation, connected tools, cleaner operations, or a technical system that is easier to run.</p>
           </div>
           <div className="service-list">
             {services.map(service => (
@@ -643,9 +643,9 @@ function App() {
 
         <section className="lead-system-section" id="lead-system" data-scroll-scene aria-labelledby="lead-system-heading">
           <div className="lead-system-heading" data-reveal>
-            <span className="kicker">What I can build and connect</span>
-            <h2 id="lead-system-heading">One technical partner across the customer-facing and backend pieces.</h2>
-            <p>Projects can involve one layer or several. I can work from the website through CRM, integrations, automation, AI, deployment, and QA without forcing every business into the same template.</p>
+            <span className="kicker">How the result gets delivered</span>
+            <h2 id="lead-system-heading">One connected system from the first action to the next useful outcome.</h2>
+            <p>The website, CRM, integrations, automation, AI, deployment, and QA can work together around the same business goal instead of operating as separate technical tasks.</p>
           </div>
 
           <div className="lead-system-flow" data-reveal aria-label="Connected delivery workflow">
@@ -687,7 +687,7 @@ function App() {
           <div className="ai-receptionist-shell" data-reveal>
             <div className="ai-receptionist-copy">
               <span className="kicker">AI Receptionist</span>
-              <h2 id="ai-receptionist-heading">Answer more inbound calls and turn more of them into booked appointments.</h2>
+              <h2 id="ai-receptionist-heading">Keep inbound calls moving toward qualification, booking, or the right human handoff.</h2>
               <p>The AI receptionist can answer inbound calls 24/7, handle common questions, capture contact details, qualify the caller, and book appointments into your calendar. The same lead can continue into CRM routing, SMS or email follow-up, reminders, and human handoff without starting over.</p>
               <div className="ai-receptionist-actions">
                 <a href="/demos/hvac-ai-front-desk" className="button button-primary">See an AI front desk example <Arrow /></a>
@@ -717,7 +717,7 @@ function App() {
               </article>
             </div>
           </div>
-          <p className="ai-receptionist-note" data-reveal>AI is the mechanism. The outcome is simple: more inbound demand gets answered, captured, qualified, and moved to the next step.</p>
+          <p className="ai-receptionist-note" data-reveal>AI is the mechanism. The result is a defined path from an inbound call to captured details, qualification, booking, CRM follow-up, or human handoff.</p>
         </section>
 
         <section className="pricing-trust-points engagement-trust" aria-label="What to expect when working with ConnectiveStack" data-scroll-scene>
@@ -788,8 +788,8 @@ function App() {
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
             <span className="kicker kicker-dark">Start with the outcome</span>
-            <h2>Tell me what should happen when a lead reaches you.</h2>
-            <p>More calls answered, faster follow-up, cleaner qualification, more booked appointments, or less manual admin. I will work backward from that result through your current website, CRM, calls, calendar, and follow-up setup, then recommend a realistic scope.</p>
+            <h2>Tell me what result you want the system to produce.</h2>
+            <p>That could mean faster response, cleaner handoffs, easier booking, less manual admin, better customer routing, or a technical workflow that reliably completes the next step. I’ll work backward from that result and scope only what is needed.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
               <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
@@ -806,7 +806,7 @@ function App() {
 
       <footer className="portfolio-footer">
         <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
-        <p>Helping more customer intent become action: calls answered, leads qualified, follow-up completed, CRM updated, and appointments booked.</p>
+        <p>Building connected systems that move customer actions and internal work toward a clear next result.</p>
         <div>
           <span>© {new Date().getFullYear()} ConnectiveStack</span>
           <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
