@@ -111,7 +111,7 @@ function LegalModal({ type, onClose }) {
               <h3>Information collected</h3>
               <p>Information may include your name, email address, company details, project requirements, and anything else you choose to provide through email or a contact form. Basic technical and analytics data may also be collected, such as device type, browser, referring page, and general location.</p>
               <h3>Cookies and browser storage</h3>
-              <p>This website may use essential browser storage to remember site preferences, including your cookie choice. The Calendly scheduling widget loads only when you accept optional services. Direct booking links remain available without it. You can reopen Cookie Preferences from the footer and change your choice.</p>
+              <p>This website may use essential browser storage to remember site preferences, including your cookie choice. Booking links take you to Calendly only when you choose to schedule. You can reopen Cookie Preferences from the footer and change your choice.</p>
               <h3>How information is used</h3>
               <ul>
                 <li>To respond to inquiries and prepare project estimates</li>
@@ -251,7 +251,7 @@ function CookieConsent({ onChoice, onPrivacy }) {
       <div className="cookie-consent-copy">
         <span>COOKIE PREFERENCES</span>
         <strong>Your privacy, your choice.</strong>
-        <p>This site uses essential browser storage for preferences. The Calendly scheduling widget loads when you accept optional services. You can still use the direct booking links with necessary cookies only. You can change your choice later.</p>
+        <p>This site uses essential browser storage for preferences. Booking links open Calendly only when you choose to schedule. You can change your cookie choice later.</p>
         <button type="button" className="cookie-privacy-link" onClick={onPrivacy}>Read Privacy Policy</button>
       </div>
       <div className="cookie-consent-actions">
@@ -333,38 +333,6 @@ function App() {
     try { return !window.localStorage.getItem('connectivestack_cookie_consent') }
     catch { return true }
   })
-
-  useEffect(() => {
-    if (cookieConsent !== 'all') return undefined
-
-    const stylesheet = document.createElement('link')
-    stylesheet.rel = 'stylesheet'
-    stylesheet.href = 'https://assets.calendly.com/assets/external/widget.css'
-    document.head.appendChild(stylesheet)
-
-    const script = document.createElement('script')
-    script.src = 'https://assets.calendly.com/assets/external/widget.js'
-    script.async = true
-    script.onload = () => {
-      if (window.Calendly) {
-        window.Calendly.initBadgeWidget({
-          url: CALENDAR_URL,
-          text: 'Schedule time with me',
-          color: '#c69a58',
-          textColor: '#ffffff',
-          branding: true,
-        })
-      }
-    }
-    document.body.appendChild(script)
-
-    return () => {
-      script.onload = null
-      script.remove()
-      stylesheet.remove()
-      document.querySelector('.calendly-badge-widget')?.remove()
-    }
-  }, [cookieConsent])
 
   useEffect(() => {
     const revealItems = [...document.querySelectorAll('[data-reveal]')]
@@ -816,7 +784,7 @@ function App() {
           <a href="mailto:ajell.saliba@connectivestack.com">Email AJ</a>
         </div>
       </footer>
-      {cookieConsent !== 'all' && !showCookieConsent && <a className="calendly-direct-badge" href={CALENDAR_URL} target="_blank" rel="noreferrer">Schedule time with me</a>}
+      {!showCookieConsent && <a className="calendly-direct-badge" href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a system review <Arrow /></a>}
       {showCookieConsent && <CookieConsent onChoice={saveCookieConsent} onPrivacy={() => setLegalModal('privacy')} />}
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
       {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
