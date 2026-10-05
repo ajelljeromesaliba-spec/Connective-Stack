@@ -176,7 +176,7 @@ function TourModal({ property, onClose }) {
         {sent ? <div className="re-confirmation"><span><Icon name="check" /></span><small>REQUEST RECEIVED</small><h2 id="tour-dialog-title">Your private tour is being coordinated.</h2><p>{property.broker} is the best-fit broker for {property.neighborhood}. In a real setup, the lead would now enter the CRM and trigger email and SMS confirmation.</p><button type="button" onClick={onClose}>Return to listings</button></div> : <>
           <span className="re-modal-kicker">PRIVATE SHOWING</span>
           <h2 id="tour-dialog-title">Tour {property.neighborhood}</h2>
-          <p>Choose a preferred time. This portfolio demo uses sample details only and does not submit information externally.</p>
+          <p>Choose a preferred time. This interactive demo uses sample details only and does not submit information externally.</p>
           <div className="re-form-route"><b>{property.initials}</b><div><small>ASSIGNED ADVISOR</small><strong>{property.broker}</strong><span>{property.category} · {property.specialty}</span></div></div>
           <form onSubmit={e => { e.preventDefault(); setSent(true) }}>
             <label>Full name<input required placeholder="Sample buyer" /></label>
@@ -199,7 +199,7 @@ function BrokerModal({ broker, onClose }) {
     luxury: <><label>Representation need<select><option>Buying</option><option>Selling</option><option>Buying and selling</option></select></label><label>Target price range<select><option>$3M–$5M</option><option>$5M–$10M</option><option>$10M+</option></select></label><label>Preferred market<input placeholder="Beverly Hills, Bel Air, Los Angeles" /></label><label>Timeline<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Exploring privately</option></select></label></>,
     coastal: <><label>Property use<select><option>Primary residence</option><option>Second home</option><option>Investment</option></select></label><label>Preferred coastal area<input placeholder="Malibu, Pacific Palisades" /></label><label>Waterfront requirement<select><option>Direct waterfront</option><option>Ocean view</option><option>Near the coast</option><option>Flexible</option></select></label><label>Tour timing<select><option>This week</option><option>Within 30 days</option><option>1–3 months</option><option>Researching</option></select></label></>,
     relocation: <><label>Moving from<input placeholder="Current city and state" /></label><label>Move-by timeframe<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Flexible</option></select></label><label>Preferred Arizona area<select><option>Scottsdale</option><option>Phoenix</option><option>Mesa</option><option>Help me choose</option></select></label><label>Home category<select><option>Premium</option><option>Starter</option><option>Affordable</option></select></label></>,
-    investment: <><label>Investment goal<select><option>Long-term rental</option><option>Short-term rental</option><option>Appreciation</option><option>Portfolio diversification</option></select></label><label>Target market<select><option>Austin</option><option>Los Angeles</option><option>Open to recommendations</option></select></label><label>Acquisition budget<select><option>Under $1M</option><option>$1M–$3M</option><option>$3M+</option></select></label><label>Target hold period<select><option>1–3 years</option><option>3–7 years</option><option>7+ years</option></select></label></>,
+    investment: <><label>Investment goal<select><option>Long-term rental</option><option>Short-term rental</option><option>Appreciation</option><option>Investment diversification</option></select></label><label>Target market<select><option>Austin</option><option>Los Angeles</option><option>Open to recommendations</option></select></label><label>Acquisition budget<select><option>Under $1M</option><option>$1M–$3M</option><option>$3M+</option></select></label><label>Target hold period<select><option>1–3 years</option><option>3–7 years</option><option>7+ years</option></select></label></>,
   }
   return <div className="re-modal-overlay" onMouseDown={e => e.target === e.currentTarget && onClose()}>
     <div className="re-modal" role="dialog" aria-modal="true" aria-labelledby="broker-dialog-title">
@@ -243,7 +243,7 @@ const visitorPaths = {
     eyebrow: 'INVESTMENT SEARCH',
     title: 'Build an acquisition brief.',
     copy: 'Define the return strategy, target market, and capital range for a more useful first conversation.',
-    fields: <><label>Investment goal<select><option>Long-term rental</option><option>Short-term rental</option><option>Appreciation</option><option>Portfolio diversification</option></select></label><label>Target market<input placeholder="Austin, Los Angeles, or open" /></label><label>Acquisition budget<select><option>Under $1M</option><option>$1M–$3M</option><option>$3M+</option></select></label><label>Purchase timeline<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Researching</option></select></label></>,
+    fields: <><label>Investment goal<select><option>Long-term rental</option><option>Short-term rental</option><option>Appreciation</option><option>Investment diversification</option></select></label><label>Target market<input placeholder="Austin, Los Angeles, or open" /></label><label>Acquisition budget<select><option>Under $1M</option><option>$1M–$3M</option><option>$3M+</option></select></label><label>Purchase timeline<select><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Researching</option></select></label></>,
   },
 }
 
@@ -339,7 +339,7 @@ export default function RealEstateDemo() {
 
   return (
     <div className="re-page">
-      <div className="re-demo-bar"><a href="/">← Connective Stack portfolio</a><span>Interactive concept · Fictional brokerage</span><b>{saved.length} saved</b></div>
+      <div className="re-demo-bar"><a href="/">← ConnectiveStack</a><span>Interactive concept · Fictional brokerage</span><b>{saved.length} saved</b></div>
       <header className="re-header">
         <a href="#home" className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>PRIVATE REAL ESTATE</small></span></a>
         <nav><a href="#start">Get started</a><a href="#properties">Properties</a><a href="#match">Private search</a><a href="#advisors">Advisors</a><a href="#affordability">Affordability</a></nav>
@@ -364,7 +364,7 @@ export default function RealEstateDemo() {
         <VisitorPathway />
 
         <section className="re-properties re-section re-reveal" id="properties">
-          <div className="re-heading"><div><span>PRIVATE COLLECTION</span><h2>Residences selected with intention.</h2></div><p>Filter the portfolio, save a property, and request a private viewing. Every inquiry is matched to the right advisor.</p></div>
+          <div className="re-heading"><div><span>PRIVATE COLLECTION</span><h2>Residences selected with intention.</h2></div><p>Filter the collection, save a property, and request a private viewing. Every inquiry is matched to the right advisor.</p></div>
           <div className="re-category-guide">{categoryGuide.map(item => <button type="button" className={filter === item.name ? 'active' : ''} onClick={() => setFilter(item.name)} key={item.name}><span>{item.name}</span><strong>{item.range}</strong><small>{item.note}</small></button>)}</div>
           <div className="re-filters">{['All Homes', 'Luxury', 'Premium', 'Starter', 'Affordable'].map(item => <button className={filter === item ? 'active' : ''} onClick={() => setFilter(item)} key={item}>{item}</button>)}</div>
           <PropertyGallery properties={shown} onTour={setTour} />
@@ -392,7 +392,7 @@ export default function RealEstateDemo() {
 
         <section className="re-cta re-reveal"><div><span>CONNECTIVE STACK DEMO</span><h2>Built for the full brokerage, not just one agent.</h2></div><div><p>This fictional concept demonstrates premium listings, broker routing, lead qualification, calculators, CRM-ready intake, and automated follow-up.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a real estate project <Icon name="arrow" /></a></div></section>
       </main>
-      <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL PORTFOLIO DEMO</small></span></div><p>Designed and built by <a href="/">Connective Stack</a></p></footer>
+      <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL REAL ESTATE DEMO</small></span></div><p>Designed and built by <a href="/">Connective Stack</a></p></footer>
       <Concierge />
       <TourModal property={tour} onClose={() => setTour(null)} />
       <BrokerModal broker={advisor} onClose={() => setAdvisor(null)} />
