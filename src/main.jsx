@@ -290,11 +290,7 @@ function ProjectInquiryForm() {
       const emailBody = [
         `Name: ${payload.name || ''}`,
         `Email: ${payload.email || ''}`,
-        `Phone: ${payload.phone || 'Not provided'}`,
-        `Company: ${payload.company || 'Not provided'}`,
-        `Service: ${payload.service || ''}`,
-        `Engagement: ${payload.engagement || ''}`,
-        `Timeline: ${payload.timeline || ''}`,
+        `Company / website: ${payload.company || 'Not provided'}`,
         '',
         'Project details:',
         payload.message || '',
@@ -309,20 +305,15 @@ function ProjectInquiryForm() {
     <form className="inquiry-form" onSubmit={submitInquiry}>
       <div className="inquiry-form-heading">
         <span>PROJECT INQUIRY</span>
-        <h3>Tell me what should happen, and what happens instead.</h3>
-        <p>Share the outcome you want, what happens today, and any deadline or technical constraint. I use that to work backward from the business result before recommending a build.</p>
+        <h3>Tell me what you need.</h3>
+        <p>A short summary is enough. I’ll review it and reply if it looks like a fit.</p>
       </div>
       <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
       <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
-      <label>Phone number <small>Optional</small><input name="phone" type="tel" autoComplete="tel" placeholder="US or international number" /></label>
-      <label>Company or business<input name="company" autoComplete="organization" placeholder="Company name" /></label>
-      <label>Current website <small>Optional</small><input name="website" type="url" inputMode="url" placeholder="https://" /></label>
-      <label>Which outcome are you trying to improve?<select name="service" required defaultValue=""><option value="" disabled>Select the closest outcome</option><option>Answer more inbound calls faster</option><option>Improve lead follow-up and booking</option><option>Make the website or form convert more reliably</option><option>Connect CRM, calendar, and other tools</option><option>Simplify the customer journey or booking flow</option><option>Make automations more reliable</option><option>Make internal handoffs automatic and visible</option><option>Build a new website around a stronger customer path</option><option>Resolve a technical issue quickly</option><option>Not sure yet</option></select></label>
-      <label>Engagement type<select name="engagement" required defaultValue="Project-based"><option>Project-based</option><option>Hourly support</option><option>Ongoing support</option><option>Not sure yet</option></select></label>
-      <label>Preferred timeline<select name="timeline" required defaultValue=""><option value="" disabled>Select a timeline</option><option>As soon as possible</option><option>Within 2 weeks</option><option>Within 30 days</option><option>1 to 3 months</option><option>Flexible or planning ahead</option></select></label>
-      <label className="inquiry-wide">What do you need, and what should the project improve?<textarea name="message" required rows="6" maxLength="3000" placeholder="Tell me about your business, the outcome you want, what happens today, and any pages or systems involved." /></label>
+      <label className="inquiry-wide">Company or website <small>Optional</small><input name="company" autoComplete="organization" placeholder="Company name or website" /></label>
+      <label className="inquiry-wide">What do you need?<textarea name="message" required rows="5" maxLength="3000" placeholder="Briefly describe what you want built, fixed, connected, or automated." /></label>
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
-      <label className="inquiry-consent inquiry-wide"><input type="checkbox" name="consent" value="yes" required /><span>I agree to be contacted about this project and understand that submitting this form does not create a service agreement.</span></label>
+      <label className="inquiry-consent inquiry-wide"><input type="checkbox" name="consent" value="yes" required /><span>You can contact me about this inquiry.</span></label>
       <button className="button button-primary inquiry-submit inquiry-wide" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending inquiry…' : 'Send project inquiry'} <Arrow /></button>
       {feedback && <div className={`inquiry-feedback ${status}`} role="status"><p>{feedback}</p>{status === 'error' && <div className="inquiry-fallback-actions"><a href={fallbackEmail}>Email these details to AJ</a><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a discovery call</a></div>}</div>}
     </form>
@@ -631,7 +622,7 @@ function App() {
               <p>These walkthroughs start with the business result, map the customer path required to reach it, then show the system logic and handoffs behind the experience. They are demonstration builds designed to make the approach and execution inspectable before we work together.</p>
               <a href="/case-studies/hvac-lead-system" className="live-project-link">Open a case study <Arrow /></a>
             </div>
-            <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/pawnova-logo-transparent-optimized.webp" alt="ConnectiveStack project proof" loading="lazy" /></div>
+            <div className="live-project-mark"><img width="494" height="410" decoding="async" src="/assets/project-hvac.svg" alt="HVAC lead system case study preview" loading="lazy" /></div>
           </div>
         </section>
 
