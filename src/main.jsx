@@ -23,8 +23,8 @@ const Check = () => (
 const services = [
   {
     number: '01',
-    title: 'Every new lead gets a fast next step',
-    copy: 'New inquiries move from first response to qualification, routing, follow-up, and booking without waiting for someone to remember.',
+    title: 'Every customer action gets a clear next step',
+    copy: 'New inquiries, form submissions, calls, and other customer actions can move into the right response, routing, follow-up, or booking path without relying on memory.',
     tags: ['Lead routing', 'Follow-up', 'Booking'],
     summary: 'ConnectiveStack traces the lead path from first submission to the person or system responsible for the next action, then fixes the handoffs where leads are getting delayed or lost.',
     includes: ['Form and lead-source mapping', 'CRM contact and opportunity creation', 'Owner, pipeline, and notification routing', 'Calendar, reminder, and follow-up logic'],
@@ -53,7 +53,7 @@ const services = [
   },
   {
     number: '04',
-    title: 'More visitors reach inquiry or booking',
+    title: 'Visitors can reach inquiry or booking with less friction',
     copy: 'Clear calls to action, better qualification, and a simpler booking path make it easier for interested visitors to take the next useful step.',
     tags: ['UX', 'Qualification', 'Conversion path'],
     summary: 'ConnectiveStack simplifies the journey around the real decision the customer needs to make, then connects that action to the system behind it.',
@@ -760,11 +760,11 @@ function App() {
             <p>That could mean faster response, cleaner handoffs, easier booking, less manual admin, better customer routing, or a technical workflow that reliably completes the next step. ConnectiveStack works backward from that result and scopes only what is needed.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
-              <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
+              <a href="mailto:ajell.saliba@connectivestack.com?subject=ConnectiveStack%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
             </div>
             <div className="contact-expectations">
               <div><strong>Scoped around the outcome</strong><span>Clear success criteria, deliverables, and delivery plan before implementation</span></div>
-              <div><strong>Direct technical support</strong><span>Work with the person diagnosing and building the system</span></div>
+              <div><strong>Founder-led technical delivery</strong><span>Direct access to the person diagnosing, building, and verifying the system</span></div>
               <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
             </div>
           </div>
