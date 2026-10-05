@@ -296,7 +296,7 @@ export default function RealEstateDemo() {
   const shown = filter === 'All Homes' ? listings : listings.filter(item => item.category === filter)
 
   useEffect(() => {
-    document.title = 'Luxury Real Estate Brokerage Demo | Connective Stack'
+    document.title = 'Luxury Real Estate Brokerage Demo | ConnectiveStack'
     const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible')), { threshold: .08 })
     document.querySelectorAll('.re-reveal').forEach(el => observer.observe(el))
     return () => observer.disconnect()
@@ -392,7 +392,7 @@ export default function RealEstateDemo() {
 
         <section className="re-cta re-reveal"><div><span>CONNECTIVE STACK DEMO</span><h2>Built for the full brokerage, not just one agent.</h2></div><div><p>This fictional concept demonstrates premium listings, broker routing, lead qualification, calculators, CRM-ready intake, and automated follow-up.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a real estate project <Icon name="arrow" /></a></div></section>
       </main>
-      <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL REAL ESTATE DEMO</small></span></div><p>Designed and built by <a href="/">Connective Stack</a></p></footer>
+      <footer className="re-footer"><div className="re-brand"><AsterRowMark /><span><strong>ASTER &amp; ROW</strong><small>FICTIONAL REAL ESTATE DEMO</small></span></div><p>Designed and built by <a href="/">ConnectiveStack</a></p></footer>
       <Concierge />
       <TourModal property={tour} onClose={() => setTour(null)} />
       <BrokerModal broker={advisor} onClose={() => setAdvisor(null)} />
