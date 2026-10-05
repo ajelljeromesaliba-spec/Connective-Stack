@@ -79,7 +79,7 @@ export function AboutAjell(){return <>
     <section className="about-skills" aria-labelledby="about-skills-heading">
       <div className="about-section-head"><span>TOOLS AND TECHNICAL WORK</span><h2 id="about-skills-heading">What I use to build and fix it</h2><p>The tools vary by project. The work usually involves more than one layer, so I test the path across the page, infrastructure, CRM and handoff.</p></div>
       <div className="about-skills-grid">{technicalSkills.map(([title,detail])=><article key={title}><h3>{title}</h3><p>{detail}</p></article>)}</div>
-      <div className="about-proof"><div><span>PUBLIC WORK</span><h3>See the built work</h3><p><a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer">Pawnova</a> is a live Amazon affiliate website. The HVAC, real estate and healthcare experiences in the demo menu are clearly labeled concepts, built to show customer journeys and system ideas.</p></div><a href="/" className="about-back-link">Back to portfolio</a></div>
+      <div className="about-proof" id="projects"><div><span>PROJECTS</span><h3>See the built work</h3><p><a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer">Pawnova</a> is a live Amazon affiliate project. The HVAC, real estate and healthcare experiences in the demo menu are clearly labeled concepts, built to show customer journeys and system ideas.</p></div><a href="/" className="about-back-link">Back to portfolio</a></div>
     </section>
   </main>
   <Foot/>
