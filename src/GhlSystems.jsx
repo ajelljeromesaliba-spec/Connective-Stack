@@ -189,7 +189,7 @@ export default function GhlSystems({ slug }) {
   const system = slug ? ghlSystems.find(item => item.slug === slug) : null
 
   if (slug && !system) {
-    return <main className="ghl-page"><section className="ghl-empty"><a href="/">← Back to portfolio</a><h1>System not found.</h1></section></main>
+    return <main className="ghl-page"><section className="ghl-empty"><a href="/">← Back to ConnectiveStack</a><h1>System not found.</h1></section></main>
   }
 
   if (system) {
@@ -242,7 +242,7 @@ export default function GhlSystems({ slug }) {
     <main className="ghl-page">
       <header className="ghl-detail-nav">
         <a href="/" className="ghl-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
-        <div><a href="/">Portfolio</a><a className="ghl-nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Start a project <Arrow /></a></div>
+        <div><a href="/">ConnectiveStack</a><a className="ghl-nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Start a project <Arrow /></a></div>
       </header>
 
       <section className="ghl-index-hero">
