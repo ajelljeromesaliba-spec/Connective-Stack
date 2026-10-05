@@ -349,7 +349,7 @@ function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
       const lead = { ...current.data, time: value, status: 'New service request' }
       onLeadCreated(lead)
       setFlow(null)
-      addBot(`Demo request created for ${lead.name}. A real setup can create the contact, add an opportunity, notify dispatch, and trigger confirmation automatically. No information from this demo was sent or saved.`, ['View CRM handoff', 'Ask another question', 'Contact Connective Stack'])
+      addBot(`Demo request created for ${lead.name}. A real setup can create the contact, add an opportunity, notify dispatch, and trigger confirmation automatically. No information from this demo was sent or saved.`, ['View CRM handoff', 'Ask another question', 'Contact ConnectiveStack'])
     }
   }
 
@@ -440,7 +440,7 @@ export default function HvacDemo() {
     const previousTitle = document.title
     const meta = document.querySelector('meta[name="description"]')
     const previousDescription = meta?.getAttribute('content')
-    document.title = 'HVAC AI Receptionist Demo | Connective Stack'
+    document.title = 'HVAC AI Receptionist Demo | ConnectiveStack'
     meta?.setAttribute('content', 'Try a live HVAC AI receptionist with browser voice, service FAQs, lead qualification, safety escalation, and appointment-request capture.')
     window.scrollTo(0, 0)
     return () => {
