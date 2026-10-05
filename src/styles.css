@@ -35,16 +35,16 @@ nav { display: flex; align-items: center; gap: 30px; font-size: 14px; font-weigh
 .nav-primary > a:hover { color: var(--ink); }
 .nav-demo-menu { position: relative; }
 
-@media (min-width: 761px) {
+@media (min-width: 1181px) {
   .site-header nav { position: absolute; inset: 0; display: block; pointer-events: none; }
   .site-header .nav-primary {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    display: flex; align-items: center; gap: clamp(16px, 1.7vw, 24px); white-space: nowrap; pointer-events: auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(10px, 1.15vw, 18px); white-space: nowrap; pointer-events: auto;
   }
-  .site-header .nav-cta {
-    position: absolute; top: 50%; right: clamp(22px, 5vw, 80px); transform: translateY(-50%);
-    pointer-events: auto;
-  }
+  .site-header .nav-primary > a,
+  .site-header .nav-demo-trigger { font-size: 12.5px; }
+  .site-header .nav-cta { padding: 9px 13px; }
 }
 .nav-demo-trigger { display: flex; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #495255; font: inherit; font-weight: 600; cursor: pointer; }
 .nav-demo-trigger > svg { width: 12px; height: 8px; transition: transform .2s ease; }
@@ -60,6 +60,42 @@ nav { display: flex; align-items: center; gap: 30px; font-size: 14px; font-weigh
 .nav-cta, .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
 .nav-cta { background: var(--ink); color: #fff; padding: 10px 15px; border-radius: 999px; white-space: nowrap; }
 .nav-cta svg, .button svg, .text-link svg { width: 18px; height: 18px; }
+.menu-toggle { display: none; border: 0; background: none; padding: 8px; }
+
+@media (max-width: 1180px) {
+  .site-header { height: 68px; padding: 0 18px; }
+  .site-header .brand img { width: 185px; }
+  .site-header .menu-toggle { display: block; margin-left: auto; }
+  .site-header nav {
+    position: absolute; top: 68px; left: 0; right: 0;
+    max-height: calc(100vh - 68px); overflow-y: auto;
+    padding: 24px 22px 28px; display: none; flex-direction: column;
+    align-items: stretch; gap: 18px; background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .site-header nav.nav-open { display: flex; }
+  .site-header .nav-primary {
+    width: min(560px, 100%); margin: 0 auto;
+    display: flex; flex-direction: column; align-items: stretch; gap: 14px;
+  }
+  .site-header .nav-primary > a,
+  .site-header .nav-demo-trigger { width: 100%; justify-content: center; text-align: center; }
+  .site-header .nav-cta { margin-top: 4px; }
+  .site-header .nav-demo-dropdown {
+    width: 100%; max-height: 0; margin-top: 0; padding: 0 6px;
+    position: static; display: grid; gap: 6px; visibility: hidden; opacity: 0;
+    overflow: hidden; transform: none; border: 0; border-radius: 11px;
+    box-shadow: none; background: #eaf1ee;
+    transition: max-height .25s ease, opacity .2s ease, padding .25s ease, margin .25s ease, visibility .2s ease;
+  }
+  .site-header .nav-demo-dropdown::before { display: none; }
+  .site-header .nav-demo-menu:hover .nav-demo-dropdown,
+  .site-header .nav-demo-menu:focus-within .nav-demo-dropdown { visibility: hidden; opacity: 0; transform: none; }
+  .site-header .nav-demo-menu.mobile-open .nav-demo-dropdown {
+    max-height: 430px; margin-top: 10px; padding: 6px; visibility: visible; opacity: 1;
+  }
+  .site-header .nav-demo-menu.mobile-open .nav-demo-trigger > svg { transform: rotate(180deg); }
+}
 .menu-toggle { display: none; border: 0; background: none; padding: 8px; }
 .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px; }
 
@@ -3155,4 +3191,10 @@ footer { padding: 42px clamp(22px, 5vw, 80px); display: grid; grid-template-colu
   .engagement-trust {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* Final navigation QA: keep all desktop navigation centered and use a centered menu before links collide with the brand. */
+@media (max-width: 1180px) {
+  .site-header .menu-toggle { display: block; }
 }
