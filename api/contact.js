@@ -27,25 +27,19 @@ export default async function handler(request, response) {
   const fields = {
     name: clean(body.name),
     email: clean(body.email),
-    phone: clean(body.phone),
     company: clean(body.company),
-    website: clean(body.website),
-    service: clean(body.service),
-    engagement: clean(body.engagement),
-    budget: clean(body.budget),
-    timeline: clean(body.timeline),
     message: clean(body.message),
     consent: clean(body.consent),
   }
 
-  if (!fields.name || !EMAIL_PATTERN.test(fields.email) || !fields.service || !fields.budget || !fields.timeline || !fields.message || fields.consent !== 'yes') {
-    return response.status(400).json({ error: 'Please complete all required fields with a valid email.' })
+  if (!fields.name || !EMAIL_PATTERN.test(fields.email) || !fields.message || fields.consent !== 'yes') {
+    return response.status(400).json({ error: 'Please complete your name, email, project details, and consent.' })
   }
 
   const rows = [
-    ['Name', fields.name], ['Email', fields.email], ['Phone', fields.phone || 'Not provided'],
-    ['Company', fields.company || 'Not provided'], ['Website', fields.website || 'Not provided'],
-    ['Service', fields.service], ['Engagement', fields.engagement], ['Budget', fields.budget], ['Timeline', fields.timeline],
+    ['Name', fields.name],
+    ['Email', fields.email],
+    ['Company / website', fields.company || 'Not provided'],
   ]
   const htmlRows = rows.map(([label, value]) => `<tr><td style="padding:9px 12px;color:#62706d;border-bottom:1px solid #e7ecea;width:150px">${escapeHtml(label)}</td><td style="padding:9px 12px;color:#18211f;border-bottom:1px solid #e7ecea;font-weight:600">${escapeHtml(value)}</td></tr>`).join('')
   const textRows = rows.map(([label, value]) => `${label}: ${value}`).join('\n')
@@ -58,7 +52,7 @@ export default async function handler(request, response) {
         from: 'Connective Stack Website <website@connectivestack.com>',
         to: ['ajell.saliba@connectivestack.com'],
         reply_to: fields.email,
-        subject: `New ${fields.service} inquiry from ${fields.name}`,
+        subject: `New project inquiry from ${fields.name}`,
         html: `<div style="font-family:Arial,sans-serif;max-width:680px;margin:auto;color:#18211f"><div style="padding:24px;background:#172123;color:white"><small style="color:#7ee3d4;letter-spacing:.12em">CONNECTIVE STACK</small><h1 style="margin:8px 0 0;font-size:28px">New project inquiry</h1></div><table style="width:100%;border-collapse:collapse;background:#fff">${htmlRows}</table><div style="padding:22px;background:#f3f7f5"><strong>Project details</strong><p style="white-space:pre-wrap;line-height:1.65">${escapeHtml(fields.message)}</p></div></div>`,
         text: `New Connective Stack project inquiry\n\n${textRows}\n\nProject details:\n${fields.message}`,
       }),
