@@ -229,7 +229,7 @@ function VoiceDemo() {
         <p>Start a real voice conversation with the Northstar receptionist. Ask about an HVAC issue, test an emergency scenario, or request a sample appointment.</p>
         <div className="voice-demo-disclosure">
           <Icon name="mic" />
-          <div><strong>Portfolio demonstration</strong><span>Your browser will request microphone access. Use sample contact details only. No real service appointment or technician dispatch will be created.</span></div>
+          <div><strong>Interactive demonstration</strong><span>Your browser will request microphone access. Use sample contact details only. No real service appointment or technician dispatch will be created.</span></div>
         </div>
         <div className="voice-prompt-list">
           <span>Try saying</span>
@@ -267,7 +267,7 @@ function VoiceDemo() {
 
 function ChatAssistant({ open, onOpenChange, onLeadCreated, seededQuestion }) {
   const [messages, setMessages] = useState([
-    { from: 'bot', text: 'Hi, I’m Nova, the Northstar virtual front desk. I can answer HVAC questions, check service coverage, and help request an appointment. This is an interactive portfolio demo, so please use sample contact details.' },
+    { from: 'bot', text: 'Hi, I’m Nova, the Northstar virtual front desk. I can answer HVAC questions, check service coverage, and help request an appointment. This is an interactive demo, so please use sample contact details.' },
   ])
   const [input, setInput] = useState('')
   const [replies, setReplies] = useState(defaultQuickReplies)
@@ -472,8 +472,8 @@ export default function HvacDemo() {
   return (
     <div className="hvac-page">
       <div className="demo-ribbon">
-        <span>Interactive portfolio demo by Connective Stack</span>
-        <a href="/">Return to AJ’s portfolio <Icon name="arrow" /></a>
+        <span>Interactive demo by ConnectiveStack</span>
+        <a href="/">Return to ConnectiveStack <Icon name="arrow" /></a>
       </div>
 
       <header className="hvac-header">
@@ -619,13 +619,13 @@ export default function HvacDemo() {
 
         <section className="hvac-demo-cta">
           <div><span>Need a system like this?</span><h2>Turn your website into a working front desk.</h2></div>
-          <div><p>This page is a fictional demonstration built by AJ Saliba at Connective Stack. The same structure can be customized around a real company’s services, policies, service area, CRM, and scheduling process.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="hvac-button dark">Discuss an HVAC project <Icon name="arrow" /></a></div>
+          <div><p>This page is a fictional demonstration built by ConnectiveStack. The same structure can be customized around a real company’s services, policies, service area, CRM, and scheduling process.</p><a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="hvac-button dark">Discuss an HVAC project <Icon name="arrow" /></a></div>
         </section>
       </main>
 
       <footer className="hvac-footer">
         <div className="hvac-brand"><NorthstarLogoMark /><span><strong>NORTHSTAR</strong><small>HVAC SERVICE DEMO</small></span></div>
-        <p>Created by <a href="/">Connective Stack</a>. No submitted demo data is transmitted or stored.</p>
+        <p>Created by <a href="/">ConnectiveStack</a>. No submitted demo data is transmitted or stored.</p>
       </footer>
 
       <ChatAssistant open={chatOpen} onOpenChange={setChatOpen} onLeadCreated={setLead} seededQuestion={seededQuestion} />
