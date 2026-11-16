@@ -1,0 +1,26 @@
+name: Verify ConnectiveStack build
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Check prerendered site
+        run: |
+          test -f dist/index.html
+          test -f dist/sitemap.xml
+          test -f dist/demos/hvac-ai-front-desk/index.html
+          test -f dist/demos/luxury-real-estate/index.html
+          test -f dist/demos/healthcare-patient-experience/index.html
+          test -f dist/solutions/website-development/index.html
