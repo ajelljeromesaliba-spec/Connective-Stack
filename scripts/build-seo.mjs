@@ -10,6 +10,8 @@ try {
   const { pages, sols } = await server.ssrLoadModule('/src/SeoPages.jsx')
   const { caseStudies } = await server.ssrLoadModule('/src/CaseStudy.jsx')
   const template = await readFile('dist/index.html', 'utf8')
+  const brandImage = template.match(/property="og:image" content="([^"]*)"/)[1]
+  const brandImageAlt = template.match(/property="og:image:alt" content="([^"]*)"/)[1]
   const images = JSON.parse(await readFile('scripts/image-dimensions.json', 'utf8'))
   const routes = new Map()
   for (const path of ['/', '/ghl-systems', '/demos/hvac-ai-front-desk', '/demos/luxury-real-estate', '/demos/healthcare-patient-experience']) {
@@ -24,14 +26,16 @@ try {
 
   for (const [path, meta] of routes) {
     let html = template
-    const image = (meta.image || `${origin}/assets/connectivestack-metallic-social.jpg`).replace('https://connectivestack.com', origin)
+    const image = (meta.image || brandImage).replace('https://connectivestack.com', origin)
     html = html.replace(/<title>.*?<\/title>/s, `<title>${escape(meta.title)}</title>`)
     const setMeta = (key, value) => { html = html.replace(new RegExp(`(<meta (?:name|property)="${key}" content=")[^"]*(")`), `$1${escape(value).replaceAll('$', '$$$$')}$2`) }
     for (const key of ['description', 'og:description', 'twitter:description']) setMeta(key, meta.desc)
     for (const key of ['og:title', 'twitter:title']) setMeta(key, meta.title)
     for (const key of ['og:image', 'twitter:image']) setMeta(key, image)
-    for (const key of ['og:image:alt', 'twitter:image:alt']) setMeta(key, meta.title)
-    html = html.replace(/<meta property="og:image:type"[^>]*>/, '')
+    for (const key of ['og:image:alt', 'twitter:image:alt']) setMeta(key, image === brandImage ? brandImageAlt : meta.title)
+    if (image !== brandImage) {
+      html = html.replace(/^[ \t]*<meta property="og:image:(?:type|width|height)"[^>]*>\r?\n/gm, '')
+    }
     setMeta('og:url', origin + path)
     html = html.replace(/(<link rel="canonical" href=")[^"]+/, `$1${origin}${path}`)
     if (path !== '/') html = html.replace(/<link rel="preload" href="\/images\/automation-signal.webp"[^>]*>/, '')
@@ -43,7 +47,7 @@ try {
         ...(path === '/' ? [] : [{ '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'ConnectiveStack', item: origin + '/' }, { '@type': 'ListItem', position: 2, name: meta.title.split(' | ')[0], item: origin + path }] }]),
       ],
     }
-    html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
+    if (path !== '/') html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
     let content = renderToString(renderRoute(path))
     content = content.replace(/<img\b[^>]*>/g, tag => {
       const src = tag.match(/src="([^"]+)"/)?.[1]
