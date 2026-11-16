@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './connection-journey.css'
 
 const steps = [
@@ -49,11 +49,16 @@ function makeTexture(THREE, index) {
 export default function ConnectionScene() {
   const root = useRef(null)
   const canvas = useRef(null)
+  const selectStage = useRef(null)
+  const [stage, setStage] = useState(0)
   useEffect(() => {
     const host = root.current, hero = host.closest('.cinematic-hero')
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const touchLayout = window.matchMedia('(max-width: 600px)')
     let disposed = false, renderer, scene, camera, cards=[], tracer, paths=[], resources=[]
     let frame = 0, progress = 0, previous = 0, active = true
+    let selected = null, selectionScrollY = 0, currentStage = 0
+    let tiltX = 0, tiltY = 0
     const resize = () => {
       if (!renderer) return
       const {width,height} = host.getBoundingClientRect()
@@ -61,8 +66,12 @@ export default function ConnectionScene() {
     }
     const draw = () => {
       host.style.setProperty('--journey-progress', progress)
-      const stage = Math.min(3, Math.floor(progress * 3.999))
-      host.dataset.stage = stage; hero.dataset.connectionStage = stage
+      const nextStage = selected ?? Math.round(progress * 3)
+      if (nextStage !== currentStage) {
+        currentStage = nextStage
+        setStage(nextStage)
+      }
+      hero.dataset.connectionStage = nextStage
       host.querySelectorAll('.journey-fallback-card').forEach((card,i) => {
         const offset = i - progress * 3
         card.style.transform = `translate3d(${offset*108}%, ${Math.abs(offset)*18}px, ${-Math.abs(offset)*130}px) rotateY(${offset*-22}deg)`
@@ -70,7 +79,7 @@ export default function ConnectionScene() {
       })
       if(!renderer) return
       const x = progress*14.4
-      camera.position.set(x+.65,.48,7.8); camera.lookAt(x,0,0)
+      camera.position.set(x+.65+tiltX,.48+tiltY,7.8); camera.lookAt(x,0,0)
       cards.forEach((card,i) => {card.rotation.y = -.12 + (i*4.8-x)*-.045;card.rotation.x = .045})
       if(tracer){ const segment=Math.min(2,Math.floor(progress*3)); const p=clamp(progress*3-segment); tracer.position.copy(paths[segment].getPoint(p)); tracer.visible=progress>.01&&progress<.99 }
       renderer.render(scene,camera)
@@ -79,9 +88,11 @@ export default function ConnectionScene() {
       frame = 0
       if(disposed || !active || document.hidden) return
       const rect = hero.getBoundingClientRect()
-      const target = motion.matches ? 0 : clamp((78-rect.top)/Math.max(1,rect.height-window.innerHeight+78))
+      const pinTop = parseFloat(getComputedStyle(host.parentElement).top) || 0
+      const scrollProgress = clamp((pinTop - rect.top) / Math.max(1,rect.height-window.innerHeight+pinTop))
+      const target = selected !== null ? selected / 3 : motion.matches || touchLayout.matches ? progress : scrollProgress
       const dt = Math.min(64,now-previous || 16); previous=now
-      progress += (target-progress)*(1-Math.exp(-dt/95))
+      progress = motion.matches ? target : progress + (target-progress)*(1-Math.exp(-dt/95))
       if(Math.abs(target-progress)<.0002) progress=target
       draw()
       if(Math.abs(target-progress)>.0002) frame=requestAnimationFrame(tick)
@@ -90,9 +101,32 @@ export default function ConnectionScene() {
     const observer = new IntersectionObserver(([entry])=>{active=entry.isIntersecting;if(active)request();else{cancelAnimationFrame(frame);frame=0}}, {rootMargin:'100px'})
     observer.observe(hero)
     const ro = new ResizeObserver(()=>{resize();request()}); ro.observe(host)
-    window.addEventListener('scroll',request,{passive:true}); document.addEventListener('visibilitychange',request); motion.addEventListener('change',request)
+    const onScroll = () => {
+      if (!motion.matches && !touchLayout.matches && Math.abs(window.scrollY - selectionScrollY) > 48) {
+        selected = null
+      }
+      request()
+    }
+    selectStage.current = index => {
+      selected = index
+      selectionScrollY = window.scrollY
+      currentStage = index
+      setStage(index)
+      request()
+    }
+    const onPointerMove = event => {
+      if (motion.matches || event.pointerType !== 'mouse') return
+      const bounds = host.getBoundingClientRect()
+      tiltX = ((event.clientX - bounds.left) / bounds.width - .5) * .7
+      tiltY = -((event.clientY - bounds.top) / bounds.height - .5) * .45
+      request()
+    }
+    const resetTilt = () => { tiltX = 0; tiltY = 0; request() }
+    host.addEventListener('pointermove', onPointerMove)
+    host.addEventListener('pointerleave', resetTilt)
+    window.addEventListener('scroll',onScroll,{passive:true}); document.addEventListener('visibilitychange',request); touchLayout.addEventListener('change',request); motion.addEventListener('change',resetTilt)
     request()
-    if(!motion.matches) import('three').then(THREE=>{
+    if(!motion.matches && !touchLayout.matches) import('three').then(THREE=>{
       if(disposed) return
       try { renderer = new THREE.WebGLRenderer({canvas:canvas.current,alpha:true,antialias:true,powerPreference:'low-power'}) } catch { return }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace
@@ -116,13 +150,23 @@ export default function ConnectionScene() {
       const geo=new THREE.BoxGeometry(.32,.2,.1),mat=new THREE.MeshBasicMaterial({color:0xffe0a2});resources.push(geo,mat);tracer=new THREE.Mesh(geo,mat);scene.add(tracer)
       resize();draw();host.classList.add('journey-webgl')
     }).catch(()=>{})
-    return ()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();ro.disconnect();window.removeEventListener('scroll',request);document.removeEventListener('visibilitychange',request);motion.removeEventListener('change',request);resources.forEach(r=>r.dispose());renderer?.dispose()}
+    return ()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();ro.disconnect();selectStage.current=null;host.removeEventListener('pointermove',onPointerMove);host.removeEventListener('pointerleave',resetTilt);window.removeEventListener('scroll',onScroll);document.removeEventListener('visibilitychange',request);touchLayout.removeEventListener('change',request);motion.removeEventListener('change',resetTilt);resources.forEach(r=>r.dispose());renderer?.dispose()}
   },[])
-  return <div className="connection-journey" ref={root} data-stage="0">
-    <div className="journey-topline"><span>ONE INQUIRY. A CONNECTED PATH.</span><span>ILLUSTRATIVE WORKFLOW</span></div>
+  return <div className="connection-journey" ref={root} data-stage={stage}>
+    <div className="journey-overview">
+      <div className="journey-flow-line" aria-hidden="true"><span /></div>
+      <ol className="journey-stages" aria-label="Explore the lead workflow">
+        {steps.map((step, index) => (
+          <li key={step.label}>
+            <button type="button" aria-pressed={stage === index} onClick={() => selectStage.current?.(index)}>
+              {step.label}
+            </button>
+          </li>
+        ))}
+      </ol>
+    </div>
     <div className="journey-fallback" aria-hidden="true">{steps.map((s,i)=><div key={s.label} className="journey-fallback-card" style={{transform:`translate3d(${i*108}%,${i*18}px,${-i*130}px) rotateY(${-i*22}deg)`}}><Panel index={i}/></div>)}</div>
     <canvas ref={canvas} className="journey-canvas" aria-hidden="true"/>
     <div className="journey-caption">{steps.map((s,i)=><div key={s.label} className={`journey-caption-${i}`}><strong>{s.title}</strong><p>{s.detail}</p></div>)}</div>
-    <ol className="journey-stages">{steps.map((s,i)=><li key={s.label} className={`journey-step-${i}`}><span/>{s.label}</li>)}</ol>
   </div>
 }
