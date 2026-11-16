@@ -57,7 +57,7 @@ export default function ConnectionScene() {
     const touchLayout = window.matchMedia('(max-width: 600px)')
     let disposed = false, renderer, scene, camera, cards=[], tracer, paths=[], resources=[]
     let frame = 0, progress = 0, previous = 0, active = true
-    let selected = null, currentStage = 0
+    let selected = null, selectionScrollY = 0, currentStage = 0
     let tiltX = 0, tiltY = 0
     const resize = () => {
       if (!renderer) return
@@ -102,11 +102,14 @@ export default function ConnectionScene() {
     observer.observe(hero)
     const ro = new ResizeObserver(()=>{resize();request()}); ro.observe(host)
     const onScroll = () => {
-      if (!motion.matches && !touchLayout.matches) selected = null
+      if (!motion.matches && !touchLayout.matches && Math.abs(window.scrollY - selectionScrollY) > 48) {
+        selected = null
+      }
       request()
     }
     selectStage.current = index => {
       selected = index
+      selectionScrollY = window.scrollY
       currentStage = index
       setStage(index)
       request()
