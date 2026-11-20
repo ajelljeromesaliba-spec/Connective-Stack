@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import './seo-pages.css'
+import ProfessionalRecommendation from './ProfessionalRecommendation'
 const SITE='https://www.connectivestack.com'
 const CAL='https://calendly.com/ajell-saliba-connectivestack/30min'
 export const pages={
@@ -81,6 +82,7 @@ export function AboutAjell(){return <>
       <div className="about-skills-grid">{technicalSkills.map(([title,detail])=><article key={title}><h3>{title}</h3><p>{detail}</p></article>)}</div>
       <div className="about-proof" id="projects"><div><span>PROJECTS</span><h3>See the built work</h3><p><a href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer">Pawnova</a> is a live Amazon affiliate project. The HVAC, real estate and healthcare experiences in the demo menu are clearly labeled concepts, built to show customer journeys and system ideas.</p></div><a href="/" className="about-back-link">Back to ConnectiveStack</a></div>
     </section>
+    <ProfessionalRecommendation placement="about" />
   </main>
   <Foot/>
 </>}

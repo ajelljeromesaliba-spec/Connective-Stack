@@ -11,6 +11,7 @@ import './premium.css'
 import './secondary-dark.css'
 import './spatial.css'
 import ConnectionScene from './ConnectionScene'
+import ProfessionalRecommendation from './ProfessionalRecommendation'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -751,6 +752,8 @@ function App() {
             <div><i /> Infrastructure and deployment</div>
           </div>
         </section>
+
+        <ProfessionalRecommendation placement="home" />
 
         <section className="contact-section" id="contact" data-scroll-scene>
           <div className="contact-glow" />

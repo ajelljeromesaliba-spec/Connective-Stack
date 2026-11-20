@@ -1,0 +1,149 @@
+/* Firsthand colleague recommendations. Styled for both the homepage and AJ's profile. */
+.professional-recommendation {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 12% 22%, rgba(19, 164, 148, .12), transparent 46%), #0b1113;
+  color: #f4f9f7;
+  border-top: 1px solid rgba(191, 228, 220, .1);
+  border-bottom: 1px solid rgba(191, 228, 220, .12);
+  padding: clamp(72px, 8vw, 124px) clamp(22px, 5vw, 80px);
+}
+.recommendation-shell {
+  width: min(100%, 1210px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(250px, .82fr) minmax(0, 1.18fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 100px);
+}
+.recommendation-intro { min-width: 0; }
+.recommendation-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: #80dace;
+  font: 700 11px/1.4 'IBM Plex Mono', monospace;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.recommendation-eyebrow > span {
+  width: 7px;
+  height: 7px;
+  background: #5bddc7;
+  border-radius: 50%;
+  box-shadow: 0 0 17px rgba(91, 221, 199, .8);
+}
+.recommendation-intro h2 {
+  margin: 24px 0 18px;
+  color: #f4f9f7;
+  font: 700 clamp(32px, 3.3vw, 53px)/1.12 'Manrope', sans-serif;
+  letter-spacing: -.045em;
+  max-width: 560px;
+}
+.recommendation-intro p {
+  max-width: 490px;
+  margin: 0;
+  color: #b6c5c2;
+  font-size: clamp(15px, 1.22vw, 17px);
+  line-height: 1.75;
+}
+.recommendation-disclaimer {
+  display: block;
+  margin-top: 26px;
+  max-width: 420px;
+  color: #7e9892;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.recommendation-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(28px, 4vw, 52px);
+  background: linear-gradient(135deg, rgba(33, 51, 51, .94), rgba(14, 24, 26, .96));
+  border: 1px solid rgba(151, 209, 201, .25);
+  border-radius: 24px;
+  box-shadow: 0 22px 76px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .05);
+  transition: transform .3s ease, border-color .3s ease;
+}
+.recommendation-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(138, 224, 206, .45);
+}
+.recommendation-quote-mark {
+  position: absolute;
+  top: 14px;
+  right: 32px;
+  font: 600 112px/1 Georgia, serif;
+  color: rgba(103, 210, 190, .13);
+  pointer-events: none;
+}
+.recommendation-card blockquote {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #f0f7f5;
+  font: 500 clamp(18px, 1.65vw, 23px)/1.65 'Manrope', sans-serif;
+  letter-spacing: -.02em;
+}
+.recommendation-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 6px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(180, 221, 210, .15);
+}
+.recommendation-author img {
+  display: block;
+  flex: 0 0 78px;
+  width: 78px;
+  height: 78px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 17px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: #bdbdbd;
+}
+.recommendation-author strong {
+  display: block;
+  color: #f8fbf9;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.recommendation-author small {
+  display: block;
+  margin-top: 5px;
+  color: #a6c5bd;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.recommendation-verified {
+  margin-left: auto;
+  color: #7bcfbd;
+  font: 600 10px/1.4 'IBM Plex Mono', monospace;
+  white-space: nowrap;
+  text-align: right;
+}
+.seo-about .professional-recommendation {
+  margin-top: clamp(40px, 6vw, 90px);
+}
+@media (max-width: 940px) {
+  .recommendation-shell { grid-template-columns: 1fr; gap: 32px; }
+  .recommendation-intro h2 { max-width: 640px; }
+}
+@media (max-width: 600px) {
+  .professional-recommendation { padding: 62px 20px; }
+  .recommendation-card { padding: 28px 24px; gap: 21px; border-radius: 20px; }
+  .recommendation-author { flex-wrap: wrap; gap: 12px; }
+  .recommendation-author img { flex-basis: 62px; width: 62px; height: 62px; border-radius: 14px; }
+  .recommendation-verified { width: 100%; margin-left: 0; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .recommendation-card { transition: none; }
+  .recommendation-card:hover { transform: none; }
+}
