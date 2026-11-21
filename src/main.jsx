@@ -155,7 +155,7 @@ function LegalModal({ type, onClose }) {
               <h3>Retention and your choices</h3>
               <p>Information is retained only as reasonably needed for communication, service delivery, recordkeeping, and legal obligations. You may request access, correction, or deletion of information by emailing AJ.</p>
               <h3>Contact</h3>
-              <p>Privacy questions may be sent to <a href="mailto:hello@connectivestack.com">hello@connectivestack.com</a>.</p>
+              <p>Privacy questions can be submitted through the <a href="#project-inquiry" onClick={onClose}>contact form</a> for hello@connectivestack.com.</p>
             </>
           ) : (
             <>
@@ -175,7 +175,7 @@ function LegalModal({ type, onClose }) {
               <h3>Limitations</h3>
               <p>No specific lead, revenue, ranking, or conversion result is guaranteed. ConnectiveStack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
               <h3>Contact</h3>
-              <p>Questions about these terms may be sent to <a href="mailto:hello@connectivestack.com">hello@connectivestack.com</a>.</p>
+              <p>Questions about these terms can be submitted through the <a href="#project-inquiry" onClick={onClose}>contact form</a> for hello@connectivestack.com.</p>
             </>
           )}
         </div>
@@ -296,13 +296,11 @@ function CookieConsent({ onChoice, onPrivacy }) {
 function ProjectInquiryForm() {
   const [status, setStatus] = useState('idle')
   const [feedback, setFeedback] = useState('')
-  const [fallbackEmail, setFallbackEmail] = useState('')
 
   const submitInquiry = async event => {
     event.preventDefault()
     setStatus('sending')
     setFeedback('')
-    setFallbackEmail('')
     const form = event.currentTarget
     const payload = Object.fromEntries(new FormData(form).entries())
 
@@ -313,27 +311,18 @@ function ProjectInquiryForm() {
         body: JSON.stringify(payload),
       })
       const result = await response.json().catch(() => ({}))
-      if (!response.ok) throw new Error(result.error || 'The inquiry could not be sent.')
+      if (!response.ok || result.ok !== true) throw new Error(result.error || 'The inquiry could not be sent.')
       form.reset()
       setStatus('success')
       setFeedback('Thanks. Your project details were sent to AJ. Expect a reply within one business day.')
     } catch (error) {
-      const emailBody = [
-        `Name: ${payload.name || ''}`,
-        `Email: ${payload.email || ''}`,
-        `Company / website: ${payload.company || 'Not provided'}`,
-        '',
-        'Project details:',
-        payload.message || '',
-      ].join('\n')
-      setFallbackEmail(`mailto:hello@connectivestack.com?subject=${encodeURIComponent(`Project inquiry from ${payload.name || 'website lead'}`)}&body=${encodeURIComponent(emailBody)}`)
       setStatus('error')
-      setFeedback('The form could not send automatically. Your details are still here. Use either option below to continue without starting over.')
+      setFeedback('The inquiry was not sent. Your details are still in the form. Please try again or book a discovery call if the issue continues.')
     }
   }
 
   return (
-    <form className="inquiry-form" onSubmit={submitInquiry}>
+    <form id="project-inquiry" className="inquiry-form" onSubmit={submitInquiry}>
       <div className="inquiry-form-heading">
         <span>PROJECT INQUIRY</span>
         <h3>Tell me what you need.</h3>
@@ -346,7 +335,7 @@ function ProjectInquiryForm() {
       <label className="inquiry-honeypot" aria-hidden="true">Leave this field blank<input name="website_check" tabIndex="-1" autoComplete="off" /></label>
       <label className="inquiry-consent inquiry-wide"><input type="checkbox" name="consent" value="yes" required /><span>You can contact me about this inquiry.</span></label>
       <button className="button button-primary inquiry-submit inquiry-wide" type="submit" disabled={status === 'sending'}>{status === 'sending' ? 'Sending inquiry…' : 'Send project inquiry'} <Arrow /></button>
-      {feedback && <div className={`inquiry-feedback ${status}`} role="status"><p>{feedback}</p>{status === 'error' && <div className="inquiry-fallback-actions"><a href={fallbackEmail}>Email these details to AJ</a><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a discovery call</a></div>}</div>}
+      {feedback && <div className={`inquiry-feedback ${status}`} role="status"><p>{feedback}</p>{status === 'error' && <div className="inquiry-fallback-actions"><a href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a discovery call</a></div>}</div>}
     </form>
   )
 }
@@ -795,7 +784,7 @@ function App() {
             <p>That could mean faster response, cleaner handoffs, easier booking, less manual admin, better customer routing, or a technical workflow that reliably completes the next step. ConnectiveStack works backward from that result and scopes only what is needed.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
-              <a href="mailto:hello@connectivestack.com?subject=ConnectiveStack%20project%20inquiry" className="contact-email">hello@connectivestack.com</a>
+              <a href="#project-inquiry" className="contact-email" aria-label="Open the project inquiry form">hello@connectivestack.com</a>
             </div>
             <div className="contact-expectations">
               <div><strong>Scoped around the outcome</strong><span>Clear success criteria, deliverables, and delivery plan before implementation</span></div>
@@ -825,7 +814,7 @@ function App() {
             <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
             <button type="button" onClick={() => setShowCookieConsent(true)}>Cookie Preferences</button>
             <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noopener noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
-            <a href="mailto:hello@connectivestack.com">Email AJ</a>
+            <a href="#project-inquiry">Send inquiry</a>
           </div>
         </div>
       </footer>
