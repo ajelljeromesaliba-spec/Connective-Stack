@@ -1,0 +1,95 @@
+/* Premium live dual-time display for the ConnectiveStack homepage hero. */
+.portfolio-main .hero-clock {
+  position: relative;
+  width: min(100%, 530px);
+  margin: clamp(18px, 2.6vh, 30px) 0 0;
+  padding: 16px 19px 13px;
+  color: #f2f7f5;
+  border: 1px solid rgba(160, 218, 204, .22);
+  border-radius: 12px;
+  background: linear-gradient(125deg, rgba(21, 42, 42, .82), rgba(7, 20, 22, .68));
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .14), inset 0 1px 0 rgba(255, 255, 255, .045);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.hero-clock__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+  gap: clamp(12px, 2vw, 23px);
+  align-items: center;
+}
+.hero-clock__rule {
+  height: 42px;
+  background: linear-gradient(transparent, rgba(152, 212, 198, .27), transparent);
+}
+.hero-clock__zone { min-width: 0; }
+.hero-clock__label {
+  display: block;
+  margin-bottom: 6px;
+  color: #a7beb8;
+  font: 600 10px/1.4 'IBM Plex Mono', monospace;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+.hero-clock__readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 7px;
+}
+.hero-clock__readout time {
+  color: #fff;
+  font: 600 clamp(18px, 1.8vw, 24px)/1.05 'IBM Plex Mono', monospace;
+  letter-spacing: -.045em;
+  font-variant-numeric: tabular-nums;
+}
+.hero-clock__offset {
+  color: #86c5b8;
+  font: 600 9px/1.4 'IBM Plex Mono', monospace;
+  white-space: nowrap;
+}
+.hero-clock__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 9px;
+  row-gap: 3px;
+  margin-top: 13px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(148, 196, 184, .16);
+  color: #b6cec8;
+  font: 600 9px/1.4 'IBM Plex Mono', monospace;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+.hero-clock__live-dot {
+  flex: 0 0 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #8addc5;
+  box-shadow: 0 0 9px rgba(138, 221, 197, .6);
+}
+.hero-clock__slash { color: #74b4a7; }
+@media (max-width: 760px) {
+  .portfolio-main .hero-clock {
+    width: min(100%, 440px);
+    margin-top: .85rem;
+    padding: .65rem .85rem .58rem;
+    border-radius: 10px;
+  }
+  .hero-clock__grid { gap: 10px; }
+  .hero-clock__rule { height: 35px; }
+  .hero-clock__label { font-size: 8px; margin-bottom: 4px; letter-spacing: .055em; }
+  .hero-clock__readout { gap: 5px; }
+  .hero-clock__readout time { font-size: clamp(14px, 4.3vw, 19px); }
+  .hero-clock__offset { font-size: 8px; }
+  .hero-clock__status { margin-top: 9px; padding-top: 8px; font-size: 8px; gap: 4px 6px; letter-spacing: .035em; }
+  .portfolio-main .hero-pinned .hero-actions { margin-top: .85rem; }
+}
+@media (max-width: 380px), (max-height: 700px) and (max-width: 760px) {
+  .portfolio-main .hero-clock { margin-top: .55rem; padding: .5rem .65rem; }
+  .hero-clock__status { font-size: 7px; margin-top: 6px; padding-top: 6px; }
+  .hero-clock__readout time { font-size: 14px; }
+  .portfolio-main .hero-pinned .hero-actions { margin-top: .6rem; }
+}

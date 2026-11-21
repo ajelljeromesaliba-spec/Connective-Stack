@@ -12,6 +12,7 @@ import './secondary-dark.css'
 import './spatial.css'
 import ConnectionScene from './ConnectionScene'
 import ProfessionalRecommendation from './ProfessionalRecommendation'
+import TimeComparison from './TimeComparison'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -564,6 +565,7 @@ function App() {
               <div className="eyebrow"><span className="status-dot" /> ConnectiveStack / Web, CRM, automation & AI</div>
               <h1>Turn your systems into a clearer path from <em>customer action to business result.</em></h1>
               <p className="hero-lead">Capture the right information, move it to the right place, automate the repeatable work, keep ownership clear, and make the next step easier to complete. Websites, CRM, integrations, automation, and AI are the tools behind that result.</p>
+              <TimeComparison />
               <div className="hero-actions">
                 <a href="#services" className="button button-primary">Explore capabilities <Arrow /></a>
                 <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Discuss a project <Arrow /></a>
