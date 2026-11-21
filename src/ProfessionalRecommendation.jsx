@@ -3,6 +3,14 @@ import './professional-recommendation.css'
 
 const recommendations = [
   {
+      "name": "Nathan Justice",
+      "title": "Senior Account Manager, AI Acquisition",
+      "photo": "/assets/nathan-justice.webp",
+      "quote": "I had the opportunity to work with Ajell at AI Acquisition, where he supported our team across website implementation, GoHighLevel systems, technical operations, and management support.\n\nWhat I appreciated about Ajell was his ability to identify problems, investigate what was causing them, and focus on getting things resolved. Whether he was reviewing client records, checking onboarding processes, identifying overdue tasks, or working on technical implementations, he consistently paid attention to the details that could affect client delivery.\n\nAjell brings a valuable combination of technical knowledge, operational experience, and a problem-solving mindset. He understands that completing a task is only part of the job. Making sure the system or process actually works is what matters.",
+      "source": "Shared with permission",
+      "kind": "featured"
+  },
+  {
     name: 'Nathaniel Orr-Depner',
     title: 'Account Manager',
     photo: '/assets/nathaniel-orr-depner.jpg?v=2',
@@ -40,7 +48,7 @@ export default function ProfessionalRecommendation({ placement = 'home' }) {
         </div>
         <div className="recommendation-cards">
           {recommendations.map(person => (
-            <figure className={`recommendation-card${person.kind === 'client' ? ' recommendation-card--client' : ''}`} key={person.name}>
+            <figure className={`recommendation-card${person.kind === 'client' ? ' recommendation-card--client' : person.kind === 'featured' ? ' recommendation-card--featured' : ''}`} key={person.name}>
               <span className="recommendation-quote-mark" aria-hidden="true">“</span>
               <blockquote>{person.quote}</blockquote>
               <figcaption className="recommendation-author">

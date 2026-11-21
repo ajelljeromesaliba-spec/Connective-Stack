@@ -202,3 +202,8 @@
     padding: 22px 0 0;
   }
 }
+
+/* Featured verified colleague recommendation */
+.recommendation-card--featured { grid-column: 1 / -1; border-color: rgba(138, 224, 206, .35); background: linear-gradient(125deg, rgba(25, 56, 56, .96), rgba(11, 23, 29, .98)); }
+.recommendation-card--featured blockquote { max-width: 92ch; white-space: pre-line; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.72; }
+.recommendation-card--featured .recommendation-author { margin-top: 2px; }
