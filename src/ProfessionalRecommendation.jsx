@@ -14,6 +14,14 @@ const recommendations = [
     photo: '/assets/jessica-quinones.jpg?v=1',
     quote: 'Ajell was a strong support to the team. He was punctual, dependable, and adaptable, and I appreciated how willing he was to step in and help where needed.',
   },
+  {
+    name: 'Carlos Furcal',
+    title: 'Former Upwork client',
+    photo: '/assets/carlos-furcal.jpg?v=1',
+    quote: 'The beeeest!!!',
+    source: '5-star Upwork review',
+    kind: 'client',
+  },
 ]
 
 export default function ProfessionalRecommendation({ placement = 'home' }) {
@@ -25,14 +33,14 @@ export default function ProfessionalRecommendation({ placement = 'home' }) {
     >
       <div className="recommendation-shell">
         <div className="recommendation-intro">
-          <span className="recommendation-eyebrow"><span aria-hidden="true" /> Professional recommendations</span>
+          <span className="recommendation-eyebrow"><span aria-hidden="true" /> Feedback & recommendations</span>
           <h2 id={`recommendation-heading-${placement}`}>What people I've worked with say.</h2>
-          <p>Firsthand feedback on AJ's reliability, ownership, and work across client delivery and operations.</p>
-          <span className="recommendation-disclaimer">Recommendations from professional colleagues, not ConnectiveStack client reviews.</span>
+          <p>Feedback from colleagues and a former Upwork client on working with AJ.</p>
+          <span className="recommendation-disclaimer">Professional references and an Upwork client review. These reflect work with AJ personally, not ConnectiveStack client engagements.</span>
         </div>
         <div className="recommendation-cards">
           {recommendations.map(person => (
-            <figure className="recommendation-card" key={person.name}>
+            <figure className={`recommendation-card${person.kind === 'client' ? ' recommendation-card--client' : ''}`} key={person.name}>
               <span className="recommendation-quote-mark" aria-hidden="true">“</span>
               <blockquote>{person.quote}</blockquote>
               <figcaption className="recommendation-author">
@@ -47,7 +55,7 @@ export default function ProfessionalRecommendation({ placement = 'home' }) {
                 <span className="recommendation-author-details">
                   <strong>{person.name}</strong>
                   <small>{person.title}</small>
-                  <small className="recommendation-verified">Shared with permission</small>
+                  <small className="recommendation-verified">{person.source || 'Shared with permission'}</small>
                 </span>
               </figcaption>
             </figure>

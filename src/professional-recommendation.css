@@ -156,3 +156,49 @@
   .recommendation-card { transition: none; }
   .recommendation-card:hover { transform: none; }
 }
+
+
+/* An Upwork review from a former client, distinct from colleague recommendations. */
+.recommendation-card--client {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(28px, 5vw, 72px);
+  background: linear-gradient(110deg, rgba(19, 47, 44, .98), rgba(14, 24, 26, .96));
+}
+.recommendation-card--client blockquote {
+  font-size: clamp(25px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  flex: 1 1 auto;
+}
+.recommendation-card--client .recommendation-author {
+  flex: 0 1 345px;
+  min-width: 245px;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  border-left: 1px solid rgba(180, 221, 210, .15);
+  padding-left: clamp(22px, 3vw, 45px);
+}
+.recommendation-card--client .recommendation-quote-mark {
+  top: 6px;
+  right: auto;
+  left: 28px;
+}
+@media (max-width: 720px) {
+  .recommendation-card--client {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 25px;
+  }
+  .recommendation-card--client .recommendation-author {
+    flex: 0 1 auto;
+    min-width: 0;
+    border-left: 0;
+    border-top: 1px solid rgba(180, 221, 210, .15);
+    padding: 22px 0 0;
+  }
+}
