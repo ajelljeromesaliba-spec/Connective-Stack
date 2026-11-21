@@ -12,9 +12,18 @@
   width: min(100%, 1210px);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(250px, .82fr) minmax(0, 1.18fr);
-  align-items: center;
-  gap: clamp(32px, 6vw, 100px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(32px, 4vw, 56px);
+}
+.recommendation-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(16px, 2.5vw, 28px);
+}
+.recommendation-cards .recommendation-card {
+  height: 100%;
 }
 .recommendation-intro { min-width: 0; }
 .recommendation-eyebrow {
@@ -93,7 +102,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 6px;
+  margin-top: auto;
   padding-top: 24px;
   border-top: 1px solid rgba(180, 221, 210, .15);
 }
@@ -122,18 +131,19 @@
   font-size: 13px;
   line-height: 1.35;
 }
+.recommendation-author-details { display: block; min-width: 0; }
 .recommendation-verified {
-  margin-left: auto;
-  color: #7bcfbd;
+  color: #7bcfbd !important;
   font: 600 10px/1.4 'IBM Plex Mono', monospace;
-  white-space: nowrap;
-  text-align: right;
+  text-align: left;
+  margin-top: 9px !important;
+  letter-spacing: .015em;
 }
 .seo-about .professional-recommendation {
   margin-top: clamp(40px, 6vw, 90px);
 }
 @media (max-width: 940px) {
-  .recommendation-shell { grid-template-columns: 1fr; gap: 32px; }
+  .recommendation-cards { grid-template-columns: 1fr; gap: 22px; }
   .recommendation-intro h2 { max-width: 640px; }
 }
 @media (max-width: 600px) {
@@ -141,7 +151,6 @@
   .recommendation-card { padding: 28px 24px; gap: 21px; border-radius: 20px; }
   .recommendation-author { flex-wrap: wrap; gap: 12px; }
   .recommendation-author img { flex-basis: 62px; width: 62px; height: 62px; border-radius: 14px; }
-  .recommendation-verified { width: 100%; margin-left: 0; text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) {
   .recommendation-card { transition: none; }
