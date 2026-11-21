@@ -811,14 +811,14 @@ function App() {
         <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack" /></a>
         <p>Building connected systems that move customer actions and internal work toward a clear next result.</p>
         <div className="footer-right">
-          <nav className="footer-social" aria-label="ConnectiveStack social media">
+          <div className="footer-social" role="group" aria-label="ConnectiveStack social media">
             {SOCIAL_PROFILES.map(({ name, url }) => (
               <a key={name} href={url} target="_blank" rel="noopener noreferrer" aria-label={`ConnectiveStack on ${name}`}>
                 <SocialIcon name={name} />
                 <span>{name}</span>
               </a>
             ))}
-          </nav>
+          </div>
           <div className="footer-utility">
             <span>© {new Date().getFullYear()} ConnectiveStack</span>
             <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
