@@ -192,7 +192,7 @@ function LegalModal({ type, onClose }) {
               <h3>Retention and your choices</h3>
               <p>Information is retained only as reasonably needed for communication, service delivery, recordkeeping, and legal obligations. You may request access, correction, or deletion of information by emailing AJ.</p>
               <h3>Contact</h3>
-              <p>Privacy questions may be sent to <a href="mailto:ajell.saliba@connectivestack.com">ajell.saliba@connectivestack.com</a>.</p>
+              <p>Privacy questions may be sent to <a href="mailto:hello@connectivestack.com">hello@connectivestack.com</a>.</p>
             </>
           ) : (
             <>
@@ -212,7 +212,7 @@ function LegalModal({ type, onClose }) {
               <h3>Limitations</h3>
               <p>No specific lead, revenue, ranking, or conversion result is guaranteed. ConnectiveStack is not responsible for outages, policy changes, or failures caused by third-party platforms and services.</p>
               <h3>Contact</h3>
-              <p>Questions about these terms may be sent to <a href="mailto:ajell.saliba@connectivestack.com">ajell.saliba@connectivestack.com</a>.</p>
+              <p>Questions about these terms may be sent to <a href="mailto:hello@connectivestack.com">hello@connectivestack.com</a>.</p>
             </>
           )}
         </div>
@@ -307,7 +307,7 @@ function ProjectInquiryForm() {
         'Project details:',
         payload.message || '',
       ].join('\n')
-      setFallbackEmail(`mailto:ajell.saliba@connectivestack.com?subject=${encodeURIComponent(`Project inquiry from ${payload.name || 'website lead'}`)}&body=${encodeURIComponent(emailBody)}`)
+      setFallbackEmail(`mailto:hello@connectivestack.com?subject=${encodeURIComponent(`Project inquiry from ${payload.name || 'website lead'}`)}&body=${encodeURIComponent(emailBody)}`)
       setStatus('error')
       setFeedback('The form could not send automatically. Your details are still here. Use either option below to continue without starting over.')
     }
@@ -782,7 +782,7 @@ function App() {
             <p>Send the current website, tools, what should happen, what happens instead, and any deadline or budget constraint. I will trace the likely failure points and recommend a realistic scope.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
-              <a href="mailto:ajell.saliba@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">ajell.saliba@connectivestack.com</a>
+              <a href="mailto:hello@connectivestack.com?subject=Website%20project%20inquiry" className="contact-email">hello@connectivestack.com</a>
             </div>
             <div className="contact-expectations">
               <div><strong>Project-based</strong><span>Defined scope, price, and delivery plan</span></div>
@@ -803,7 +803,7 @@ function App() {
           <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
           <button type="button" onClick={() => setShowCookieConsent(true)}>Cookie Preferences</button>
           <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
-          <a href="mailto:ajell.saliba@connectivestack.com">Email AJ</a>
+          <a href="mailto:hello@connectivestack.com">Email AJ</a>
         </div>
       </footer>
       {showCookieConsent && <CookieConsent onChoice={saveCookieConsent} onPrivacy={() => setLegalModal('privacy')} />}
