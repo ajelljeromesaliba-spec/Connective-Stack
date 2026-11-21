@@ -181,6 +181,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
     opacity: 1 !important;
     filter: none;
     z-index: 5;
+    order: 1;
   }
   .portfolio-main .journey-hero .eyebrow {
     display: flex;
@@ -260,6 +261,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
     margin-top: clamp(18px, 4vw, 26px);
     overflow: hidden;
     z-index: 2;
+    order: 2;
   }
   .portfolio-main .journey-hero .journey-overview { top: 14px; left: 6%; right: 6%; }
   .portfolio-main .journey-hero .journey-stages {
