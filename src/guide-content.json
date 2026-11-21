@@ -1,0 +1,473 @@
+{
+  "ai-receptionist-small-business": {
+    "answer": "An AI receptionist can answer common inbound questions, collect caller details, and offer a booking or human handoff. It needs explicit rules about what it may say, which calendar it can access, and what happens when the call or integration fails.",
+    "sections": [
+      {
+        "heading": "What happens during an inbound call?",
+        "paragraphs": [
+          "A typical flow begins when a caller reaches a business number connected to a voice platform. The assistant identifies the reason for the call, asks only the questions needed for the next action, and saves structured details for the business.",
+          "For a home-service business, those details may be service requested, address or service area, urgency, preferred appointment window, caller name, and callback number. The business still owns diagnosis, pricing, availability, and service decisions."
+        ],
+        "steps": [
+          "Answer and state that the caller is speaking with an AI assistant.",
+          "Identify intent: new service request, existing booking, general question, or urgent issue.",
+          "Ask for the minimum usable details and confirm them back to the caller.",
+          "Check calendar availability only if the integration is authorized and responding.",
+          "Confirm the next action, save the lead, and notify the assigned person."
+        ]
+      },
+      {
+        "heading": "How the voice assistant connects to a CRM",
+        "paragraphs": [
+          "A voice platform such as Vapi or Retell can collect conversation details. Those details can then be mapped into a CRM, including GoHighLevel, using a supported integration or an authenticated webhook. The exact field names and webhook payload depend on the chosen provider and configuration.",
+          "Use stable fields such as call ID, caller number, service intent, source, appointment status, and transcript link where permitted. Do not assume that a transcript or recording is safe to store without checking privacy rules and consent requirements."
+        ],
+        "example": {
+          "label": "Example system design, not a live client outcome",
+          "text": "Inbound call → AI gathers service request → verified contact is created or updated → service-area rule assigns an owner → booking is offered if a slot is available → confirmation and internal notification are sent."
+        }
+      },
+      {
+        "heading": "Where the automation must stop",
+        "steps": [
+          "If someone reports a safety emergency, direct them to emergency services or the business's documented urgent-response procedure; do not let an assistant improvise medical or equipment advice.",
+          "If the caller is upset, asks for a human, or repeats themselves without progress, route to a live contact or capture a callback request.",
+          "If the calendar or CRM is unavailable, avoid promising a confirmed appointment; take the details for follow-up instead.",
+          "If an answer depends on pricing or policy that has not been approved, state that the team will confirm it."
+        ]
+      },
+      {
+        "heading": "How to test before launch",
+        "steps": [
+          "Call from a new number and from an existing contact to check deduplication.",
+          "Ask an unclear question, interrupt an answer, and request a human agent.",
+          "Offer a time that is unavailable; make sure the assistant does not invent a slot.",
+          "Temporarily disconnect the calendar or webhook in a test environment and verify the fallback.",
+          "Confirm who receives alerts, what appears in the CRM, and whether the caller receives only permitted follow-up messages."
+        ],
+        "paragraphs": [
+          "Measure answered calls, correctly qualified requests, confirmed bookings, fallbacks, and manual corrections. A successful call count alone says little about whether the system improved operations."
+        ]
+      },
+      {
+        "heading": "See the concept in context",
+        "paragraphs": [
+          "ConnectiveStack has an HVAC AI Front Desk concept showing the kind of customer-facing journey that can support voice intake. It is a demonstration, not evidence of measured client performance or a promise that every integration shown is running in a production environment."
+        ]
+      }
+    ],
+    "related": [
+      "hvac-missed-call-automation",
+      "website-to-crm-integration",
+      "automated-lead-follow-up"
+    ],
+    "demo": "/demos/hvac-ai-front-desk",
+    "sources": [
+      [
+        "HighLevel outbound webhook documentation",
+        "https://help.gohighlevel.com/support/solutions/articles/155000003299"
+      ]
+    ]
+  },
+  "website-to-crm-integration": {
+    "answer": "Connect the website form to a server-side endpoint or a supported CRM form, validate and map each field, create or update the contact, assign ownership, then test notifications and follow-up end to end. A successful form animation is not proof that the lead reached the CRM.",
+    "sections": [
+      {
+        "heading": "Start with a field map, not a tool",
+        "paragraphs": [
+          "Write down exactly which information the business needs. A straightforward service inquiry might include name, email or phone, requested service, location, source page, and a free-text message. For higher-intent requests, add a service date or urgency field only if someone will use it.",
+          "Decide which fields belong on the contact, which belong to the opportunity, and which are internal notes. Record the field names, required formats, and whether consent is needed before sending messages."
+        ],
+        "example": {
+          "label": "Sample mapping",
+          "text": "Website 'Service needed' → CRM custom field 'service_type'; Website 'Phone' → normalized contact phone; Page URL → source; New opportunity → 'New inquiry' pipeline stage; Assigned owner → responsible team."
+        }
+      },
+      {
+        "heading": "Three common integration routes",
+        "steps": [
+          "Native CRM form: quickest to configure, but design and field behavior depend on the provider.",
+          "Website → server endpoint → CRM API: offers validation and control, but requires secure credentials, error handling, and maintenance.",
+          "Website → automation platform or webhook → CRM: useful when several tools are involved, but test retries, limits, and duplicate submissions."
+        ],
+        "paragraphs": [
+          "Do not put private API keys in browser JavaScript. If a form collects personal information, restrict access to the data and keep only what the workflow actually needs."
+        ]
+      },
+      {
+        "heading": "Handle duplicates and failed deliveries",
+        "paragraphs": [
+          "Before creating a contact, decide whether email, phone, or a CRM-specific identifier defines a match. HighLevel has configurable duplicate-contact preferences; those settings should be checked for the actual sub-account instead of assuming every submission creates a new lead.",
+          "Return a visible success message only after the server has accepted the request. For downstream failures, log a traceable request ID, alert an operator, and choose whether to retry safely. Idempotency prevents the same browser retry from creating several opportunities."
+        ],
+        "steps": [
+          "Submit the form twice with the same email to check match behavior.",
+          "Leave a required field empty to confirm validation happens before CRM creation.",
+          "Disconnect the receiving workflow in staging and verify monitoring.",
+          "Check whether a wrong phone format is corrected or rejected.",
+          "Inspect the opportunity owner, pipeline stage, and internal notification, not just the contact record."
+        ]
+      },
+      {
+        "heading": "What the customer should receive",
+        "paragraphs": [
+          "A confirmation should say what was received and what happens next. Keep marketing consent separate from a service-request acknowledgment where local requirements demand it. Do not promise a response time that the team cannot consistently meet.",
+          "When a calendar is involved, record whether the inquiry is only requested or actually booked. A proposed date is not a confirmed appointment."
+        ]
+      },
+      {
+        "heading": "Related ConnectiveStack examples",
+        "paragraphs": [
+          "The site includes GoHighLevel system examples for lead capture, follow-up, routing, and appointment workflows. These describe architectures and intended behavior; they are not presented as verified client performance metrics."
+        ]
+      }
+    ],
+    "related": [
+      "automated-lead-follow-up",
+      "website-form-not-delivering-leads",
+      "ai-receptionist-small-business"
+    ],
+    "demo": "/ghl-systems",
+    "sources": [
+      [
+        "HighLevel contact deduplication preferences",
+        "https://help.gohighlevel.com/support/solutions/articles/48001181714"
+      ],
+      [
+        "HighLevel create contact action",
+        "https://help.gohighlevel.com/support/solutions/articles/155000002685"
+      ]
+    ]
+  },
+  "automated-lead-follow-up": {
+    "answer": "A lead follow-up workflow starts when an inquiry is accepted, checks who owns it, sends an appropriate acknowledgment, and schedules the next action. Its main safeguards are consent, reply detection, duplicate prevention, and a human handoff when automation cannot resolve the request.",
+    "sections": [
+      {
+        "heading": "A useful follow-up sequence",
+        "steps": [
+          "Trigger only from a valid form, inbound call, approved import, or another defined source.",
+          "Create or update the contact and put the inquiry into the correct pipeline.",
+          "Send a brief receipt confirmation via an allowed channel.",
+          "Assign an owner and create a task if the lead needs human review.",
+          "Wait or branch based on replies, appointments, consent, and deal status.",
+          "Stop reminders once the lead replies, opts out, books, or is closed."
+        ],
+        "paragraphs": [
+          "A sequence should not continue blindly after someone has replied. Business rules determine whether the next step is a salesperson, dispatcher, support agent, or automated calendar."
+        ]
+      },
+      {
+        "heading": "Example: service quote request",
+        "example": {
+          "label": "Illustrative workflow, not reported results",
+          "text": "A homeowner submits a quote request at 7:40 p.m. → CRM logs the inquiry as 'New' → an allowed acknowledgment confirms receipt → the morning owner sees a task with the address and service requested → a reminder is sent only if consent and status permit → the workflow ends when the inquiry is answered or closed."
+        },
+        "paragraphs": [
+          "This is a sample architecture. Exact send times, messaging limits, and legal requirements depend on the business and the countries involved."
+        ]
+      },
+      {
+        "heading": "What goes wrong",
+        "steps": [
+          "Multiple workflows respond to the same trigger and send repeated messages.",
+          "An appointment is booked but the lead remains in a reminder sequence.",
+          "A customer opts out, yet SMS continues through a second tool.",
+          "A contact arrives without a valid owner or pipeline.",
+          "A webhook fails silently and the team assumes the customer was contacted."
+        ]
+      },
+      {
+        "heading": "How to measure whether it helps",
+        "paragraphs": [
+          "Track accepted inquiries, first-response time, owner assignment time, replied contacts, confirmed bookings, opt-outs, failed sends, and manually corrected records. Compare like-for-like periods and lead sources before claiming the automation caused an increase in sales.",
+          "A small pilot with actual staff reviewing failures is more reliable than turning on a long sequence for an entire database at once."
+        ]
+      }
+    ],
+    "related": [
+      "website-to-crm-integration",
+      "website-form-not-delivering-leads",
+      "hvac-missed-call-automation"
+    ],
+    "demo": "/ghl-systems",
+    "sources": [
+      [
+        "HighLevel workflow settings",
+        "https://help.gohighlevel.com/support/solutions/articles/48001239875"
+      ]
+    ]
+  },
+  "website-form-not-delivering-leads": {
+    "answer": "When a website form says 'Sent' but no inquiry arrives, test each delivery stage separately: browser submission, endpoint response, email or CRM provider, destination inbox, lead ownership, and follow-up. The failure is often downstream of the button.",
+    "sections": [
+      {
+        "heading": "Trace the submission from the browser",
+        "steps": [
+          "Send a test request with a unique email and timestamp.",
+          "Check whether the browser actually made the network request and what status came back.",
+          "Check whether the server rejected required fields, anti-spam checks, or a large payload.",
+          "Find the request in the endpoint logs; do not assume a 200 response means an email was delivered.",
+          "Find the matching message or contact at the destination and confirm who was notified."
+        ]
+      },
+      {
+        "heading": "Email delivery and CRM delivery are different",
+        "paragraphs": [
+          "A contact form may use a service such as Resend to deliver email, while another route creates a CRM contact. Either may succeed while the other fails. Verify both if the business depends on both.",
+          "For email, check the delivery provider's event log, verified sending domain, SPF, DKIM, inbox rules, bounced or suppressed recipients, and whether the destination mailbox can receive mail. For CRM, check the API response, deduplication rules, field mapping, and pipeline ownership."
+        ],
+        "example": {
+          "label": "Common failure pattern",
+          "text": "The website shows 'Thanks' → a transactional email provider accepts the message → the destination mailbox is suspended or misconfigured → nobody sees the lead. The frontend did not report the real business problem."
+        }
+      },
+      {
+        "heading": "Build a safer failure path",
+        "steps": [
+          "Keep form input visible if sending fails so the visitor can retry.",
+          "Display an honest error instead of a false success.",
+          "Log a non-sensitive request identifier and the failed stage.",
+          "Provide a backup contact method that actually reaches a working inbox.",
+          "Set up alerts for repeated failures and test them after DNS or mailbox changes."
+        ],
+        "paragraphs": [
+          "Avoid placing full personal inquiry details in public logs. Sample test leads should use safe placeholder data."
+        ]
+      },
+      {
+        "heading": "Quick acceptance test",
+        "paragraphs": [
+          "Test on mobile and desktop, from a fresh contact and a repeat contact. Confirm actual receipt, not just an on-screen confirmation. Follow the handoff through reply or booking where appropriate."
+        ]
+      }
+    ],
+    "related": [
+      "website-to-crm-integration",
+      "automated-lead-follow-up",
+      "website-not-showing-on-google"
+    ],
+    "demo": "/solutions/integrations",
+    "sources": []
+  },
+  "hvac-missed-call-automation": {
+    "answer": "An HVAC missed-call workflow can detect an unanswered business call, acknowledge it where messaging permission allows, collect service details, and notify a dispatcher. The text-back is a recovery path, not a substitute for a documented emergency process.",
+    "sections": [
+      {
+        "heading": "What a missed-call recovery path needs",
+        "steps": [
+          "A business phone system capable of identifying missed calls and the caller number.",
+          "A permitted SMS response with clear business identity and a way to stop messages where required.",
+          "A CRM contact and callback task, avoiding duplicate entries.",
+          "Routing rules for service area, working hours, and existing customers.",
+          "A clear owner for urgent responses and unresolved requests."
+        ]
+      },
+      {
+        "heading": "Example: after-hours cooling problem",
+        "paragraphs": [
+          "A homeowner calls after closing and does not reach staff. An automation may send a concise acknowledgment and ask for the service address and issue. The response creates or updates the lead and alerts the next on-call person or morning dispatcher.",
+          "The message must not pretend that a technician has already been dispatched or that a visit is confirmed. If the business does not operate emergency service, the flow should state its actual hours and next callback window."
+        ],
+        "example": {
+          "label": "Sample first response",
+          "text": "Thanks for calling [HVAC Business]. We missed your call. Reply with your ZIP code and a brief description of the problem so our team can follow up. This message is not an emergency dispatch confirmation."
+        }
+      },
+      {
+        "heading": "Where missed-call systems fail",
+        "steps": [
+          "Caller ID is withheld, so there is no safe number to text.",
+          "The number is a landline or messaging is not permitted.",
+          "A lead is marked contacted without anyone acknowledging the issue.",
+          "Two phone systems both trigger a reply.",
+          "The dispatcher never sees the urgent service tag.",
+          "An existing appointment is mistaken for a new request."
+        ]
+      },
+      {
+        "heading": "QA and next steps",
+        "paragraphs": [
+          "Test missed calls during business hours, after-hours, repeat calls, blocked numbers, and people requesting an agent. Review who receives alerts and how the workflow stops when a human takes over.",
+          "ConnectiveStack's HVAC front desk is an interactive concept that illustrates the customer-facing portion of this process, not a measured customer case study."
+        ]
+      }
+    ],
+    "related": [
+      "ai-receptionist-small-business",
+      "automated-lead-follow-up",
+      "website-to-crm-integration"
+    ],
+    "demo": "/demos/hvac-ai-front-desk",
+    "sources": [
+      [
+        "HighLevel workflow overview",
+        "https://help.gohighlevel.com/support/solutions/articles/48001239875"
+      ]
+    ]
+  },
+  "website-not-showing-on-google": {
+    "answer": "A live website may be absent from Google because Google has not discovered it, cannot crawl it, chose not to index it, or indexed it without ranking it for the query. Diagnose those separately before rewriting the page.",
+    "sections": [
+      {
+        "heading": "Find out whether Google indexed the exact URL",
+        "steps": [
+          "Open Google Search Console's URL Inspection for the canonical URL.",
+          "Check Page indexing details: crawled, discovered, excluded, or indexed.",
+          "Check whether the URL returns a real 200 page instead of a soft 404 or redirect loop.",
+          "Confirm that a robots rule, meta robots tag, or response header is not blocking indexing.",
+          "Inspect canonical selection and whether near-duplicate URLs compete."
+        ],
+        "paragraphs": [
+          "A 'site:' query is a quick clue but is not a complete index report. Search Console is the more useful diagnostic source for your verified property."
+        ]
+      },
+      {
+        "heading": "Check discovery and internal links",
+        "paragraphs": [
+          "Publish an XML sitemap with canonical URLs and submit it through Search Console. Link service pages and guides from visible navigation or other crawlable pages; do not rely on a client-side search filter as the only path.",
+          "A sitemap is a discovery hint, not a guarantee that a page will be indexed. If several articles repeat the same advice with different titles, consolidate or expand them so each URL has a distinct purpose."
+        ]
+      },
+      {
+        "heading": "If the page is indexed but receives no clicks",
+        "steps": [
+          "Look at actual queries and impressions before choosing a target keyword.",
+          "Check whether the page answers what the searcher meant by that query.",
+          "Use a direct H1 and an opening paragraph that gives the answer quickly.",
+          "Include specific examples, screenshots, trade-offs, and constraints only when supported by the work.",
+          "Improve page usability and make the next action obvious, without hiding the answer behind a sales pitch."
+        ]
+      },
+      {
+        "heading": "What this means for AI search",
+        "paragraphs": [
+          "Google's AI search features use established Search systems and generally the same underlying content quality and technical discovery principles. Extra keywords or special AI-only markup cannot force a citation. Prioritize crawlability, useful original detail, and clear authorship.",
+          "Do not claim that an article is 'featured in AI' without measuring it in the appropriate tools."
+        ]
+      }
+    ],
+    "related": [
+      "hvac-website-not-showing-on-google",
+      "website-form-not-delivering-leads",
+      "website-to-crm-integration"
+    ],
+    "demo": "/solutions/website-development",
+    "sources": [
+      [
+        "Google Search Essentials",
+        "https://developers.google.com/search/docs/essentials"
+      ],
+      [
+        "Google AI features and your website",
+        "https://developers.google.com/search/docs/appearance/ai-features"
+      ]
+    ]
+  },
+  "hvac-website-not-showing-on-google": {
+    "answer": "If an HVAC company's site is not visible in local searches, check that Google can index the site, that each service and service area is clearly described, and that the business's location and contact details are consistent. Organic rankings and Maps visibility are separate systems.",
+    "sections": [
+      {
+        "heading": "Separate four different problems",
+        "steps": [
+          "Website not indexed at all: start with Search Console URL Inspection and technical access.",
+          "Business not shown on Google Maps: check Google Business Profile eligibility and verification.",
+          "Ranks for the company name but not 'AC repair near me': review local relevance and genuine service-area evidence.",
+          "Receives search visits but no calls: review mobile calls to action, service availability, and contact flow."
+        ],
+        "paragraphs": [
+          "A new website does not automatically outrank established local providers. Google needs usable information and signals over time, and search results can vary by the user's location."
+        ]
+      },
+      {
+        "heading": "Build real service information",
+        "paragraphs": [
+          "An HVAC page should state which jobs the company actually performs, the locations it can serve, customer contact methods, hours, and what a customer should expect after requesting service. A page for 'air conditioner repair' should not simply replace the words on a copied 'furnace repair' page.",
+          "Avoid creating dozens of thin city pages for places the business does not genuinely serve. Show real coverage and distinct information where helpful."
+        ]
+      },
+      {
+        "heading": "Make local actions work",
+        "steps": [
+          "Display a working tap-to-call action on mobile.",
+          "Let customers describe their system and issue without requiring technical knowledge.",
+          "Route an inquiry to someone who can confirm the service area and next step.",
+          "Test forms, phone routing, and after-hours handling.",
+          "Measure calls and qualified inquiries separately from raw traffic."
+        ]
+      },
+      {
+        "heading": "How the HVAC demo is relevant",
+        "paragraphs": [
+          "Our HVAC front-desk concept illustrates one possible mobile intake flow. It is not proof of higher rankings, faster callbacks, or client revenue."
+        ]
+      }
+    ],
+    "related": [
+      "hvac-google-business-profile-vs-website",
+      "hvac-missed-call-automation",
+      "website-not-showing-on-google"
+    ],
+    "demo": "/demos/hvac-ai-front-desk",
+    "sources": [
+      [
+        "Google Search SEO Starter Guide",
+        "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+      ]
+    ]
+  },
+  "hvac-google-business-profile-vs-website": {
+    "answer": "A Google Business Profile helps eligible HVAC companies appear in Maps and local business features. A website explains services in depth, provides booking and estimate paths, and creates pages that can rank in ordinary search. Most legitimate local businesses benefit from keeping both accurate.",
+    "sections": [
+      {
+        "heading": "What belongs in each place",
+        "paragraphs": [
+          "The Business Profile should show the actual business name, verified business location or service area, opening hours, phone, business category, and customer reviews according to Google's policies.",
+          "The website can give fuller explanations of service types, coverage, scheduling rules, common troubleshooting questions, credentials, and customer intake. It should match the business details in the Profile rather than introduce a different address or phone number."
+        ],
+        "steps": [
+          "Business Profile: discovery in Maps, directions where applicable, calls, business information, reviews.",
+          "Website: detailed service pages, deeper answers, quote requests, routing, CRM, and booking.",
+          "Both: accurate contact details, business identity, and consistent service information."
+        ]
+      },
+      {
+        "heading": "Why a profile alone may be limiting",
+        "paragraphs": [
+          "A profile cannot replace a well-designed intake flow with service qualification, calendar rules, lead ownership, and clear failure handling. It also gives the company less control over how complex services are explained.",
+          "A website on its own cannot guarantee visibility in the local map pack. These are complementary channels."
+        ]
+      },
+      {
+        "heading": "An HVAC lead path worth testing",
+        "example": {
+          "label": "Sample path",
+          "text": "Customer finds the verified business profile → visits the AC repair service page → submits ZIP code and symptoms → CRM assigns a dispatcher → the dispatcher confirms appointment availability → the customer receives the actual confirmation."
+        },
+        "paragraphs": [
+          "Check the entire route on a phone, including after-hours behavior. A successful visit is not a qualified lead until the customer can take the next action."
+        ]
+      },
+      {
+        "heading": "What to avoid",
+        "steps": [
+          "Fake or virtual-office business listings that do not meet eligibility guidelines.",
+          "Copied service-area pages with no unique local information.",
+          "Unverified business claims, reviews, or location pages.",
+          "Calendar buttons that look bookable but lead to unavailable scheduling."
+        ]
+      }
+    ],
+    "related": [
+      "hvac-website-not-showing-on-google",
+      "hvac-missed-call-automation",
+      "website-to-crm-integration"
+    ],
+    "demo": "/solutions/hvac",
+    "sources": [
+      [
+        "Google Business Profile policies",
+        "https://support.google.com/business/answer/3038177"
+      ]
+    ]
+  }
+}

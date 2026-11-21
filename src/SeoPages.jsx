@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import './seo-pages.css'
 import ProfessionalRecommendation from './ProfessionalRecommendation'
+import guideContent from './guide-content.json'
 const SITE='https://www.connectivestack.com'
 const CAL='https://calendly.com/ajell-saliba-connectivestack/30min'
 export const pages={
@@ -26,7 +27,68 @@ function Meta({title,desc,path}){useEffect(()=>{document.title=title;const set=(
 function Head(){const [open,setOpen]=useState(false);return <header className="seo-head"><a href="/" className="seo-logo"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack"/></a><button type="button" className="seo-menu-toggle" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} onClick={()=>setOpen(!open)}><span/><span/></button><nav className={open?'is-open':''}><a href="/#services">Problems I Solve</a><a href="/seo-guides">Guides</a><a href="/ajell-saliba">About</a><a className="seo-pill" href={CAL} target="_blank" rel="noreferrer">Show me the problem</a></nav></header>}
 function Foot(){return <footer className="seo-foot"><a href="/"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack"/></a><p>Websites, CRM, AI automation and integrations built around the problem that needs to be solved.</p><div><a href="/seo-guides">Guides</a><a href="/ajell-saliba">About</a></div></footer>}
 export function GuideHub(){const [q,setQ]=useState('');const list=Object.entries(pages).filter(([,p])=>(p[1]+' '+p[2]+' '+p[3]).toLowerCase().includes(q.toLowerCase()));return <><Meta title="Website, CRM and AI Automation Guides | ConnectiveStack" desc="Practical ConnectiveStack guides for website SEO, HVAC lead generation, CRM automation, AI receptionists and business system integrations." path="/seo-guides"/><Head/><main className="seo-main"><section className="seo-hero"><span>PRACTICAL SYSTEM GUIDES</span><h1>Find the problem before adding another tool.</h1><p>Technical guides for service businesses dealing with weak website visibility, lost leads, disconnected CRM workflows, missed calls and manual handoffs.</p><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search website, CRM, HVAC, AI..." aria-label="Search guides"/></section><section className="seo-grid">{list.map(([slug,p])=><article key={slug}><small>{p[0]}</small><h2>{p[1]}</h2><p>{p[2]}</p><a href={'/guides/'+slug}>Read guide</a></article>)}</section></main><Foot/></>}
-export function Guide({slug}){const p=pages[slug];if(!p)return <GuideHub/>;return <><Meta title={p[1]+' | ConnectiveStack'} desc={p[2]} path={'/guides/'+slug}/><Head/><main className="seo-main seo-article"><a href="/seo-guides">Back to guides</a><article><span>{p[0]}</span><h1>{p[1]}</h1><p className="lead">{p[2]}</p><h2>Start with what can be verified</h2><p>A visible symptom does not always reveal the layer causing the problem. Check the customer path before deciding whether the fix belongs in the website, search setup, CRM, automation or integration.</p><h2>What to check</h2><ul><li>Can the right customer discover and understand the page?</li><li>Is the primary call, form, estimate or booking action easy to complete?</li><li>Does submitted information reach the correct system and owner?</li><li>Is there a defined response when a webhook, field, notification or human handoff fails?</li></ul><h2>What the system should accomplish</h2><p>The goal is a clear path from customer intent to the next business action. That means fewer silent failures, fewer manual handoffs and enough visibility to understand what happened when something breaks.</p><div className="seo-next"><strong>Related solution</strong><a href={p[4]}>Explore {p[3]}</a></div></article></main><Foot/></>}
+function GuideSection({block}) {
+  return (
+    <section className="guide-section">
+      <h2>{block.heading}</h2>
+      {(block.paragraphs || []).map((paragraph, i) => <p key={i}>{paragraph}</p>)}
+      {block.steps?.length > 0 && (
+        <ol className="guide-checklist">
+          {block.steps.map((step, i) => <li key={i}>{step}</li>)}
+        </ol>
+      )}
+      {block.example && (
+        <aside className="guide-example" aria-label={block.example.label}>
+          <span>{block.example.label}</span>
+          <p>{block.example.text}</p>
+        </aside>
+      )}
+    </section>
+  )
+}
+export function Guide({slug}) {
+  const p = pages[slug]
+  if (!p) return <GuideHub/>
+  const content = guideContent[slug]
+  const related = content?.related?.filter(key => pages[key]) || []
+  return <>
+    <Meta title={p[1]+' | ConnectiveStack'} desc={p[2]} path={'/guides/'+slug}/>
+    <Head/>
+    <main className="seo-main seo-article guide-page">
+      <nav className="guide-breadcrumb" aria-label="Breadcrumb"><a href="/">ConnectiveStack</a><span>/</span><a href="/seo-guides">Guides</a><span>/</span><span>{p[0]}</span></nav>
+      <article className="guide-article">
+        <header className="guide-article-head">
+          <span className="guide-topic">{p[0]}</span>
+          <h1>{p[1]}</h1>
+          <p className="lead">{p[2]}</p>
+          <div className="guide-byline"><span>ConnectiveStack technical guides</span><span>Updated November 2026</span><a href="/ajell-saliba">About the technical work</a></div>
+        </header>
+        <section className="guide-direct-answer" aria-label="Short answer">
+          <span>THE SHORT ANSWER</span>
+          <p>{content?.answer || p[2]}</p>
+        </section>
+        {content?.sections.map((block,i) => <GuideSection block={block} key={i}/>)}
+        {content?.sources?.length > 0 && (
+          <section className="guide-reference" aria-label="Documentation">
+            <h2>Documentation and further reading</h2>
+            <p>Product features and policies can change. Check the provider's current documentation before implementing any workflow.</p>
+            <ul>{content.sources.map(([label,url]) => <li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{label}</a></li>)}</ul>
+          </section>
+        )}
+        <section className="guide-next-step">
+          <div><span>EXPLORE A RELATED SYSTEM</span><h2>See how this connects to the bigger workflow.</h2><p>These guides describe design and QA practices. Demo and architecture pages are illustrative, not claims of verified client results.</p></div>
+          <a className="guide-demo-link" href={content?.demo || p[4]}>View the example system <span aria-hidden="true">↗</span></a>
+        </section>
+        <nav className="guide-related" aria-label="Related technical guides">
+          <h2>Continue with a related guide</h2>
+          <ul>{related.map(key => <li key={key}><a href={'/guides/'+key}>{pages[key][1]}<span aria-hidden="true">↗</span></a></li>)}</ul>
+        </nav>
+        <div className="seo-next"><strong>Related ConnectiveStack service</strong><a href={p[4]}>Explore {p[3]}</a></div>
+      </article>
+    </main>
+    <Foot/>
+  </>
+}
 export function Solution({slug}){const p=sols[slug];if(!p)return <GuideHub/>;const demo=slug==='hvac'?'/demos/hvac-ai-front-desk':slug==='real-estate'?'/demos/luxury-real-estate':slug==='healthcare'?'/demos/healthcare-patient-experience':null;return <><Meta title={p[1]+' | ConnectiveStack'} desc={p[2]} path={'/solutions/'+slug}/><Head/><main className="seo-main"><section className="seo-hero"><span>{p[0]}</span><h1>{p[1]}</h1><p>{p[2]}</p><div className="seo-actions">{demo&&<a className="primary" href={demo}>Try the live demo</a>}<a href="/seo-guides">Read related guides</a></div></section><section className="seo-grid"><article><small>TRACE</small><h2>Trace the current path</h2><p>Start with the customer action, the information it creates and every handoff that follows.</p></article><article><small>REPAIR</small><h2>Fix the actual failure</h2><p>Change the page, routing, workflow or integration that evidence points to instead of adding unnecessary software.</p></article><article><small>TEST</small><h2>Test edge cases</h2><p>Verify mobile behavior, missing fields, duplicates, failed notifications, retries and human escalation.</p></article><article><small>MEASURE</small><h2>Make it measurable</h2><p>Track meaningful customer and operational actions so the business can see where the journey succeeds or stalls.</p></article></section></main><Foot/></>}
 const technicalSkills = [
   ['Websites and deployment', 'React, JavaScript, HTML, CSS, responsive UI, WordPress, Shopify, Framer, Lovable, GitHub and Vercel.'],

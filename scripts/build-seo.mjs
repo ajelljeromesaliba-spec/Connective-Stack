@@ -47,6 +47,19 @@ try {
         ...(path === '/' ? [] : [{ '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'ConnectiveStack', item: origin + '/' }, { '@type': 'ListItem', position: 2, name: meta.title.split(' | ')[0], item: origin + path }] }]),
       ],
     }
+    if (path.startsWith('/guides/')) {
+      schema['@graph'].push({
+        '@type': 'Article',
+        '@id': origin + path + '#article',
+        mainEntityOfPage: { '@id': origin + path + '#webpage' },
+        headline: meta.title.replace(' | ConnectiveStack', ''),
+        description: meta.desc,
+        author: { '@type': 'Organization', name: 'ConnectiveStack', url: origin + '/' },
+        publisher: { '@id': origin + '/#business' },
+        dateModified: '2026-11-21',
+        inLanguage: 'en-US'
+      })
+    }
     if (path !== '/') html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`)
     let content = renderToString(renderRoute(path))
     content = content.replace(/<img\b[^>]*>/g, tag => {
