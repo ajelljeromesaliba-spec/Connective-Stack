@@ -567,6 +567,7 @@ function App() {
               <div className="eyebrow"><span className="status-dot" /> ConnectiveStack / Web, CRM, automation & AI</div>
               <h1>Turn your systems into a clearer path from <em>customer action to business result.</em></h1>
               <p className="hero-lead">Capture the right information, move it to the right place, automate the repeatable work, keep ownership clear, and make the next step easier to complete. Websites, CRM, integrations, automation, and AI are the tools behind that result.</p>
+              <p className="brand-search-note"><strong>ConnectiveStack</strong> (also written <strong>Connective Stack</strong>) helps service businesses fix lost inquiries, CRM handoff problems, and follow-up gaps.</p>
               <TimeComparison />
               <div className="hero-actions">
                 <a href="#services" className="button button-primary">Explore capabilities <Arrow /></a>

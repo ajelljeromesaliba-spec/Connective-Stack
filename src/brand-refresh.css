@@ -209,3 +209,22 @@ body:has(.case-page) {
   .portfolio-header .brand img { width: min(55vw, 220px); height: auto; }
   .seo-logo img, .ghl-brand img { height: auto; }
 }
+
+/* Natural alternative-spelling signal for branded search queries. */
+.portfolio-main .cinematic-hero .brand-search-note {
+  max-width: 570px;
+  margin: 16px 0 0;
+  color: #b6c9e9;
+  font: 500 13px/1.65 'DM Sans', sans-serif;
+}
+.portfolio-main .cinematic-hero .brand-search-note strong {
+  color: #f5f8ff;
+  font-weight: 650;
+}
+@media (max-width: 700px) {
+  .portfolio-main .cinematic-hero .brand-search-note {
+    font-size: 12px;
+    line-height: 1.55;
+    max-width: 42ch;
+  }
+}
