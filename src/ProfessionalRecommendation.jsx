@@ -3,6 +3,14 @@ import './professional-recommendation.css'
 
 const recommendations = [
   {
+      "name": "ProClick Owner",
+      "title": "Owner, ProClick · Former Upwork Client",
+      "photo": "/assets/proclick-owner-180.webp",
+      "quote": "Ajell was an outstanding freelancer who consistently demonstrated dedication, professionalism, and a strong work ethic. He started as a Customer Service Agent and, through his hard work, commitment, and excellent performance, earned a well-deserved promotion to Team Leader.\nThroughout his time with the company, Ajell proved that he was not only capable of delivering excellent results but also had the leadership skills needed to guide and support others. He showed initiative, took responsibility for his tasks, and maintained a positive attitude even when facing challenges.",
+      "source": "ProClick professional recommendation",
+      "kind": "featured"
+  },
+  {
       "name": "Nathan Justice",
       "title": "Senior Account Manager, AI Acquisition",
       "photo": "/assets/nathan-justice.webp",
@@ -43,8 +51,8 @@ export default function ProfessionalRecommendation({ placement = 'home' }) {
         <div className="recommendation-intro">
           <span className="recommendation-eyebrow"><span aria-hidden="true" /> Feedback & recommendations</span>
           <h2 id={`recommendation-heading-${placement}`}>What people I've worked with say.</h2>
-          <p>Feedback from colleagues and a former Upwork client on working with AJ.</p>
-          <span className="recommendation-disclaimer">Professional references and an Upwork client review. These reflect work with AJ personally, not ConnectiveStack client engagements.</span>
+          <p>Feedback from colleagues, ProClick leadership, and a former Upwork client on working with AJ.</p>
+          <span className="recommendation-disclaimer">Professional recommendations and an Upwork client review. These reflect work with AJ personally, not ConnectiveStack client engagements.</span>
         </div>
         <div className="recommendation-cards">
           {recommendations.map(person => (
