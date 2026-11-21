@@ -22,7 +22,7 @@ export default function ProfessionalRecommendation({ placement = 'home' }) {
           <blockquote>{testimonial}</blockquote>
           <figcaption className="recommendation-author">
             <img
-              src="/assets/nathaniel-orr-depner.jpg"
+              src="/assets/nathaniel-orr-depner.jpg?v=2"
               alt="Nathaniel Orr-Depner"
               width="160"
               height="160"
