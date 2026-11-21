@@ -16,6 +16,33 @@ import TimeComparison from './TimeComparison'
 import './brand-refresh.css'
 import './responsive-polish.css'
 
+
+const SOCIAL_PROFILES = [
+  { name: 'Facebook', url: 'https://www.facebook.com/share/18iv6b2mkH/' },
+  { name: 'Instagram', url: 'https://www.instagram.com/connectivestack/' },
+  { name: 'TikTok', url: 'https://www.tiktok.com/@connectivestack' },
+]
+
+function SocialIcon({ name }) {
+  if (name === 'Facebook') return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.03 3.66 9.2 8.44 9.94v-7.03H7.9v-2.91h2.54V9.84c0-2.52 1.5-3.92 3.8-3.92 1.1 0 2.25.2 2.25.2v2.48h-1.27c-1.25 0-1.64.77-1.64 1.57v1.89h2.79l-.45 2.91h-2.34V22C18.35 21.26 22 17.09 22 12.06Z" />
+    </svg>
+  )
+  if (name === 'Instagram') return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.6" cy="6.5" r="1.15" fill="currentColor" stroke="none" />
+    </svg>
+  )
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M16.7 2h-3.2v12.7a3.1 3.1 0 1 1-3.2-3.1V8.3a6.4 6.4 0 1 0 6.4 6.4V7.6c1.4 1.1 3.2 1.7 5.1 1.7V6.1c-2.8 0-5.1-2.1-5.1-4.1Z" />
+    </svg>
+  )
+}
+
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
 )
@@ -783,13 +810,23 @@ function App() {
       <footer className="portfolio-footer">
         <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack" /></a>
         <p>Building connected systems that move customer actions and internal work toward a clear next result.</p>
-        <div>
-          <span>© {new Date().getFullYear()} ConnectiveStack</span>
-          <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
-          <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
-          <button type="button" onClick={() => setShowCookieConsent(true)}>Cookie Preferences</button>
-          <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
-          <a href="mailto:ajell.saliba@connectivestack.com">Email AJ</a>
+        <div className="footer-right">
+          <nav className="footer-social" aria-label="ConnectiveStack social media">
+            {SOCIAL_PROFILES.map(({ name, url }) => (
+              <a key={name} href={url} target="_blank" rel="noopener noreferrer" aria-label={`ConnectiveStack on ${name}`}>
+                <SocialIcon name={name} />
+                <span>{name}</span>
+              </a>
+            ))}
+          </nav>
+          <div className="footer-utility">
+            <span>© {new Date().getFullYear()} ConnectiveStack</span>
+            <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
+            <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
+            <button type="button" onClick={() => setShowCookieConsent(true)}>Cookie Preferences</button>
+            <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noopener noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
+            <a href="mailto:ajell.saliba@connectivestack.com">Email AJ</a>
+          </div>
         </div>
       </footer>
       {!showCookieConsent && <a className="calendly-direct-badge" href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a system review <Arrow /></a>}
