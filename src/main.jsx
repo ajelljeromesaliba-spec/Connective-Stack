@@ -13,6 +13,7 @@ import './spatial.css'
 import ConnectionScene from './ConnectionScene'
 import ProfessionalRecommendation from './ProfessionalRecommendation'
 import TimeComparison from './TimeComparison'
+import './brand-refresh.css'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -499,7 +500,7 @@ function App() {
     <>
       <header className="site-header portfolio-header">
         <a href="#top" className="brand" aria-label="ConnectiveStack home">
-          <img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" />
+          <img width="1200" height="199" decoding="async" src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack" />
         </a>
         <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="site-navigation">
           <span /><span />
@@ -778,7 +779,7 @@ function App() {
       </main>
 
       <footer className="portfolio-footer">
-        <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
+        <a href="#top" className="footer-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack" /></a>
         <p>Building connected systems that move customer actions and internal work toward a clear next result.</p>
         <div>
           <span>© {new Date().getFullYear()} ConnectiveStack</span>

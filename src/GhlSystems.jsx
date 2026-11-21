@@ -196,7 +196,7 @@ export default function GhlSystems({ slug }) {
     return (
       <main className="ghl-page">
         <header className="ghl-detail-nav">
-          <a href="/" className="ghl-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
+          <a href="/" className="ghl-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack" /></a>
           <div><a href="/ghl-systems">All GHL systems</a><a className="ghl-nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss a build <Arrow /></a></div>
         </header>
 
@@ -241,7 +241,7 @@ export default function GhlSystems({ slug }) {
   return (
     <main className="ghl-page">
       <header className="ghl-detail-nav">
-        <a href="/" className="ghl-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-metallic-logo-optimized.webp" alt="ConnectiveStack" /></a>
+        <a href="/" className="ghl-brand"><img width="1200" height="199" decoding="async" src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack" /></a>
         <div><a href="/">ConnectiveStack</a><a className="ghl-nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer">Start a project <Arrow /></a></div>
       </header>
 

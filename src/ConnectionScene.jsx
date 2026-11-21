@@ -29,18 +29,18 @@ function makeTexture(THREE, index) {
   const el = document.createElement('canvas'); el.width = 1024; el.height = 820
   const c = el.getContext('2d')
   const text = (s, x, y, size = 30, color = '#f4eee4', weight = 500) => { c.fillStyle = color; c.font = `${weight} ${size}px Arial`; c.fillText(s, x, y) }
-  const box = (x,y,w,h,color,stroke = '#494036') => { c.fillStyle = color; c.beginPath(); c.roundRect(x,y,w,h,14); c.fill(); c.strokeStyle = stroke; c.lineWidth = 2; c.stroke() }
-  c.fillStyle = '#171615'; c.fillRect(0,0,1024,820)
-  c.fillStyle = '#24221f'; c.fillRect(0,0,1024,80)
-  for(let i=0;i<3;i++){ c.fillStyle = '#bda778'; c.beginPath(); c.arc(38+i*26,40,6,0,Math.PI*2); c.fill() }
-  text(['yourbusiness.com / contact','CRM / new opportunity','Workflow / inquiry follow-up','Calendar / discovery call'][index],142,50,25,'#bfb6a7')
+  const box = (x,y,w,h,color,stroke = '#365184') => { c.fillStyle = color; c.beginPath(); c.roundRect(x,y,w,h,14); c.fill(); c.strokeStyle = stroke; c.lineWidth = 2; c.stroke() }
+  c.fillStyle = '#0a132e'; c.fillRect(0,0,1024,820)
+  c.fillStyle = '#15203b'; c.fillRect(0,0,1024,80)
+  for(let i=0;i<3;i++){ c.fillStyle = '#2b6fcf'; c.beginPath(); c.arc(38+i*26,40,6,0,Math.PI*2); c.fill() }
+  text(['yourbusiness.com / contact','CRM / new opportunity','Workflow / inquiry follow-up','Calendar / discovery call'][index],142,50,25,'#c2cbe0')
   text(['YOUR WEBSITE','YOUR CRM','YOUR AUTOMATION','YOUR CALENDAR'][index], 60,145,23,'#ddbb7a',700)
   text(['Let’s talk about your project.','New inquiry. Clear next step.','Follow up, automatically.','You’re on the calendar.'][index],60,217, 40, '#f6f0e6',700)
-  const row = (label,value,y) => { box(60,y,904,100,'#22201d'); text(label,84,y+35,22,'#bdb4a4'); text(value,84,y+76,30) }
-  if(index===0){ row('Name','Alex Morgan',272); row('I’m looking for','A website + booking setup',399); box(60,538,904,83,'#dabc80','#e9d6ae'); text('Send inquiry',90,591,30,'#21190d',700); text('↗',889,591,35,'#21190d') }
-  if(index===1){ box(60,270,904,104,'#2b261e','#8d754b'); text('AM',90,335,36,'#e3c993',700); text('Alex Morgan',195,317,30); text('Website inquiry',195,351,23,'#bdb4a4'); row('Pipeline','New lead → Contacted',397); row('Assigned to','Business owner',524) }
-  if(index===2){ ['Inquiry captured','Confirmation email sent','Booking link delivered'].forEach((s,i)=>{box(60,270+i*122,904,85,'#26231d','#7a6747');text('✓  '+s,92,324+i*122,31);if(i<2)text('↓',490,379+i*122,30,'#dab979')}) }
-  if(index===3){box(60,270,904,126,'#2b261e','#b99a61');text('✓',92,345,55,'#e2c68e');text('Discovery call',190,321,36);text('Alex Morgan · 30 minutes',190,365,27,'#bdb4a4');row('Status','Booking confirmed',419);row('Team notification','Delivered',544)}
+  const row = (label,value,y) => { box(60,y,904,100,'#101b38'); text(label,84,y+35,22,'#bdb4a4'); text(value,84,y+76,30) }
+  if(index===0){ row('Name','Alex Morgan',272); row('I’m looking for','A website + booking setup',399); box(60,538,904,83,'#e4b857','#e9d6ae'); text('Send inquiry',90,591,30,'#21190d',700); text('↗',889,591,35,'#21190d') }
+  if(index===1){ box(60,270,904,104,'#172344','#886a31'); text('AM',90,335,36,'#e3c993',700); text('Alex Morgan',195,317,30); text('Website inquiry',195,351,23,'#bdb4a4'); row('Pipeline','New lead → Contacted',397); row('Assigned to','Business owner',524) }
+  if(index===2){ ['Inquiry captured','Confirmation email sent','Booking link delivered'].forEach((s,i)=>{box(60,270+i*122,904,85,'#101c3b','#3c5482');text('✓  '+s,92,324+i*122,31);if(i<2)text('↓',490,379+i*122,30,'#dab979')}) }
+  if(index===3){box(60,270,904,126,'#172344','#b99a61');text('✓',92,345,55,'#e2c68e');text('Discovery call',190,321,36);text('Alex Morgan · 30 minutes',190,365,27,'#bdb4a4');row('Status','Booking confirmed',419);row('Team notification','Delivered',544)}
   text(steps[index].badge,60,756,24,'#e3c993',700)
   const texture = new THREE.CanvasTexture(el); texture.colorSpace = THREE.SRGBColorSpace
   return texture

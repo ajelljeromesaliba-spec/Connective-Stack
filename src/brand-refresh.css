@@ -1,0 +1,211 @@
+/* ConnectiveStack | Midnight Navy, Royal Blue & Champagne Gold
+   Branding applies to ConnectiveStack pages only. Standalone concept demos retain their own colors. */
+:root {
+  --brand-night: #010520;
+  --brand-panel: #0a1431;
+  --brand-panel-raised: #122142;
+  --brand-ivory: #f6f8fc;
+  --brand-muted: #b9c4d7;
+  --brand-gold: #e3b553;
+  --brand-gold-light: #f3d17b;
+  --brand-blue: #155ab9;
+  --brand-blue-light: #7dadf4;
+  --brand-line: rgba(91, 130, 211, .28);
+}
+body:has(.portfolio-main),
+body:has(.seo-main),
+body:has(.ghl-page),
+body:has(.case-page) {
+  background: var(--brand-night);
+  --teal: #286dd0;
+  --teal-dark: #144a98;
+}
+.portfolio-main, .seo-main, .ghl-page, .case-page {
+  background: var(--brand-night);
+  color: var(--brand-ivory);
+}
+.site-header.portfolio-header, .seo-head, .ghl-detail-nav {
+  background: rgba(2, 7, 29, .97);
+  border-color: rgba(90, 137, 228, .24);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, .28);
+}
+.portfolio-header .brand img, .seo-logo img, .ghl-brand img,
+.portfolio-footer .footer-brand img, .case-back img, .seo-foot img {
+  filter: none;
+}
+.portfolio-header .nav-primary > a,
+.portfolio-header .nav-demo-trigger, .seo-head nav a, .ghl-detail-nav a { color: #d4deef; }
+.portfolio-header .nav-primary > a:hover,
+.portfolio-header .nav-demo-trigger:hover,
+.seo-head nav a:hover, .ghl-detail-nav a:hover { color: #efc667; }
+.portfolio-header .nav-cta, .seo-head .seo-pill, .ghl-nav-cta,
+.portfolio-main .cinematic-hero .button-primary,
+.portfolio-main .contact-section .button-light,
+.portfolio-main .inquiry-submit, .seo-actions .primary,
+.ghl-detail-cta a {
+  background: linear-gradient(115deg, #ffe298 0%, #e4b653 53%, #c99238 100%);
+  border-color: #e3b553;
+  color: #0d1835;
+  box-shadow: 0 10px 30px rgba(208, 154, 51, .14), inset 0 1px rgba(255, 255, 255, .45);
+}
+.portfolio-header .nav-demo-dropdown {
+  background: rgba(7, 15, 39, .98);
+  border-color: var(--brand-line);
+}
+.portfolio-header .nav-demo-dropdown > a:hover { background: #142954; }
+.portfolio-header .menu-toggle span { background: #f3d17b; }
+/* The gold headline and CTAs carry the primary brand color; the interface uses blue. */
+.portfolio-main .cinematic-hero,
+.portfolio-main .hero-pinned,
+.portfolio-main .journey-hero,
+.portfolio-main .journey-hero .hero-pinned {
+  background: radial-gradient(ellipse at 77% 37%, #12316c 0%, #0a1a42 31%, #030c2b 64%, #010520 100%);
+}
+.portfolio-main .hero-pinned::after {
+  background: linear-gradient(90deg, #010520 0%, rgba(1,5,32,.95) 23%, rgba(1,5,32,.70) 46%, transparent 77%);
+}
+.portfolio-main .journey-hero h1 em,
+.portfolio-main .hero-pinned h1 em {
+  color: #f7d37d;
+  background: linear-gradient(105deg, #ffe8a0, #d9a245 58%, #fce5a1);
+  background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.portfolio-main .hero-pinned .hero-lead { color: #d5ddec; }
+.portfolio-main .cinematic-hero .eyebrow {
+  background: rgba(15, 34, 83, .58);
+  color: #f6d98f;
+  border-color: rgba(226, 178, 77, .36);
+}
+.portfolio-main .hero-pinned .hero-copy .status-dot {
+  background: #edbf66;
+  box-shadow: 0 0 0 5px rgba(237, 191, 102, .13), 0 0 18px rgba(237, 191, 102, .4);
+}
+.portfolio-main .cinematic-hero .button-secondary {
+  color: #f0f5ff;
+  background: rgba(17, 43, 98, .52);
+  border: 1px solid rgba(102, 159, 245, .44);
+}
+.portfolio-main .cinematic-hero .button-secondary:hover { background: rgba(24, 69, 151, .64); }
+.connection-journey {
+  filter: drop-shadow(0 20px 60px rgba(0, 0, 0, .15));
+}
+.connection-stage {
+  background: radial-gradient(ellipse at 70% 43%, #132f66, #091634 46%, #010520 100%);
+}
+.connection-stage::after {
+  background: radial-gradient(ellipse at 75% 45%, transparent 14%, rgba(1,5,32,.26) 67%, #010520 100%);
+}
+.connection-atmosphere {
+  background: radial-gradient(ellipse at 72% 42%, rgba(28, 99, 209, .20), transparent 47%), radial-gradient(ellipse at 48% 88%, rgba(220, 171, 78, .08), transparent 47%);
+}
+.journey-panel-content { background: #0b1633; border-color: #5977bc; box-shadow: 5px 5px 0 #162f66, 9px 9px 0 #0c1a3d, 18px 28px 38px #0009; }
+.journey-window { background: #102148; color: #c1cce2; }
+.journey-field { background: #0d1d3f; border-color: #3c5589; }
+.journey-contact, .journey-booking, .journey-workflow div { background: #15274c; border-color: #4b69a7; }
+.journey-stages button { background: #132a58; border-color: #3963a5; color: #dce6f6; }
+.journey-stages button[aria-pressed="true"] { background: #e8bb5d; color: #0a1732; border-color: #f9da92; }
+/* Panels, sections and floating surfaces */
+.portfolio-main .services, .portfolio-main .live-project,
+.portfolio-main .offer-marquee, .portfolio-main .price-section,
+.portfolio-main .process-showcase, .portfolio-main .ai-receptionist-section,
+.portfolio-main .lead-system-section {
+  background-color: #070e29;
+}
+.portfolio-main .service-card {
+  background: linear-gradient(125deg, #0e1a39, #09132d 75%);
+  border-color: rgba(77, 124, 210, .31);
+  box-shadow: 0 18px 43px rgba(0, 0, 0, .24);
+}
+.portfolio-main .service-card:hover {
+  background: linear-gradient(130deg, #132a59, #0c1c3d);
+  border-color: #477ee0;
+}
+.portfolio-main .service-number, .portfolio-main .service-arrow,
+.portfolio-main .process-heading .kicker { color: #e9bf69; }
+.portfolio-main .service-tags span {
+  background: #15284b;
+  border-color: rgba(82, 130, 218, .32);
+  color: #bfd6f7;
+}
+.portfolio-main .live-project-inner, .portfolio-main .pricing-tier {
+  background: linear-gradient(145deg, #111f42, #08112b 85%);
+  border-color: rgba(84, 131, 218, .28);
+}
+.portfolio-main .pricing-tier.featured {
+  background: linear-gradient(150deg, #172d59, #091634 65%);
+  border-color: rgba(236, 192, 100, .60);
+}
+.portfolio-main .process-steps article, .portfolio-main .pricing-trust-points article {
+  background-color: #0c1a39;
+  border-color: rgba(83, 130, 215, .27);
+}
+.portfolio-main [data-depth-card]::before {
+  background: radial-gradient(350px circle at var(--glint-x,70%) var(--glint-y,15%), rgba(64, 129, 231, .14), transparent 65%);
+}
+.portfolio-main .contact-section {
+  background: radial-gradient(ellipse at 19% 27%, rgba(27, 86, 170, .24), transparent 57%), #030b27;
+}
+.portfolio-main .contact-panel {
+  background: #0b1735;
+  border-color: rgba(98, 144, 226, .32);
+}
+.portfolio-main .portfolio-footer, .portfolio-footer { background: #01051a; border-top-color: rgba(80, 122, 206, .28); }
+.portfolio-main .hero-clock {
+  background: linear-gradient(112deg, rgba(15, 35, 80, .90), rgba(7, 18, 47, .86));
+  border-color: rgba(104, 151, 234, .41);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .23), inset 0 1px rgba(255, 255, 255, .055);
+}
+.hero-clock__rule { background: linear-gradient(transparent, rgba(235, 193, 95, .46), transparent); }
+.hero-clock__label, .hero-clock__status { color: #c6d2e9; }
+.hero-clock__offset, .hero-clock__slash { color: #efc76b; }
+.hero-clock__live-dot { background: #efc76b; box-shadow: 0 0 10px rgba(239, 199, 107, .56); }
+.professional-recommendation {
+  background: radial-gradient(ellipse at 9% 22%, rgba(19, 67, 149, .22), transparent 49%), #050d28;
+  border-color: rgba(100, 142, 223, .22);
+  color: #f6f8fc;
+}
+.recommendation-eyebrow, .recommendation-verified { color: #efc66d !important; }
+.recommendation-eyebrow > span { background: #efc66d; box-shadow: 0 0 14px rgba(239, 198, 109, .52); }
+.recommendation-intro p { color: #becae0; }
+.recommendation-disclaimer { color: #8fa2c2; }
+.recommendation-card, .recommendation-card--client {
+  background: linear-gradient(135deg, rgba(16, 33, 75, .98), rgba(6, 16, 43, .98));
+  border-color: rgba(95, 141, 223, .30);
+}
+.recommendation-card:hover { border-color: rgba(236, 187, 88, .58); }
+.recommendation-card blockquote { color: #f6f8ff; }
+.recommendation-quote-mark { color: rgba(233, 186, 87, .18); }
+.recommendation-author small { color: #b1c4e1; }
+/* Editorial, GHL and professional experience pages */
+.seo-head, .seo-foot, .ghl-detail-nav { background: #020820; }
+.seo-main, .ghl-page { background: #060e29; color: #f6f8fc; }
+.seo-hero, .seo-about .about-intro {
+  background: radial-gradient(ellipse at 82% 25%, rgba(31, 90, 187, .24), transparent 58%), #0a1736;
+}
+.seo-grid { background: #17294b; }
+.seo-grid article, .ghl-system-card, .ghl-architecture-card {
+  background: #101e3b;
+  border-color: rgba(93, 137, 222, .32);
+}
+.seo-actions a, .seo-next a { border-color: rgba(101, 146, 225, .48); color: #e2eaf8; }
+.seo-next, .ghl-integrations, .ghl-flow-stage, .ghl-detail-cta { background: #102043; }
+.seo-hero > span, .seo-about section > div > span, .seo-grid small,
+.seo-grid a, .seo-article > a, .ghl-detail-kicker,
+.ghl-card-top > span, .ghl-label { color: #e6be6c; }
+.seo-hero input { background: #0a1736; border-color: #385c9a; color: #fff; }
+.seo-hero input::placeholder { color: #98abc9; }
+.ghl-flow span, .ghl-card-tags span, .ghl-integration-list span { background: #1b315d; border-color: #365c99; color: #cfe0f7; }
+.ghl-flow b, .ghl-fallback .ghl-mini-label { color: #efc66d; }
+.ghl-architecture { background: #0b1532; border-color: #354d80; }
+.ghl-fallback { background: #102248; }
+@media (max-width: 760px) {
+  .portfolio-main .journey-hero .hero-pinned {
+    background: radial-gradient(ellipse at 50% 31%, #153773, #020925 76%);
+  }
+  .portfolio-main .hero-pinned::after {
+    background: linear-gradient(0deg, #010520 0%, rgba(1,5,32,.98) 31%, rgba(1,5,32,.65) 61%, transparent 82%);
+  }
+  .portfolio-main .hero-clock { border-radius: 12px; }
+  .portfolio-header .brand img { width: min(55vw, 220px); height: auto; }
+  .seo-logo img, .ghl-brand img { height: auto; }
+}
