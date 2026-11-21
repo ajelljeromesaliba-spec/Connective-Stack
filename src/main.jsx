@@ -14,6 +14,7 @@ import ConnectionScene from './ConnectionScene'
 import ProfessionalRecommendation from './ProfessionalRecommendation'
 import TimeComparison from './TimeComparison'
 import './brand-refresh.css'
+import './responsive-polish.css'
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>

@@ -1,0 +1,475 @@
+/* Mobile-first readability and typography
+ * Scope: ConnectiveStack brand pages only; individual demo microsites retain their own styling.
+ * Keeps all content in normal flow on phones, including the live clock and 3D workflow fallback.
+ */
+:root {
+  --font-display: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.case-page) {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.portfolio-main, .seo-main, .ghl-page, .case-page {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-optical-sizing: auto;
+}
+.portfolio-main :is(h1,h2,h3),
+.seo-main :is(h1,h2,h3),
+.ghl-page :is(h1,h2,h3),
+.case-page :is(h1,h2,h3) {
+  font-family: var(--font-display);
+  letter-spacing: -.035em;
+  font-weight: 700;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
+.portfolio-main :is(h1,h2), .seo-main :is(h1,h2),
+.ghl-page :is(h1,h2), .case-page :is(h1,h2) { line-height: 1.12; }
+.portfolio-main h3, .seo-main h3, .ghl-page h3, .case-page h3 { line-height: 1.22; letter-spacing: -.025em; }
+.portfolio-main :is(p,li), .seo-main :is(p,li),
+.ghl-page :is(p,li), .case-page :is(p,li) { overflow-wrap: break-word; }
+.portfolio-main :is(.kicker,.eyebrow), .seo-main .kicker,
+.ghl-page :is(.ghl-label,.ghl-detail-kicker) {
+  font-family: var(--font-mono);
+  letter-spacing: .09em;
+  line-height: 1.5;
+}
+.portfolio-main .button, .portfolio-header .nav-cta,
+.seo-head .seo-pill, .ghl-nav-cta { font-family: var(--font-display); font-weight: 700; letter-spacing: -.015em; }
+.portfolio-main .journey-hero h1 {
+  font-weight: 750;
+  letter-spacing: -.04em;
+  line-height: 1.1;
+}
+.portfolio-main .section-heading h2,
+.portfolio-main .lead-system-heading h2,
+.portfolio-main .ai-receptionist-copy h2,
+.portfolio-main .process-heading h2,
+.portfolio-main .contact-content h2 {
+  letter-spacing: -.04em;
+  line-height: 1.12;
+}
+.portfolio-main .journey-hero h1 em {
+  text-wrap: pretty;
+}
+/* Correct light-background text left over from the prior palette. These sections are now navy. */
+.portfolio-main .lead-system-section {
+  color: #f5f8ff;
+  background: radial-gradient(ellipse at 92% 12%, rgba(23, 83, 179, .2), transparent 46%), #070e29;
+}
+.portfolio-main .lead-system-heading > p, .portfolio-main .lead-system-card > p { color: #c1cde2; }
+.portfolio-main .lead-system-card {
+  color: #f5f8ff;
+  background: linear-gradient(145deg, #122248, #0a1633);
+  border-color: rgba(109, 151, 225, .24);
+}
+.portfolio-main .lead-system-card h3, .portfolio-main .lead-system-outcome strong { color: #f5f8ff; }
+.portfolio-main .lead-system-outcome small { color: #9eb8dd; }
+.portfolio-main .lead-system-number { color: #f0c56c; }
+.portfolio-main .lead-system-grid { border-color: rgba(109,151,225,.28); }
+.portfolio-main .lead-system-flow {
+  background: #101d3d;
+  border-color: rgba(109,151,225,.3);
+  color: #dbe5f6;
+  border-radius: 18px;
+}
+.portfolio-main .lead-system-flow i { color: #f1c86f; }
+.portfolio-main .engagement-trust { background: #08132e; color: #f5f8ff; }
+.portfolio-main .engagement-trust article { background: linear-gradient(130deg,#15254a,#0c1837); }
+.portfolio-main .ai-receptionist-section {
+  background: radial-gradient(ellipse at 14% 15%, rgba(26,80,159,.18), transparent 46%), #07122c;
+  color: #f5f8ff;
+}
+.portfolio-main .ai-receptionist-copy > p { color: #c1cde2; }
+.portfolio-main .ai-receptionist-flow { border-color: rgba(92,135,209,.31); background: #203761; }
+.portfolio-main .ai-receptionist-flow article { background: #0c1a39; color: #f2f6fd; }
+.portfolio-main .ai-receptionist-flow article p { color: #b7c8e2; }
+.portfolio-main .ai-receptionist-flow article span { color: #edc56e; }
+.portfolio-main .ai-receptionist-note { color: #b5c8e7; }
+/* Blue surfaces throughout the professional profile, without changing testimonial content. */
+.seo-about .about-work { background: #07112c; }
+.seo-about .about-skills { background: #0a1634; }
+.seo-about .about-role, .seo-about .about-skills-grid article {
+  background: linear-gradient(135deg, #16294e, #0c1734 75%);
+  border-color: rgba(109,151,225,.3);
+}
+.seo-about .about-role-current { background: radial-gradient(circle at 100% 0%,rgba(30,91,189,.24),transparent 45%),#111f43; }
+.seo-about .about-role h3, .seo-about .about-skills-grid h3,
+.seo-about .about-proof h3, .seo-about .about-section-head h2 { color: #f4f8ff; }
+.seo-about .about-role ul, .seo-about .about-role p,
+.seo-about .about-skills-grid p { color: #c4cfe2; }
+.seo-about .about-role-top strong { color: #f1cc7b; }
+/* Also avoid white-on-white or dark-on-navy in GHL flow cards and trust panels. */
+.ghl-page .ghl-index-hero p, .ghl-page .ghl-detail-lead,
+.ghl-page .ghl-detail-grid p, .ghl-page .ghl-architecture-head p { color: #c1cde2; }
+.ghl-page .ghl-architecture, .ghl-page .ghl-architecture-card { color: #f5f8ff; }
+.ghl-page .ghl-architecture-card h3 { color: #f5f8ff; }
+.ghl-page .ghl-system-card h2 { color: #f5f8ff; }
+.ghl-page .ghl-card-top small { color: #b2c1da; }
+.ghl-page .ghl-architecture-top small { color: #acbdda; }
+.ghl-page .ghl-fallback p { color: #d6e2f4; }
+/* Default for unusual wide technical strings without splitting ordinary short words. */
+.portfolio-main .contact-email, .portfolio-footer a,
+.seo-main a, .ghl-page a { overflow-wrap: anywhere; }
+
+@media (max-width: 900px) {
+  .portfolio-main :is(.section-heading h2,.lead-system-heading h2,.ai-receptionist-copy h2,.process-heading h2,.contact-content h2),
+  .seo-about .about-section-head h2, .ghl-page .ghl-architecture-head h2 {
+    font-size: clamp(2.1rem, 5.5vw, 3rem);
+    line-height: 1.14;
+    letter-spacing: -.035em;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Header and mobile menu stay distinct from the hero. */
+  .site-header.portfolio-header, .seo-head, .ghl-detail-nav {
+    background: #030b26;
+    min-width: 0;
+  }
+  .site-header.portfolio-header { height: 68px; padding-inline: 16px; }
+  .portfolio-header .brand { flex: 0 1 auto; min-width: 0; }
+  .portfolio-header .brand img { width: clamp(158px, 52vw, 207px); max-width: 100%; height: auto; }
+  .portfolio-header .menu-toggle { display: block; flex: 0 0 42px; margin-left: auto; min-width: 42px; min-height: 42px; }
+  .portfolio-header nav {
+    background: #071330;
+    border-color: rgba(109,151,225,.35);
+    max-height: calc(100dvh - 68px);
+    overscroll-behavior: contain;
+  }
+  .portfolio-header .nav-demo-dropdown { background: #0f2349; }
+  .site-header .nav-primary { min-width: 0; }
+  /* Replace competing fixed/pinned hero heights with content-driven mobile layout. */
+  .portfolio-main .journey-hero {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    padding: 0;
+    overflow: visible;
+  }
+  .portfolio-main .journey-hero .hero-pinned {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    top: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: clamp(26px, 6vw, 40px) 0 0;
+    overflow: visible;
+    isolation: isolate;
+  }
+  .portfolio-main .journey-hero .hero-copy {
+    position: relative;
+    inset: auto;
+    left: auto; right: auto; top: auto; bottom: auto;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0 clamp(20px, 5.5vw, 28px);
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none;
+    z-index: 5;
+  }
+  .portfolio-main .journey-hero .eyebrow {
+    display: flex;
+    max-width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+    font-size: clamp(10px, 2.5vw, 11px);
+    line-height: 1.5;
+    letter-spacing: .055em;
+    overflow-wrap: break-word;
+    color: #efcd82;
+  }
+  .portfolio-main .journey-hero h1 {
+    display: block;
+    max-width: none;
+    width: 100%;
+    margin: 15px 0 15px;
+    font-size: clamp(2rem, 8.25vw, 2.85rem);
+    line-height: 1.14;
+    font-weight: 750;
+    letter-spacing: -.037em;
+    text-wrap: balance;
+    overflow: visible;
+    animation: none;
+  }
+  .portfolio-main .journey-hero h1 em {
+    display: block;
+    color: #f4cb74;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    -webkit-text-fill-color: #f4cb74;
+    animation: none;
+    line-height: inherit;
+  }
+  .portfolio-main .journey-hero .hero-lead {
+    width: 100%;
+    max-width: 60ch;
+    margin: 0;
+    font-size: clamp(14px, 3.5vw, 15px);
+    line-height: 1.62;
+    letter-spacing: 0;
+    color: #d0ddf0;
+  }
+  .portfolio-main .journey-hero .hero-actions {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 10px;
+    margin: 18px 0 0;
+    width: 100%;
+  }
+  .portfolio-main .journey-hero .hero-actions .button {
+    display: inline-flex;
+    width: 100%;
+    min-width: 0;
+    min-height: 49px;
+    padding: 12px 16px;
+    justify-content: center;
+    gap: 11px;
+    font-size: 13px;
+    line-height: 1.3;
+    text-align: center;
+    white-space: normal;
+    border-radius: 11px;
+  }
+  .portfolio-main .journey-hero .hero-actions svg { flex: 0 0 18px; }
+  /* The 3D workflow is a separate item below the copy on mobile, not an absolute overlay. */
+  .portfolio-main .journey-hero .connection-journey {
+    position: relative;
+    inset: auto;
+    left: auto; right: auto; top: auto; bottom: auto;
+    display: block;
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    height: 445px;
+    margin-top: clamp(18px, 4vw, 26px);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .portfolio-main .journey-hero .journey-overview { top: 14px; left: 6%; right: 6%; }
+  .portfolio-main .journey-hero .journey-stages {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 8px;
+    padding-top: 10px;
+  }
+  .portfolio-main .journey-hero .journey-stages button {
+    min-height: 43px;
+    font-size: 11px;
+    line-height: 1.35;
+    border-radius: 9px;
+    padding: 7px;
+    overflow-wrap: break-word;
+    transform: none;
+  }
+  .portfolio-main .journey-hero .journey-fallback {
+    position: absolute;
+    inset: 133px 10% 88px;
+    min-height: 0;
+  }
+  .portfolio-main .journey-hero .journey-caption {
+    left: 6%; right: 6%; bottom: 15px;
+    min-height: 0;
+    text-wrap: pretty;
+  }
+  .portfolio-main .journey-hero .journey-caption strong {
+    font-size: clamp(15px, 4.5vw, 18px);
+    line-height: 1.3;
+    color: #f7faff;
+  }
+  .portfolio-main .journey-hero .journey-caption p {
+    max-width: 48ch;
+    margin-top: 5px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #becce3;
+  }
+  .portfolio-main .journey-hero .hero-scroll-cue,
+  .portfolio-main .journey-hero .hero-motion-track { display: none; }
+  /* The clock is readable on an iPhone without squeezing GMT offsets into clipped inline runs. */
+  .portfolio-main .hero-clock {
+    width: 100%;
+    max-width: 520px;
+    margin-top: 19px;
+    padding: 13px 14px;
+    min-width: 0;
+    border-radius: 13px;
+  }
+  .portfolio-main .hero-clock__grid { gap: 10px; min-width: 0; }
+  .portfolio-main .hero-clock__zone { min-width: 0; }
+  .portfolio-main .hero-clock__readout { display: flex; gap: 6px; flex-wrap: wrap; }
+  .portfolio-main .hero-clock__readout time {
+    font-size: clamp(14px, 4vw, 18px);
+    line-height: 1.3;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .portfolio-main .hero-clock__label { font-size: 10px; letter-spacing: .04em; }
+  .portfolio-main .hero-clock__offset { font-size: 9px; }
+  .portfolio-main .hero-clock__status {
+    font-size: 9px;
+    line-height: 1.55;
+    letter-spacing: .035em;
+    color: #d0daeb;
+  }
+  /* Consistent heading rhythm; prevents descenders and multiline glyphs being cut. */
+  .portfolio-main :is(.section-heading h2,.lead-system-heading h2,.ai-receptionist-copy h2,.process-heading h2,.contact-content h2,.live-project h2),
+  .seo-main :is(.seo-hero h1,.seo-article h1,.about-intro h1,.about-section-head h2),
+  .ghl-page :is(.ghl-index-hero h1,.ghl-detail h1,.ghl-integrations h2,.ghl-architecture-head h2),
+  .case-page :is(h1,h2) {
+    max-width: 100%;
+    font-size: clamp(1.9rem, 7.8vw, 2.7rem);
+    letter-spacing: -.037em;
+    line-height: 1.17;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+  .portfolio-main .service-card {
+    grid-template-columns: minmax(0, 1fr) 42px;
+    padding: 22px 18px;
+    gap: 12px;
+    min-width: 0;
+  }
+  .portfolio-main .service-card > div:first-child { min-width: 0; }
+  .portfolio-main .service-card h3 {
+    font-size: clamp(1.1rem, 5.1vw, 1.45rem);
+    line-height: 1.28;
+    margin: 0 0 9px;
+  }
+  .portfolio-main .service-card p { font-size: 14px; line-height: 1.65; }
+  .portfolio-main .service-card .service-tags {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+  }
+  .portfolio-main .service-card .service-arrow {
+    grid-column: 2; grid-row: 1;
+    min-width: 40px; min-height: 40px;
+    align-self: start;
+  }
+  .portfolio-main .lead-system-section,
+  .portfolio-main .ai-receptionist-section,
+  .portfolio-main .process-showcase,
+  .portfolio-main .contact-section,
+  .portfolio-main .services { padding-inline: clamp(18px,5vw,28px); }
+  .portfolio-main .lead-system-card, .portfolio-main .ai-receptionist-flow article {
+    min-width: 0;
+    padding: clamp(18px, 5vw, 24px);
+  }
+  .portfolio-main .lead-system-flow {
+    min-width: 0;
+    width: 100%;
+    padding: 10px 13px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .portfolio-main .lead-system-cta {
+    min-width: 0;
+    padding: 21px 18px;
+    border-radius: 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .portfolio-main .lead-system-cta .button,
+  .portfolio-main .ai-receptionist-actions .button { width: 100%; white-space: normal; }
+  .portfolio-main .ai-receptionist-copy h2 { max-width: 100%; }
+  .portfolio-main .ai-receptionist-flow { grid-template-columns: 1fr; }
+  .portfolio-main .ai-receptionist-flow article { min-height: 0; }
+  .portfolio-main .ai-receptionist-flow article span { margin-bottom: 12px; }
+  .portfolio-main .engagement-trust { padding: 48px clamp(18px,5vw,26px); }
+  .portfolio-main .engagement-trust article { min-width: 0; }
+  .portfolio-main .process-film-topbar { flex-wrap: wrap; gap: 6px; }
+  .portfolio-main .process-film-topbar span { white-space: normal; }
+  .portfolio-main .process-output { min-width: 0; }
+  .portfolio-main .contact-email { max-width: 100%; font-size: 13px; overflow-wrap: anywhere; }
+  .portfolio-main .contact-panel { width: 100%; min-width: 0; }
+  .portfolio-main .inquiry-form { padding: 22px 18px; }
+  .professional-recommendation { padding: 64px clamp(18px,5vw,28px); }
+  .professional-recommendation .recommendation-card {
+    min-width: 0; height: auto;
+    padding: 26px 20px;
+    border-radius: 19px;
+  }
+  .professional-recommendation .recommendation-card blockquote {
+    font-size: clamp(16px, 4.5vw, 19px);
+    line-height: 1.65;
+    overflow-wrap: break-word;
+  }
+  .professional-recommendation .recommendation-author { min-width: 0; }
+  .professional-recommendation .recommendation-author-details { flex: 1 1 150px; min-width: 0; }
+  .professional-recommendation .recommendation-author strong,
+  .professional-recommendation .recommendation-author small { overflow-wrap: break-word; }
+  .professional-recommendation .recommendation-intro h2 { font-size: clamp(2rem, 8vw, 2.6rem); line-height: 1.17; }
+  .portfolio-footer { padding-inline: 20px; min-width: 0; }
+  .portfolio-footer > div { display: flex; flex-wrap: wrap; gap: 10px 15px; }
+  .seo-about .about-intro { min-height: 0; padding: 62px 20px; gap: 24px; }
+  .seo-about .about-intro .lead { font-size: 15px; line-height: 1.65; }
+  .seo-about .about-intro-copy > p:not(.lead) { font-size: 14px; line-height: 1.68; }
+  .seo-about .about-work,.seo-about .about-skills { padding: 62px 20px; }
+  .seo-about .about-role, .seo-about .about-skills-grid article { padding: 21px 18px; min-width: 0; }
+  .seo-about .about-role-top { flex-wrap: wrap; gap: 8px 16px; }
+  .ghl-page .ghl-index-hero,.ghl-page .ghl-detail { padding-inline: 20px; }
+  .ghl-page .ghl-system-card,.ghl-page .ghl-architecture-card { min-width: 0; padding: 23px 20px; }
+  .ghl-page .ghl-system-card h2,.ghl-page .ghl-architecture-card h3 { line-height: 1.23; letter-spacing: -.027em; font-size: clamp(21px,5.5vw,28px); }
+  .ghl-page .ghl-architecture-detail { grid-template-columns: minmax(0, 1fr); }
+  .ghl-page .ghl-detail-cta { padding: 25px 19px; }
+  .ghl-page .ghl-detail-cta a { white-space: normal; }
+  .ghl-detail-nav { padding-inline: 15px; }
+  .ghl-brand { flex: 0 1 auto; min-width: 0; }
+  .ghl-brand img { width: clamp(123px, 39vw, 170px); max-width: 100%; height: auto; }
+  .ghl-detail-nav > div { flex: 0 0 auto; gap: 9px; }
+  .ghl-nav-cta { padding: 9px 10px; font-size: 11px; }
+  .seo-head nav { background: #071330; border-color: #2a4780; }
+  .seo-logo { min-width: 0; }
+  .seo-logo img { width: min(50vw,188px); height: auto; }
+  .seo-main .seo-grid article { min-width: 0; padding: 24px 20px; }
+}
+@media (max-width: 380px) {
+  .portfolio-main .journey-hero h1 {
+    font-size: clamp(1.88rem, 8.6vw, 2.1rem);
+    line-height: 1.17;
+    letter-spacing: -.032em;
+  }
+  .portfolio-main .hero-clock__grid {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 8px;
+  }
+  .portfolio-main .hero-clock__rule { height: 1px; width: 100%; background: rgba(233,196,115,.28); }
+  .portfolio-main .hero-clock__readout time { font-size: 17px; }
+  .portfolio-main .hero-clock__status { font-size: 9px; }
+  .portfolio-main .journey-hero .connection-journey { height: 420px; }
+  .portfolio-main .journey-hero .journey-fallback { inset: 125px 7% 83px; }
+  .portfolio-main .journey-hero .journey-caption p { font-size: 11px; }
+  .portfolio-main :is(.section-heading h2,.lead-system-heading h2,.ai-receptionist-copy h2,.process-heading h2,.contact-content h2),
+  .seo-main :is(.seo-hero h1,.about-intro h1,.about-section-head h2),
+  .ghl-page :is(.ghl-index-hero h1,.ghl-detail h1,.ghl-architecture-head h2) {
+    font-size: clamp(1.78rem, 8.2vw, 2rem);
+    line-height: 1.19;
+  }
+  .professional-recommendation .recommendation-author img { width: 62px; height: 62px; flex-basis: 62px; }
+  .portfolio-header .brand img { width: clamp(150px,49vw,175px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-main .journey-hero h1, .portfolio-main .hero-clock, .portfolio-main .hero-clock * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
