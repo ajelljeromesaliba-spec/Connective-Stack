@@ -63,7 +63,7 @@ export async function onRequestPost({ request, env }) {
       },
       body: JSON.stringify({
         from: 'Connective Stack Website <website@connectivestack.com>',
-        to: ['ajell.saliba@connectivestack.com'],
+        to: ['hello@connectivestack.com'],
         reply_to: fields.email,
         subject: `New project inquiry from ${fields.name}`,
         html: `<div style="font-family:Arial,sans-serif;max-width:680px;margin:auto;color:#18211f"><div style="padding:24px;background:#172123;color:white"><small style="color:#7ee3d4;letter-spacing:.12em">CONNECTIVE STACK</small><h1 style="margin:8px 0 0;font-size:28px">New project inquiry</h1></div><table style="width:100%;border-collapse:collapse;background:#fff">${htmlRows}</table><div style="padding:22px;background:#f3f7f5"><strong>Project details</strong><p style="white-space:pre-wrap;line-height:1.65">${escapeHtml(fields.message)}</p></div></div>`,
