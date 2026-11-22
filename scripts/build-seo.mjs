@@ -19,7 +19,6 @@ try {
     routes.set(path, { title: html.match(/<title>(.*?)<\/title>/s)[1].replaceAll('&amp;', '&'), desc: html.match(/name="description" content="([^"]*)"/)[1], image: html.match(/property="og:image" content="([^"]*)"/)?.[1] })
   }
   routes.set('/seo-guides', { title: 'Website, CRM and AI Automation Guides | ConnectiveStack', desc: 'Practical ConnectiveStack guides for website SEO, HVAC lead generation, CRM automation, AI receptionists and business system integrations.' })
-  routes.set('/ajell-saliba', { title: 'Experience and Technical Work | ConnectiveStack', desc: 'Website delivery, GoHighLevel systems, DNS, integrations and technical problem solving across agency and operations roles.' })
   for (const [slug, p] of Object.entries(pages)) routes.set(`/guides/${slug}`, { title: `${p[1]} | ConnectiveStack`, desc: p[2] })
   for (const [slug, p] of Object.entries(sols)) routes.set(`/solutions/${slug}`, { title: `${p[1]} | ConnectiveStack`, desc: p[2] })
   for (const [slug, p] of Object.entries(caseStudies)) routes.set(`/case-studies/${slug}`, { title: `${p.title} | ConnectiveStack Case Study`, desc: p.summary, image: origin + p.image })
