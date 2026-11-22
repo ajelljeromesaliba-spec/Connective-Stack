@@ -39,6 +39,11 @@
   ],
   "redirects": [
     {
+      "source": "/ajell-saliba",
+      "destination": "https://ajellsaliba.services/",
+      "permanent": true
+    },
+    {
       "source": "/solutions/website-systems",
       "destination": "/solutions/website-development",
       "permanent": true
