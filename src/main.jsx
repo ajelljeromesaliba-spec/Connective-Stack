@@ -6,7 +6,7 @@ import RealEstateDemo from './RealEstateDemo'
 import HealthcareDemo from './HealthcareDemo'
 import CaseStudy from './CaseStudy'
 import GhlSystems from './GhlSystems'
-import { GuideHub, Guide, Solution, AboutAjell, guideSlugs, solutionSlugs } from './SeoPages'
+import { GuideHub, Guide, Solution, guideSlugs, solutionSlugs } from './SeoPages'
 import './premium.css'
 import './secondary-dark.css'
 import './spatial.css'
@@ -15,6 +15,7 @@ import ProfessionalRecommendation from './ProfessionalRecommendation'
 import TimeComparison from './TimeComparison'
 import './brand-refresh.css'
 import './responsive-polish.css'
+import './pawnova-showcase.css'
 
 
 const SOCIAL_PROFILES = [
@@ -568,7 +569,7 @@ function App() {
             <a href="#process" onClick={closeMenu}>Process</a>
             <a href="/ghl-systems" onClick={closeMenu}>GHL Systems</a>
             <a href="/seo-guides" onClick={closeMenu}>Guides</a>
-            <a href="/ajell-saliba" onClick={closeMenu}>About</a>
+            <a href="https://ajellsaliba.services/" target="_blank" rel="noopener noreferrer" onClick={closeMenu} aria-label="About Ajell, open personal portfolio in a new tab">About</a>
           </div>
           <a className="nav-cta" href={CALENDAR_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Book a system review <Arrow /></a>
         </nav>
@@ -774,6 +775,24 @@ function App() {
           </div>
         </section>
 
+        <section className="portfolio-project-spotlight" id="projects" data-scroll-scene aria-labelledby="paw-nova-heading">
+          <div className="portfolio-project-inner" data-reveal>
+            <div className="portfolio-project-copy">
+              <span className="kicker">Selected independent project</span>
+              <h2 id="paw-nova-heading">Paw Nova Co. <em>Product discovery with a purpose.</em></h2>
+              <p>Designed and built as an Amazon affiliate product-discovery website for pet owners. Paw Nova organizes product categories, individual product notes, and buying guides into a clear, responsive browsing experience.</p>
+              <p className="portfolio-project-note">Visitors compare and research products on Paw Nova, then complete any purchase on Amazon. This is an affiliate site, not an on-site ecommerce checkout.</p>
+              <div className="portfolio-project-tags"><span>Website &amp; UI/UX</span><span>Product catalogue</span><span>Buying guides</span><span>Responsive QA</span></div>
+              <a className="button button-primary" href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer">Explore Paw Nova Co. <Arrow /></a>
+            </div>
+            <a className="portfolio-project-visual" href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Paw Nova Co. live website">
+              <span className="portfolio-project-visual-top">INDEPENDENT PROJECT <span>LIVE WEBSITE ↗</span></span>
+              <span className="portfolio-project-logo-wrap"><img src="/assets/pawnova-logo-transparent-optimized.webp" alt="Paw Nova Co. logo" loading="lazy" decoding="async" /></span>
+              <span className="portfolio-project-visual-bottom">PET PRODUCT FINDS · AMAZON AFFILIATE</span>
+            </a>
+          </div>
+        </section>
+
         <ProfessionalRecommendation placement="home" />
 
         <section className="contact-section" id="contact" data-scroll-scene>
@@ -826,6 +845,11 @@ function App() {
   )
 }
 
+function PersonalPortfolioRedirect() {
+  useEffect(() => { window.location.replace('https://ajellsaliba.services/') }, [])
+  return <main className="seo-main"><h1>About Ajell</h1><p>This page has moved to <a href="https://ajellsaliba.services/">Ajell's personal portfolio</a>.</p></main>
+}
+
 export function renderRoute(currentPath, search = '') {
 const caseStudySlug = currentPath.startsWith('/case-studies/')
   ? currentPath.replace('/case-studies/', '')
@@ -845,7 +869,7 @@ const route = currentPath === '/seo-guides'
     : solutionSlugs.has(solutionSlug)
       ? <Solution slug={solutionSlug} />
       : currentPath === '/ajell-saliba'
-        ? <AboutAjell />
+        ? <PersonalPortfolioRedirect />
         : currentPath === '/ghl-systems'
           ? <GhlSystems slug={ghlSystemSlug || undefined} />
           : currentPath === '/demos/hvac-ai-front-desk'
