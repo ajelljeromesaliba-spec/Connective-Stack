@@ -74,7 +74,7 @@ try {
     await mkdir(dir, { recursive: true })
     await writeFile(`${dir}/index.html`, html)
   }
-  await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...routes.keys()].map(path => `  <url><loc>${origin}${path}</loc>${path === '/' ? '<lastmod>2026-11-21</lastmod>' : ''}</url>`).join('\n')}\n</urlset>\n`)
+  await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[...routes.keys(), '/style-picker/'].map(path => `  <url><loc>${origin}${path}</loc>${path === '/' ? '<lastmod>2026-11-21</lastmod>' : ''}</url>`).join('\n')}\n</urlset>\n`)
   await writeFile('dist/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`)
   await writeFile('dist/404.html', '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Page not found | ConnectiveStack</title></head><body><main><h1>Page not found</h1><p>This address does not match a page on ConnectiveStack.</p><a href="/">Return to ConnectiveStack</a></main></body></html>')
   console.log(`SEO: generated ${routes.size} pages with rendered content, unique metadata, schema and sitemap.`)
