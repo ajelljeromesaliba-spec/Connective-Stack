@@ -564,6 +564,11 @@ function App() {
                   <strong>Connected Patient Experience</strong>
                   <span>Intake, benefits, scheduling, and provider routing</span>
                 </a>
+                <a href="/style-picker/" onClick={closeMenu}>
+                  <small>Interactive Design Tool</small>
+                  <strong>Website Style Picker</strong>
+                  <span>Explore templates, typography, and brand colors</span>
+                </a>
               </div>
             </div>
             <a href="#process" onClick={closeMenu}>Process</a>
@@ -833,6 +838,7 @@ function App() {
             <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
             <button type="button" onClick={() => setShowCookieConsent(true)}>Cookie Preferences</button>
             <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noopener noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
+            <a href="/style-picker/">Website Style Picker</a>
             <a href="#project-inquiry">Send inquiry</a>
           </div>
         </div>

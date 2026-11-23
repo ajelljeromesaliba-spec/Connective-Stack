@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090e17">
+  <meta name="description" content="Explore website design directions with the ConnectiveStack Style Picker. Choose templates, typography and brand colors, preview the result, and export a design brief.">
+  <link rel="icon" href="/assets/connectivestack-blue-gold-icon.png">
+  <link rel="canonical" href="https://www.connectivestack.com/style-picker/">
+  <link rel="stylesheet" href="/style-picker/picker.css">
+  <title>Website Style Picker | ConnectiveStack</title>
+</head>
+<body class="picker-body">
+  <div class="picker-shell">
+    <header class="picker-header">
+      <div class="brand-zone">
+        <a href="/" class="picker-logo" aria-label="ConnectiveStack homepage"><img src="/assets/connectivestack-blue-gold-logo.png" alt="ConnectiveStack" /></a>
+        <div class="picker-title"><span class="picker-division">INTERACTIVE DESIGN TOOL</span><h1>Website Style Picker</h1></div>
+      </div>
+      <div class="header-actions"><span class="session-label"><span class="live-dot"></span> Live preview</span><a class="exit-link" href="/">Back to website <span aria-hidden="true">↗</span></a></div>
+    </header>
+    <div class="picker-intro">
+      <div><p class="eyebrow">EXPLORE YOUR WEBSITE DIRECTION</p><h2>Make it yours before we build it.</h2><p>Choose a layout, experiment with type and colors, then save your direction. We'll give you a clear design brief you can share.</p></div>
+      <div class="mini-steps" aria-label="Three steps"><span><b>01</b> Pick</span><span class="step-line" aria-hidden="true"></span><span><b>02</b> Preview</span><span class="step-line" aria-hidden="true"></span><span><b>03</b> Export</span></div>
+    </div>
+    <main class="picker-workspace">
+      <aside class="control-panel" aria-label="Style controls">
+        <div class="panel-top"><div class="panel-heading"><span class="number-pill">01 / 03</span><h3>Shape your style</h3></div><p>Fine-tune each choice. Your preview updates as you go.</p></div>
+        <div class="picker-tabs" role="tablist" aria-label="Design options">
+          <button type="button" class="picker-tab is-active" id="tab-template" role="tab" aria-selected="true" aria-controls="panel-template" data-tab="template">▦ <span>Template</span></button>
+          <button type="button" class="picker-tab" id="tab-typography" role="tab" aria-selected="false" aria-controls="panel-typography" data-tab="typography">Aa <span>Typography</span></button>
+          <button type="button" class="picker-tab" id="tab-branding" role="tab" aria-selected="false" aria-controls="panel-branding" data-tab="branding">◉ <span>Branding</span></button>
+        </div>
+        <section class="tab-panel" id="panel-template" role="tabpanel" aria-labelledby="tab-template">
+          <label for="template-search" class="field-label">CHOOSE A STARTING POINT</label>
+          <div class="search-wrap"><span aria-hidden="true">⌕</span><input id="template-search" placeholder="Search templates or industries..." autocomplete="off"></div>
+          <p class="field-help">10 curated concepts from the original style picker. Template copy and imagery are illustrative.</p>
+          <div id="template-grid" class="template-grid"></div>
+          <p id="template-empty" class="template-empty" hidden>No matching templates. Try another search.</p>
+        </section>
+        <section class="tab-panel" id="panel-typography" role="tabpanel" aria-labelledby="tab-typography" hidden>
+          <label class="field-label">SELECT A TYPOGRAPHY MOOD</label><div id="font-categories" class="font-categories"></div>
+          <p id="font-category-description" class="field-help"></p><div id="font-grid" class="font-grid"></div>
+        </section>
+        <section class="tab-panel" id="panel-branding" role="tabpanel" aria-labelledby="tab-branding" hidden>
+          <p class="field-label">SELECT A BRAND PALETTE</p>
+          <div id="theme-grid"></div>
+          <div id="custom-colors" class="custom-colors" hidden>
+            <div class="custom-header"><strong>Customize colors</strong><button type="button" id="reset-theme" class="text-action" hidden>Reset to theme</button></div>
+            <p class="field-help">Change individual colors without altering the rest of the palette.</p>
+            <div id="color-fields"></div>
+          </div>
+        </section>
+      </aside>
+      <section class="preview-panel" aria-label="Website preview">
+        <div class="preview-header">
+          <div><div class="preview-headline"><span class="number-pill">LIVE</span><h3>Preview your design</h3></div><p id="preview-subtitle">Choose a template, font or color to explore a direction.</p></div>
+          <div class="device-switch" role="group" aria-label="Preview device">
+            <button type="button" class="device-button is-active" data-device="desktop" aria-label="Desktop preview" aria-pressed="true" title="Desktop">▣</button>
+            <button type="button" class="device-button" data-device="tablet" aria-label="Tablet preview" aria-pressed="false" title="Tablet">▯</button>
+            <button type="button" class="device-button" data-device="mobile" aria-label="Mobile preview" aria-pressed="false" title="Mobile">▮</button>
+          </div>
+        </div>
+        <div id="preview-note" class="preview-note" hidden>ⓘ This preview uses sample content and layout concepts. Your final website will use your own copy, images and business details.</div>
+        <div class="preview-stage">
+          <div class="preview-frame" id="preview-frame">
+            <div class="browser-bar"><div class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></div><div id="preview-domain" class="browser-url">yourbrand.com</div><span class="browser-secure">⌁</span></div>
+            <div id="preview-inner" class="preview-inner" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="picker-footer">
+      <div class="save-status"><p id="save-status-text">Make a selection, then save your pick to enable exports.</p><div class="selection-chips" id="selection-chips" aria-live="polite"></div></div>
+      <div class="footer-actions">
+        <button type="button" class="footer-button quiet" id="reset-all">Start over</button>
+        <button type="button" class="footer-button secondary" id="save-pick" disabled>Save pick</button>
+        <button type="button" class="footer-button secondary" id="view-prompt" disabled>View prompt</button>
+        <button type="button" class="footer-button primary" id="download-preview" disabled>Download preview <span aria-hidden="true">↓</span></button>
+      </div>
+    </footer>
+    <p class="privacy-note">No account required. Selections stay in this page until you leave or refresh. No design choices are stored on our servers.</p>
+  </div>
+  <dialog id="prompt-dialog" class="prompt-dialog" aria-labelledby="prompt-dialog-title">
+    <div class="dialog-header"><div><p class="eyebrow">YOUR SAVED DIRECTION</p><h2 id="prompt-dialog-title">Website design prompt</h2><p>Use this brief with v0 or share it with a web developer.</p></div><button type="button" id="close-dialog" class="close-dialog" aria-label="Close dialog">×</button></div>
+    <pre id="prompt-content" tabindex="0"></pre>
+    <div class="dialog-footer"><button type="button" id="download-prompt" class="footer-button secondary">Download .txt</button><button type="button" id="copy-prompt" class="footer-button primary">Copy prompt</button></div>
+  </dialog>
+  <script defer src="/style-picker/picker.js"></script>
+</body>
+</html>
