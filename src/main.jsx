@@ -116,10 +116,10 @@ const services = [
 ]
 
 const process = [
-  ['01', 'Define the outcome', 'We start with the business result you want after a customer acts, then define the response time, ownership, qualification, booking, or follow-through that result requires.'],
+  ['01', 'Define the outcome', 'Agree on the problem, expected behavior and how we will verify it. Where baseline data exists, identify a useful measure such as response time, missed inquiries or manual steps.'],
   ['02', 'Find the constraint', 'ConnectiveStack traces the current customer and data path to identify the smallest set of changes standing between the current setup and the target outcome.'],
   ['03', 'Build the useful system', 'ConnectiveStack implements the customer-facing experience, CRM logic, integrations, and automations needed to produce the agreed next action without adding tools for their own sake.'],
-  ['04', 'Verify end to end', 'We test the normal path and the failure cases, then launch with ownership, documentation, and a clear measurement point for the outcome we set at the start.'],
+  ['04', 'Verify end to end', 'Run agreed end-to-end acceptance checks, including relevant failure cases. Review the results with you, document ownership and remaining limitations, and hand over the agreed deliverables.'],
 ]
 
 function LegalModal({ type, onClose }) {
@@ -327,7 +327,7 @@ function ProjectInquiryForm() {
       <div className="inquiry-form-heading">
         <span>PROJECT INQUIRY</span>
         <h3>Tell me what you need.</h3>
-        <p>A short summary is enough. ConnectiveStack will review it and reply if it looks like a fit.</p>
+        <p>Describe the problem, who it affects, and what you want to happen instead. We will review the details and discuss whether the work is a fit.</p>
       </div>
       <label>Full name<input name="name" required autoComplete="name" placeholder="Your name" /></label>
       <label>Work email<input name="email" required type="email" autoComplete="email" placeholder="you@company.com" /></label>
@@ -587,13 +587,13 @@ function App() {
             <div className="hero-grid grid-lines" aria-hidden="true" />
             <div className="hero-copy">
               <div className="eyebrow"><span className="status-dot" /> ConnectiveStack / Web, CRM, automation & AI</div>
-              <h1>Turn your systems into a clearer path from <em>customer action to business result.</em></h1>
-              <p className="hero-lead">Capture the right information, move it to the right place, automate the repeatable work, keep ownership clear, and make the next step easier to complete. Websites, CRM, integrations, automation, and AI are the tools behind that result.</p>
+              <h1>Stop losing inquiries to <em>broken systems and missed follow-ups.</em></h1>
+              <p className="hero-lead">When a customer calls, submits a form or requests an appointment, your team should know what happened and what to do next. ConnectiveStack builds and repairs websites, CRM workflows and AI receptionists around that goal. We agree on what must work, then test the actual customer journey before handoff.</p>
               <p className="brand-search-note"><strong>ConnectiveStack</strong> (also written <strong>Connective Stack</strong>) helps service businesses fix lost inquiries, CRM handoff problems, and follow-up gaps.</p>
               <TimeComparison />
               <div className="hero-actions">
-                <a href="#services" className="button button-primary">Explore capabilities <Arrow /></a>
-                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Discuss a project <Arrow /></a>
+                <a href="#services" className="button button-primary">See what we can fix <Arrow /></a>
+                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Review your system <Arrow /></a>
               </div>
             </div>
             <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see capabilities</span><span className="hero-scroll-line" /></div>
@@ -618,8 +618,8 @@ function App() {
           </div>
           <div className="section-heading" data-reveal>
             <span className="kicker">Business outcomes</span>
-            <h2>Faster response. Cleaner handoffs. Less manual work. More completed next steps.</h2>
-            <p>The build is shaped around the result you need, whether that means a better customer journey, a working CRM flow, reliable automation, connected tools, cleaner operations, or a technical system that is easier to run.</p>
+            <h2>Where is your business losing time or customer inquiries?</h2>
+            <p>A missed call, a form that never reaches the CRM, or a lead with no assigned owner can cost you an opportunity. We identify which part of your process is failing, agree on the expected behavior, and build the fix around it. Open any outcome below to see what we check and what delivery looks like.</p>
           </div>
           <div className="service-list">
             {services.map(service => (
@@ -640,8 +640,8 @@ function App() {
         <section className="lead-system-section" id="lead-system" data-scroll-scene aria-labelledby="lead-system-heading">
           <div className="lead-system-heading" data-reveal>
             <span className="kicker">How the result gets delivered</span>
-            <h2 id="lead-system-heading">One connected system from the first action to the next useful outcome.</h2>
-            <p>The website, CRM, integrations, automation, AI, deployment, and QA can work together around the same business goal instead of operating as separate technical tasks.</p>
+            <h2 id="lead-system-heading">Know what happens after every inquiry.</h2>
+            <p>For example, when a visitor requests a quote, the form should capture the details, create or update a CRM record, notify the assigned person and trigger the agreed follow-up. If a connection fails, there should be a visible fallback. We design and test that path using the tools your business actually needs.</p>
           </div>
 
           <div className="lead-system-flow" data-reveal aria-label="Connected delivery workflow">
@@ -737,9 +737,9 @@ function App() {
           <div className="process-heading" data-reveal>
             <div>
               <span className="kicker">The ConnectiveStack method</span>
-              <h2>Define the outcome. Build the path. Verify it works.</h2>
+              <h2>Know what you are paying for before we build.</h2>
             </div>
-            <p>The business result comes first. ConnectiveStack defines what should happen after a customer acts, works backward through the customer-facing and technical layers, then uses only the pieces needed to make that outcome repeatable.</p>
+            <p>Before implementation, we agree on scope, dependencies, deliverables and acceptance checks. For a lead workflow, those checks might include a test submission, CRM record, assigned owner, notification and follow-up. You can review the evidence at handoff. Revenue and lead volume depend on factors outside the build, so we do not promise them.</p>
           </div>
 
           <div className="process-stage">
@@ -804,8 +804,8 @@ function App() {
           <div className="contact-glow" />
           <div className="contact-content" data-reveal>
             <span className="kicker kicker-dark">Start with the outcome</span>
-            <h2>Tell me what result you want the system to produce.</h2>
-            <p>That could mean faster response, cleaner handoffs, easier booking, less manual admin, better customer routing, or a technical workflow that reliably completes the next step. ConnectiveStack works backward from that result and scopes only what is needed.</p>
+            <h2>Show us where your customer journey breaks.</h2>
+            <p>Bring your website, CRM or current workflow and describe what should happen but does not. We can discuss the likely cause, what needs verification, the scope of a fix and how you would know the work is complete. You do not need to choose the technology before the conversation.</p>
             <div className="contact-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-light">Book a discovery call <Arrow /></a>
               <a href="#project-inquiry" className="contact-email" aria-label="Open the project inquiry form">hello@connectivestack.com</a>
