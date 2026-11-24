@@ -105,3 +105,17 @@ body:has(.portfolio-main),body:has(.seo-main),body:has(.case-page),body:has(.ghl
  .portfolio-main .editorial-pending{opacity:1!important;translate:none!important;animation:none!important}
  body:has(.portfolio-main)::before{animation:none!important}
 }
+
+/* Remaining floating CTA and legacy warm accents. */
+body:has(.portfolio-main) .calendly-direct-badge{background:linear-gradient(135deg,#e5bcfb,#c483df)!important;border-color:#e5b7f7!important;color:#241032!important;box-shadow:0 8px 28px #a85ac54a}
+body:has(.portfolio-main) .calendly-direct-badge:focus-visible{outline:2px solid #e7bdfb}
+.portfolio-main .lead-system-cta span{color:#e3b8f5!important}
+.portfolio-main .lead-system-number{margin-bottom:clamp(16px,2vw,26px)}
+.portfolio-main .recommendation-card--featured blockquote{white-space:pre-line}
+@media(prefers-reduced-motion:no-preference){
+ .portfolio-main .service-list .service-card.editorial-pending.editorial-arrived,.portfolio-main .lead-system-grid .lead-system-card.editorial-pending.editorial-arrived,.portfolio-main .recommendation-cards .recommendation-card.editorial-pending.editorial-arrived{animation:brand-rise .85s var(--editorial-delay,0ms) cubic-bezier(.2,.75,.25,1) backwards!important}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ body:has(.portfolio-main) .calendly-direct-badge{transition:translate .25s ease,box-shadow .25s ease,filter .25s ease!important}
+ body:has(.portfolio-main) .calendly-direct-badge:hover{translate:0 -3px;transform:none;filter:brightness(1.1);box-shadow:0 12px 36px #cc7ce76b}
+}
