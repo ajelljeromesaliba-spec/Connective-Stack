@@ -10,13 +10,12 @@ import { GuideHub, Guide, Solution, guideSlugs, solutionSlugs } from './SeoPages
 import './premium.css'
 import './secondary-dark.css'
 import './spatial.css'
-import ConnectionScene from './ConnectionScene'
 import ProfessionalRecommendation from './ProfessionalRecommendation'
-import TimeComparison from './TimeComparison'
 import './brand-refresh.css'
 import './responsive-polish.css'
 import './pawnova-showcase.css'
 import './glassmorphism.css'
+import './frosted-site.css'
 
 
 const SOCIAL_PROFILES = [
@@ -357,133 +356,6 @@ function App() {
   })
 
   useEffect(() => {
-    const revealItems = [...document.querySelectorAll('[data-reveal]')]
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    revealItems.forEach((item, index) => {
-      item.style.setProperty('--reveal-delay', `${(index % 3) * 90}ms`)
-    })
-
-    if (reduceMotion) {
-      revealItems.forEach(item => item.classList.add('is-visible'))
-      return undefined
-    }
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return
-        entry.target.classList.add('is-visible')
-        observer.unobserve(entry.target)
-      })
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' })
-
-    revealItems.forEach(item => observer.observe(item))
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
-    const scenes = [...document.querySelectorAll('[data-scroll-scene]')]
-    const hero = document.querySelector('.cinematic-hero')
-    let frame = 0
-    let heroVisualProgress = null
-    let lastFrameTime = 0
-    const smoothstep = value => {
-      const t = Math.max(0, Math.min(1, value))
-      return t * t * (3 - 2 * t)
-    }
-    const update = () => {
-      frame = 0
-      scenes.forEach(scene => {
-        const rect = scene.getBoundingClientRect()
-        if (rect.bottom < 0 || rect.top > window.innerHeight) return
-        const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)))
-        scene.style.setProperty('--scene-progress', progress.toFixed(3))
-        scene.style.setProperty('--scene-shift', `${((.5 - progress) * 54).toFixed(1)}px`)
-        scene.style.setProperty('--scene-turn', `${((progress - .5) * 5).toFixed(2)}deg`)
-      })
-      if (hero) {
-        const rect = hero.getBoundingClientRect()
-        const travel = Math.max(1, rect.height - window.innerHeight + 78)
-        const targetProgress = Math.max(0, Math.min(1, -rect.top / travel))
-        const now = performance.now()
-        const easing = 1 - Math.exp(-Math.min(now - lastFrameTime, 32) / 105)
-        heroVisualProgress = heroVisualProgress === null ? targetProgress : heroVisualProgress + (targetProgress - heroVisualProgress) * easing
-        lastFrameTime = now
-        const progress = heroVisualProgress
-        const secondOpacity = smoothstep((progress - .25) / .5)
-        const middleOpacity = smoothstep((progress - .2) / .16) * (1 - smoothstep((progress - .61) / .16))
-        hero.style.setProperty('--hero-progress', progress.toFixed(3))
-        hero.style.setProperty('--hero-second-opacity', secondOpacity.toFixed(3))
-        hero.style.setProperty('--hero-film-middle', middleOpacity.toFixed(3))
-        hero.style.setProperty('--hero-film-first', (1 - smoothstep((progress - .18) / .18)).toFixed(3))
-        hero.style.setProperty('--hero-film-last', smoothstep((progress - .62) / .18).toFixed(3))
-        if (Math.abs(targetProgress - progress) > .001) frame = window.requestAnimationFrame(update)
-      }
-    }
-    const requestUpdate = () => {
-      if (frame) return
-      frame = window.requestAnimationFrame(update)
-    }
-    update()
-    window.addEventListener('scroll', requestUpdate, { passive: true })
-    window.addEventListener('resize', requestUpdate)
-    return () => {
-      window.removeEventListener('scroll', requestUpdate)
-      window.removeEventListener('resize', requestUpdate)
-      if (frame) window.cancelAnimationFrame(frame)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return undefined
-    const cards = [...document.querySelectorAll('[data-depth-card]')]
-    const cleanups = cards.map(card => {
-      let frame = 0
-      const onMove = event => {
-        if (frame) cancelAnimationFrame(frame)
-        const { clientX, clientY } = event
-        frame = requestAnimationFrame(() => {
-          const rect = card.getBoundingClientRect()
-          const x = (clientX - rect.left) / rect.width - .5
-          const y = (clientY - rect.top) / rect.height - .5
-          card.style.setProperty('--tilt-x', `${(-y * 6).toFixed(2)}deg`)
-          card.style.setProperty('--tilt-y', `${(x * 6).toFixed(2)}deg`)
-          card.style.setProperty('--glint-x', `${((x + .5) * 100).toFixed(1)}%`)
-          card.style.setProperty('--glint-y', `${((y + .5) * 100).toFixed(1)}%`)
-        })
-      }
-      const onLeave = () => {
-        if (frame) cancelAnimationFrame(frame)
-        card.style.removeProperty('--tilt-x')
-        card.style.removeProperty('--tilt-y')
-      }
-      card.addEventListener('pointermove', onMove, { passive: true })
-      card.addEventListener('pointerleave', onLeave)
-      return () => {
-        card.removeEventListener('pointermove', onMove)
-        card.removeEventListener('pointerleave', onLeave)
-        if (frame) cancelAnimationFrame(frame)
-      }
-    })
-    return () => cleanups.forEach(cleanup => cleanup())
-  }, [])
-
-  useEffect(() => {
-    const videos = document.querySelectorAll('.process-film video, .services-background video')
-    if (!videos.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const video = entry.target
-        if (entry.isIntersecting) video.play().catch(() => {})
-        else video.pause()
-      })
-    }, { threshold: .15 })
-    videos.forEach(video => observer.observe(video))
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
     if (!legalModal && !activeService && !menuOpen) return undefined
     const closeOnEscape = event => {
       if (event.key !== 'Escape') return
@@ -582,49 +454,49 @@ function App() {
       </header>
 
       <main id="top" className="portfolio-main">
-        <section className="hero cinematic-hero journey-hero" data-scroll-scene>
-          <div className="hero-pinned">
-            <ConnectionScene />
-            <div className="hero-grid grid-lines" aria-hidden="true" />
-            <div className="hero-copy">
-              <div className="eyebrow"><span className="status-dot" /> ConnectiveStack / Web, CRM, automation & AI</div>
-              <h1>Stop losing inquiries to <em>broken systems and missed follow-ups.</em></h1>
-              <p className="hero-lead">When a customer calls, submits a form or requests an appointment, your team should know what happened and what to do next. ConnectiveStack builds and repairs websites, CRM workflows and AI receptionists around that goal. We agree on what must work, then test the actual customer journey before handoff.</p>
-              <p className="brand-search-note"><strong>ConnectiveStack</strong> (also written <strong>Connective Stack</strong>) helps service businesses fix lost inquiries, CRM handoff problems, and follow-up gaps.</p>
-              <TimeComparison />
-              <div className="hero-actions">
-                <a href="#services" className="button button-primary">See what we can fix <Arrow /></a>
-                <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-secondary">Review your system <Arrow /></a>
+        <section className="frost-hero" aria-labelledby="frost-hero-title">
+          <div className="frost-hero-copy">
+            <span className="frost-eyebrow"><i /> Web · CRM · Automation · AI</span>
+            <h1 id="frost-hero-title">Every inquiry.<br />A clear <em>next step.</em></h1>
+            <p className="frost-lead">Stop losing inquiries to broken systems and missed follow-ups. We build and repair websites, CRM workflows and AI receptionists so your customers reach the right next action.</p>
+            <div className="frost-actions">
+              <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Book a system review <Arrow /></a>
+              <a href="#live-examples" className="button button-secondary">Explore live demos <Arrow /></a>
+            </div>
+            <p className="frost-brand-note">ConnectiveStack (Connective Stack) · Founder-led technical delivery</p>
+          </div>
+          <div className="frost-console" aria-label="Illustrative customer workflow dashboard">
+            <div className="frost-console-top"><span><i /><i /><i /></span><strong>Connected workspace</strong><small>Example workflow</small></div>
+            <div className="frost-console-body">
+              <aside className="frost-console-nav" aria-label="Illustrative modules"><span className="frost-console-active">◈ Overview</span><span>Website</span><span>CRM</span><span>Automations</span><span>AI reception</span></aside>
+              <div className="frost-console-content">
+                <div className="frost-console-heading"><div><small>Customer journey</small><h2>Lead activity</h2></div><span className="frost-state"><i /> Sample</span></div>
+                <div className="frost-mini-grid"><div><small>01 · Capture</small><strong>Inquiry</strong></div><div><small>02 · Route</small><strong>CRM</strong></div><div><small>03 · Respond</small><strong>Follow-up</strong></div></div>
+                <div className="frost-chart"><span>Workflow overview</span><svg viewBox="0 0 320 110" role="img" aria-label="Illustrative connected workflow line" preserveAspectRatio="none"><defs><linearGradient id="frostLine"><stop stopColor="#87d8ff"/><stop offset="1" stopColor="#ae8cf8"/></linearGradient><linearGradient id="frostArea" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#8da9f6" stopOpacity=".24"/><stop offset="1" stopColor="#8da9f6" stopOpacity="0"/></linearGradient></defs><path d="M0 94H320M0 63H320M0 32H320" stroke="#b4c7ec" strokeOpacity=".13" strokeDasharray="3 5"/><path d="M0 87C35 87 44 47 79 60S125 83 150 46 192 63 217 37 256 49 282 24 307 20 320 12V110H0Z" fill="url(#frostArea)"/><path d="M0 87C35 87 44 47 79 60S125 83 150 46 192 63 217 37 256 49 282 24 307 20 320 12" fill="none" stroke="url(#frostLine)" strokeWidth="2.4" vectorEffect="non-scaling-stroke"/></svg></div>
+                <div className="frost-console-log"><span><Check /> Form captured</span><span>CRM owner assigned</span><span>Next action defined</span></div>
               </div>
             </div>
-            <div className="hero-scroll-cue" aria-hidden="true"><span>Scroll to see capabilities</span><span className="hero-scroll-line" /></div>
-            <div className="hero-motion-track" aria-hidden="true"><span /></div>
+          </div>
+        </section>
+        <section className="frost-offers" aria-label="Our services">
+          {[['01','Websites','Clear customer journeys, responsive pages and reliable forms.'],['02','CRM & automation','Capture, route and follow up on inquiries.'],['03','AI integrations','Voice, intake, APIs and connected workflows.'],['04','Technical support','Diagnose broken systems and verify the fix.']].map(([n,title,copy]) => <a className="frost-offer" href="#services" key={n}><span>{n}</span><h2>{title}</h2><p>{copy}</p><Arrow /></a>)}
+        </section>
+        <section className="frost-demos" id="live-examples" aria-labelledby="frost-demos-title">
+          <span className="kicker">Explore the work</span><h2 id="frost-demos-title">See the customer journey in action.</h2>
+          <div className="frost-demo-grid">
+            {[['HVAC','AI front desk','/demos/hvac-ai-front-desk'],['Real estate','Luxury brokerage','/demos/luxury-real-estate'],['Healthcare','Patient experience','/demos/healthcare-patient-experience']].map(([tag,title,href])=><a href={href} key={href}><small>{tag}</small><strong>{title}</strong><span>Open live demo <Arrow /></span></a>)}
           </div>
         </section>
 
-        <section className="offer-marquee" aria-label="Website and automation services">
-          <p className="offer-marquee-accessible">{offerTicker.join(', ')}</p>
-          <div className="offer-marquee-track" aria-hidden="true">
-            {[0, 1].map(copy => <div className="offer-marquee-group" key={copy}>
-              {offerTicker.map(item => <span className="offer-marquee-item" key={item}>{item}</span>)}
-            </div>)}
-          </div>
-        </section>
-
-        <section className="section services" id="services" data-scroll-scene>
-          <div className="services-background" aria-hidden="true">
-            <video muted loop playsInline preload="none" poster="/assets/problems-motion-poster.jpg">
-              <source src="/assets/problems-motion.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <div className="section-heading" data-reveal>
+        <section className="section services" id="services">
+          <div className="section-heading">
             <span className="kicker">Business outcomes</span>
             <h2>Where is your business losing time or customer inquiries?</h2>
             <p>A missed call, a form that never reaches the CRM, or a lead with no assigned owner can cost you an opportunity. We identify which part of your process is failing, agree on the expected behavior, and build the fix around it. Open any outcome below to see what we check and what delivery looks like.</p>
           </div>
           <div className="service-list">
             {services.map(service => (
-              <article className="service-card" key={service.title} data-reveal data-depth-card>
+              <article className="service-card" key={service.title}>
                 <div>
                   <h3>{service.title}</h3>
                   <p>{service.copy}</p>
@@ -638,14 +510,14 @@ function App() {
           </div>
         </section>
 
-        <section className="lead-system-section" id="lead-system" data-scroll-scene aria-labelledby="lead-system-heading">
-          <div className="lead-system-heading" data-reveal>
+        <section className="lead-system-section" id="lead-system" aria-labelledby="lead-system-heading">
+          <div className="lead-system-heading">
             <span className="kicker">How the result gets delivered</span>
             <h2 id="lead-system-heading">Know what happens after every inquiry.</h2>
             <p>For example, when a visitor requests a quote, the form should capture the details, create or update a CRM record, notify the assigned person and trigger the agreed follow-up. If a connection fails, there should be a visible fallback. We design and test that path using the tools your business actually needs.</p>
           </div>
 
-          <div className="lead-system-flow" data-reveal aria-label="Connected delivery workflow">
+          <div className="lead-system-flow" aria-label="Connected delivery workflow">
             <span>Website</span>
             <i aria-hidden="true">→</i>
             <span>CRM</span>
@@ -659,7 +531,7 @@ function App() {
 
           <div className="lead-system-grid">
             {leadConversionCapabilities.map(item => (
-              <article className="lead-system-card" key={item.title} data-reveal data-depth-card>
+              <article className="lead-system-card" key={item.title}>
                 <span className="lead-system-number">{item.number}</span>
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
@@ -671,7 +543,7 @@ function App() {
             ))}
           </div>
 
-          <div className="lead-system-cta" data-reveal>
+          <div className="lead-system-cta">
             <div>
               <span>Project-based or ongoing technical support</span>
               <strong>Bring the current setup and desired result. You’ll get a clear view of what ConnectiveStack can own, what should change, and where deeper specialization is needed.</strong>
@@ -680,8 +552,8 @@ function App() {
           </div>
         </section>
 
-        <section className="ai-receptionist-section" id="ai-receptionist" data-scroll-scene aria-labelledby="ai-receptionist-heading">
-          <div className="ai-receptionist-shell" data-reveal>
+        <section className="ai-receptionist-section" id="ai-receptionist" aria-labelledby="ai-receptionist-heading">
+          <div className="ai-receptionist-shell">
             <div className="ai-receptionist-copy">
               <span className="kicker">AI Receptionist</span>
               <h2 id="ai-receptionist-heading">Keep inbound calls moving toward qualification, booking, or the right human handoff.</h2>
@@ -714,18 +586,18 @@ function App() {
               </article>
             </div>
           </div>
-          <p className="ai-receptionist-note" data-reveal>AI is the mechanism. The result is a defined path from an inbound call to captured details, qualification, booking, CRM follow-up, or human handoff.</p>
+          <p className="ai-receptionist-note">AI is the mechanism. The result is a defined path from an inbound call to captured details, qualification, booking, CRM follow-up, or human handoff.</p>
         </section>
 
-        <section className="pricing-trust-points engagement-trust" aria-label="What to expect when working with ConnectiveStack" data-scroll-scene>
-          <article data-reveal data-depth-card>
+        <section className="pricing-trust-points engagement-trust" aria-label="What to expect when working with ConnectiveStack">
+          <article>
             <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
             <div>
               <strong>You Own What We Build</strong>
               <p>Your production accounts, domain, and project assets remain under your ownership. ConnectiveStack gets only the access needed to build and manage the agreed system.</p>
             </div>
           </article>
-          <article data-reveal data-depth-card>
+          <article>
             <span className="pricing-trust-icon" aria-hidden="true"><Check /></span>
             <div>
               <strong>30-Day Post-Launch Support</strong>
@@ -734,8 +606,8 @@ function App() {
           </article>
         </section>
 
-        <section className="process-showcase" id="process" data-scroll-scene>
-          <div className="process-heading" data-reveal>
+        <section className="process-showcase" id="process">
+          <div className="process-heading">
             <div>
               <span className="kicker">The ConnectiveStack method</span>
               <h2>Know what you are paying for before we build.</h2>
@@ -744,24 +616,16 @@ function App() {
           </div>
 
           <div className="process-stage">
-            <div className="process-film" data-reveal>
-              <video muted loop playsInline preload="none" poster="/assets/automation-process-gold-poster.jpg">
-                <source src="/assets/automation-process-gold.mp4" type="video/mp4" />
-              </video>
-              <div className="process-film-topbar">
-                <span><i /> Build sequence</span>
-                <span>Outcome / Constraint / Build / Verify</span>
-                <span>Connected system</span>
-              </div>
-              <div className="process-film-caption">
-                <small>Connected execution</small>
-                <strong>One method from target outcome to verified result</strong>
-              </div>
+            <div className="frost-process-visual" aria-label="Example build verification checklist">
+              <div className="frost-process-top"><span>Delivery workspace</span><small>Example acceptance checks</small></div>
+              <h3>From request to verified handoff.</h3>
+              {['Agree on target outcome','Map customer journey and dependencies','Implement the agreed workflow','Test the path and document the handoff'].map((label,i)=><div className="frost-process-row" key={label}><span className="frost-process-index">0{i+1}</span><strong>{label}</strong><Check /></div>)}
+              <p>Acceptance criteria are agreed before implementation.</p>
             </div>
 
-            <div className="process-steps" data-reveal>
+            <div className="process-steps">
               {process.map(([, title, copy]) => (
-                <article key={title} data-depth-card>
+                <article key={title}>
                   <div>
                     <h3>{title}</h3>
                     <p>{copy}</p>
@@ -771,7 +635,7 @@ function App() {
             </div>
           </div>
 
-          <div className="process-output" data-reveal>
+          <div className="process-output">
             <span>Tools used when the diagnosis calls for them</span>
             <div><i /> Website and customer experience</div>
             <div><i /> Forms, calls, and qualification</div>
@@ -781,8 +645,8 @@ function App() {
           </div>
         </section>
 
-        <section className="portfolio-project-spotlight" id="projects" data-scroll-scene aria-labelledby="paw-nova-heading">
-          <div className="portfolio-project-inner" data-reveal>
+        <section className="portfolio-project-spotlight" id="projects" aria-labelledby="paw-nova-heading">
+          <div className="portfolio-project-inner">
             <div className="portfolio-project-copy">
               <span className="kicker">Selected independent project</span>
               <h2 id="paw-nova-heading">Paw Nova Co. <em>Product discovery with a purpose.</em></h2>
@@ -801,9 +665,9 @@ function App() {
 
         <ProfessionalRecommendation placement="home" />
 
-        <section className="contact-section" id="contact" data-scroll-scene>
+        <section className="contact-section" id="contact">
           <div className="contact-glow" />
-          <div className="contact-content" data-reveal>
+          <div className="contact-content">
             <span className="kicker kicker-dark">Start with the outcome</span>
             <h2>Show us where your customer journey breaks.</h2>
             <p>Bring your website, CRM or current workflow and describe what should happen but does not. We can discuss the likely cause, what needs verification, the scope of a fix and how you would know the work is complete. You do not need to choose the technology before the conversation.</p>
@@ -817,7 +681,7 @@ function App() {
               <div><strong>1 business day</strong><span>Typical response time for new inquiries</span></div>
             </div>
           </div>
-          <div className="contact-panel" data-reveal><ProjectInquiryForm /></div>
+          <div className="contact-panel"><ProjectInquiryForm /></div>
         </section>
       </main>
 
