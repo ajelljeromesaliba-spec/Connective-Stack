@@ -1,0 +1,107 @@
+
+/* Final brand and interaction pass. Industry demo identities are not changed. */
+body:has(.portfolio-main),body:has(.seo-main),body:has(.case-page),body:has(.ghl-page){
+ --teal:#db9ced;--teal-dark:#a65ec9;--brand-gold:#dda7f1;--brand-gold-light:#f0d8ff;
+ --frost-accent:#e6b5f6;--case-accent:#e0a7f0;--case-ink:#f7efff;--case-muted:#d0bedf;--case-paper:#140a28;--case-deep:#24113d;--case-soft:#2c1941;--case-line:#e5bcf82b;
+}
+.portfolio-main,.portfolio-main section,.portfolio-main .section-heading,.portfolio-main .process-stage,.portfolio-main .portfolio-project-inner,.portfolio-main .recommendation-shell {min-width:0;max-width:100%}
+.portfolio-main :is(.service-list,.lead-system-grid,.ai-receptionist-shell,.ai-receptionist-flow,.engagement-trust,.process-steps,.recommendation-cards,.contact-panel,.contact-section,.portfolio-project-inner){min-width:0;max-width:100%}
+.portfolio-main :is(.service-card,.lead-system-card,.ai-receptionist-flow article,.engagement-trust article,.process-steps article,.recommendation-card,.contact-panel){min-width:0;height:auto;max-height:none;overflow:visible;overflow-wrap:anywhere}
+.portfolio-main :is(.service-card,.lead-system-card,.process-steps article,.contact-panel,.recommendation-card)>*{min-width:0;max-width:100%}
+.portfolio-main :is(.service-card h3,.lead-system-card h3,.recommendation-card blockquote,.ai-receptionist-flow p,.process-steps p){white-space:normal;overflow:visible;text-overflow:clip;max-height:none;-webkit-line-clamp:unset}
+.portfolio-main .lead-system-grid{border-left:0}
+.portfolio-main .lead-system-grid .lead-system-card{min-height:0}
+.portfolio-main .ai-receptionist-flow article{min-height:0}
+.portfolio-main .ai-receptionist-flow article span{margin-bottom:8px}
+.portfolio-main .lead-system-flow{overflow:visible;justify-content:flex-start;white-space:normal}
+.portfolio-main .lead-system-flow span{white-space:normal}
+.portfolio-main .service-list .service-card,.portfolio-main .service-list .service-card:hover{padding:25px 0;grid-template-columns:42px minmax(0,1fr) minmax(0,.42fr) 42px}
+.portfolio-main .service-list .service-card>div:nth-child(2){grid-column:2;grid-row:1}
+.portfolio-main .service-list .service-card .service-tags{grid-column:3;grid-row:1;min-width:0}
+.portfolio-main .service-list .service-card .service-arrow{grid-column:4;grid-row:1}
+.portfolio-main .service-list .editorial-index{grid-column:1;grid-row:1}
+.portfolio-main .recommendation-cards{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+.portfolio-main .recommendation-cards .recommendation-card{margin:0;min-width:0;height:auto;gap:18px}
+.portfolio-main .recommendation-cards .recommendation-card--client{flex-direction:column;align-items:stretch}
+.portfolio-main .recommendation-card--client .recommendation-author{flex:auto;min-width:0;border-left:0;border-top:1px solid var(--frost-edge);padding:18px 0 0}
+.portfolio-main .recommendation-author-details{min-width:0;overflow-wrap:anywhere}
+.portfolio-main .recommendation-author{flex-wrap:wrap}
+.portfolio-main .inquiry-form{min-width:0;max-width:100%;grid-template-columns:repeat(2,minmax(0,1fr))}
+.portfolio-main .inquiry-form :is(input,textarea,select){min-width:0;width:100%;max-width:100%}
+.portfolio-main .contact-section{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);overflow:visible}
+.portfolio-main .frost-console-body{grid-template-columns:minmax(105px,.29fr) minmax(0,1fr)}
+.portfolio-main .frost-console-nav{min-width:0}
+.portfolio-main .frost-console-nav span{white-space:normal;overflow-wrap:anywhere}
+.portfolio-main .frost-console-log{overflow-wrap:anywhere}
+.portfolio-main :is(.frost-state,.frost-console-top small){white-space:normal}
+.portfolio-main :is(.kicker,.kicker-dark,.lead-system-number,.lead-system-flow i,.ai-receptionist-flow article span,.process-steps article>span,.pricing-trust-icon,.recommendation-verified,.recommendation-eyebrow,.contact-email,.service-arrow,.editorial-index,.editorial-step-number,.editorial-link,.portfolio-project-visual-top,.portfolio-project-visual-bottom){color:#e3b8f5!important}
+.portfolio-main .lead-system-outcome small,.portfolio-main .ai-receptionist-note,.portfolio-main .recommendation-disclaimer,.portfolio-main .recommendation-author small{color:#c9b6dc}
+.portfolio-main .pricing-trust-icon,.portfolio-main .editorial-step-number{border-color:#dca7f449;background:#ad71d31b}
+.portfolio-main .portfolio-project-copy h2 em{color:#dda9f1}
+.portfolio-header .nav-demo-dropdown small,.portfolio-header .nav-demo-trigger:hover,.portfolio-header .nav-primary>a:hover,.seo-head a:hover,.ghl-detail-kicker,.case-kicker,.case-section-label,.case-final-cta>span{color:#e5b9f6!important}
+.case-button-primary,.case-button-light{background:linear-gradient(120deg,#e9caff,#d29cec)!important;border-color:#e6b9fa!important;color:#21102f!important}
+.portfolio-main .contact-panel:focus-within{border-color:#d9a3f199!important}
+:where(.portfolio-main,.portfolio-header,.portfolio-footer,.seo-main,.ghl-page,.case-page) :is(a,button,input,select,textarea):focus-visible{outline:2px solid #e5b2f9;outline-offset:4px}
+@media(max-width:900px){
+ .portfolio-main .contact-section{grid-template-columns:minmax(0,1fr)}
+ .portfolio-main .service-list .service-card,.portfolio-main .service-list .service-card:hover{grid-template-columns:28px minmax(0,1fr) 42px;gap:12px;padding:22px 0}
+ .portfolio-main .service-list .service-card .service-tags{grid-column:2;grid-row:2}
+ .portfolio-main .service-list .service-card .service-arrow{grid-column:3;grid-row:1;align-self:start}
+ .portfolio-main .recommendation-cards{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:600px){
+ .portfolio-main .frost-console-body{grid-template-columns:minmax(0,1fr)}
+ .portfolio-main .frost-console-content{padding:12px}
+ .portfolio-main .frost-mini-grid{gap:5px}
+ .portfolio-main .frost-mini-grid>div{padding:9px 5px}
+ .portfolio-main .frost-console-top{flex-wrap:wrap}
+ .portfolio-main .inquiry-form{grid-template-columns:minmax(0,1fr);padding:16px 0}
+ .portfolio-main .inquiry-form>*{grid-column:1/-1}
+ .portfolio-main .engagement-trust,.portfolio-main .lead-system-grid{grid-template-columns:minmax(0,1fr)}
+ .portfolio-main .frost-showcase-copy h3,.portfolio-main .ai-receptionist-copy h2{max-width:100%;overflow-wrap:anywhere}
+}
+/* Motion uses independent translate/scale properties so old transform overrides do not cancel it. */
+@keyframes brand-rise{from{opacity:0;translate:0 28px}to{opacity:1;translate:0 0}}
+@keyframes brand-hero-in{from{opacity:0;translate:0 20px}to{opacity:1;translate:0 0}}
+@keyframes brand-ambient{0%,100%{opacity:.55}50%{opacity:.95}}
+@media(prefers-reduced-motion:no-preference){
+ .portfolio-main .editorial-pending:not(.editorial-arrived){opacity:0!important;translate:0 28px}
+ .portfolio-main .editorial-pending.editorial-arrived{animation:brand-rise .85s var(--editorial-delay,0ms) cubic-bezier(.2,.75,.25,1) backwards!important}
+ .portfolio-main .frost-hero-copy{animation:brand-hero-in .85s ease-out backwards!important}
+ .portfolio-main .frost-console{animation:brand-hero-in 1s .16s ease-out backwards!important}
+ body:has(.portfolio-main)::before{animation:brand-ambient 9s ease-in-out infinite}
+ .portfolio-main .frost-chart svg>path:last-child{animation:editorial-chart 1.8s .45s ease-out both!important}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .portfolio-main :is(.frost-console,.contact-panel,.frost-showcase-visual,.portfolio-project-visual),.seo-grid article,.ghl-system-card,.case-testing-grid article,.case-outcome-grid article{
+  transition:translate .34s cubic-bezier(.2,.75,.25,1),box-shadow .34s ease,border-color .3s ease,filter .3s ease!important
+ }
+ .portfolio-main :is(.frost-console,.contact-panel,.frost-showcase-visual,.portfolio-project-visual):hover,.seo-grid article:hover,.ghl-system-card:hover,.case-testing-grid article:hover,.case-outcome-grid article:hover{
+  translate:0 -5px;box-shadow:0 20px 48px #0b041b55,0 0 25px #c980f229!important;border-color:#e4b1f780!important
+ }
+ .portfolio-main .frost-showcase-visual img{transition:scale .65s cubic-bezier(.2,.7,.25,1),filter .5s ease!important}
+ .portfolio-main .frost-showcase-visual:hover img{scale:1.045;filter:saturate(1.02)}
+ .portfolio-main :is(.button,.service-arrow),.portfolio-header .nav-cta,.seo-actions a,.case-button-primary,.case-button-light,.ghl-nav-cta{
+  transition:translate .23s ease,filter .23s ease,box-shadow .23s ease!important
+ }
+ .portfolio-main :is(.button,.service-arrow):hover,.portfolio-header .nav-cta:hover,.seo-actions a:hover,.case-button-primary:hover,.case-button-light:hover,.ghl-nav-cta:hover{
+  translate:0 -3px;filter:brightness(1.12);box-shadow:0 7px 24px #d58aec45!important
+ }
+ .portfolio-main :is(.button,.editorial-link,.service-arrow) svg{transition:translate .25s ease!important}
+ .portfolio-main :is(.button,.editorial-link,.service-arrow):hover svg{translate:3px 0}
+ .portfolio-header .brand img,.portfolio-footer .footer-brand img{transition:scale .28s ease,opacity .28s ease!important}
+ .portfolio-header .brand:hover img,.portfolio-footer .footer-brand:hover img{scale:1.025;opacity:.88}
+ .portfolio-header .nav-primary>a,.portfolio-header .nav-demo-trigger{transition:color .22s,text-shadow .22s!important}
+ .portfolio-header .nav-primary>a:hover,.portfolio-header .nav-demo-trigger:hover{text-shadow:0 0 14px #ddabf6a0}
+ .portfolio-main :is(.service-card,.lead-system-card,.recommendation-card,.process-steps article,.ai-receptionist-flow article){transition:background-color .3s ease,box-shadow .3s ease!important}
+ .portfolio-main .service-list .service-card:hover,.portfolio-main .lead-system-grid .lead-system-card:hover,.portfolio-main .recommendation-cards .recommendation-card:hover,.portfolio-main .ai-receptionist-flow article:hover{background:linear-gradient(90deg,#d5a1f213,transparent)!important}
+ .portfolio-main .service-card h3,.portfolio-main .lead-system-card h3,.portfolio-main .process-steps article h3{transition:color .25s ease,translate .25s ease!important}
+ .portfolio-main :is(.service-card,.lead-system-card,.process-steps article):hover h3{color:#eac1ff;translate:3px 0}
+ .portfolio-main .frost-mini-grid>div{transition:translate .25s ease,border-color .25s ease,background .25s ease!important}
+ .portfolio-main .frost-mini-grid>div:hover{translate:0 -3px;border-color:#e2b7f888;background:#e2b7f818}
+}
+/* Release the animation's translate value once it ends so hover remains responsive. */
+@media(prefers-reduced-motion:reduce){
+ .portfolio-main .editorial-pending{opacity:1!important;translate:none!important;animation:none!important}
+ body:has(.portfolio-main)::before{animation:none!important}
+}

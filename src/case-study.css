@@ -33,9 +33,9 @@ body { margin: 0; }
 .case-page main { display: block; }
 
 .case-theme-forest {
-  --case-accent: #7e6c42;
+  --case-accent: #6f447c;
   --case-deep: #18352d;
-  --case-soft: #eee9dd;
+  --case-soft: #eadeed;
 }
 .case-theme-teal {
   --case-accent: #078f89;

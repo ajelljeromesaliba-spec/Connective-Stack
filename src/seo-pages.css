@@ -17,13 +17,13 @@
   font: 600 12px/1.5 'DM Sans',sans-serif;
   color: #9ab0d4;
 }
-.guide-page .guide-breadcrumb a {color:#e7bd69; text-decoration:none}
+.guide-page .guide-breadcrumb a {color:#c274dc; text-decoration:none}
 .guide-page .guide-breadcrumb span {min-width:0}
 .guide-page .guide-article {max-width:860px; margin:0 auto}
 .guide-page .guide-article-head {margin-bottom:35px}
 .guide-page .guide-topic, .guide-page .guide-direct-answer > span,
 .guide-page .guide-next-step > div > span,.guide-page .guide-example > span {
-  display:block; color:#f0ca7c; font:700 11px/1.5 'IBM Plex Mono',monospace;
+  display:block; color:#ce86e6; font:700 11px/1.5 'IBM Plex Mono',monospace;
   letter-spacing:.12em; text-transform:uppercase
 }
 .guide-page h1 {
@@ -42,13 +42,13 @@
   color:#a8bbd7; font-size:12px; line-height:1.55
 }
 .guide-page .guide-byline a, .guide-page .guide-reference a {
-  color:#f1d28b; text-underline-offset:4px
+  color:#d494e8; text-underline-offset:4px
 }
 .guide-page .guide-direct-answer {
   margin:0 0 clamp(45px,7vw,72px);
   padding:clamp(22px,4vw,32px);
-  border:1px solid rgba(239,193,100,.43);
-  border-left:4px solid #edbd63;
+  border:1px solid rgba(198,113,226,.43);
+  border-left:4px solid #c46fe1;
   border-radius:14px;
   background:linear-gradient(120deg,#122750,#101c3b)
 }
@@ -78,7 +78,7 @@
 }
 .guide-page .guide-checklist li:before {
   content:counter(guide-step,decimal-leading-zero);
-  font:700 12px/1.75 'IBM Plex Mono',monospace; color:#f0c76b
+  font:700 12px/1.75 'IBM Plex Mono',monospace; color:#c978e3
 }
 .guide-page .guide-example {
   padding:19px 23px; margin:25px 0 7px;
@@ -103,7 +103,7 @@
 .guide-page .guide-demo-link {
   display:inline-flex; justify-content:center; align-items:center; gap:10px;
   min-height:47px; padding:12px 17px; border-radius:10px;
-  color:#0d1832; background:#edc572; font:700 13px/1.3 'Manrope',sans-serif;
+  color:#0d1832; background:#c97de2; font:700 13px/1.3 'Manrope',sans-serif;
   text-decoration:none
 }
 .guide-page .guide-related {margin:52px 0 38px}
@@ -114,14 +114,14 @@
   padding:16px 3px; color:#dce8f8; font:650 15px/1.5 'DM Sans',sans-serif;
   text-decoration:none; overflow-wrap:break-word
 }
-.guide-page .guide-related a:hover,.guide-page .guide-related a:focus-visible {color:#f1cb76}
-.guide-page .guide-related a span {color:#eac67a; flex:0 0 auto}
+.guide-page .guide-related a:hover,.guide-page .guide-related a:focus-visible {color:#cd82e5}
+.guide-page .guide-related a span {color:#ca83e1; flex:0 0 auto}
 .guide-page .seo-next {
   margin:38px 0 0; border:1px solid rgba(102,147,225,.3);
   background:#111e3d; color:#e9f2ff; border-radius:12px
 }
 .guide-page .seo-next strong {color:#f2f6fd}
-.guide-page .seo-next a {color:#f1c76d; border-color:#be974a}
+.guide-page .seo-next a {color:#ca7ae4; border-color:#9d51b7}
 @media (max-width:760px) {
   .seo-main.guide-page {padding:29px 18px 70px}
   .guide-page h1 {font-size:clamp(31px,8.7vw,47px); line-height:1.15}

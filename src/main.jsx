@@ -16,6 +16,7 @@ import './responsive-polish.css'
 import './pawnova-showcase.css'
 import './glassmorphism.css'
 import './frosted-site.css'
+import './brand-interaction-polish.css'
 
 
 const SOCIAL_PROFILES = [
@@ -357,7 +358,7 @@ function App() {
 
   useEffect(() => {
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const targets = document.querySelectorAll('.frost-demos > *, .frost-showcase, .section-heading, .service-card, .lead-system-heading, .lead-system-flow, .lead-system-card, .lead-system-cta, .ai-receptionist-copy, .ai-receptionist-flow, .engagement-trust article, .process-heading, .process-steps article, .portfolio-project-inner, .recommendation-intro, .recommendation-card, .contact-content, .contact-panel')
+    const targets = [...document.querySelectorAll('.editorial-intro, .frost-showcase-copy, .frost-showcase-visual, .section-heading, .service-card, .lead-system-heading, .lead-system-flow, .lead-system-card, .lead-system-cta, .ai-receptionist-copy, .ai-receptionist-flow, .engagement-trust article, .process-heading, .process-steps article, .portfolio-project-copy, .portfolio-project-visual, .recommendation-intro, .recommendation-card, .contact-content, .contact-panel')]
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -365,11 +366,25 @@ function App() {
           observer.unobserve(entry.target)
         }
       })
-    }, { threshold: 0.12 })
-    targets.forEach(target => {
-      if (target.getBoundingClientRect().top >= window.innerHeight) observer.observe(target)
+    }, { threshold: 0, rootMargin: '0px 0px -24px 0px' })
+    targets.forEach((target,index) => {
+      if (target.getBoundingClientRect().top >= window.innerHeight - 12) {
+        target.style.setProperty('--editorial-delay', ((index % 2) * 90) + 'ms')
+        target.classList.add('editorial-pending')
+        observer.observe(target)
+      }
     })
-    return () => observer.disconnect()
+    const revealHash = () => {
+      const target = document.getElementById(window.location.hash.slice(1))
+      if (target) targets.filter(el => target.contains(el)).forEach(el => el.classList.add('editorial-arrived'))
+    }
+    window.addEventListener('hashchange', revealHash)
+    revealHash()
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('hashchange', revealHash)
+      targets.forEach(el => el.classList.remove('editorial-pending', 'editorial-arrived'))
+    }
   }, [])
 
   useEffect(() => {

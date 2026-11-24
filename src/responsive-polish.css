@@ -69,7 +69,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 }
 .portfolio-main .lead-system-card h3, .portfolio-main .lead-system-outcome strong { color: #f5f8ff; }
 .portfolio-main .lead-system-outcome small { color: #9eb8dd; }
-.portfolio-main .lead-system-number { color: #f0c56c; }
+.portfolio-main .lead-system-number { color: #c979e3; }
 .portfolio-main .lead-system-grid { border-color: rgba(109,151,225,.28); }
 .portfolio-main .lead-system-flow {
   background: #101d3d;
@@ -77,7 +77,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
   color: #dbe5f6;
   border-radius: 18px;
 }
-.portfolio-main .lead-system-flow i { color: #f1c86f; }
+.portfolio-main .lead-system-flow i { color: #cb7ce4; }
 .portfolio-main .engagement-trust { background: #08132e; color: #f5f8ff; }
 .portfolio-main .engagement-trust article { background: linear-gradient(130deg,#15254a,#0c1837); }
 .portfolio-main .ai-receptionist-section {
@@ -88,7 +88,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 .portfolio-main .ai-receptionist-flow { border-color: rgba(92,135,209,.31); background: #203761; }
 .portfolio-main .ai-receptionist-flow article { background: #0c1a39; color: #f2f6fd; }
 .portfolio-main .ai-receptionist-flow article p { color: #b7c8e2; }
-.portfolio-main .ai-receptionist-flow article span { color: #edc56e; }
+.portfolio-main .ai-receptionist-flow article span { color: #c879e2; }
 .portfolio-main .ai-receptionist-note { color: #b5c8e7; }
 /* Blue surfaces throughout the professional profile, without changing testimonial content. */
 .seo-about .about-work { background: #07112c; }
@@ -102,7 +102,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 .seo-about .about-proof h3, .seo-about .about-section-head h2 { color: #f4f8ff; }
 .seo-about .about-role ul, .seo-about .about-role p,
 .seo-about .about-skills-grid p { color: #c4cfe2; }
-.seo-about .about-role-top strong { color: #f1cc7b; }
+.seo-about .about-role-top strong { color: #cf86e6; }
 /* Also avoid white-on-white or dark-on-navy in GHL flow cards and trust panels. */
 .ghl-page .ghl-index-hero p, .ghl-page .ghl-detail-lead,
 .ghl-page .ghl-detail-grid p, .ghl-page .ghl-architecture-head p { color: #c1cde2; }
@@ -192,7 +192,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
     line-height: 1.5;
     letter-spacing: .055em;
     overflow-wrap: break-word;
-    color: #efcd82;
+    color: #d08be6;
   }
   .portfolio-main .journey-hero h1 {
     display: block;
@@ -209,11 +209,11 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
   }
   .portfolio-main .journey-hero h1 em {
     display: block;
-    color: #f4cb74;
+    color: #cd83e6;
     background: none;
     -webkit-background-clip: initial;
     background-clip: initial;
-    -webkit-text-fill-color: #f4cb74;
+    -webkit-text-fill-color: #cd83e6;
     animation: none;
     line-height: inherit;
   }
@@ -454,7 +454,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
     grid-template-columns: minmax(0,1fr);
     gap: 8px;
   }
-  .portfolio-main .hero-clock__rule { height: 1px; width: 100%; background: rgba(233,196,115,.28); }
+  .portfolio-main .hero-clock__rule { height: 1px; width: 100%; background: rgba(199,125,223,.28); }
   .portfolio-main .hero-clock__readout time { font-size: 17px; }
   .portfolio-main .hero-clock__status { font-size: 9px; }
   .portfolio-main .journey-hero .connection-journey { height: 420px; }
@@ -508,13 +508,13 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 }
 .portfolio-footer .footer-social a:hover,
 .portfolio-footer .footer-social a:focus-visible {
-  color: #f3d17b;
+  color: #d087e7;
   background: rgba(34, 64, 120, .76);
-  border-color: rgba(243, 209, 123, .55);
+  border-color: rgba(208,135,231, .55);
   transform: translateY(-2px);
 }
 .portfolio-footer .footer-social a:focus-visible {
-  outline: 2px solid #f3d17b;
+  outline: 2px solid #d087e7;
   outline-offset: 3px;
 }
 .portfolio-footer .footer-social svg {
@@ -535,7 +535,7 @@ body:has(.portfolio-main), body:has(.seo-main), body:has(.ghl-page), body:has(.c
 }
 .portfolio-footer .footer-utility span { color: #8795af; }
 .portfolio-footer .footer-utility a:hover,
-.portfolio-footer .footer-utility button:hover { color: #f3d17b; }
+.portfolio-footer .footer-utility button:hover { color: #d087e7; }
 @media (max-width: 900px) {
   .portfolio-footer .footer-right { align-items: flex-start; }
   .portfolio-footer .footer-social,

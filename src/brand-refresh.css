@@ -46,7 +46,7 @@ body:has(.case-page) {
   background: linear-gradient(115deg, #ebcef9 0%, #d9afe9 53%, #ba8dc8 100%);
   border-color: #d5a8e6;
   color: #290e34;
-  box-shadow: 0 10px 30px rgba(208,154,51, .14), inset 0 1px rgba(255,255,255, .45);
+  box-shadow: 0 10px 30px rgba(162,63,196, .14), inset 0 1px rgba(255,255,255, .45);
 }
 .portfolio-header .nav-demo-dropdown {
   background: rgba(30,8,38, .98);
@@ -74,11 +74,11 @@ body:has(.case-page) {
 .portfolio-main .cinematic-hero .eyebrow {
   background: rgba(63,17,81, .58);
   color: #ebcaf9;
-  border-color: rgba(226,178,77, .36);
+  border-color: rgba(183,89,214, .36);
 }
 .portfolio-main .hero-pinned .hero-copy .status-dot {
   background: #e3b7f4;
-  box-shadow: 0 0 0 5px rgba(237,191,102, .13), 0 0 18px rgba(237,191,102, .4);
+  box-shadow: 0 0 0 5px rgba(197,114,225, .13), 0 0 18px rgba(197,114,225, .4);
 }
 .portfolio-main .cinematic-hero .button-secondary {
   color: #faf2fd;
@@ -96,7 +96,7 @@ body:has(.case-page) {
   background: radial-gradient(ellipse at 75% 45%, transparent 14%, rgba(24,4,29,.26) 67%, #18041d 100%);
 }
 .connection-atmosphere {
-  background: radial-gradient(ellipse at 72% 42%, rgba(148,33,204, .20), transparent 47%), radial-gradient(ellipse at 48% 88%, rgba(220,171,78, .08), transparent 47%);
+  background: radial-gradient(ellipse at 72% 42%, rgba(148,33,204, .20), transparent 47%), radial-gradient(ellipse at 48% 88%, rgba(178,89,209, .08), transparent 47%);
 }
 .journey-panel-content { background: #270c32; border-color: #9e5bba; box-shadow: 5px 5px 0 #4d1864, 9px 9px 0 #2e0d3c, 18px 28px 38px #0009; }
 .journey-window { background: #371147; color: #d8c1e2; }
@@ -133,7 +133,7 @@ body:has(.case-page) {
 }
 .portfolio-main .pricing-tier.featured {
   background: linear-gradient(150deg, #441957, #270a33 65%);
-  border-color: rgba(236,192,100, .60);
+  border-color: rgba(197,112,224, .60);
 }
 .portfolio-main .process-steps article, .portfolio-main .pricing-trust-points article {
   background-color: #2b0d38;
@@ -155,26 +155,26 @@ body:has(.case-page) {
   border-color: rgba(191,108,230, .41);
   box-shadow: 0 18px 45px rgba(0,0,0, .23), inset 0 1px rgba(255,255,255, .055);
 }
-.hero-clock__rule { background: linear-gradient(transparent, rgba(235,193,95, .46), transparent); }
+.hero-clock__rule { background: linear-gradient(transparent, rgba(195,107,223, .46), transparent); }
 .hero-clock__label, .hero-clock__status { color: #dec7e8; }
 .hero-clock__offset, .hero-clock__slash { color: #e4bef4; }
-.hero-clock__live-dot { background: #e4bef4; box-shadow: 0 0 10px rgba(239,199,107, .56); }
+.hero-clock__live-dot { background: #e4bef4; box-shadow: 0 0 10px rgba(201,119,227, .56); }
 .professional-recommendation {
   background: radial-gradient(ellipse at 9% 22%, rgba(106,23,145, .22), transparent 49%), #1e0627;
   border-color: rgba(184,103,220, .22);
   color: #faf6fc;
 }
 .recommendation-eyebrow, .recommendation-verified { color: #e9c4f8 !important; }
-.recommendation-eyebrow > span { background: #e9c4f8; box-shadow: 0 0 14px rgba(239,198,109, .52); }
+.recommendation-eyebrow > span { background: #e9c4f8; box-shadow: 0 0 14px rgba(201,121,227, .52); }
 .recommendation-intro p { color: #d5bee0; }
 .recommendation-disclaimer { color: #b28fc2; }
 .recommendation-card, .recommendation-card--client {
   background: linear-gradient(135deg, rgba(57,18,73, .98), rgba(32,7,42, .98));
   border-color: rgba(181,98,220, .30);
 }
-.recommendation-card:hover { border-color: rgba(236,187,88, .58); }
+.recommendation-card:hover { border-color: rgba(193,101,223, .58); }
 .recommendation-card blockquote { color: #fcf7fe; }
-.recommendation-quote-mark { color: rgba(233,186,87, .18); }
+.recommendation-quote-mark { color: rgba(191,100,220, .18); }
 .recommendation-author small { color: #d1b2e0; }
 /* Editorial, GHL and professional experience pages */
 .seo-head, .seo-foot, .ghl-detail-nav { background: #18041e; }
