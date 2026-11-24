@@ -1,0 +1,66 @@
+/* Dark glassmorphism: layered light, frosted surfaces, restrained highlights. */
+:root {
+  --glass-base:#0a0d1c;
+  --glass-ink:#f4f6ff;
+  --glass-muted:#c0c9df;
+  --glass-accent:#b6d5ff;
+  --glass-line:rgba(197,217,255,.24);
+  --glass-edge:rgba(220,235,255,.44);
+  --glass-fill:linear-gradient(145deg,rgba(174,194,239,.16),rgba(73,88,135,.13) 55%,rgba(121,96,174,.12));
+  --glass-shadow:0 18px 44px -20px rgba(0,0,0,.66),inset 0 1px 0 rgba(255,255,255,.13);
+  --glass-ambient:radial-gradient(ellipse at 12% 12%,rgba(137,54,107,.28),transparent 45%),radial-gradient(ellipse at 84% 24%,rgba(68,131,212,.32),transparent 47%),radial-gradient(ellipse at 72% 92%,rgba(119,85,196,.23),transparent 48%),#0a0d1c;
+}
+@supports (backdrop-filter:blur(16px)) or (-webkit-backdrop-filter:blur(16px)) {
+  .glass-blur { -webkit-backdrop-filter:blur(16px) saturate(125%);backdrop-filter:blur(16px) saturate(125%); }
+}
+
+/* Main brand site only; each standalone industry demo retains its own visual identity. */
+body:has(.portfolio-main) {background:var(--glass-ambient);color:var(--glass-ink);}
+.portfolio-main {background:var(--glass-ambient);color:var(--glass-ink);}
+.site-header.portfolio-header {
+ background:linear-gradient(115deg,rgba(20,25,46,.88),rgba(38,49,77,.79),rgba(33,25,50,.85));
+ border:1px solid var(--glass-line);border-radius:16px;
+ box-shadow:0 12px 36px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.16);
+ -webkit-backdrop-filter:blur(20px) saturate(130%);backdrop-filter:blur(20px) saturate(130%);
+}
+@media(min-width:1181px){.site-header.portfolio-header{top:10px;margin:10px clamp(16px,2vw,32px) 0;}}
+.portfolio-header .nav-demo-dropdown {background:rgba(21,28,51,.97);border-color:var(--glass-line);border-radius:16px;}
+.portfolio-header .nav-primary>a,.portfolio-header .nav-demo-trigger{color:var(--glass-muted);}
+.portfolio-main .cinematic-hero,.portfolio-main .journey-hero,.portfolio-main .journey-hero .hero-pinned{
+ background:radial-gradient(ellipse at 6% 24%,rgba(130,55,113,.32),transparent 45%),radial-gradient(ellipse at 80% 22%,rgba(125,168,234,.29),transparent 52%),radial-gradient(ellipse at 68% 89%,rgba(57,57,143,.32),transparent 53%),#0a0d20;
+}
+.portfolio-main .hero-pinned::after{background:linear-gradient(90deg,rgba(10,13,28,.94),rgba(10,13,28,.7) 37%,transparent 78%);}
+.portfolio-main .journey-hero .hero-copy{border:1px solid var(--glass-line);border-radius:22px;padding:clamp(20px,2.1vw,34px);background:linear-gradient(135deg,rgba(137,152,200,.13),rgba(22,27,49,.43));box-shadow:var(--glass-shadow);}
+.portfolio-main .hero-pinned h1 em,.portfolio-main .journey-hero h1 em{color:#e2eaff;background:linear-gradient(110deg,#f5f8ff,#a8c9ff 57%,#d2bbff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.portfolio-main .cinematic-hero .eyebrow{background:rgba(147,174,230,.12);color:#d5e4ff;border-color:var(--glass-line);}
+.portfolio-main .connection-stage{background:radial-gradient(ellipse at 76% 25%,rgba(110,157,228,.31),transparent 55%),radial-gradient(ellipse at 20% 76%,rgba(143,64,122,.23),transparent 53%),#101429;}
+.portfolio-main .connection-stage::after{background:radial-gradient(ellipse at 65% 38%,transparent 28%,rgba(10,13,29,.25) 70%,#0a0d1c);}
+.portfolio-main .journey-panel-content{background:linear-gradient(145deg,rgba(78,101,156,.83),rgba(24,30,57,.94));border-color:var(--glass-edge);box-shadow:5px 5px 0 #354569,9px 9px 0 #17203b,18px 28px 38px #0009,inset 0 1px #ffffff30;}
+.portfolio-main .journey-window,.portfolio-main .journey-field,.portfolio-main .journey-contact,.portfolio-main .journey-booking,.portfolio-main .journey-workflow div{background:rgba(149,174,225,.13);border-color:var(--glass-line);}
+.portfolio-main :is(.services,.lead-system-section,.ai-receptionist-section,.process-showcase,.engagement-trust,.portfolio-project-spotlight,.contact-section,.professional-recommendation){background:transparent;color:var(--glass-ink);}
+.portfolio-main .services-background{opacity:.32;}
+.portfolio-main :is(.service-card,.lead-system-card,.lead-system-flow,.lead-system-cta,.ai-receptionist-shell,.ai-receptionist-flow article,.engagement-trust article,.process-film,.process-steps article,.process-output,.contact-panel,.hero-clock,.recommendation-card,.recommendation-card--client){
+ background:var(--glass-fill);border:1px solid var(--glass-line);border-radius:18px;box-shadow:var(--glass-shadow);
+}
+.portfolio-main :is(.service-card,.lead-system-card,.recommendation-card):hover{background:linear-gradient(135deg,rgba(164,193,255,.22),rgba(98,90,163,.18));border-color:var(--glass-edge);}
+.portfolio-main :is(.service-card,.lead-system-card,.contact-panel,.recommendation-card) h3{color:var(--glass-ink);}
+.portfolio-main :is(.service-card,.lead-system-card,.ai-receptionist-copy,.contact-content,.recommendation-intro,.portfolio-project-copy) p{color:var(--glass-muted);}
+.portfolio-main :is(.service-tags span,.portfolio-project-tags span,.journey-stages button,.hero-clock__label){color:#d5e3ff;}
+.portfolio-main :is(.service-tags span,.portfolio-project-tags span,.journey-stages button){background:rgba(151,174,230,.11);border-color:var(--glass-line);border-radius:999px;}
+.portfolio-main .journey-stages button[aria-pressed=true]{background:#c7ddff;color:#10182b;border-color:#dceaff;}
+.portfolio-main :is(.button-primary,.button-light,.inquiry-submit),.portfolio-header .nav-cta{background:linear-gradient(145deg,#f1f5ff,#bcd6ff 58%,#b8b5ef);color:#10182c;border:1px solid #e2eaff;border-radius:12px;box-shadow:0 8px 25px rgba(111,154,231,.17),inset 0 1px #fff9;}
+.portfolio-main .button-secondary{background:rgba(160,185,235,.12);color:#f4f7ff;border:1px solid var(--glass-line);border-radius:12px;}
+.portfolio-main .offer-marquee{background:rgba(110,129,179,.1);border-block:1px solid var(--glass-line);}
+.portfolio-main .portfolio-project-visual{border:1px solid var(--glass-edge);}
+.portfolio-main .contact-panel :is(input,textarea,select){background:rgba(9,14,30,.72);color:var(--glass-ink);border-color:var(--glass-line);}
+.portfolio-main .contact-panel :is(input,textarea)::placeholder{color:#a8b6d0;}
+.portfolio-footer{background:rgba(18,22,42,.86);border-color:var(--glass-line);}
+.portfolio-main .portfolio-project-copy h2 em{color:#b9d5ff;}
+.portfolio-main :is(.service-number,.service-arrow,.kicker,.recommendation-eyebrow,.recommendation-verified){color:#c6d9ff;}
+@media(max-width:760px){
+ .site-header.portfolio-header{border-radius:0;border-inline:0;}
+ .portfolio-main .journey-hero .hero-copy{padding:16px;border-radius:16px;}
+ .portfolio-main .hero-pinned::after{background:linear-gradient(0deg,#0a0d1c 0%,rgba(10,13,28,.96) 25%,rgba(10,13,28,.53) 63%,transparent 88%);}
+ .portfolio-main :is(.service-card,.lead-system-card,.recommendation-card,.contact-panel){border-radius:14px;}
+}
+@media(prefers-reduced-motion:reduce){.portfolio-main :is(.service-card,.lead-system-card,.recommendation-card){transition:none;}}
