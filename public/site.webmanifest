@@ -4,8 +4,8 @@
   "description": "ConnectiveStack builds websites, GoHighLevel CRM systems, and AI automations that capture inquiries, route leads, and turn follow-ups into booked calls.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#010520",
-  "theme_color": "#010520",
+  "background_color": "#17152e",
+  "theme_color": "#17152e",
   "icons": [
     {
       "src": "/assets/connectivestack-glass-icon.svg",
