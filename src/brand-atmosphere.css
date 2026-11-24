@@ -1,0 +1,144 @@
+
+/* Shared page rhythm: every section uses the same safe outside gutter. */
+body:has(.portfolio-main){
+ --page-gutter:clamp(24px,6vw,96px);
+ --page-content:1200px;
+ background:#100820;
+}
+body:has(.portfolio-main)::before{display:none!important}
+body:has(.portfolio-main) #root{isolation:isolate;position:relative;min-width:0}
+.portfolio-main{
+ position:relative;z-index:1;
+ width:100%;max-width:none!important;margin:0;
+ padding:0 var(--page-gutter) clamp(48px,7vw,96px)!important;
+ background:transparent!important;overflow:visible!important;
+}
+.portfolio-main > :is(section,.editorial-capabilities){
+ width:100%!important;max-width:var(--page-content)!important;
+ margin-inline:auto!important;box-sizing:border-box;
+ padding-inline:0!important;min-width:0;
+}
+.portfolio-main > section:not(.frost-hero){padding-block:clamp(64px,8vw,112px)!important;overflow:visible!important}
+.portfolio-main > .frost-hero{padding-block:clamp(72px,10vw,140px) clamp(44px,6vw,80px)!important}
+.portfolio-main > .editorial-capabilities{padding-block:24px!important}
+.portfolio-main > .engagement-trust{padding-block:clamp(30px,4vw,56px)!important}
+.site-header.portfolio-header,.portfolio-footer{
+ width:min(var(--page-content),calc(100% - var(--page-gutter) - var(--page-gutter)))!important;
+ margin-inline:auto!important;box-sizing:border-box;
+}
+.site-header.portfolio-header{padding-inline:clamp(16px,2.2vw,30px)!important}
+.portfolio-footer{position:relative;z-index:1;padding:clamp(24px,4vw,48px)!important;margin-bottom:36px!important}
+.portfolio-main :is(.frost-hero,.frost-showcase,.ai-receptionist-shell,.portfolio-project-inner,.contact-section){gap:clamp(32px,6vw,88px)}
+.portfolio-main .section-heading,.portfolio-main .lead-system-heading,.portfolio-main .process-heading{margin-bottom:clamp(30px,4.5vw,60px)}
+.portfolio-main .frost-showcase{padding-block:clamp(32px,5vw,64px)}
+.portfolio-main .frost-console{width:100%;max-width:100%;border-radius:22px}
+.portfolio-main .frost-console-top{padding:18px 22px}
+.portfolio-main .frost-console-content{padding:24px}
+.portfolio-main .frost-console-nav{padding:22px 12px}
+.portfolio-main .frost-mini-grid{gap:10px}
+.portfolio-main .frost-mini-grid>div{padding:14px 11px}
+.portfolio-main .frost-chart{padding:16px 16px 8px;margin-top:14px}
+.portfolio-main .frost-console-log{padding:14px 12px}
+.portfolio-main .service-list .service-card,.portfolio-main .service-list .service-card:hover{padding:clamp(22px,3vw,36px) clamp(16px,2vw,26px)!important;gap:clamp(12px,2vw,26px);border-radius:10px;align-items:center}
+.portfolio-main .service-list .service-card h3{margin:0 0 10px}
+.portfolio-main .service-list .service-card p{margin:0;line-height:1.7}
+.portfolio-main .lead-system-grid{width:100%;gap:22px 30px}
+.portfolio-main .lead-system-grid .lead-system-card{
+ padding:clamp(24px,3vw,38px)!important;
+ border:1px solid rgba(227,190,250,.14)!important;border-radius:16px;
+ background:linear-gradient(140deg,rgba(220,180,255,.07),rgba(150,93,196,.025))!important;
+}
+.portfolio-main .lead-system-grid .lead-system-card:hover{background:linear-gradient(140deg,rgba(220,180,255,.13),rgba(150,93,196,.05))!important;border-color:#dab0f24d!important}
+.portfolio-main .lead-system-outcome{margin-top:22px}
+.portfolio-main .lead-system-flow{padding:22px clamp(12px,2vw,26px)!important;gap:12px 16px;justify-content:center;flex-wrap:wrap}
+.portfolio-main .lead-system-cta{padding:24px 16px!important;gap:24px}
+.portfolio-main .ai-receptionist-shell{width:100%;max-width:100%}
+.portfolio-main .ai-receptionist-flow{padding:clamp(24px,3vw,36px)!important;overflow:visible}
+.portfolio-main .ai-receptionist-flow article{padding:20px 8px!important}
+.portfolio-main .ai-receptionist-flow article:first-child{padding-top:8px!important}
+.portfolio-main .ai-receptionist-flow article:last-child{padding-bottom:8px!important}
+.portfolio-main .engagement-trust{gap:24px 36px}
+.portfolio-main .engagement-trust article{padding:26px 18px!important;gap:16px}
+.portfolio-main .process-steps{gap:24px 30px;padding-top:32px}
+.portfolio-main .process-steps article{padding:10px 12px 20px!important}
+.portfolio-main .process-output{padding:24px 12px!important;gap:16px 24px}
+.portfolio-main .portfolio-project-inner{width:100%;max-width:100%}
+.portfolio-main .portfolio-project-visual{padding:clamp(24px,3vw,40px)!important}
+.portfolio-main .recommendation-shell{width:100%;max-width:100%;gap:36px}
+.portfolio-main .recommendation-cards{gap:28px}
+.portfolio-main .recommendation-cards .recommendation-card{padding:clamp(24px,3.5vw,44px)!important;border:1px solid rgba(227,190,250,.13)!important;border-radius:16px;background:rgba(209,173,242,.045)!important}
+.portfolio-main .recommendation-cards .recommendation-card:hover{background:rgba(209,173,242,.09)!important}
+.portfolio-main .recommendation-author{padding-top:20px}
+.portfolio-main .contact-panel{padding:clamp(24px,3.5vw,42px)!important}
+.portfolio-main .inquiry-form{padding:0!important;gap:20px 18px;border:0!important}
+.portfolio-main .inquiry-consent input{width:17px!important;height:17px!important;max-width:17px!important}
+.portfolio-main .inquiry-form :is(input:not([type=checkbox]),select,textarea){padding-inline:14px}
+.portfolio-main .contact-expectations{gap:14px}
+.portfolio-main .contact-expectations>div{padding:15px 0}
+.portfolio-main :is(.frost-console,.lead-system-card,.recommendation-card,.contact-panel,.ai-receptionist-flow,.portfolio-project-visual){box-sizing:border-box;min-width:0;max-width:100%}
+@media(max-width:1100px){.site-header.portfolio-header{width:calc(100% - 2 * var(--page-gutter))!important}.portfolio-main .frost-console-content{padding:18px}.portfolio-main .frost-console-nav{padding-inline:10px}}
+@media(max-width:900px){body:has(.portfolio-main){--page-gutter:clamp(24px,5vw,44px)}.portfolio-main .frost-hero,.portfolio-main .frost-showcase,.portfolio-main .ai-receptionist-shell,.portfolio-main .portfolio-project-inner,.portfolio-main .contact-section{gap:32px}.portfolio-main .service-list .service-card,.portfolio-main .service-list .service-card:hover{padding:24px 12px!important}.portfolio-main .lead-system-grid{gap:18px}.portfolio-main .process-steps{gap:22px}}
+@media(max-width:600px){
+ body:has(.portfolio-main){--page-gutter:24px}
+ .portfolio-main > section:not(.frost-hero){padding-block:56px!important}
+ .portfolio-main > .frost-hero{padding-block:48px 36px!important}
+ .portfolio-main > .engagement-trust{padding-block:28px!important}
+ .site-header.portfolio-header{width:calc(100% - 32px)!important;padding-inline:14px!important}
+ .portfolio-footer{padding:24px!important}
+ .portfolio-main .frost-hero h1{font-size:clamp(37px,10.6vw,60px)}
+ .portfolio-main .frost-console-top{padding:14px 16px}
+ .portfolio-main .frost-console-content{padding:16px}
+ .portfolio-main .frost-mini-grid{gap:6px}
+ .portfolio-main .frost-mini-grid>div{padding:10px 6px}
+ .portfolio-main .frost-chart{padding:12px 10px 6px}
+ .portfolio-main .frost-console-log{padding:12px 10px}
+ .portfolio-main .service-list .service-card,.portfolio-main .service-list .service-card:hover{grid-template-columns:22px minmax(0,1fr) 36px;gap:10px;padding:22px 8px!important}
+ .portfolio-main .service-list .service-card .service-arrow{width:36px;height:36px;min-width:36px;min-height:36px}
+ .portfolio-main .lead-system-grid .lead-system-card,.portfolio-main .recommendation-cards .recommendation-card,.portfolio-main .contact-panel{padding:22px!important}
+ .portfolio-main .ai-receptionist-flow{padding:22px!important}
+ .portfolio-main .lead-system-flow{justify-content:flex-start;padding:18px 4px!important;gap:9px}
+ .portfolio-main .lead-system-cta{padding:18px 4px!important}
+ .portfolio-main .process-steps article{padding:12px 6px!important}
+ .portfolio-main .engagement-trust article{padding:24px 8px!important}
+ .portfolio-main .portfolio-project-visual{min-height:300px;padding:22px!important}
+ .portfolio-main .portfolio-project-visual-top{flex-wrap:wrap}
+}
+@media(max-width:350px){body:has(.portfolio-main){--page-gutter:18px}.portfolio-main .frost-console-content{padding:12px}.portfolio-main .lead-system-grid .lead-system-card,.portfolio-main .recommendation-cards .recommendation-card,.portfolio-main .contact-panel{padding:18px!important}}
+
+/* Fixed atmospheric artwork. Decorative, not interactive; all motion is 2D CSS. */
+.brand-atmosphere{
+ position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+ background:radial-gradient(ellipse at 18% 22%,#281141 0%,transparent 55%),radial-gradient(ellipse at 86% 82%,#33124b 0%,transparent 56%),linear-gradient(155deg,#160b2d,#0e071d 52%,#18082d);
+}
+.brand-atmosphere>div{position:absolute;pointer-events:none;will-change:transform,opacity}
+.atmosphere-halo{width:clamp(360px,70vw,1100px);aspect-ratio:1;border-radius:50%;filter:blur(38px);opacity:.7}
+.atmosphere-halo--left{left:-38%;top:-52%;background:radial-gradient(circle,rgba(167,54,224,.53),rgba(116,50,181,.20) 40%,transparent 68%)}
+.atmosphere-halo--right{right:-38%;bottom:-62%;background:radial-gradient(circle,rgba(220,62,201,.36),rgba(126,52,201,.20) 44%,transparent 68%)}
+.atmosphere-ribbon{width:clamp(750px,120vw,2100px);height:clamp(250px,42vw,700px);border-radius:50%;border:1px solid rgba(236,170,255,.38);background:linear-gradient(180deg,rgba(206,137,255,.12),rgba(108,51,201,.10) 45%,transparent 76%);box-shadow:0 -3px 24px #d77af641,inset 0 2px 18px #e7adff27}
+.atmosphere-ribbon--top{top:-37%;left:-47%;transform:rotate(-27deg)}
+.atmosphere-ribbon--bottom{bottom:-38%;right:-45%;transform:rotate(-24deg)}
+.atmosphere-orbit{width:clamp(280px,38vw,650px);aspect-ratio:1;border-radius:50%;border:1px solid #e6b3ff22;background:radial-gradient(circle at 30% 24%,#e5baff0a,transparent 42%);box-shadow:inset 0 0 28px #c68af013,0 0 34px #c68af00c}
+.atmosphere-orbit--left{left:-22%;top:36%}
+.atmosphere-orbit--right{right:-21%;top:4%;width:clamp(290px,46vw,740px)}
+.atmosphere-glass{width:clamp(90px,12vw,200px);aspect-ratio:1;border-radius:24%;border:1px solid #f2cfff38;background:linear-gradient(145deg,#f1d4ff24,#b67cea0b 48%,#d16dc71c);box-shadow:inset 1px 1px 0 #f9dcff30,inset -3px -3px 12px #ab73ea16,0 18px 40px #09021230;opacity:.62}
+.atmosphere-glass--one{left:1%;top:48%;transform:rotate(28deg)}
+.atmosphere-glass--two{right:3%;top:17%;width:clamp(75px,8vw,145px);transform:rotate(-25deg)}
+.atmosphere-glass--three{right:7%;bottom:7%;width:clamp(65px,7vw,120px);transform:rotate(34deg);opacity:.42}
+@keyframes atmosphere-drift-left{0%,100%{transform:translate(0,0)}50%{transform:translate(8vw,6vh)}}
+@keyframes atmosphere-drift-right{0%,100%{transform:translate(0,0)}50%{transform:translate(-8vw,-8vh)}}
+@keyframes atmosphere-ribbon-top{0%,100%{transform:translate(0,0) rotate(-27deg)}50%{transform:translate(6vw,5vh) rotate(-23deg)}}
+@keyframes atmosphere-ribbon-bottom{0%,100%{transform:translate(0,0) rotate(-24deg)}50%{transform:translate(-7vw,-6vh) rotate(-19deg)}}
+@keyframes atmosphere-float-one{0%,100%{transform:translate(0,0) rotate(28deg)}50%{transform:translate(22px,-42px) rotate(37deg)}}
+@keyframes atmosphere-float-two{0%,100%{transform:translate(0,0) rotate(-25deg)}50%{transform:translate(-30px,38px) rotate(-14deg)}}
+@keyframes atmosphere-float-three{0%,100%{transform:translate(0,0) rotate(34deg)}50%{transform:translate(-22px,-30px) rotate(24deg)}}
+@media(prefers-reduced-motion:no-preference){
+ .atmosphere-halo--left,.atmosphere-orbit--left{animation:atmosphere-drift-left 18s ease-in-out infinite}
+ .atmosphere-halo--right,.atmosphere-orbit--right{animation:atmosphere-drift-right 22s ease-in-out infinite}
+ .atmosphere-ribbon--top{animation:atmosphere-ribbon-top 19s ease-in-out infinite}
+ .atmosphere-ribbon--bottom{animation:atmosphere-ribbon-bottom 24s ease-in-out infinite}
+ .atmosphere-glass--one{animation:atmosphere-float-one 11s ease-in-out infinite}
+ .atmosphere-glass--two{animation:atmosphere-float-two 13s ease-in-out infinite}
+ .atmosphere-glass--three{animation:atmosphere-float-three 15s ease-in-out infinite}
+}
+@media(max-width:600px){.atmosphere-glass--one{left:-9%;top:42%;opacity:.38}.atmosphere-glass--two{right:-7%;opacity:.4}.atmosphere-glass--three{display:none}.atmosphere-ribbon--top{top:-18%;left:-130%}.atmosphere-ribbon--bottom{bottom:-19%;right:-135%}.atmosphere-halo{filter:blur(20px)}}
+@media(prefers-reduced-motion:reduce){.brand-atmosphere>div{animation:none!important;will-change:auto}}

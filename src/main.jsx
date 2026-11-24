@@ -17,6 +17,7 @@ import './pawnova-showcase.css'
 import './glassmorphism.css'
 import './frosted-site.css'
 import './brand-interaction-polish.css'
+import './brand-atmosphere.css'
 
 
 const SOCIAL_PROFILES = [
@@ -421,6 +422,17 @@ function App() {
 
   return (
     <>
+      <div className="brand-atmosphere" aria-hidden="true">
+        <div className="atmosphere-halo atmosphere-halo--left" />
+        <div className="atmosphere-halo atmosphere-halo--right" />
+        <div className="atmosphere-ribbon atmosphere-ribbon--top" />
+        <div className="atmosphere-ribbon atmosphere-ribbon--bottom" />
+        <div className="atmosphere-orbit atmosphere-orbit--left" />
+        <div className="atmosphere-orbit atmosphere-orbit--right" />
+        <div className="atmosphere-glass atmosphere-glass--one" />
+        <div className="atmosphere-glass atmosphere-glass--two" />
+        <div className="atmosphere-glass atmosphere-glass--three" />
+      </div>
       <header className="site-header portfolio-header">
         <a href="#top" className="brand" aria-label="ConnectiveStack home">
           <img width="1200" height="220" decoding="async" src="/assets/connectivestack-approved-logo.svg" alt="ConnectiveStack" />
