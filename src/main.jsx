@@ -18,6 +18,7 @@ import './glassmorphism.css'
 import './frosted-site.css'
 import './brand-interaction-polish.css'
 import './brand-atmosphere.css'
+import './brand-editorial-final.css'
 
 
 const SOCIAL_PROFILES = [
@@ -359,7 +360,7 @@ function App() {
 
   useEffect(() => {
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const targets = [...document.querySelectorAll('.editorial-intro, .frost-showcase-copy, .frost-showcase-visual, .section-heading, .service-card, .lead-system-heading, .lead-system-flow, .lead-system-card, .lead-system-cta, .ai-receptionist-copy, .ai-receptionist-flow, .engagement-trust article, .process-heading, .process-steps article, .portfolio-project-copy, .portfolio-project-visual, .recommendation-intro, .recommendation-card, .contact-content, .contact-panel')]
+    const targets = [...document.querySelectorAll('.editorial-intro, .frost-showcase-copy, .frost-showcase-visual, .section-heading, .service-card, .lead-system-heading, .lead-system-flow, .lead-system-card, .lead-system-cta, .ai-receptionist-copy, .ai-receptionist-flow, .engagement-trust article, .process-heading, .process-steps article, .portfolio-project-copy, .portfolio-project-details, .recommendation-intro, .recommendation-card, .contact-content, .contact-panel')]
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -606,7 +607,7 @@ function App() {
           <div className="ai-receptionist-shell">
             <div className="ai-receptionist-copy">
               <span className="kicker">AI Receptionist</span>
-              <h2 id="ai-receptionist-heading">Keep inbound calls moving toward qualification, booking, or the right human handoff.</h2>
+              <h2 id="ai-receptionist-heading">Turn incoming calls into qualified next steps.</h2>
               <p>The AI receptionist can answer inbound calls 24/7, handle common questions, capture contact details, qualify the caller, and book appointments into your calendar. The same lead can continue into CRM routing, SMS or email follow-up, reminders, and human handoff without starting over.</p>
               <div className="ai-receptionist-actions">
                 <a href="/demos/hvac-ai-front-desk" className="button button-primary">See an AI front desk example <Arrow /></a>
@@ -699,11 +700,14 @@ function App() {
               <div className="portfolio-project-tags"><span>Website &amp; UI/UX</span><span>Product catalogue</span><span>Buying guides</span><span>Responsive QA</span></div>
               <a className="button button-primary" href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer">Explore Paw Nova Co. <Arrow /></a>
             </div>
-            <a className="portfolio-project-visual" href="https://www.pawnovaco.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Paw Nova Co. live website">
-              <span className="portfolio-project-visual-top">INDEPENDENT PROJECT <span>LIVE WEBSITE ↗</span></span>
-              <span className="portfolio-project-logo-wrap"><img src="/assets/pawnova-logo-transparent-optimized.webp" alt="Paw Nova Co. logo" loading="lazy" decoding="async" /></span>
-              <span className="portfolio-project-visual-bottom">PET PRODUCT FINDS · AMAZON AFFILIATE</span>
-            </a>
+            <div className="portfolio-project-details">
+              <span className="kicker">Project scope</span>
+              <dl>
+                <div><dt>Platform</dt><dd>Product discovery website</dd></div>
+                <div><dt>Business model</dt><dd>Amazon affiliate</dd></div>
+                <div><dt>Customer journey</dt><dd>Browse, compare, visit retailer</dd></div>
+              </dl>
+            </div>
           </div>
         </section>
 

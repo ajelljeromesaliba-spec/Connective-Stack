@@ -1,0 +1,87 @@
+
+/* Correct nested glass wrappers from the earlier theme. The page keeps an open editorial layout. */
+.portfolio-main > .ai-receptionist-section > .ai-receptionist-shell,
+.portfolio-main > .portfolio-project-spotlight > .portfolio-project-inner {
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  overflow:visible!important;
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  align-items:center;
+  gap:clamp(36px,6vw,80px);
+}
+.portfolio-main > .ai-receptionist-section::before,
+.portfolio-main > .ai-receptionist-section::after,
+.portfolio-main > .portfolio-project-spotlight::before,
+.portfolio-main > .portfolio-project-spotlight::after {content:none!important;display:none!important}
+.portfolio-main .ai-receptionist-shell > .ai-receptionist-copy,
+.portfolio-main .portfolio-project-inner > .portfolio-project-copy {
+  min-width:0;max-width:100%;padding:12px 0;
+  background:none!important;border:0!important;box-shadow:none!important;
+}
+.portfolio-main .ai-receptionist-shell > .ai-receptionist-copy h2 {
+  width:100%;max-width:19ch!important;
+  font-size:clamp(34px,3.7vw,54px)!important;
+  line-height:1.12!important;letter-spacing:-.045em;
+  margin:14px 0 22px;
+  overflow-wrap:normal;word-break:normal;text-wrap:balance;
+}
+.portfolio-main .ai-receptionist-copy > p,
+.portfolio-main .portfolio-project-copy > p {max-width:62ch;line-height:1.8;color:#ded1ea;margin-bottom:20px}
+.portfolio-main .ai-receptionist-actions {display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.portfolio-main .ai-receptionist-actions .button {max-width:100%;white-space:normal;text-align:left}
+.portfolio-main .ai-receptionist-shell > .ai-receptionist-flow {
+  padding:clamp(24px,3.3vw,42px)!important;
+  min-width:0;width:100%;
+  background:linear-gradient(145deg,rgba(203,168,248,.10),rgba(65,34,102,.24))!important;
+  border:1px solid #e2baf339!important;border-radius:22px;
+  box-shadow:0 20px 56px #10051e44!important;
+}
+.portfolio-main .ai-receptionist-flow > article {padding:20px 0!important;min-height:0;min-width:0}
+.portfolio-main .ai-receptionist-flow > article span {margin-bottom:8px}
+.portfolio-main .ai-receptionist-flow > article strong {font-size:clamp(19px,1.7vw,24px)}
+.portfolio-main .ai-receptionist-flow > article p {line-height:1.65;max-width:100%}
+.portfolio-main .ai-receptionist-note {max-width:85ch;margin:30px 0 0!important;padding:0!important;line-height:1.65}
+.portfolio-main .portfolio-project-copy h2 {font-size:clamp(32px,3.7vw,54px);line-height:1.12;max-width:24ch;margin:14px 0 22px}
+.portfolio-main .portfolio-project-copy h2 em {font-family:inherit;font-style:normal;font-weight:inherit;color:#e3b6f5}
+.portfolio-main .portfolio-project-details {min-width:0;max-width:100%;align-self:center;padding:clamp(12px,2vw,24px) 0;border-top:1px solid var(--frost-edge);border-bottom:1px solid var(--frost-edge)}
+.portfolio-main .portfolio-project-details dl {margin:18px 0 0}
+.portfolio-main .portfolio-project-details dl > div {padding:18px 0;display:grid;grid-template-columns:minmax(100px,.7fr) minmax(0,1fr);gap:16px;border-bottom:1px solid var(--frost-edge)}
+.portfolio-main .portfolio-project-details dl > div:last-child {border:0}
+.portfolio-main .portfolio-project-details dt {font-size:13px;color:#ccb8de}
+.portfolio-main .portfolio-project-details dd {margin:0;font-size:15px;line-height:1.5;color:#f6efff;overflow-wrap:anywhere}
+.portfolio-main > .editorial-capabilities {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 24px;text-align:center;padding:22px 16px!important;align-items:center}
+.portfolio-main > .editorial-capabilities span {min-width:0;line-height:1.5}
+.portfolio-main .editorial-intro {margin-bottom:clamp(20px,3vw,42px)}
+.portfolio-main > .editorial-demos {padding-top:clamp(48px,6vw,84px)!important}
+.portfolio-main .frost-showcase {padding-block:clamp(28px,4vw,52px)}
+.portfolio-main .frost-showcase-visual {min-width:0}
+.portfolio-main .editorial-pending:not(.editorial-arrived) {opacity:1!important;translate:none!important}
+@keyframes editorial-safe-rise {from {opacity:.45;translate:0 18px}to {opacity:1;translate:0 0}}
+@media(prefers-reduced-motion:no-preference) {
+  .portfolio-main .editorial-pending.editorial-arrived {animation:editorial-safe-rise .72s var(--editorial-delay,0ms) cubic-bezier(.2,.75,.25,1) backwards!important}
+  .portfolio-main .service-list .service-card.editorial-pending.editorial-arrived,
+  .portfolio-main .lead-system-grid .lead-system-card.editorial-pending.editorial-arrived,
+  .portfolio-main .recommendation-cards .recommendation-card.editorial-pending.editorial-arrived {animation:editorial-safe-rise .72s var(--editorial-delay,0ms) ease-out backwards!important}
+}
+body:has(.portfolio-main) .calendly-direct-badge {right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));max-width:calc(100vw - 40px);white-space:normal}
+@media(max-width:900px) {
+ .portfolio-main > .ai-receptionist-section > .ai-receptionist-shell,
+ .portfolio-main > .portfolio-project-spotlight > .portfolio-project-inner {grid-template-columns:minmax(0,1fr);gap:30px}
+ .portfolio-main .ai-receptionist-shell > .ai-receptionist-copy h2 {max-width:22ch!important}
+ .portfolio-main .portfolio-project-copy h2 {max-width:24ch}
+ .portfolio-main > .editorial-capabilities {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px) {
+ .portfolio-main .ai-receptionist-shell > .ai-receptionist-copy h2,
+ .portfolio-main .portfolio-project-copy h2 {font-size:clamp(32px,8.4vw,42px)!important;max-width:100%!important}
+ .portfolio-main .ai-receptionist-shell > .ai-receptionist-flow {padding:24px!important}
+ .portfolio-main .ai-receptionist-actions {display:grid;grid-template-columns:minmax(0,1fr)}
+ .portfolio-main .portfolio-project-details dl > div {grid-template-columns:minmax(0,1fr);gap:5px;padding:15px 0}
+ .portfolio-main > .editorial-capabilities {padding:18px 8px!important;gap:14px}
+}
