@@ -40,7 +40,7 @@ try {
     if (path !== '/') html = html.replace(/<link rel="preload" href="\/images\/automation-signal.webp"[^>]*>/, '')
     const schema = {
       '@context': 'https://schema.org', '@graph': [
-        { '@type': 'Organization', '@id': `${origin}/#business`, name: 'ConnectiveStack', alternateName: ['Connective Stack'], url: origin + '/', logo: origin + '/assets/connectivestack-blue-gold-logo.png' },
+        { '@type': 'Organization', '@id': `${origin}/#business`, name: 'ConnectiveStack', alternateName: ['Connective Stack'], url: origin + '/', logo: origin + '/assets/connectivestack-glass-logo.svg' },
         { '@type': 'WebSite', '@id': `${origin}/#website`, url: origin + '/', name: 'ConnectiveStack', alternateName: ['Connective Stack'], publisher: { '@id': `${origin}/#business` } },
         { '@type': 'WebPage', '@id': origin + path + '#webpage', url: origin + path, name: meta.title, description: meta.desc, isPartOf: { '@id': `${origin}/#website` } },
         ...(path === '/' ? [] : [{ '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'ConnectiveStack', item: origin + '/' }, { '@type': 'ListItem', position: 2, name: meta.title.split(' | ')[0], item: origin + path }] }]),

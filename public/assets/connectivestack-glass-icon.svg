@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192"><rect width="192" height="192" rx="34" fill="#11172f"/><g transform="translate(12 23) scale(.82)"><defs>
+<linearGradient id="top" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#75efff"/><stop offset=".48" stop-color="#426bb7"/><stop offset="1" stop-color="#9275ff"/></linearGradient>
+<linearGradient id="middle" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00d7f7"/><stop offset=".52" stop-color="#244ccc"/><stop offset="1" stop-color="#b86bff"/></linearGradient>
+<linearGradient id="bottom" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1763b7"/><stop offset=".5" stop-color="#342d9e"/><stop offset="1" stop-color="#bb4dff"/></linearGradient>
+<linearGradient id="orbit" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#72efff"/><stop offset=".5" stop-color="#6889ff"/><stop offset="1" stop-color="#d1d3ff"/></linearGradient>
+</defs><g stroke-linejoin="round"><path d="M26 117 91 82Q100 77 109 82L174 117Q186 124 174 132L109 167Q100 172 91 167L26 132Q14 124 26 117Z" fill="url(#bottom)" stroke="#8e6cf8" stroke-width="1.5"/>
+<path d="M26 79 91 44Q100 39 109 44L174 79Q186 86 174 94L109 129Q100 134 91 129L26 94Q14 86 26 79Z" fill="url(#middle)" stroke="#9693ff" stroke-width="1.5"/>
+<path d="M26 41 91 6Q100 1 109 6L174 41Q186 48 174 56L109 91Q100 96 91 91L26 56Q14 48 26 41Z" fill="url(#top)" stroke="#a0c6ff" stroke-width="1.5"/>
+<path d="M168 51C220 48 212 89 139 104S-8 151 9 114Q14 105 26 99" fill="none" stroke="url(#orbit)" stroke-width="3.5" stroke-linecap="round"/>
+<circle cx="190" cy="52" r="5.5" fill="#f1fbff" stroke="#a7c6ff" stroke-width="2"/><circle cx="13" cy="122" r="5.5" fill="#ecfdff" stroke="#65d9ff" stroke-width="2"/></g></g></svg>
