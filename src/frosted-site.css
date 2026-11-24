@@ -172,3 +172,27 @@ body:has(.portfolio-main),body:has(.seo-main),body:has(.ghl-page),body:has(.case
 .portfolio-main .contact-panel :is(input,select,textarea){background:rgba(25,18,39,.72)}
 .portfolio-main .recommendation-quote-mark{color:#d6a8eb!important}
 @media(max-width:1180px){.portfolio-header nav{background:#2b203ef7}}
+
+/* Approved artwork, not an approximation. Header uses the original icon and wordmark pixels. */
+.portfolio-header .brand img,.portfolio-footer .footer-brand img,.seo-logo img,.seo-foot img,.ghl-brand img,.case-back img{mix-blend-mode:screen;filter:none!important;transform:none!important}
+.portfolio-header .brand img{width:clamp(175px,19vw,235px)}
+:root{--frost-bg:#14092b;--frost-text:#f7f1ff;--frost-muted:#d7c6e5;--frost-edge:rgba(232,191,255,.19);--frost-panel:linear-gradient(135deg,rgba(218,176,255,.12),rgba(110,60,154,.06));--frost-accent:#e9b6f6}
+body:has(.portfolio-main),body:has(.seo-main),body:has(.ghl-page),body:has(.case-page){
+ background:
+ radial-gradient(ellipse 46% 64% at 2% 2%,rgba(166,43,214,.32),transparent 70%),
+ radial-gradient(ellipse 65% 55% at 100% 95%,rgba(159,34,205,.28),transparent 73%),
+ radial-gradient(ellipse at 78% 35%,rgba(57,17,106,.44),transparent 63%),
+ linear-gradient(142deg,#210936,#100720 46%,#1c0836 100%);
+ background-attachment:fixed;
+}
+body:has(.portfolio-main)::before{
+ content:"";display:block;position:fixed;inset:0;pointer-events:none;z-index:-1;
+ background:
+ radial-gradient(ellipse 71% 85% at -17% -51%,transparent 78%,rgba(126,44,208,.13) 88%,rgba(215,78,247,.48) 98%,transparent 100%),
+ radial-gradient(ellipse 88% 92% at 119% 153%,transparent 78%,rgba(138,41,210,.14) 89%,rgba(227,85,248,.40) 99%,transparent 100%);
+}
+.site-header.portfolio-header,.seo-head,.seo-foot,.ghl-detail-nav{background:rgba(30,13,54,.83)!important}
+.frost-console{background:linear-gradient(145deg,rgba(216,184,252,.16),rgba(40,20,69,.65) 55%,rgba(174,65,193,.13));border-color:rgba(236,187,255,.25)}
+.portfolio-main .frost-hero h1 em{background:linear-gradient(115deg,#f1e5ff,#cba8f5 48%,#e184ed);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.portfolio-main :is(.button-primary,.button-light,.inquiry-submit),.portfolio-header .nav-cta,.seo-actions .primary,.seo-head .seo-pill,.ghl-nav-cta,.ghl-detail-cta a{background:linear-gradient(120deg,#e7c8ff,#ca96eb 55%,#d580dc)!important;border-color:#e6c1fa!important;color:#210f35!important}
+@media(max-width:600px){.portfolio-header .brand img{width:clamp(150px,51vw,205px)}}

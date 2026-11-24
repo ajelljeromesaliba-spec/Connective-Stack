@@ -408,7 +408,7 @@ function App() {
     <>
       <header className="site-header portfolio-header">
         <a href="#top" className="brand" aria-label="ConnectiveStack home">
-          <img width="1200" height="220" decoding="async" src="/assets/connectivestack-glass-logo.svg" alt="ConnectiveStack" />
+          <img width="1200" height="220" decoding="async" src="/assets/connectivestack-approved-logo.svg" alt="ConnectiveStack" />
         </a>
         <button className="menu-toggle" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="site-navigation">
           <span /><span />
@@ -703,7 +703,7 @@ function App() {
       </main>
 
       <footer className="portfolio-footer">
-        <a href="#top" className="footer-brand"><img width="1200" height="220" decoding="async" src="/assets/connectivestack-glass-logo.svg" alt="ConnectiveStack" /></a>
+        <a href="#top" className="footer-brand"><img width="1200" height="220" decoding="async" src="/assets/connectivestack-approved-logo.svg" alt="ConnectiveStack" /></a>
         <p>Building connected systems that move customer actions and internal work toward a clear next result.</p>
         <div className="footer-right">
           <div className="footer-social" role="group" aria-label="ConnectiveStack social media">
