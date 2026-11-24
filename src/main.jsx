@@ -356,6 +356,23 @@ function App() {
   })
 
   useEffect(() => {
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const targets = document.querySelectorAll('.frost-demos > *, .frost-showcase, .section-heading, .service-card, .lead-system-heading, .lead-system-flow, .lead-system-card, .lead-system-cta, .ai-receptionist-copy, .ai-receptionist-flow, .engagement-trust article, .process-heading, .process-steps article, .portfolio-project-inner, .recommendation-intro, .recommendation-card, .contact-content, .contact-panel')
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('editorial-arrived')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.12 })
+    targets.forEach(target => {
+      if (target.getBoundingClientRect().top >= window.innerHeight) observer.observe(target)
+    })
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
     if (!legalModal && !activeService && !menuOpen) return undefined
     const closeOnEscape = event => {
       if (event.key !== 'Escape') return
@@ -478,14 +495,19 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="frost-offers" aria-label="Our services">
-          {[['01','Websites','Clear customer journeys, responsive pages and reliable forms.'],['02','CRM & automation','Capture, route and follow up on inquiries.'],['03','AI integrations','Voice, intake, APIs and connected workflows.'],['04','Technical support','Diagnose broken systems and verify the fix.']].map(([n,title,copy]) => <a className="frost-offer" href="#services" key={n}><span>{n}</span><h2>{title}</h2><p>{copy}</p><Arrow /></a>)}
-        </section>
-        <section className="frost-demos" id="live-examples" aria-labelledby="frost-demos-title">
-          <span className="kicker">Explore the work</span><h2 id="frost-demos-title">See the customer journey in action.</h2>
-          <div className="frost-demo-grid">
-            {[['HVAC','AI front desk','/demos/hvac-ai-front-desk'],['Real estate','Luxury brokerage','/demos/luxury-real-estate'],['Healthcare','Patient experience','/demos/healthcare-patient-experience']].map(([tag,title,href])=><a href={href} key={href}><small>{tag}</small><strong>{title}</strong><span>Open live demo <Arrow /></span></a>)}
-          </div>
+        <div className="editorial-capabilities" aria-label="Technical capabilities">
+          <span>Website development</span><span>CRM &amp; automation</span><span>AI integrations</span><span>Technical support</span>
+        </div>
+        <section className="frost-demos editorial-demos" id="live-examples" aria-labelledby="frost-demos-title">
+          <div className="editorial-intro"><span className="kicker">Selected work · Interactive concepts</span><h2 id="frost-demos-title">See what connected<br />systems can do.</h2><p>Explore working concept demos that connect the website, customer intake and the next action.</p></div>
+          {[
+            {tag:'01 / Home services',title:'Never miss the next call.',copy:'An AI front desk concept for service businesses, with qualification, estimates and appointment intake.',label:'Explore HVAC AI front desk',href:'/demos/hvac-ai-front-desk',image:'/assets/hero-hvac-arrival-v1.webp',width:1672,height:941,alt:'HVAC service concept imagery'},
+            {tag:'02 / Real estate',title:'Make every viewing count.',copy:'A luxury brokerage concept connecting property discovery to buyer inquiries and broker routing.',label:'Explore real estate demo',href:'/demos/luxury-real-estate',image:'/assets/realestate-austin-premium-optimized.webp',width:1200,height:801,alt:'Contemporary luxury property concept imagery'},
+            {tag:'03 / Healthcare',title:'A clearer path to care.',copy:'A patient experience concept with intake, scheduling and provider routing.',label:'Explore healthcare demo',href:'/demos/healthcare-patient-experience',image:'/assets/healthcare-hero-v1.webp',width:1672,height:941,alt:'Healthcare patient experience concept imagery'}
+          ].map((demo,i)=><article className={'frost-showcase'+(i%2?' frost-showcase-reverse':'')} key={demo.href}>
+            <div className="frost-showcase-copy"><small>{demo.tag}</small><h3>{demo.title}</h3><p>{demo.copy}</p><a className="editorial-link" href={demo.href}>{demo.label} <Arrow /></a></div>
+            <a className="frost-showcase-visual" href={demo.href} aria-label={demo.label}><img src={demo.image} width={demo.width} height={demo.height} alt={demo.alt} loading="lazy" decoding="async" /><span className="frost-showcase-label">Live concept demo <Arrow /></span></a>
+          </article>)}
         </section>
 
         <section className="section services" id="services">
@@ -495,8 +517,9 @@ function App() {
             <p>A missed call, a form that never reaches the CRM, or a lead with no assigned owner can cost you an opportunity. We identify which part of your process is failing, agree on the expected behavior, and build the fix around it. Open any outcome below to see what we check and what delivery looks like.</p>
           </div>
           <div className="service-list">
-            {services.map(service => (
+            {services.map((service, index) => (
               <article className="service-card" key={service.title}>
+                <span className="editorial-index">{String(index+1).padStart(2, '0')}</span>
                 <div>
                   <h3>{service.title}</h3>
                   <p>{service.copy}</p>
@@ -616,16 +639,10 @@ function App() {
           </div>
 
           <div className="process-stage">
-            <div className="frost-process-visual" aria-label="Example build verification checklist">
-              <div className="frost-process-top"><span>Delivery workspace</span><small>Example acceptance checks</small></div>
-              <h3>From request to verified handoff.</h3>
-              {['Agree on target outcome','Map customer journey and dependencies','Implement the agreed workflow','Test the path and document the handoff'].map((label,i)=><div className="frost-process-row" key={label}><span className="frost-process-index">0{i+1}</span><strong>{label}</strong><Check /></div>)}
-              <p>Acceptance criteria are agreed before implementation.</p>
-            </div>
-
             <div className="process-steps">
-              {process.map(([, title, copy]) => (
+              {process.map(([, title, copy], index) => (
                 <article key={title}>
+                  <span className="editorial-step-number">{String(index+1).padStart(2, '0')}</span>
                   <div>
                     <h3>{title}</h3>
                     <p>{copy}</p>
