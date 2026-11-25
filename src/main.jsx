@@ -852,7 +852,7 @@ function App() {
         </div>
       </footer>
       {!showCookieConsent && <a className="calendly-direct-badge" href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a system review <Arrow /></a>}
-      {showCookieConsent && <CookieConsent onChoice={saveCookieConsent} onPrivacy={() => setLegalModal('privacy')} />}
+      {showCookieConsent && <CookieConsent onChoice={saveCookieConsent} onPrivacy={() => { window.location.href = '/privacy/' }} />}
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
       {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
     </>
