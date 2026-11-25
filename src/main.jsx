@@ -841,8 +841,9 @@ function App() {
           </div>
           <div className="footer-utility">
             <span>© {new Date().getFullYear()} ConnectiveStack</span>
-            <button type="button" onClick={() => setLegalModal('privacy')}>Privacy</button>
-            <button type="button" onClick={() => setLegalModal('terms')}>Terms</button>
+            <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
+            <a href="/data-deletion/">Data deletion</a>
             <button type="button" onClick={() => setShowCookieConsent(true)}>Cookie Preferences</button>
             <a href="https://www.linkedin.com/in/ajellsaliba" target="_blank" rel="noopener noreferrer" aria-label="Ajell Saliba on LinkedIn">LinkedIn</a>
             <a href="/style-picker/">Website Style Picker</a>
@@ -851,7 +852,7 @@ function App() {
         </div>
       </footer>
       {!showCookieConsent && <a className="calendly-direct-badge" href={CALENDAR_URL} target="_blank" rel="noreferrer">Book a system review <Arrow /></a>}
-      {showCookieConsent && <CookieConsent onChoice={saveCookieConsent} onPrivacy={() => setLegalModal('privacy')} />}
+      {showCookieConsent && <CookieConsent onChoice={saveCookieConsent} onPrivacy={() => { window.location.href = '/privacy/' }} />}
       {legalModal && <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />}
       {activeService && <ServiceModal service={activeService} onClose={() => setActiveService(null)} />}
     </>
