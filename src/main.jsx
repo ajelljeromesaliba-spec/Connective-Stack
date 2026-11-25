@@ -19,6 +19,7 @@ import './frosted-site.css'
 import './brand-interaction-polish.css'
 import './brand-atmosphere.css'
 import './brand-editorial-final.css'
+import './capability-network.css'
 
 
 const SOCIAL_PROFILES = [
@@ -523,8 +524,25 @@ function App() {
             </div>
           </div>
         </section>
-        <div className="editorial-capabilities" aria-label="Technical capabilities">
-          <span>Website development</span><span>CRM &amp; automation</span><span>AI integrations</span><span>Technical support</span>
+        <div className="editorial-capabilities capability-network" aria-label="Technical capabilities">
+          <svg className="capability-connection" viewBox="0 0 1000 72" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="capability-line" x1="0%" y1="0%" x2="100%" y2="0%"><stop stopColor="#bc79ef" stopOpacity=".04"/><stop offset=".18" stopColor="#b58ae9" stopOpacity=".65"/><stop offset=".55" stopColor="#d58af1" stopOpacity=".8"/><stop offset=".85" stopColor="#dd9cf8" stopOpacity=".65"/><stop offset="1" stopColor="#c782ef" stopOpacity=".04"/></linearGradient>
+              <linearGradient id="capability-signal"><stop stopColor="#d7a9ff" stopOpacity="0"/><stop offset=".55" stopColor="#cda2ff" stopOpacity=".8"/><stop offset="1" stopColor="#fff2ff"/></linearGradient>
+            </defs>
+            <path d="M0 46 C50 46 75 36 125 36 S200 19 250 19 S325 36 375 36 S450 53 500 53 S575 36 625 36 S700 19 750 19 S825 36 875 36 S950 46 1000 46" fill="none" stroke="url(#capability-line)" strokeWidth="1.4" vectorEffect="non-scaling-stroke"/>
+            <path className="capability-signal" pathLength="1000" d="M0 46 C50 46 75 36 125 36 S200 19 250 19 S325 36 375 36 S450 53 500 53 S575 36 625 36 S700 19 750 19 S825 36 875 36 S950 46 1000 46" fill="none" stroke="#edb5ff" strokeWidth="2.2" strokeLinecap="round" vectorEffect="non-scaling-stroke"/>
+          </svg>
+          {[
+            {label:'Website development',href:'#services',icon:<><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M9 12l-2 2 2 2m6-4 2 2-2 2"/></>},
+            {label:'CRM & automation',href:'#lead-system',icon:<><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h5a3 3 0 0 1 3 3V14M6.5 10v5a3 3 0 0 0 3 3H14"/></>},
+            {label:'AI integrations',href:'#ai-receptionist',icon:<><circle cx="12" cy="12" r="3"/><circle cx="12" cy="3" r="1.5"/><circle cx="12" cy="21" r="1.5"/><circle cx="3" cy="12" r="1.5"/><circle cx="21" cy="12" r="1.5"/><path d="M12 4.5V9m0 6v4.5M4.5 12H9m6 0h4.5"/></>},
+            {label:'Technical support',href:'#contact',icon:<><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H3a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2v-5zm16 0h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2v-5zm0 5v1a3 3 0 0 1-3 3h-4"/><path d="M10 21h3"/></>}
+          ].map((item,i)=><a className="capability-node" href={item.href} key={item.label} style={{'--node-delay':i*1.7+'s'}}>
+            <span className="capability-orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{item.icon}</svg></span>
+            <span className="capability-label">{item.label}</span>
+            <span className="capability-underline" aria-hidden="true"/>
+          </a>)}
         </div>
         <section className="frost-demos editorial-demos" id="live-examples" aria-labelledby="frost-demos-title">
           <div className="editorial-intro"><span className="kicker">Selected work · Interactive concepts</span><h2 id="frost-demos-title">See what connected<br />systems can do.</h2><p>Explore working concept demos that connect the website, customer intake and the next action.</p></div>

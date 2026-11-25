@@ -1,0 +1,58 @@
+
+/* A connected capability rail, rather than a static text strip. */
+.portfolio-main > .editorial-capabilities.capability-network{
+ position:relative;isolation:isolate;display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));align-items:start;gap:0;
+ padding:12px 0 18px!important;border:0;overflow:visible;
+ background:transparent;min-height:126px;
+}
+.capability-connection{position:absolute;top:12px;left:0;width:100%;height:72px;z-index:-1;overflow:visible;pointer-events:none}
+.portfolio-main .capability-node{
+ min-width:0;position:relative;display:flex;flex-direction:column;align-items:center;
+ justify-content:flex-start;gap:13px;padding:10px 8px 12px;
+ color:#e7d9f4;text-align:center;text-decoration:none;
+}
+.portfolio-main .capability-orb{
+ position:relative;display:grid;place-items:center;width:52px;height:52px;flex:0 0 52px;border-radius:50%;
+ color:#f6e9ff;border:1px solid #e4c1ff70;
+ background:radial-gradient(circle at 30% 20%,#e0c0ff45,transparent 56%),linear-gradient(145deg,#50326d,#221039 72%);
+ box-shadow:inset 0 1px 0 #f2d9ff40,0 4px 22px #b477eb38;
+}
+.portfolio-main .capability-orb svg{width:22px;height:22px;display:block}
+.portfolio-main .capability-orb::after{
+ content:"";position:absolute;inset:-5px;border:1px solid #d9a7ff66;border-radius:50%;
+ opacity:0;pointer-events:none;
+}
+.portfolio-main .capability-label{
+ font:550 clamp(12px,1.1vw,15px)/1.45 Manrope,sans-serif;letter-spacing:-.01em;
+ min-width:0;max-width:100%;text-wrap:balance;
+}
+.portfolio-main .capability-underline{
+ width:34px;height:2px;border-radius:2px;
+ background:linear-gradient(90deg,transparent,#dc9cff,transparent);
+ opacity:.6;
+}
+.capability-signal{stroke-dasharray:55 945;stroke-dashoffset:1000;filter:drop-shadow(0 0 4px #e0a4ff)}
+@keyframes capability-travel{to{stroke-dashoffset:0}}
+@keyframes capability-pulse{0%,70%,100%{opacity:0;scale:.9}12%{opacity:.7;scale:1}40%{opacity:0;scale:1.35}}
+@media(prefers-reduced-motion:no-preference){
+ .portfolio-main .capability-signal{animation:capability-travel 6.8s linear infinite!important}
+ .portfolio-main .capability-orb::after{animation:capability-pulse 6.8s var(--node-delay,0s) ease-out infinite!important}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .portfolio-main .capability-orb,.portfolio-main .capability-label,.portfolio-main .capability-underline{transition:translate .3s ease,scale .3s ease,color .3s ease,box-shadow .3s ease,opacity .3s ease!important}
+ .portfolio-main .capability-node:hover .capability-orb{translate:0 -4px;scale:1.12;box-shadow:0 0 28px #d68dff70,inset 0 1px 0 #f8e5ff80;color:#fff}
+ .portfolio-main .capability-node:hover .capability-label{color:#fff;translate:0 -2px}
+ .portfolio-main .capability-node:hover .capability-underline{scale:1.8 1;opacity:1}
+}
+.portfolio-main .capability-node:focus-visible{outline:2px solid #e5b2f9;outline-offset:4px;border-radius:12px}
+@media(max-width:640px){
+ .portfolio-main > .editorial-capabilities.capability-network{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 0;padding:8px 0 12px!important}
+ .capability-connection{display:none}
+ .portfolio-main .capability-node{gap:10px;padding:9px 5px}
+ .portfolio-main .capability-orb{width:46px;height:46px;flex-basis:46px}
+ .portfolio-main .capability-orb svg{width:20px;height:20px}
+ .portfolio-main .capability-label{font-size:13px}
+ .portfolio-main .capability-node:nth-of-type(odd)::before{content:"";position:absolute;left:50%;right:-50%;top:32px;height:1px;background:linear-gradient(90deg,#c88bf42b,#d99cf488,#c88bf42b);z-index:-1;pointer-events:none}
+}
+@media(prefers-reduced-motion:reduce){.portfolio-main .capability-signal{display:none}.portfolio-main .capability-orb::after{animation:none!important}}
