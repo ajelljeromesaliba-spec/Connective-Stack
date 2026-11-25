@@ -21,6 +21,7 @@ import './brand-atmosphere.css'
 import './brand-editorial-final.css'
 import './capability-network.css'
 import './delivery-method.css'
+import './engineering-refinement.css'
 
 
 const SOCIAL_PROFILES = [
@@ -390,6 +391,58 @@ function ProjectInquiryForm() {
   )
 }
 
+const previewStages = [
+  {name:'Website',event:'Form submission',detail:'Inquiry captured',payload:'name · email · request'},
+  {name:'Integration',event:'Webhook received',detail:'Fields mapped',payload:'event · payload · mapping'},
+  {name:'CRM',event:'Contact upsert',detail:'Owner assigned',payload:'contact · source · owner'},
+  {name:'Follow-up',event:'Workflow triggered',detail:'Next action queued',payload:'channel · action · status'},
+]
+
+function SystemPreview() {
+  const [stage,setStage] = useState(-1)
+  const [running,setRunning] = useState(false)
+  useEffect(() => {
+    if (!running) return
+    const timer = window.setTimeout(() => {
+      if (stage >= previewStages.length-1) setRunning(false)
+      else setStage(stage+1)
+    }, 620)
+    return () => window.clearTimeout(timer)
+  }, [running,stage])
+  const run = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setStage(previewStages.length-1)
+      setRunning(false)
+      return
+    }
+    setStage(0)
+    setRunning(true)
+  }
+  const complete = stage === previewStages.length-1 && !running
+  return (
+    <div className="engineering-preview" aria-label="Interactive sample of a connected lead workflow">
+      <div className="engineering-top">
+        <div className="engineering-brand"><span className="engineering-mark" aria-hidden="true">◈</span><div><strong>System explorer</strong><small>Interactive workflow preview</small></div></div>
+        <span className="engineering-mode"><i/> Simulation</span>
+      </div>
+      <div className="engineering-body">
+        <div className="engineering-intro"><div><span>EVENT PIPELINE / 01</span><h2>From inquiry to action.</h2></div><span className="engineering-count">{Math.max(0,stage+1)}<small> / 4</small></span></div>
+        <div className="engineering-nodes" aria-label="Workflow stages">
+          {previewStages.map((item,i)=><div className={'engineering-node'+(i<=stage?' is-done':'')+(i===stage&&running?' is-running':'')} key={item.name}>
+            <span className="engineering-node-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">{i===0?<><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 13h8m-8 3h5"/></>:i===1?<><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-2-12-4 14"/></>:i===2?<><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></>:<><path d="m3 10 18-7-7 18-3-8-8-3zm8 3 10-10"/></>}</svg></span>
+            <strong>{item.name}</strong><small>{i<=stage?'Processed':'Ready'}</small>
+          </div>)}
+        </div>
+        <div className="engineering-log">
+          <div className="engineering-log-head"><span>EVENT TRACE</span><span>{running?'Running':complete?'Complete':'Ready to run'}</span></div>
+          {previewStages.map((item,i)=><div className={'engineering-event'+(i<=stage?' is-done':'')} key={item.event}><span className="engineering-event-dot">{i<=stage?<Check/>:<span/>}</span><div><strong>{item.event}</strong><small>{i<=stage?item.detail:item.payload}</small></div><span className="engineering-event-state">{i<=stage?'OK':'—'}</span></div>)}
+        </div>
+        <div className="engineering-footer"><button type="button" onClick={run} disabled={running} className="engineering-run"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 5 11 7-11 7z"/></svg>{running?'Running…':complete?'Run again':'Run sample inquiry'}</button><span role="status">{complete?'All four sample stages complete.':'Sample data only. No external requests.'}</span></div>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [openNavDropdown, setOpenNavDropdown] = useState(null)
@@ -548,26 +601,15 @@ function App() {
         <section className="frost-hero" aria-labelledby="frost-hero-title">
           <div className="frost-hero-copy">
             <span className="frost-eyebrow"><i /> Web · CRM · Automation · AI</span>
-            <h1 id="frost-hero-title">Every inquiry.<br />A clear <em>next step.</em></h1>
-            <p className="frost-lead">Stop losing inquiries to broken systems and missed follow-ups. We build and repair websites, CRM workflows and AI receptionists so your customers reach the right next action.</p>
+            <h1 id="frost-hero-title">Your systems.<br /> <em>Connected.</em></h1>
+            <p className="frost-lead">We build websites, CRM workflows and AI integrations that capture inquiries, assign the right owner and keep follow-up moving. One connected system, with a clear next action.</p>
             <div className="frost-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Book a system review <Arrow /></a>
               <a href="#live-examples" className="button button-secondary">Explore live demos <Arrow /></a>
             </div>
-            <p className="frost-brand-note">ConnectiveStack (Connective Stack) · Founder-led technical delivery</p>
+            <p className="frost-brand-note">Founder-led engineering · Agreed scope · Verified handoff</p>
           </div>
-          <div className="frost-console" aria-label="Illustrative customer workflow dashboard">
-            <div className="frost-console-top"><span><i /><i /><i /></span><strong>Connected workspace</strong><small>Example workflow</small></div>
-            <div className="frost-console-body">
-              <aside className="frost-console-nav" aria-label="Illustrative modules"><span className="frost-console-active">◈ Overview</span><span>Website</span><span>CRM</span><span>Automations</span><span>AI reception</span></aside>
-              <div className="frost-console-content">
-                <div className="frost-console-heading"><div><small>Customer journey</small><h2>Lead activity</h2></div><span className="frost-state"><i /> Sample</span></div>
-                <div className="frost-mini-grid"><div><small>01 · Capture</small><strong>Inquiry</strong></div><div><small>02 · Route</small><strong>CRM</strong></div><div><small>03 · Respond</small><strong>Follow-up</strong></div></div>
-                <div className="frost-chart"><span>Workflow overview</span><svg viewBox="0 0 320 110" role="img" aria-label="Illustrative connected workflow line" preserveAspectRatio="none"><defs><linearGradient id="frostLine"><stop stopColor="#e2c0fa"/><stop offset="1" stopColor="#d16dcb"/></linearGradient><linearGradient id="frostArea" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#c58ee3" stopOpacity=".24"/><stop offset="1" stopColor="#c58ee3" stopOpacity="0"/></linearGradient></defs><path d="M0 94H320M0 63H320M0 32H320" stroke="#e0c6f4" strokeOpacity=".13" strokeDasharray="3 5"/><path d="M0 87C35 87 44 47 79 60S125 83 150 46 192 63 217 37 256 49 282 24 307 20 320 12V110H0Z" fill="url(#frostArea)"/><path d="M0 87C35 87 44 47 79 60S125 83 150 46 192 63 217 37 256 49 282 24 307 20 320 12" fill="none" stroke="url(#frostLine)" strokeWidth="2.4" vectorEffect="non-scaling-stroke"/></svg></div>
-                <div className="frost-console-log"><span><Check /> Form captured</span><span>CRM owner assigned</span><span>Next action defined</span></div>
-              </div>
-            </div>
-          </div>
+          <SystemPreview />
         </section>
         <div className="editorial-capabilities capability-network" aria-label="Technical capabilities">
           <svg className="capability-connection" viewBox="0 0 1000 72" preserveAspectRatio="none" aria-hidden="true" focusable="false">
@@ -590,7 +632,7 @@ function App() {
           </a>)}
         </div>
         <section className="frost-demos editorial-demos" id="live-examples" aria-labelledby="frost-demos-title">
-          <div className="editorial-intro"><span className="kicker">Selected work · Interactive concepts</span><h2 id="frost-demos-title">See what connected<br />systems can do.</h2><p>Explore working concept demos that connect the website, customer intake and the next action.</p></div>
+          <div className="editorial-intro"><span className="kicker">Selected work · Interactive concepts</span><h2 id="frost-demos-title">See the systems<br />in action.</h2><p>Explore interactive concepts for real customer journeys, from first inquiry to follow-up.</p></div>
           {[
             {tag:'01 / Home services',title:'Never miss the next call.',copy:'An AI front desk concept for service businesses, with qualification, estimates and appointment intake.',label:'Explore HVAC AI front desk',href:'/demos/hvac-ai-front-desk',image:'/assets/hero-hvac-arrival-v1.webp',width:1672,height:941,alt:'HVAC service concept imagery'},
             {tag:'02 / Real estate',title:'Make every viewing count.',copy:'A luxury brokerage concept connecting property discovery to buyer inquiries and broker routing.',label:'Explore real estate demo',href:'/demos/luxury-real-estate',image:'/assets/realestate-austin-premium-optimized.webp',width:1200,height:801,alt:'Contemporary luxury property concept imagery'},

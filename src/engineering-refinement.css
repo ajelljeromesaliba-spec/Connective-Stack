@@ -1,0 +1,56 @@
+
+/* Product-grade hero: real interactive sample, no fabricated performance numbers. */
+.portfolio-main .frost-hero{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(32px,5vw,76px);align-items:center}
+.portfolio-main .frost-hero h1{font-size:clamp(48px,5.8vw,82px);line-height:1.05;letter-spacing:-.062em}
+.portfolio-main .frost-lead{font-size:clamp(16px,1.3vw,19px);max-width:49ch}
+.portfolio-main .frost-brand-note{line-height:1.65;color:#c6b4d5}
+.portfolio-main .engineering-preview{min-width:0;max-width:100%;overflow:hidden;border:1px solid #e2bdf445;border-radius:22px;background:linear-gradient(145deg,#301e48dc,#180e2be8 62%,#29163dbf);box-shadow:0 28px 80px #09041480,inset 0 1px #f0d5ff20;position:relative}
+.portfolio-main .engineering-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:18px 22px;border-bottom:1px solid #e6c0ff22}
+.engineering-brand{display:flex;align-items:center;gap:10px;min-width:0}
+.engineering-mark{width:32px;height:32px;display:grid;place-items:center;color:#f0d3ff;background:#bd8ef42b;border:1px solid #e1bbf54a;border-radius:9px;font-size:19px;flex:none}
+.engineering-brand strong,.engineering-brand small{display:block;line-height:1.4}
+.engineering-brand strong{font-size:13px;color:#f7eeff}.engineering-brand small{font-size:10px;color:#c5b2d6}
+.engineering-mode{display:flex;align-items:center;gap:6px;font:500 11px/1.4 Manrope,sans-serif;color:#e4c9f6}
+.engineering-mode i{width:6px;height:6px;background:#d5a5f8;border-radius:50%;box-shadow:0 0 9px #d5a5f8}
+.engineering-body{padding:clamp(18px,2.5vw,28px)}
+.engineering-intro{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+.engineering-intro>div>span,.engineering-log-head{font:600 10px/1.5 monospace;letter-spacing:.1em;color:#c9a9e6}
+.portfolio-main .engineering-intro h2{font:650 clamp(20px,2vw,28px)/1.2 Manrope,sans-serif;letter-spacing:-.035em;color:#f5edff;margin:8px 0 0}
+.engineering-count{font-size:26px;font-weight:650;color:#efd9ff;white-space:nowrap}.engineering-count small{font-size:12px;font-weight:400;color:#b9a5cd}
+.engineering-nodes{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;isolation:isolate;margin:0 0 25px}
+.engineering-nodes::before{content:"";position:absolute;top:23px;left:12.5%;right:12.5%;height:1px;background:#d1a3f24a;z-index:-1}
+.engineering-node{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;min-width:0}
+.engineering-node-symbol{width:46px;height:46px;border:1px solid #d6b4ef50;border-radius:13px;background:#29183e;display:grid;place-items:center;margin-bottom:4px;color:#cbb4e4;transition:background .3s,color .3s,box-shadow .3s!important}
+.engineering-node-symbol svg{width:23px;height:23px}.engineering-node strong{font-size:11px;color:#f2e7fb;font-weight:600;overflow-wrap:anywhere}.engineering-node small{font-size:10px;color:#c1accf}
+.engineering-node.is-done .engineering-node-symbol{background:linear-gradient(145deg,#654390,#3a235c);border-color:#e4bbff;color:#fff;box-shadow:0 0 18px #b77ce440}
+.engineering-log{border:1px solid #e0b7ff24;border-radius:12px;background:#11091e77;padding:14px 15px 3px}
+.engineering-log-head{display:flex;justify-content:space-between;gap:8px;margin:0 0 8px;letter-spacing:.05em}
+.engineering-event{display:grid;grid-template-columns:18px minmax(0,1fr) 26px;gap:9px;align-items:center;padding:10px 0;border-top:1px solid #e1b8ff13}
+.engineering-event-dot{width:17px;height:17px;display:grid;place-items:center;color:#e7c2ff}.engineering-event-dot svg{width:15px;height:15px}.engineering-event-dot>span{width:7px;height:7px;border:1px solid #d3a4ef66;border-radius:50%}
+.engineering-event strong,.engineering-event small{display:block;line-height:1.45;overflow-wrap:anywhere}.engineering-event strong{font-size:12px;color:#eaddf6;font-weight:600}.engineering-event small{font-size:10px;color:#b7a4cb}
+.engineering-event-state{font:600 10px/1.4 monospace;color:#bfa7d5;text-align:right}
+.engineering-event.is-done .engineering-event-state{color:#e6baff}
+.engineering-footer{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;margin-top:18px}
+.engineering-run{border:1px solid #d9b0f388;background:linear-gradient(120deg,#d7b1fa,#b67bd9);color:#21102e;font:650 12px/1.4 Manrope,sans-serif;padding:10px 13px;border-radius:9px;display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+.engineering-run svg{width:14px;height:14px}.engineering-run:disabled{cursor:wait;opacity:.7}
+.engineering-footer>span{font-size:10px;line-height:1.5;color:#c5b2d8;flex:1 1 130px;text-align:right}
+@keyframes engineering-arrival{from{opacity:.2;translate:0 16px}to{opacity:1;translate:0 0}}
+@keyframes engineering-active{50%{box-shadow:0 0 25px #e0a8ff88;scale:1.055}}
+@media(prefers-reduced-motion:no-preference){.portfolio-main .engineering-preview{animation:engineering-arrival .9s .12s ease-out backwards!important}.portfolio-main .engineering-node.is-running .engineering-node-symbol{animation:engineering-active .62s ease-in-out!important}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.portfolio-main .engineering-preview{transition:border-color .35s ease,box-shadow .35s ease!important}.portfolio-main .engineering-preview:hover{border-color:#e8c3ff78;box-shadow:0 28px 80px #09041480,0 0 32px #b777e52a}.portfolio-main .engineering-run{transition:translate .25s ease,filter .25s ease!important}.portfolio-main .engineering-run:hover:not(:disabled){translate:0 -2px;filter:brightness(1.12)}}
+@media(max-width:900px){.portfolio-main .frost-hero{grid-template-columns:minmax(0,1fr)}.portfolio-main .engineering-preview{width:100%;max-width:650px;margin-inline:auto}}
+@media(max-width:600px){.portfolio-main .frost-hero h1{font-size:clamp(39px,10.5vw,59px)}.portfolio-main .engineering-top{padding:15px}.engineering-body{padding:15px}.engineering-node-symbol{width:39px;height:39px}.engineering-node-symbol svg{width:20px;height:20px}.engineering-nodes::before{top:19px}.engineering-node strong{font-size:10px}.engineering-node small{font-size:9px}.engineering-log{padding:10px 10px 2px}.engineering-footer>span{text-align:left}.engineering-intro h2{font-size:20px}}
+/* Tone down large decorative surfaces to keep the product interface in focus. */
+.atmosphere-glass--one,.atmosphere-glass--two{opacity:.42}.atmosphere-glass--three{opacity:.3}
+.atmosphere-ribbon{border-color:#e0aaff26;box-shadow:0 -3px 24px #d77af62c,inset 0 2px 18px #e7adff18}
+/* Brand-family pages share a quiet indigo backdrop and generous reading space. Industry demo pages remain independent. */
+.seo-main,.ghl-page,.case-page{--surface-quiet:#251436;--surface-line:#dcb7f02c;color:#f5edff;background:transparent!important}
+.seo-head,.ghl-detail-nav,.case-header{background:#1b102cec!important;border-color:#ddbbf12e!important;backdrop-filter:blur(18px)}
+.seo-head a,.seo-foot a,.ghl-detail-nav a,.case-header a{color:#efe1fa}
+.seo-main :is(.seo-hero,.guide-article,.guide-direct-answer,.guide-example,.guide-next-step,.about-role,.about-skills-grid article),.ghl-page :is(.ghl-system-card,.ghl-flow-stage,.ghl-architecture-card,.ghl-integrations,.ghl-detail-grid>article),.case-page :is(.case-hero-visual,.case-testing-grid article,.case-outcome-grid article,.case-strategy-grid article,.case-build-grid article){background:linear-gradient(145deg,#e4c0ff0b,#3e245826)!important;border-color:var(--surface-line)!important;box-shadow:none!important;min-width:0;max-width:100%}
+.seo-main :is(h1,h2,h3),.ghl-page :is(h1,h2,h3),.case-page :is(h1,h2,h3){color:#f6efff}
+.seo-main :is(p,li),.ghl-page :is(p,li),.case-page p{color:#d1bfdc}
+.seo-main a:not(.primary),.ghl-page .ghl-label,.case-page .case-section-label{color:#e4b8fa}
+.seo-main .seo-grid,.ghl-page .ghl-system-grid,.case-page .case-testing-grid,.case-page .case-outcome-grid{gap:clamp(16px,2.5vw,28px)}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){.seo-main .seo-grid article,.ghl-page .ghl-system-card,.case-page .case-testing-grid article,.case-page .case-outcome-grid article{transition:translate .3s ease,border-color .3s ease,background .3s ease!important}.seo-main .seo-grid article:hover,.ghl-page .ghl-system-card:hover,.case-page .case-testing-grid article:hover,.case-page .case-outcome-grid article:hover{translate:0 -4px;border-color:#e6b9fa88!important;background:linear-gradient(145deg,#e4c0ff16,#3e24583b)!important}}
+@media(prefers-reduced-motion:reduce){.engineering-node-symbol{transition:none!important}}
