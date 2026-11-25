@@ -1,0 +1,66 @@
+
+/* Finish pass: consistent materials, deliberate lighting, and editorial imagery. */
+body:has(.portfolio-main){background:#110a20}
+.brand-atmosphere{background:radial-gradient(ellipse at 70% 0%,#33204b 0,transparent 55%),radial-gradient(ellipse at 0% 85%,#241239 0,transparent 52%),linear-gradient(150deg,#1c102f,#10091c 55%,#1a0c2e)}
+.brand-atmosphere .atmosphere-halo{opacity:.45;filter:blur(42px)}
+.brand-atmosphere .atmosphere-orbit{opacity:.22}
+.brand-atmosphere .atmosphere-ribbon{opacity:.36;border-color:#ddb0f92d;box-shadow:0 -2px 30px #d77af624}
+.atmosphere-fiber{position:absolute;inset:0;width:100%;height:100%;opacity:.82;pointer-events:none}
+.atmosphere-lens{position:absolute;aspect-ratio:1;border-radius:50%;width:clamp(260px,36vw,650px);border:1px solid #e3bbff24;background:radial-gradient(circle at 32% 20%,#ebcaff0d,transparent 42%),radial-gradient(circle at 65% 80%,#ac70ec0b,transparent 55%);box-shadow:inset 4px 3px 18px #e5b7ff12,inset -8px -8px 36px #7b49b110,0 0 45px #ac70ec08;opacity:.8}
+.atmosphere-lens--one{left:-22%;top:23%}
+.atmosphere-lens--two{right:-22%;bottom:-12%;width:clamp(310px,40vw,720px);opacity:.65}
+@keyframes fiber-upper-drift{0%,100%{transform:translate(0,0)}50%{transform:translate(36px,32px)}}
+@keyframes fiber-lower-drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-42px,-35px)}}
+@keyframes lens-drift{0%,100%{transform:translate(0,0)}50%{transform:translate(38px,-32px)}}
+@media(prefers-reduced-motion:no-preference){.fiber-upper{animation:fiber-upper-drift 22s ease-in-out infinite}.fiber-lower{animation:fiber-lower-drift 27s ease-in-out infinite}.atmosphere-lens--one{animation:lens-drift 18s ease-in-out infinite}.atmosphere-lens--two{animation:lens-drift 23s ease-in-out infinite reverse}}
+/* Strong typography, softer metal-glass accents, no extra hero cards. */
+.portfolio-main .frost-hero h1{font-size:clamp(48px,6.15vw,88px);line-height:1.015;letter-spacing:-.064em;margin:20px 0 25px}
+.portfolio-main .frost-hero h1 em{background:linear-gradient(112deg,#f3e9ff 4%,#c6a0ef 56%,#d995d8);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.portfolio-main .frost-eyebrow{font-size:11px;letter-spacing:.13em}
+.portfolio-main .frost-brand-note{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:11px;color:#cbbad9;margin-top:24px}
+.portfolio-main .frost-brand-note svg{width:14px;height:14px;color:#d9b9f3}
+.portfolio-main .engineering-preview{--light-x:20%;--light-y:0%;isolation:isolate;border-color:#d9b7f450;background:linear-gradient(138deg,#35234bd9,#1b102de8 58%,#26163bcc);box-shadow:0 28px 74px #07030e85,inset 0 1px #fff2}
+.portfolio-main .engineering-preview::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(380px circle at var(--light-x) var(--light-y),#e7bfff1d,transparent 72%);opacity:.95}
+.portfolio-main .engineering-preview::after{content:"";position:absolute;left:8%;right:8%;top:0;height:1px;background:linear-gradient(90deg,transparent,#e9c6ff90,transparent);pointer-events:none}
+.portfolio-main .engineering-top{background:#e2b6ff04;padding-block:20px}
+.portfolio-main .engineering-log{background:linear-gradient(145deg,#10091cc9,#1c112dcc);border-color:#e6c9ff20}
+.portfolio-main .engineering-nodes::before{display:none}
+.portfolio-main .engineering-progress{position:absolute;left:12.5%;right:12.5%;top:23px;height:1px;z-index:-1;background:#cda5f04a;overflow:visible}
+.portfolio-main .engineering-progress>span{display:block;height:2px;margin-top:-.5px;background:linear-gradient(90deg,#ab83e4,#e7b2f9);box-shadow:0 0 12px #c991ff9e;transition:width .52s cubic-bezier(.2,.7,.25,1)!important}
+.portfolio-main .engineering-node.is-running .engineering-node-symbol{border-color:#f4dbff;color:#fff}
+.portfolio-main .engineering-node-symbol{background:linear-gradient(145deg,#3c2856,#251537);box-shadow:inset 0 1px #fff1}
+.portfolio-main .engineering-event.is-done strong{color:#f2e6ff}
+.portfolio-main .engineering-footer{border-top:1px solid #e0b7ff1e;padding-top:16px}
+.portfolio-main .engineering-run{min-height:40px}
+.portfolio-main .frost-actions .button-primary{box-shadow:0 7px 22px #b275db30,inset 0 1px #fff8!important}
+/* A gallery of actual concept artwork, not generic dashboard boxes. */
+.portfolio-main .editorial-demos .editorial-intro{max-width:850px;margin-bottom:clamp(30px,4vw,52px)}
+.portfolio-main .editorial-demos .editorial-intro h2{font-size:clamp(40px,5.4vw,72px);line-height:1.07}
+.portfolio-main .frost-showcase{gap:clamp(28px,5.5vw,80px);align-items:center;padding-block:clamp(30px,4.5vw,60px)}
+.portfolio-main .frost-showcase-copy small{font-size:11px;letter-spacing:.14em}
+.portfolio-main .frost-showcase-copy h3{font-size:clamp(30px,3.6vw,50px);line-height:1.1}
+.portfolio-main .frost-showcase-copy p{line-height:1.75;color:#d8c9e4}
+.portfolio-main .cinematic-project{--light-x:50%;--light-y:50%;aspect-ratio:16/10;border-radius:20px;border-color:#d9b4f345;box-shadow:0 20px 55px #08041065;isolation:isolate;overflow:hidden}
+.portfolio-main .cinematic-project img{position:absolute;inset:0;object-fit:cover;filter:saturate(.82) brightness(.93);width:100%;height:100%}
+.cinematic-project-shade{position:absolute;inset:0;background:linear-gradient(0deg,#10091de8,transparent 58%),linear-gradient(180deg,#130a219c,transparent 36%);pointer-events:none}
+.cinematic-project-meta{position:absolute;top:0;left:0;right:0;padding:18px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;color:#fff5ff;font:600 10px/1.4 monospace;letter-spacing:.08em}
+.cinematic-project-meta>span:last-child{display:flex;align-items:center;gap:7px}.cinematic-project-meta i{width:6px;height:6px;flex:none;border-radius:50%;background:#dfb4f7;box-shadow:0 0 8px #dba4ff}
+.cinematic-project-bottom{position:absolute;bottom:0;left:0;right:0;padding:20px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px;color:#fff6ff}
+.cinematic-project-bottom>span:first-child{min-width:0}.cinematic-project-bottom small{display:block;font:600 10px/1.4 monospace;color:#dcc8ed;letter-spacing:.08em;margin-bottom:6px}
+.cinematic-project-bottom strong{display:block;font-size:clamp(13px,1.4vw,18px);font-weight:600;line-height:1.45;overflow-wrap:anywhere}
+.cinematic-project-arrow{display:grid;place-items:center;width:40px;height:40px;flex:none;border:1px solid #f1daff65;border-radius:50%;background:#21112e80;backdrop-filter:blur(12px);color:#fff}
+.cinematic-project-arrow svg{width:18px;height:18px}
+.portfolio-main .cinematic-project::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(260px circle at var(--light-x) var(--light-y),#f5d7ff24,transparent 75%);opacity:0;transition:opacity .35s ease!important}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .portfolio-main .cinematic-project:hover::after{opacity:1}
+ .portfolio-main .cinematic-project:hover img{scale:1.055;transform:none;filter:saturate(1) brightness(1)}
+ .cinematic-project-arrow{transition:scale .28s ease,background .28s ease!important}
+ .cinematic-project:hover .cinematic-project-arrow{scale:1.09;background:#714a90d9}
+}
+/* Unified accent detail without enclosing every section in a panel. */
+.portfolio-main .delivery-panel{background:linear-gradient(135deg,#dcb7ff0d,#3d24532c 72%,#c78ce60c);border-color:#d8b4f33d}
+.portfolio-main .capability-orb,.portfolio-main .delivery-flow-symbol{background:linear-gradient(145deg,#644884,#2b193e);border-color:#e3c4f75c;box-shadow:inset 0 1px #fff2,0 6px 18px #0b051a55}
+.portfolio-main .recommendation-cards .recommendation-card{background:linear-gradient(145deg,#e5c4ff08,#c69de903)!important;border-color:#e5c4ff23!important}
+@media(max-width:900px){.portfolio-main .frost-hero h1{font-size:clamp(52px,8vw,76px)}.portfolio-main .frost-showcase{gap:24px}.atmosphere-fiber{opacity:.55}}
+@media(max-width:600px){.portfolio-main .frost-hero h1{font-size:clamp(38px,10.5vw,58px);margin-block:16px 20px}.portfolio-main .engineering-top{padding-block:15px}.portfolio-main .engineering-progress{top:19px}.portfolio-main .cinematic-project{border-radius:15px;aspect-ratio:4/3}.cinematic-project-meta{padding:13px;font-size:9px}.cinematic-project-bottom{padding:14px;gap:8px}.cinematic-project-bottom small{font-size:9px}.cinematic-project-arrow{width:34px;height:34px}.atmosphere-lens--one{left:-52%;opacity:.45}.atmosphere-lens--two{right:-58%;opacity:.38}}
+@media(prefers-reduced-motion:reduce){.portfolio-main .engineering-progress>span,.portfolio-main .cinematic-project::after{transition:none!important}.atmosphere-fiber g,.atmosphere-lens{animation:none!important}}

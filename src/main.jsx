@@ -22,6 +22,7 @@ import './brand-editorial-final.css'
 import './capability-network.css'
 import './delivery-method.css'
 import './engineering-refinement.css'
+import './visual-polish.css'
 
 
 const SOCIAL_PROFILES = [
@@ -398,6 +399,13 @@ const previewStages = [
   {name:'Follow-up',event:'Workflow triggered',detail:'Next action queued',payload:'channel · action · status'},
 ]
 
+function surfacePointer(event) {
+  if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const rect = event.currentTarget.getBoundingClientRect()
+  event.currentTarget.style.setProperty('--light-x', ((event.clientX-rect.left)/rect.width*100)+'%')
+  event.currentTarget.style.setProperty('--light-y', ((event.clientY-rect.top)/rect.height*100)+'%')
+}
+
 function SystemPreview() {
   const [stage,setStage] = useState(-1)
   const [running,setRunning] = useState(false)
@@ -420,14 +428,14 @@ function SystemPreview() {
   }
   const complete = stage === previewStages.length-1 && !running
   return (
-    <div className="engineering-preview" aria-label="Interactive sample of a connected lead workflow">
+    <div className="engineering-preview" onPointerMove={surfacePointer} aria-label="Interactive sample of a connected lead workflow">
       <div className="engineering-top">
         <div className="engineering-brand"><span className="engineering-mark" aria-hidden="true">◈</span><div><strong>System explorer</strong><small>Interactive workflow preview</small></div></div>
         <span className="engineering-mode"><i/> Simulation</span>
       </div>
       <div className="engineering-body">
         <div className="engineering-intro"><div><span>EVENT PIPELINE / 01</span><h2>From inquiry to action.</h2></div><span className="engineering-count">{Math.max(0,stage+1)}<small> / 4</small></span></div>
-        <div className="engineering-nodes" aria-label="Workflow stages">
+        <div className="engineering-nodes" aria-label="Workflow stages"><div className="engineering-progress" aria-hidden="true"><span style={{width:Math.max(0,stage)/3*100+'%'}}/></div>
           {previewStages.map((item,i)=><div className={'engineering-node'+(i<=stage?' is-done':'')+(i===stage&&running?' is-running':'')} key={item.name}>
             <span className="engineering-node-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">{i===0?<><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M8 13h8m-8 3h5"/></>:i===1?<><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-2-12-4 14"/></>:i===2?<><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></>:<><path d="m3 10 18-7-7 18-3-8-8-3zm8 3 10-10"/></>}</svg></span>
             <strong>{item.name}</strong><small>{i<=stage?'Processed':'Ready'}</small>
@@ -529,9 +537,16 @@ function App() {
         <div className="atmosphere-ribbon atmosphere-ribbon--bottom" />
         <div className="atmosphere-orbit atmosphere-orbit--left" />
         <div className="atmosphere-orbit atmosphere-orbit--right" />
-        <div className="atmosphere-glass atmosphere-glass--one" />
-        <div className="atmosphere-glass atmosphere-glass--two" />
-        <div className="atmosphere-glass atmosphere-glass--three" />
+        <svg className="atmosphere-fiber" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" focusable="false" aria-hidden="true">
+          <defs>
+            <linearGradient id="fiber-edge" x1="0%" y1="100%" x2="100%" y2="0%"><stop stopColor="#a257e0" stopOpacity="0"/><stop offset=".4" stopColor="#c792f8" stopOpacity=".32"/><stop offset=".75" stopColor="#e7a4ed" stopOpacity=".16"/><stop offset="1" stopColor="#a257e0" stopOpacity="0"/></linearGradient>
+            <linearGradient id="fiber-fill" x1="0%" y1="0%" x2="0%" y2="100%"><stop stopColor="#b86ae3" stopOpacity=".14"/><stop offset="1" stopColor="#9d57e3" stopOpacity="0"/></linearGradient>
+          </defs>
+          <g className="fiber-upper"><path d="M-220 210 C300 -260 870 -70 1820 300 L1820 350 C870 -15 320 -200 -220 290Z" fill="url(#fiber-fill)"/><path d="M-220 210 C300 -260 870 -70 1820 300" fill="none" stroke="url(#fiber-edge)" strokeWidth="1.5"/><path d="M-220 232 C300 -238 870 -48 1820 322" fill="none" stroke="url(#fiber-edge)" strokeWidth=".7"/></g>
+          <g className="fiber-lower"><path d="M-140 1050 C390 930 860 590 1800 680 L1800 745 C860 655 390 995 -140 1115Z" fill="url(#fiber-fill)"/><path d="M-140 1050 C390 930 860 590 1800 680" stroke="url(#fiber-edge)" fill="none" strokeWidth="1.5"/><path d="M-140 1073 C390 953 860 613 1800 703" stroke="url(#fiber-edge)" fill="none" strokeWidth=".7"/></g>
+        </svg>
+        <div className="atmosphere-lens atmosphere-lens--one" />
+        <div className="atmosphere-lens atmosphere-lens--two" />
       </div>
       <header className="site-header portfolio-header">
         <a href="#top" className="brand" aria-label="ConnectiveStack home">
@@ -602,12 +617,12 @@ function App() {
           <div className="frost-hero-copy">
             <span className="frost-eyebrow"><i /> Web · CRM · Automation · AI</span>
             <h1 id="frost-hero-title">Your systems.<br /> <em>Connected.</em></h1>
-            <p className="frost-lead">We build websites, CRM workflows and AI integrations that capture inquiries, assign the right owner and keep follow-up moving. One connected system, with a clear next action.</p>
+            <p className="frost-lead">We connect websites, CRM and AI into systems that capture inquiries, route them to the right owner and keep follow-up moving.</p>
             <div className="frost-actions">
               <a href={CALENDAR_URL} target="_blank" rel="noreferrer" className="button button-primary">Book a system review <Arrow /></a>
               <a href="#live-examples" className="button button-secondary">Explore live demos <Arrow /></a>
             </div>
-            <p className="frost-brand-note">Founder-led engineering · Agreed scope · Verified handoff</p>
+            <p className="frost-brand-note"><Check/> Founder-led engineering <span aria-hidden="true">·</span> Verified handoff</p>
           </div>
           <SystemPreview />
         </section>
@@ -634,12 +649,17 @@ function App() {
         <section className="frost-demos editorial-demos" id="live-examples" aria-labelledby="frost-demos-title">
           <div className="editorial-intro"><span className="kicker">Selected work · Interactive concepts</span><h2 id="frost-demos-title">See the systems<br />in action.</h2><p>Explore interactive concepts for real customer journeys, from first inquiry to follow-up.</p></div>
           {[
-            {tag:'01 / Home services',title:'Never miss the next call.',copy:'An AI front desk concept for service businesses, with qualification, estimates and appointment intake.',label:'Explore HVAC AI front desk',href:'/demos/hvac-ai-front-desk',image:'/assets/hero-hvac-arrival-v1.webp',width:1672,height:941,alt:'HVAC service concept imagery'},
-            {tag:'02 / Real estate',title:'Make every viewing count.',copy:'A luxury brokerage concept connecting property discovery to buyer inquiries and broker routing.',label:'Explore real estate demo',href:'/demos/luxury-real-estate',image:'/assets/realestate-austin-premium-optimized.webp',width:1200,height:801,alt:'Contemporary luxury property concept imagery'},
-            {tag:'03 / Healthcare',title:'A clearer path to care.',copy:'A patient experience concept with intake, scheduling and provider routing.',label:'Explore healthcare demo',href:'/demos/healthcare-patient-experience',image:'/assets/healthcare-hero-v1.webp',width:1672,height:941,alt:'Healthcare patient experience concept imagery'}
+            {tag:'01 / Home services',title:'Never miss the next call.',copy:'An AI front desk concept for service businesses, with qualification, estimates and appointment intake.',label:'Explore HVAC AI front desk',href:'/demos/hvac-ai-front-desk',outcome:'Call → qualification → appointment',image:'/assets/hero-hvac-arrival-v1.webp',width:1672,height:941,alt:'HVAC service concept imagery'},
+            {tag:'02 / Real estate',title:'Make every viewing count.',copy:'A luxury brokerage concept connecting property discovery to buyer inquiries and broker routing.',label:'Explore real estate demo',href:'/demos/luxury-real-estate',outcome:'Discovery → buyer inquiry → broker',image:'/assets/realestate-austin-premium-optimized.webp',width:1200,height:801,alt:'Contemporary luxury property concept imagery'},
+            {tag:'03 / Healthcare',title:'A clearer path to care.',copy:'A patient experience concept with intake, scheduling and provider routing.',label:'Explore healthcare demo',href:'/demos/healthcare-patient-experience',outcome:'Intake → provider routing → booking',image:'/assets/healthcare-hero-v1.webp',width:1672,height:941,alt:'Healthcare patient experience concept imagery'}
           ].map((demo,i)=><article className={'frost-showcase'+(i%2?' frost-showcase-reverse':'')} key={demo.href}>
             <div className="frost-showcase-copy"><small>{demo.tag}</small><h3>{demo.title}</h3><p>{demo.copy}</p><a className="editorial-link" href={demo.href}>{demo.label} <Arrow /></a></div>
-            <a className="frost-showcase-visual" href={demo.href} aria-label={demo.label}><img src={demo.image} width={demo.width} height={demo.height} alt={demo.alt} loading="lazy" decoding="async" /><span className="frost-showcase-label">Live concept demo <Arrow /></span></a>
+            <a className="frost-showcase-visual cinematic-project" href={demo.href} aria-label={demo.label} onPointerMove={surfacePointer}>
+              <img src={demo.image} width={demo.width} height={demo.height} alt={demo.alt} loading="lazy" decoding="async" />
+              <span className="cinematic-project-shade" aria-hidden="true"/>
+              <span className="cinematic-project-meta"><span>CONCEPT / 0{i+1}</span><span><i/> INTERACTIVE</span></span>
+              <span className="cinematic-project-bottom"><span><small>CONNECTED JOURNEY</small><strong>{demo.outcome}</strong></span><span className="cinematic-project-arrow"><Arrow/></span></span>
+            </a>
           </article>)}
         </section>
 
