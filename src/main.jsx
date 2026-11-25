@@ -20,6 +20,7 @@ import './brand-interaction-polish.css'
 import './brand-atmosphere.css'
 import './brand-editorial-final.css'
 import './capability-network.css'
+import './delivery-method.css'
 
 
 const SOCIAL_PROFILES = [
@@ -119,12 +120,56 @@ const services = [
   },
 ]
 
-const process = [
-  ['01', 'Define the outcome', 'Agree on the problem, expected behavior and how we will verify it. Where baseline data exists, identify a useful measure such as response time, missed inquiries or manual steps.'],
-  ['02', 'Find the constraint', 'ConnectiveStack traces the current customer and data path to identify the smallest set of changes standing between the current setup and the target outcome.'],
-  ['03', 'Build the useful system', 'ConnectiveStack implements the customer-facing experience, CRM logic, integrations, and automations needed to produce the agreed next action without adding tools for their own sake.'],
-  ['04', 'Verify end to end', 'Run agreed end-to-end acceptance checks, including relevant failure cases. Review the results with you, document ownership and remaining limitations, and hand over the agreed deliverables.'],
+const deliverySteps = [
+  {title:'Define',heading:'Agree on the outcome.',copy:'We identify what needs to work, set the scope and agree on how to test it. Where baseline data exists, we choose a useful measure.',output:'Agreed scope and acceptance criteria',nodes:['Current problem','Target outcome','Success criteria']},
+  {title:'Diagnose',heading:'Find where the system breaks.',copy:'We trace the customer journey, data and handoffs to find the smallest useful fix, before adding new tools.',output:'Workflow map and implementation plan',nodes:['Customer journey','Find the gap','Plan the fix']},
+  {title:'Build',heading:'Make the systems work together.',copy:'We implement the agreed website, CRM logic, integrations or automations, based on what the project actually needs.',output:'Working implementation and configured integrations',nodes:['Website / intake','CRM / routing','Next action']},
+  {title:'Verify',heading:'Test it. Then hand it over.',copy:'We run the agreed end-to-end checks, including relevant failure cases, review the evidence with you and document ownership and limitations.',output:'Test evidence, documentation and handoff',nodes:['Test submission','Check the result','Review & handoff']},
 ]
+
+function DeliveryMethod() {
+  const [active, setActive] = useState(0)
+  const step = deliverySteps[active]
+  return (
+    <section className="process-showcase delivery-method" id="process" aria-labelledby="delivery-heading">
+      <div className="delivery-heading">
+        <span className="kicker">The ConnectiveStack method</span>
+        <h2 id="delivery-heading">Know what you're paying for.<br/><em>Before we build.</em></h2>
+        <p>Clear scope. A working system. Evidence at handoff.</p>
+      </div>
+      <div className="delivery-track" role="group" aria-label="Explore the four delivery stages">
+        <div className="delivery-track-line" aria-hidden="true"><span style={{width:(active/3*100)+'%'}} /></div>
+        {deliverySteps.map((item,index)=><button type="button" key={item.title} className={'delivery-step'+(index===active?' is-current':'')+(index<active?' is-past':'')} aria-pressed={index===active} aria-controls="delivery-detail" onClick={()=>setActive(index)}>
+          <span className="delivery-step-dot">{String(index+1).padStart(2,'0')}</span>
+          <span className="delivery-step-label">{item.title}</span>
+        </button>)}
+      </div>
+      <div className="delivery-panel" id="delivery-detail" aria-live="polite">
+        <div className="delivery-panel-content" key={'copy-'+active}>
+          <span className="delivery-counter">STEP {String(active+1).padStart(2,'0')} / 04</span>
+          <h3>{step.heading}</h3>
+          <p>{step.copy}</p>
+          <div className="delivery-output"><Check/><div><small>WHAT YOU GET</small><strong>{step.output}</strong></div></div>
+        </div>
+        <div className="delivery-visual" key={'visual-'+active} aria-label={step.nodes.join(' to ')}>
+          <span className="delivery-visual-caption">ILLUSTRATIVE WORKFLOW</span>
+          <div className="delivery-flow">
+            {step.nodes.map((node,i)=><div className="delivery-flow-node" key={node} style={{'--flow-delay':i*.65+'s'}}>
+              <span className="delivery-flow-symbol" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">{i===0?<><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8m-8 4h5"/></>:i===1?<><path d="M12 3 21 12 12 21 3 12Z"/><path d="M8 12h8m-4-4v8"/></>:<><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></>}</svg>
+              </span><span>{node}</span>
+            </div>)}
+          </div>
+          <div className="delivery-visual-status"><i/> {active===3?'Acceptance checks and handoff':'Agreed project stage'}</div>
+        </div>
+      </div>
+      <div className="delivery-bottom">
+        <p>We agree on deliverables, dependencies and acceptance checks before implementation. Revenue and lead volume depend on factors outside the build, so they are not guaranteed.</p>
+        <a className="editorial-link" href={CALENDAR_URL} target="_blank" rel="noreferrer">Discuss your project <Arrow/></a>
+      </div>
+    </section>
+  )
+}
 
 function LegalModal({ type, onClose }) {
   const isPrivacy = type === 'privacy'
@@ -361,7 +406,7 @@ function App() {
 
   useEffect(() => {
     if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const targets = [...document.querySelectorAll('.editorial-intro, .frost-showcase-copy, .frost-showcase-visual, .section-heading, .service-card, .lead-system-heading, .lead-system-flow, .lead-system-card, .lead-system-cta, .ai-receptionist-copy, .ai-receptionist-flow, .engagement-trust article, .process-heading, .process-steps article, .portfolio-project-copy, .portfolio-project-details, .recommendation-intro, .recommendation-card, .contact-content, .contact-panel')]
+    const targets = [...document.querySelectorAll('.editorial-intro, .frost-showcase-copy, .frost-showcase-visual, .section-heading, .service-card, .lead-system-heading, .lead-system-flow, .lead-system-card, .lead-system-cta, .ai-receptionist-copy, .ai-receptionist-flow, .engagement-trust article, .delivery-heading, .delivery-track, .delivery-panel, .portfolio-project-copy, .portfolio-project-details, .recommendation-intro, .recommendation-card, .contact-content, .contact-panel')]
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -675,38 +720,7 @@ function App() {
           </article>
         </section>
 
-        <section className="process-showcase" id="process">
-          <div className="process-heading">
-            <div>
-              <span className="kicker">The ConnectiveStack method</span>
-              <h2>Know what you are paying for before we build.</h2>
-            </div>
-            <p>Before implementation, we agree on scope, dependencies, deliverables and acceptance checks. For a lead workflow, those checks might include a test submission, CRM record, assigned owner, notification and follow-up. You can review the evidence at handoff. Revenue and lead volume depend on factors outside the build, so we do not promise them.</p>
-          </div>
-
-          <div className="process-stage">
-            <div className="process-steps">
-              {process.map(([, title, copy], index) => (
-                <article key={title}>
-                  <span className="editorial-step-number">{String(index+1).padStart(2, '0')}</span>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{copy}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          <div className="process-output">
-            <span>Tools used when the diagnosis calls for them</span>
-            <div><i /> Website and customer experience</div>
-            <div><i /> Forms, calls, and qualification</div>
-            <div><i /> CRM and ownership</div>
-            <div><i /> Automation and integrations</div>
-            <div><i /> Infrastructure and deployment</div>
-          </div>
-        </section>
+        <DeliveryMethod />
 
         <section className="portfolio-project-spotlight" id="projects" aria-labelledby="paw-nova-heading">
           <div className="portfolio-project-inner">
